@@ -1,0 +1,67 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.29613.14
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ReportManagement", "ReportManagement\ReportManagement.csproj", "{22FDBFFB-4F0B-41BD-9D0E-4009CC2D5D8F}"
+	ProjectSection(ProjectDependencies) = postProject
+		{160B143B-8544-443A-A5B1-B6BDCABF2E08} = {160B143B-8544-443A-A5B1-B6BDCABF2E08}
+		{1C9FFC8F-41AE-4138-9BB3-2B57178DEC04} = {1C9FFC8F-41AE-4138-9BB3-2B57178DEC04}
+		{197B53A1-5F32-4D33-B826-3E7EFD1F7EC4} = {197B53A1-5F32-4D33-B826-3E7EFD1F7EC4}
+		{DB0143DA-87AB-4DBA-B2D6-CF816A320FDC} = {DB0143DA-87AB-4DBA-B2D6-CF816A320FDC}
+	EndProjectSection
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ReportManagement.Common", "ReportManagement.Common\ReportManagement.Common.csproj", "{DB0143DA-87AB-4DBA-B2D6-CF816A320FDC}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ReportManagement.Model", "ReportManagement.Model\ReportManagement.Model.csproj", "{160B143B-8544-443A-A5B1-B6BDCABF2E08}"
+	ProjectSection(ProjectDependencies) = postProject
+		{DB0143DA-87AB-4DBA-B2D6-CF816A320FDC} = {DB0143DA-87AB-4DBA-B2D6-CF816A320FDC}
+	EndProjectSection
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ReportManagement.Services", "ReportManagement.Services\ReportManagement.Services.csproj", "{197B53A1-5F32-4D33-B826-3E7EFD1F7EC4}"
+	ProjectSection(ProjectDependencies) = postProject
+		{160B143B-8544-443A-A5B1-B6BDCABF2E08} = {160B143B-8544-443A-A5B1-B6BDCABF2E08}
+		{1C9FFC8F-41AE-4138-9BB3-2B57178DEC04} = {1C9FFC8F-41AE-4138-9BB3-2B57178DEC04}
+		{DB0143DA-87AB-4DBA-B2D6-CF816A320FDC} = {DB0143DA-87AB-4DBA-B2D6-CF816A320FDC}
+	EndProjectSection
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ReportManagement.Repository", "ReportManagement.Repository\ReportManagement.Repository.csproj", "{1C9FFC8F-41AE-4138-9BB3-2B57178DEC04}"
+	ProjectSection(ProjectDependencies) = postProject
+		{160B143B-8544-443A-A5B1-B6BDCABF2E08} = {160B143B-8544-443A-A5B1-B6BDCABF2E08}
+		{DB0143DA-87AB-4DBA-B2D6-CF816A320FDC} = {DB0143DA-87AB-4DBA-B2D6-CF816A320FDC}
+	EndProjectSection
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{22FDBFFB-4F0B-41BD-9D0E-4009CC2D5D8F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{22FDBFFB-4F0B-41BD-9D0E-4009CC2D5D8F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{22FDBFFB-4F0B-41BD-9D0E-4009CC2D5D8F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{22FDBFFB-4F0B-41BD-9D0E-4009CC2D5D8F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{DB0143DA-87AB-4DBA-B2D6-CF816A320FDC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{DB0143DA-87AB-4DBA-B2D6-CF816A320FDC}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{DB0143DA-87AB-4DBA-B2D6-CF816A320FDC}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{DB0143DA-87AB-4DBA-B2D6-CF816A320FDC}.Release|Any CPU.Build.0 = Release|Any CPU
+		{160B143B-8544-443A-A5B1-B6BDCABF2E08}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{160B143B-8544-443A-A5B1-B6BDCABF2E08}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{160B143B-8544-443A-A5B1-B6BDCABF2E08}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{160B143B-8544-443A-A5B1-B6BDCABF2E08}.Release|Any CPU.Build.0 = Release|Any CPU
+		{197B53A1-5F32-4D33-B826-3E7EFD1F7EC4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{197B53A1-5F32-4D33-B826-3E7EFD1F7EC4}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{197B53A1-5F32-4D33-B826-3E7EFD1F7EC4}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{197B53A1-5F32-4D33-B826-3E7EFD1F7EC4}.Release|Any CPU.Build.0 = Release|Any CPU
+		{1C9FFC8F-41AE-4138-9BB3-2B57178DEC04}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1C9FFC8F-41AE-4138-9BB3-2B57178DEC04}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1C9FFC8F-41AE-4138-9BB3-2B57178DEC04}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1C9FFC8F-41AE-4138-9BB3-2B57178DEC04}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {AAC97665-6623-48B6-ADDB-1B4CAFE91081}
+	EndGlobalSection
+EndGlobal
