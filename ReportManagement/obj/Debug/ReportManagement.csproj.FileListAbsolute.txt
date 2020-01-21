@@ -118,3 +118,9 @@ C:\Hasib\Projects\ReportManagement\ReportManagement\ReportManagement\bin\Microso
 C:\Hasib\Projects\ReportManagement\ReportManagement\ReportManagement\bin\System.IdentityModel.Tokens.Jwt.xml
 C:\Hasib\Projects\ReportManagement\ReportManagement\ReportManagement\bin\System.Web.Http.Owin.xml
 C:\Hasib\Projects\ReportManagement\ReportManagement\ReportManagement\bin\Thinktecture.IdentityModel.Core.pdb
+C:\Hasib\Projects\ReportManagement\ReportManagement\ReportManagement\bin\ReportManagement.Services.dll
+C:\Hasib\Projects\ReportManagement\ReportManagement\ReportManagement\bin\ReportManagement.Repository.dll
+C:\Hasib\Projects\ReportManagement\ReportManagement\ReportManagement\bin\ReportManagement.Services.pdb
+C:\Hasib\Projects\ReportManagement\ReportManagement\ReportManagement\bin\ReportManagement.Services.dll.config
+C:\Hasib\Projects\ReportManagement\ReportManagement\ReportManagement\bin\ReportManagement.Repository.pdb
+C:\Hasib\Projects\ReportManagement\ReportManagement\ReportManagement\bin\ReportManagement.Repository.dll.config
