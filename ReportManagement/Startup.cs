@@ -26,10 +26,10 @@ namespace ReportManagement
             // For more information on how to configure your application, visit https://go.microsoft.com/fwlink/?LinkID=316888
 
             HttpConfiguration httpConfig = new HttpConfiguration();
+            app.UseCors(Microsoft.Owin.Cors.CorsOptions.AllowAll);
             ConfigureOAuthTokenGeneration(app);
             ConfigureOAuthTokenConsumption(app);
             ConfigureWebApi(httpConfig);
-            app.UseCors(Microsoft.Owin.Cors.CorsOptions.AllowAll);
             app.UseWebApi(httpConfig);
         }
 
@@ -48,7 +48,7 @@ namespace ReportManagement
             {
                 // For Dev environment only (on production should be AllowInsecureHttp = false)
                 AllowInsecureHttp = true,
-                TokenEndpointPath = new PathString("/login"),
+                TokenEndpointPath = new PathString("/api/login"),
                 AccessTokenExpireTimeSpan = TimeSpan.FromDays(1),
                 Provider = new CustomOAuthProvider(),
                 AccessTokenFormat = new CustomJwtFormat("http://localhost:44330")
