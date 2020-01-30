@@ -19,13 +19,10 @@
                         CreatedBy = c.Int(),
                         UpdatedDate = c.DateTime(),
                         UpdatedBy = c.Int(),
-                        ReportDetail_id = c.Int(),
                     })
                 .PrimaryKey(t => t.id)
                 .ForeignKey("dbo.AspNetUsers", t => t.UserId)
-                .ForeignKey("dbo.ReportDetail", t => t.ReportDetail_id)
-                .Index(t => t.UserId)
-                .Index(t => t.ReportDetail_id);
+                .Index(t => t.UserId);
             
             CreateTable(
                 "dbo.AspNetUsers",
@@ -110,12 +107,15 @@
                         Plan = c.String(),
                         Details = c.String(),
                         Progress = c.String(),
+                        ReportId = c.Int(nullable: false),
                         CreatedDate = c.DateTime(),
                         CreatedBy = c.Int(),
                         UpdatedDate = c.DateTime(),
                         UpdatedBy = c.Int(),
                     })
-                .PrimaryKey(t => t.id);
+                .PrimaryKey(t => t.id)
+                .ForeignKey("dbo.Report", t => t.ReportId)
+                .Index(t => t.ReportId);
             
             CreateTable(
                 "dbo.AspNetRoles",
@@ -135,17 +135,17 @@
             DropForeignKey("dbo.AspNetUserLogins", "UserId", "dbo.AspNetUsers");
             DropForeignKey("dbo.AspNetUserClaims", "UserId", "dbo.AspNetUsers");
             DropForeignKey("dbo.AspNetUserRoles", "RoleId", "dbo.AspNetRoles");
-            DropForeignKey("dbo.Report", "ReportDetail_id", "dbo.ReportDetail");
+            DropForeignKey("dbo.ReportDetail", "ReportId", "dbo.Report");
             DropForeignKey("dbo.Report", "UserId", "dbo.AspNetUsers");
             DropForeignKey("dbo.UserInfo", "UserId", "dbo.AspNetUsers");
             DropIndex("dbo.AspNetRoles", "RoleNameIndex");
+            DropIndex("dbo.ReportDetail", new[] { "ReportId" });
             DropIndex("dbo.UserInfo", new[] { "UserId" });
             DropIndex("dbo.AspNetUserRoles", new[] { "RoleId" });
             DropIndex("dbo.AspNetUserRoles", new[] { "UserId" });
             DropIndex("dbo.AspNetUserLogins", new[] { "UserId" });
             DropIndex("dbo.AspNetUserClaims", new[] { "UserId" });
             DropIndex("dbo.AspNetUsers", "UserNameIndex");
-            DropIndex("dbo.Report", new[] { "ReportDetail_id" });
             DropIndex("dbo.Report", new[] { "UserId" });
             DropTable("dbo.AspNetRoles");
             DropTable("dbo.ReportDetail");

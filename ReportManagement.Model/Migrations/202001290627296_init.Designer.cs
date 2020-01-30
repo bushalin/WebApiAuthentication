@@ -13,7 +13,7 @@ namespace ReportManagement.Model.Migrations
         
         string IMigrationMetadata.Id
         {
-            get { return "202001210618256_init"; }
+            get { return "202001290627296_init"; }
         }
         
         string IMigrationMetadata.Source

@@ -21,5 +21,7 @@ namespace ReportManagement.Model.Reports
         public string UserId { get; set; }
         public virtual ApplicationUser ApplicationUser { get; set; }
 
+        public IEnumerable<ReportDetail> ReportDetails { get; set; }
+
     }
 }

@@ -39,5 +39,3 @@ C:\Hasib\Projects\ReportManagement\ReportManagement\ReportManagement.Model\obj\D
 C:\Hasib\Projects\ReportManagement\ReportManagement\ReportManagement.Model\obj\Debug\ReportManagement.Model.csproj.CopyComplete
 C:\Hasib\Projects\ReportManagement\ReportManagement\ReportManagement.Model\obj\Debug\ReportManagement.Model.Migrations.init.resources
 C:\Hasib\Projects\ReportManagement\ReportManagement\ReportManagement.Model\obj\Debug\ReportManagement.Model.csproj.GenerateResource.cache
-C:\Hasib\Projects\ReportManagement\ReportManagement\ReportManagement.Model\obj\Debug\ReportManagement.Model.Migrations.init_correction.resources
-C:\Hasib\Projects\ReportManagement\ReportManagement\ReportManagement.Model\obj\Debug\ReportManagement.Model.Migrations.init_correction1.resources

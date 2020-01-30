@@ -8,12 +8,15 @@ import { AppComponent } from './app.component';
 import { TranslateLoader, TranslateModule } from '@ngx-translate/core';
 import { TranslateHttpLoader } from '@ngx-translate/http-loader';
 import { HttpClient, HttpClientModule } from '@angular/common/http';
+import { ReportModule } from './report/report.module';
+import { CommonService } from 'src/services/common.services';
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
   ],
   imports: [
+    ReportModule,
     BrowserModule,
     AppRoutingModule,
 
@@ -27,7 +30,7 @@ import { HttpClient, HttpClientModule } from '@angular/common/http';
       }
     })
   ],
-  providers: [],
+  providers: [CommonService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

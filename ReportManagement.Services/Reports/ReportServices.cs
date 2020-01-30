@@ -47,14 +47,54 @@ namespace ReportManagement.Services.Reports
                 JsonRequestBehavior = JsonRequestBehavior.AllowGet
             };
         }
-        //public JsonResult GetReportByName(string username)
-        //{
-        //    throw new NotImplementedException();
-        //}
+
+        public JsonResult SaveReport(ReportViewModel obj)
+        {
+            var message = "";
+
+            var reportDetails = new List<ReportDetail>();
+            var report = new Report
+            {
+                UserId = obj.UserId,
+                ReportStatus = obj.ReportStatus,
+                CreatedDate = DateTime.Now
+            };
+
+            if (report.ReportStatus == false)
+            {
+                message = "Report Status not available";
+            }
+            else
+            {
+                try
+                {
+                    _services.Save(report);
+                    _services.SaveChanges();
+                    message = "Report Saved Successfully";
+                }
+                catch (Exception ex)
+                {
+                    message = ex.Message;
+                }
+            }
+
+            return new JsonResult
+            {
+                Data = new
+                {
+                    message 
+                },
+
+                JsonRequestBehavior =  JsonRequestBehavior.AllowGet
+            };
+        }
+
+
     }
 
     public interface IReportServices
     {
         JsonResult GetReportByName(string username);
+        JsonResult SaveReport(ReportViewModel obj);
     }
 }

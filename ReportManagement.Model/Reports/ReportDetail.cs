@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Text;
@@ -13,6 +14,11 @@ namespace ReportManagement.Model.Reports
         public string Plan { get; set; }
         public string Details { get; set; }
         public string Progress { get; set; }
+
+        //one to one relationship
+        //[Key, ForeignKey("Report")]
+        //public int ReportId { get; set; }
+        //public virtual Report Report { get; set; }
 
         [ForeignKey("Report")]
         public int ReportId { get; set; }
