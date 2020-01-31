@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Web.Http.Results;
 using System.Web.Mvc;
+using Newtonsoft.Json.Linq;
 using ReportManagement.Model;
 using ReportManagement.Model.Reports;
 
@@ -14,11 +15,13 @@ namespace ReportManagement.Services.Reports
     {
         private readonly ApplicationDbContext _context;
         private readonly IEntityService<Report> _services;
+        private readonly IEntityService<ReportDetail> _detailServices;
 
         public ReportServices()
         {
             _context = new ApplicationDbContext();
             _services = new EntityService<Report>(_context);
+            _detailServices = new EntityService<ReportDetail>(_context);
         }
 
         public JsonResult GetReportByName(string username)
@@ -48,17 +51,13 @@ namespace ReportManagement.Services.Reports
             };
         }
 
-        public JsonResult SaveReport(ReportViewModel obj)
+        public JsonResult SaveReport(JObject obj)
         {
             var message = "";
 
-            var reportDetails = new List<ReportDetail>();
-            var report = new Report
-            {
-                UserId = obj.UserId,
-                ReportStatus = obj.ReportStatus,
-                CreatedDate = DateTime.Now
-            };
+            var report = obj["report"].ToObject<Report>();
+            var reportDetail = obj["reportDetail"].ToObject<List<ReportDetail>>();
+
 
             if (report.ReportStatus == false)
             {
@@ -70,6 +69,15 @@ namespace ReportManagement.Services.Reports
                 {
                     _services.Save(report);
                     _services.SaveChanges();
+                    var reportId = report.id;
+
+                    foreach (var item in reportDetail)
+                    {
+                        item.ReportId = reportId;
+                        _detailServices.Save(item);
+                        _detailServices.SaveChanges();
+                    }
+
                     message = "Report Saved Successfully";
                 }
                 catch (Exception ex)
@@ -77,6 +85,7 @@ namespace ReportManagement.Services.Reports
                     message = ex.Message;
                 }
             }
+
 
             return new JsonResult
             {
@@ -95,6 +104,6 @@ namespace ReportManagement.Services.Reports
     public interface IReportServices
     {
         JsonResult GetReportByName(string username);
-        JsonResult SaveReport(ReportViewModel obj);
+        JsonResult SaveReport(JObject obj);
     }
 }

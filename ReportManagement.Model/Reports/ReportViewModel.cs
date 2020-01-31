@@ -11,8 +11,7 @@ namespace ReportManagement.Model.Reports
         public string UserId { get; set; }
         public string Remarks { get; set; }
         public bool ReportStatus { get; set; }
-        public string Plan { get; set; }
-        public string Details { get; set; }
-        public string Progress { get; set; }
+        
+        public IEnumerable<ReportDetail> ReportDetail { get; set; }
     }
 }

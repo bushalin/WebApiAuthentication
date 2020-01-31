@@ -4,6 +4,7 @@ using System.Linq;
 using System.Net;
 using System.Net.Http;
 using System.Web.Http;
+using Newtonsoft.Json.Linq;
 using ReportManagement.Model.Reports;
 using ReportManagement.Services.Reports;
 
@@ -32,14 +33,14 @@ namespace ReportManagement.Controllers.ReportControllers
 
         [Route("SaveReport")]
         [HttpPost]
-        public IHttpActionResult SaveReport(ReportViewModel reportViewModel)
+        public IHttpActionResult SaveReport(JObject obj)
         {
             if (!ModelState.IsValid)
             {
                 return BadRequest();
             }
 
-            return Ok(_reportServices.SaveReport(reportViewModel).Data);
+            return Ok(_reportServices.SaveReport(obj).Data);
         }
     }
 }

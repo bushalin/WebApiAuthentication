@@ -21,42 +21,46 @@ namespace ReportManagement.Services.Reports
         }
 
 
+        //public JsonResult SaveReportDetail(ReportViewModel obj)
+        //{
+        //    var message = "";
+        //    //ReportDetail reportDetail = new ReportDetail
+        //    //{
+        //    //    Plan = obj.Plan,
+        //    //    Progress = obj.Progress,
+        //    //    Details = obj.Details
+        //    //};
+
+        //    //if (obj.Plan == null || obj.Details == null)
+        //    //{
+        //    //    message = "please enter a plan or details";
+        //    //}
+        //    else
+        //    {
+        //        try
+        //        {
+        //            _service.Save(reportDetail);
+        //            _service.SaveChanges();
+        //            message = "Report Detail saved successfully";
+        //        }
+        //        catch (Exception ex)
+        //        {
+        //            message = ex.Message;
+        //        }
+        //    }
+
+        //    return new JsonResult
+        //    {
+        //        Data = new
+        //        {
+        //            message
+        //        },
+        //        JsonRequestBehavior = JsonRequestBehavior.AllowGet
+        //    };
+        //}
         public JsonResult SaveReportDetail(ReportViewModel obj)
         {
-            var message = "";
-            ReportDetail reportDetail = new ReportDetail
-            {
-                Plan = obj.Plan,
-                Progress = obj.Progress,
-                Details = obj.Details
-            };
-
-            if (obj.Plan == null || obj.Details == null)
-            {
-                message = "please enter a plan or details";
-            }
-            else
-            {
-                try
-                {
-                    _service.Save(reportDetail);
-                    _service.SaveChanges();
-                    message = "Report Detail saved successfully";
-                }
-                catch (Exception ex)
-                {
-                    message = ex.Message;
-                }
-            }
-
-            return new JsonResult
-            {
-                Data = new
-                {
-                    message
-                },
-                JsonRequestBehavior = JsonRequestBehavior.AllowGet
-            };
+            throw new NotImplementedException();
         }
     }
 
