@@ -1,12 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Net;
-using System.Net.Http;
-using System.Web.Http;
-using Newtonsoft.Json.Linq;
-using ReportManagement.Model.Reports;
+﻿using Newtonsoft.Json.Linq;
 using ReportManagement.Services.Reports;
+using System.Web.Http;
 
 namespace ReportManagement.Controllers.ReportControllers
 {
@@ -22,15 +16,28 @@ namespace ReportManagement.Controllers.ReportControllers
             _reportDetailServices = new ReportDetailServices();
         }
 
-
-        [Authorize]
-        [Route("GetReportByName/{username}")]
+        // URL: api/Report/GetReportByName?username=something
+        [Route("GetReportByName")]
         [HttpGet]
         public IHttpActionResult GetReportByName(string username)
         {
             return Ok(_reportServices.GetReportByName(username).Data);
         }
 
+        // URL: api/Report/GetReportById/1dd77da5-8a67-4729-923c-3224bbccf460
+        [Route("GetReportById/{id:guid}")]
+        [HttpGet]
+        public IHttpActionResult GetReportById(string id)
+        {
+            if (!ModelState.IsValid)
+            {
+                return BadRequest();
+            }
+
+            return Ok(_reportServices.GetReportById(id).Data);
+        }
+
+        // URL: api/Report/SaveReport
         [Route("SaveReport")]
         [HttpPost]
         public IHttpActionResult SaveReport(JObject obj)

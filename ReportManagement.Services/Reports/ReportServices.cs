@@ -1,13 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Web.Http.Results;
-using System.Web.Mvc;
-using Newtonsoft.Json.Linq;
+﻿using Newtonsoft.Json.Linq;
 using ReportManagement.Model;
 using ReportManagement.Model.Reports;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Web.Mvc;
 
 namespace ReportManagement.Services.Reports
 {
@@ -24,26 +21,81 @@ namespace ReportManagement.Services.Reports
             _detailServices = new EntityService<ReportDetail>(_context);
         }
 
+        public JsonResult GetReportById(string id)
+        {
+            var result = _context.UserInfo.Where(x => x.UserId == id)
+                .Join(_context.Report,
+                    u => u.UserId,
+                    v => v.UserId,
+                    (u, v) => new {User = u, Report = v})
+                .Select(t => new
+                {
+                    t.User.FirstName,
+                    t.User.LastName,
+                    t.User.JobTitle,
+                    t.User.Address,
+                    t.User.Sex,
+                    t.Report.CreatedDate,
+                    t.Report.id,
+                    t.Report.ReportStatus,
+                    t.Report.Remarks,
+
+                    ReportDetail = _context.ReportDetail.Where(r => r.ReportId == t.Report.id)
+                        .Select(rd => new
+                        {
+                            rd.Plan,
+                            rd.Details,
+                            rd.Progress
+                        }).ToList()
+                });
+
+            return new JsonResult
+            {
+                Data = result,
+                JsonRequestBehavior = JsonRequestBehavior.AllowGet
+            };
+        }
+
         public JsonResult GetReportByName(string username)
         {
-            var userid = _context.UserInfo.FirstOrDefault(x => x.FirstName == username);
+            var userId = _context.UserInfo.Where(x => x.FirstName == username || x.LastName == username).Select(x=> x.UserId).FirstOrDefault();
+            if (userId == null)
+            {
+                var message = "User not found";
 
-            var result = _context.Report.Where(x => x.UserId == userid.UserId)
-                .Join(_context.ReportDetail,
-                    x => x.id,
-                    y => y.ReportId,
-                    (x, y) => new {Report = x, ReportDetail = y})
-                .Select(x => new
+                return new JsonResult
                 {
-                    x.Report.id,
-                    x.Report.Remarks,
-                    x.Report.CreatedDate,
-                    x.Report.UserId,
-                    x.Report.ReportStatus,
-                    x.ReportDetail.Plan,
-                    x.ReportDetail.Details,
-                    x.ReportDetail.Progress
-                }).ToList();
+                    Data = message,
+                    JsonRequestBehavior = JsonRequestBehavior.AllowGet
+                };
+            }
+
+            var result = _context.UserInfo.Where(x => x.UserId == userId)
+                .Join(_context.Report,
+                    u => u.UserId,
+                    v => v.UserId,
+                    (u, v) => new { User = u, Report = v })
+                .Select(t => new
+                {
+                    t.User.FirstName,
+                    t.User.LastName,
+                    t.User.JobTitle,
+                    t.User.Address,
+                    t.User.Sex,
+                    t.Report.CreatedDate,
+                    t.Report.id,
+                    t.Report.ReportStatus,
+                    t.Report.Remarks,
+
+                    ReportDetail = _context.ReportDetail.Where(r => r.ReportId == t.Report.id)
+                        .Select(rd => new
+                        {
+                            rd.Plan,
+                            rd.Details,
+                            rd.Progress
+                        }).ToList()
+                });
+
             return new JsonResult
             {
                 Data = result,
@@ -58,6 +110,7 @@ namespace ReportManagement.Services.Reports
             var report = obj["report"].ToObject<Report>();
             var reportDetail = obj["reportDetail"].ToObject<List<ReportDetail>>();
 
+            report.CreatedDate = DateTime.Today;
 
             if (report.ReportStatus == false)
             {
@@ -98,11 +151,11 @@ namespace ReportManagement.Services.Reports
             };
         }
 
-
     }
 
     public interface IReportServices
     {
+        JsonResult GetReportById(string Id);
         JsonResult GetReportByName(string username);
         JsonResult SaveReport(JObject obj);
     }
