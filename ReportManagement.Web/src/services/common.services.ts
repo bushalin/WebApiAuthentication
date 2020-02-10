@@ -10,6 +10,7 @@ export class CommonService {
   constructor(private http: HttpClient) {
     this.header = new HttpHeaders()
     .set('Content-type', 'application/json');
+    this.header.set('Accept', 'application/json');
   }
 
     // Common Request Urls

@@ -21,6 +21,16 @@ namespace ReportManagement.Services.Reports
             _detailServices = new EntityService<ReportDetail>(_context);
         }
 
+        public JsonResult GetAllReports()
+        {
+            var result = _context.Report.Select(x => x.id);
+            return new JsonResult
+            {
+                Data = result,
+                JsonRequestBehavior = JsonRequestBehavior.AllowGet
+            };
+        }
+
         public JsonResult GetReportById(string id)
         {
             var result = _context.UserInfo.Where(x => x.UserId == id)
@@ -157,6 +167,7 @@ namespace ReportManagement.Services.Reports
     {
         JsonResult GetReportById(string Id);
         JsonResult GetReportByName(string username);
+        JsonResult GetAllReports();
         JsonResult SaveReport(JObject obj);
     }
 }
