@@ -108,6 +108,7 @@
     <Compile Include="Reports\Report.cs" />
     <Compile Include="Reports\ReportDetail.cs" />
     <Compile Include="Reports\ReportViewModel.cs" />
+    <Compile Include="Reports\TestingModel.cs" />
     <Compile Include="User\AccountBindingModels.cs" />
     <Compile Include="User\ApplicationRoleManager.cs" />
     <Compile Include="User\ApplicationUser.cs" />

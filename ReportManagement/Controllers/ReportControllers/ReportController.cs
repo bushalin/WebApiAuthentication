@@ -37,6 +37,18 @@ namespace ReportManagement.Controllers.ReportControllers
             return Ok(_reportServices.GetReportById(id).Data);
         }
 
+        [Route("GetAllReports")]
+        [HttpGet]
+        public IHttpActionResult GetAllReports()
+        {
+            if(!ModelState.IsValid)
+            {
+                return BadRequest();
+            }
+
+            return Ok(_reportServices.GetAllReports().Data);
+        }
+
         // URL: api/Report/SaveReport
         [Route("SaveReport")]
         [HttpPost]
