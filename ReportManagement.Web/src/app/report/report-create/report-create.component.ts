@@ -47,7 +47,7 @@ export class ReportCreateComponent implements OnInit {
 
   removeReports(){
     if (this.reportDetailList.length > 1) {
-      this.reportDetailList.removeAt(0);
+      this.reportDetailList.removeAt(this.reportDetailList.length - 1);
       console.log(this.reportCreateForm.controls.reportsdetails.value);
     }
   }
@@ -55,4 +55,5 @@ export class ReportCreateComponent implements OnInit {
   onFormSubmit(){
     console.log(this.reportCreateForm.value);
   }
+
 }
