@@ -10,10 +10,12 @@ import { TranslateHttpLoader } from '@ngx-translate/http-loader';
 import { HttpClient, HttpClientModule } from '@angular/common/http';
 import { ReportModule } from './report/report.module';
 import { CommonService } from 'src/services/common.services';
+import { PageNotFoundComponent } from './common/page-not-found/page-not-found.component';
 
 @NgModule({
   declarations: [
     AppComponent,
+    PageNotFoundComponent,
   ],
   imports: [
     ReportModule,
