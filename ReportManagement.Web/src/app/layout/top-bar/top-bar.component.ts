@@ -7,7 +7,7 @@ import { Component, OnInit } from '@angular/core';
 })
 export class TopBarComponent implements OnInit {
 
-  userName = "Hasib";
+  userName = "Imran";
   constructor() { }
 
   ngOnInit() {
