@@ -90,4 +90,5 @@ export class ReportCreateComponent implements OnInit {
 
     //console.log("report added succesfully");
   }
+
 }
