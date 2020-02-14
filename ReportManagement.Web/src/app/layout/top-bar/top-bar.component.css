@@ -6,15 +6,6 @@
   width: 45px;
 }
 
-.separator {
-  content: "";
-  display: inline-block;
-  background: #888;
-  margin: 0px 4px;
-  height: 18px;
-  width: 1px;
-  vertical-align: top;
-}
 
 .btn-separator:after {
   content: " ";
@@ -27,7 +18,7 @@
 }
 
 .nav-link-item{
-    color: #ffffff;
+    color: #ffffff !important;
 }
 
 a.nav-link-item:hover {
