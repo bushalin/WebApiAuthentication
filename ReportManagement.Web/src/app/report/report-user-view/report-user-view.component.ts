@@ -10,6 +10,7 @@ import { element } from 'protractor';
 })
 export class ReportUserViewComponent implements OnInit {
   userId = "1dd77da5-8a67-4729-923c-3224bbccf460";
+  userName = "Imran";
 
   // list for showing the form data
   reportList = [];

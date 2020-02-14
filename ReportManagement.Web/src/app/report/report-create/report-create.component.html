@@ -17,14 +17,14 @@
             <h5>Report Create</h5>
           </div>
           <div class="col-md-6">
-              <div class="row">
-                  <div class="col-md-6">
-                    <button type="button" (click)="addReports()" class="btn btn-block btn-primary">Add report</button>
-                  </div>
-                  <div class="col-md-6">
-                    <button type="button" (click)="removeReports()" class="btn btn-block btn-danger">Remove report</button>
-                  </div>
+            <div class="row">
+              <div class="offset-md-4 col-md-4">
+                <button type="button" (click)="addReports()" class="btn btn-block btn-primary">Add report</button>
               </div>
+              <div class="col-md-4">
+                <button type="button" (click)="removeReports()" class="btn btn-block btn-danger">Remove report</button>
+              </div>
+            </div>
           </div>
         </div>
 
@@ -32,6 +32,15 @@
       </div>
       <div class="card-body">
         <form class="form-inline" [formGroup]="reportCreateForm">
+
+          <div class="row">
+            <div class="form-group col-md-4">
+              <h6>Date :</h6>
+              <input id="reportCreateDate" class="form-control" formControlName="createdDate" placeholder="Datepicker"
+                bsDatepicker [minDate]="minDate" [maxDate]="maxDate">
+            </div>
+
+          </div>
 
           <div formArrayName="reportsdetails" class="py-1 col-md-12"
             *ngFor="let item of reportCreateForm.get('reportsdetails').controls; let i = index">
@@ -58,7 +67,8 @@
             </div>
           </div>
 
-          <button type="button" (click)="onFormSubmit()" class="btn btn-block btn-info offset-md-10 col-md-2 mt-5">Submit</button>
+          <button type="button" (click)="onFormSubmit()"
+            class="btn btn-block btn-info offset-md-10 col-md-2 mt-5">Submit</button>
 
         </form>
       </div>

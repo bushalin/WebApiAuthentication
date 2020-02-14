@@ -11,17 +11,19 @@ import { HttpClient, HttpClientModule } from '@angular/common/http';
 import { ReportModule } from './report/report.module';
 import { CommonService } from 'src/services/common.services';
 import { PageNotFoundComponent } from './common/page-not-found/page-not-found.component';
+import { UserProfileComponent } from './user/user-profile/user-profile.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     PageNotFoundComponent,
+    UserProfileComponent,
   ],
   imports: [
     ReportModule,
     BrowserModule,
     AppRoutingModule,
-
+    
     // configure translate module
     HttpClientModule,
     TranslateModule.forRoot({

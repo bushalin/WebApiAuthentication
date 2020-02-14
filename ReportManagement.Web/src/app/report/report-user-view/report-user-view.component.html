@@ -4,85 +4,103 @@
 <!-- Main body area -->
 
 <div class="container">
-  <div class="row">
-    <div class="col-md-12">
+  <div class="card mt-5">
+    <div class="card-header">
       <div class="row">
-        <div class="col-md-4">
-          <h5>Create Report</h5>
-        </div>
-        <div class="col-md-8 d-flex flex-row justify-content-end">
-          <a [routerLink]="'/create'" class="col-md-3">Create report</a>
-          <a [routerLink]="'/checkreport'" class="col-md-3">Check Report</a>
+        <div class="col-md-12">
+          <div class="row">
+            <div class="col-md-4">
+              <h5>Report Home</h5>
+            </div>
+            <div class="col-md-8 d-flex flex-row justify-content-end">
+              <!-- <a [routerLink]="'/checkreport'" class="col-md-3">Check Report</a> -->
+              <button type="button" [routerLink]="'/check-report'" class="col-md-3 btn btn-block btn-info">Check
+                Report</button>
+            </div>
+          </div>
+          <h6>Name : {{userName}}</h6>
+          <!-- ==========================eikhane pashapashi sundor kore imran vai username anbe================================ -->
         </div>
       </div>
     </div>
-  </div>
 
-  <div class="row py-5">
-    <div class="col-md-12">
-      <table class="table table-bordered table-striped">
-        <thead>
-          <tr>
-            <th>Date</th>
-            <th>Title</th>
-            <th>Detail</th>
-            <th>Progress</th>
-            <th>Comment</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr>
-            <td>something</td>
-            <td>something</td>
-            <td>something</td>
-            <td>something</td>
-            <td>something</td>
-          </tr>
-          <tr>
-            <td>something</td>
-            <td>something</td>
-            <td>something</td>
-            <td>something</td>
-            <td>something</td>
-          </tr>
-          <tr>
-            <td>something</td>
-            <td>something</td>
-            <td>something</td>
-            <td>something</td>
-            <td>something</td>
-          </tr>
-          <tr>
-            <td>something</td>
-            <td>something</td>
-            <td>something</td>
-            <td>something</td>
-            <td>something</td>
-          </tr>
-          <tr>
-            <td>something</td>
-            <td>something</td>
-            <td>something</td>
-            <td>something</td>
-            <td>something</td>
-          </tr>
-          <tr>
-            <td>something</td>
-            <td>something</td>
-            <td>something</td>
-            <td>something</td>
-            <td>something</td>
-          </tr>
-          <tr>
-            <td>something</td>
-            <td>something</td>
-            <td>something</td>
-            <td>something</td>
-            <td>something</td>
-          </tr>
-        </tbody>
+    <div class="card-body">
 
-      </table>
+      <div class="row">
+        <div class="col-md-12">
+          <table class="table table-bordered table-striped">
+            <thead>
+              <tr>
+                <th>#</th>
+                <th>Date</th>
+                <th>Title</th>
+                <th>Detail</th>
+                <th>Progress</th>
+                <th>Comment</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>1</td>
+                <td>something</td>
+                <td>something</td>
+                <td>something</td>
+                <td>something</td>
+                <td>something</td>
+              </tr>
+              <tr>
+                <td>2</td>
+                <td>something</td>
+                <td>something</td>
+                <td>something</td>
+                <td>something</td>
+                <td>something</td>
+              </tr>
+              <tr>
+                <td>3</td>
+                <td>something</td>
+                <td>something</td>
+                <td>something</td>
+                <td>something</td>
+                <td>something</td>
+              </tr>
+              <tr>
+                <td>4</td>
+                <td>something</td>
+                <td>something</td>
+                <td>something</td>
+                <td>something</td>
+                <td>something</td>
+              </tr>
+              <tr>
+                <td>5</td>
+                <td>something</td>
+                <td>something</td>
+                <td>something</td>
+                <td>something</td>
+                <td>something</td>
+              </tr>
+              <tr>
+                <td>6</td>
+                <td>something</td>
+                <td>something</td>
+                <td>something</td>
+                <td>something</td>
+                <td>something</td>
+              </tr>
+              <tr>
+                <td>7</td>
+                <td>something</td>
+                <td>something</td>
+                <td>something</td>
+                <td>something</td>
+                <td>something</td>
+              </tr>
+            </tbody>
+
+          </table>
+        </div>
+      </div>
     </div>
   </div>
 </div>

@@ -9,12 +9,12 @@
 </div> -->
 
 <nav class="navbar navbar-expand-lg navbar-light navbar-color">
-  <a class="navbar-brand" href="#">
+  <a class="navbar-brand" [routerLink]="'/view-report'">
     <img
       class="navbar-brand-logo"
       src="../../../assets/images/logo.png"
       alt="Company Logo"
-    /> <b>株式会社盛武組</b>
+    /> <b> 株式会社盛武組</b>
   </a>
   <button
     class="navbar-toggler"
@@ -56,15 +56,15 @@
         </div>
       </li> -->
       <li class="nav-item ">
-        <a class="nav-link nav-link-item" style="color: #ffff;" href="#">Home<span class="sr-only">(current)</span></a>
+        <a class="nav-link nav-link-item" style="color: #ffff;" [routerLink]="'/view-report'">Home<span class="sr-only">(current)</span></a>
       </li>
       <span class="btn-separator"></span>
       <li class="nav-item">
-        <a class="nav-link nav-link-item" style="color: #ffff;" href="#">Create Report<span class="sr-only">(current)</span></a>
+        <a class="nav-link nav-link-item" style="color: #ffff;" [routerLink]="'/create-report'">Create Report<span class="sr-only">(current)</span></a>
       </li>
       <span class="btn-separator"></span>
       <li class="nav-item">
-        <a class="nav-link nav-link-profile" href="#"> {{userName}}</a>
+        <a class="nav-link nav-link-profile" [routerLink]="'/profile'"> {{userName}}</a>
       </li>
       
       <!-- <li class="nav-item">

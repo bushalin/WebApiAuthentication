@@ -4,14 +4,20 @@ import { ReportCreateComponent } from './report/report-create/report-create.comp
 import { ReportUserViewComponent } from './report/report-user-view/report-user-view.component';
 import { PageNotFoundComponent } from './common/page-not-found/page-not-found.component';
 import { ReportCheckComponent } from './report/report-check/report-check.component';
+import { ReportPreviledgedViewComponent } from './report/report-previledged-view/report-previledged-view.component';
+import { ReportCommentComponent } from './report/report-comment/report-comment.component';
+import { UserProfileComponent } from './user/user-profile/user-profile.component';
 
 
 const routes: Routes = [
   
-  { path: '', redirectTo: '/viewreport', pathMatch: 'full' },
-  { path: 'create', component: ReportCreateComponent },
-  { path: 'viewreport', component: ReportUserViewComponent },
-  { path: 'checkreport', component: ReportCheckComponent },
+  { path: '', redirectTo: '/view-report', pathMatch: 'full' },
+  { path: 'create-report', component: ReportCreateComponent },
+  { path: 'view-report', component: ReportUserViewComponent },
+  { path: 'check-report', component: ReportCheckComponent },
+  { path: 'view-previledged-report', component: ReportPreviledgedViewComponent },
+  { path: 'create-comment', component: ReportCommentComponent },
+  { path: 'profile', component: UserProfileComponent },
   { path: '**', component: PageNotFoundComponent }
 ];
 

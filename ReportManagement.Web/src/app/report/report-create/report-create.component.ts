@@ -14,12 +14,21 @@ export class ReportCreateComponent implements OnInit {
   public reportDetailList: FormArray;
   reportFormData : any = {}
 
+  minDate: Date;
+  maxDate: Date;
+
   constructor(private router: Router,
     private reportService: ReportService,
-    private formBuilder: FormBuilder) { }
+    private formBuilder: FormBuilder) {
+      this.minDate = new Date();
+      this.maxDate = new Date();
+      this.minDate.setDate(this.minDate.getDate() - 1);
+      this.maxDate.setDate(this.maxDate.getDate());
+     }
 
   ngOnInit() {
     this.reportCreateForm = this.formBuilder.group({
+      createdDate: [''],
       reportsdetails: this.formBuilder.array([this.createReports()])
     });
 
@@ -77,6 +86,7 @@ export class ReportCreateComponent implements OnInit {
     this.reportFormData = {'report' : {}, 'reportDetail' : []};
     this.reportFormData.report.UserID = "1dd77da5-8a67-4729-923c-3224bbccf460";
     this.reportFormData.report.ReportStatus = true;
+    this.reportFormData.report.CreatedDate = this.reportCreateForm.controls['createdDate'].value;
     this.reportFormData.reportDetail = this.reportDetailList.value;
     localStorage.setItem('report-create-data', JSON.stringify(this.reportFormData));
 
@@ -87,6 +97,7 @@ export class ReportCreateComponent implements OnInit {
     error => {}
     );
 
+    this.router.navigate(['/view-report'])
 
     //console.log("report added succesfully");
   }
