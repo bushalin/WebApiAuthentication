@@ -1,0 +1,10 @@
+.edit-btn{
+    width: 50%;
+    float: right;
+}
+.compact-row{
+    width: 50px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}

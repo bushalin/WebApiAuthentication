@@ -7,6 +7,8 @@ import { ReportCheckComponent } from './report/report-check/report-check.compone
 import { ReportPreviledgedViewComponent } from './report/report-previledged-view/report-previledged-view.component';
 import { ReportCommentComponent } from './report/report-comment/report-comment.component';
 import { UserProfileComponent } from './user/user-profile/user-profile.component';
+import { UserProfileCreateComponent } from './user/user-profile-create/user-profile-create.component';
+import { UserProfileEditComponent } from './user/user-profile-edit/user-profile-edit.component';
 
 
 const routes: Routes = [
@@ -18,6 +20,8 @@ const routes: Routes = [
   { path: 'view-previledged-report', component: ReportPreviledgedViewComponent },
   { path: 'create-comment', component: ReportCommentComponent },
   { path: 'profile', component: UserProfileComponent },
+  { path: 'profile-create', component: UserProfileCreateComponent },
+  { path: 'profile-edit', component: UserProfileEditComponent },
   { path: '**', component: PageNotFoundComponent }
 ];
 
