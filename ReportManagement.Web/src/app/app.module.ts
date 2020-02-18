@@ -12,12 +12,16 @@ import { ReportModule } from './report/report.module';
 import { CommonService } from 'src/services/common.services';
 import { PageNotFoundComponent } from './common/page-not-found/page-not-found.component';
 import { UserProfileComponent } from './user/user-profile/user-profile.component';
+import { UserProfileCreateComponent } from './user/user-profile-create/user-profile-create.component';
+import { UserProfileEditComponent } from './user/user-profile-edit/user-profile-edit.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     PageNotFoundComponent,
     UserProfileComponent,
+    UserProfileCreateComponent,
+    UserProfileEditComponent,
   ],
   imports: [
     ReportModule,
