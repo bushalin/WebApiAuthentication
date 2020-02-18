@@ -12,8 +12,13 @@ import { map } from "rxjs/operators";
 export class ReportService {
   header;
   constructor(private http: HttpClient) {
-    this.header = new HttpHeaders().set("content-type", "application/json");
-    this.header.set("Accept", "application/json");
+    // this.header = new HttpHeaders().set("Content-Type", "application/json");
+    // this.header.set("Accept", "application/json");
+
+    this.header = new HttpHeaders({
+      'Content-Type': 'application/json',
+      'Accept': 'application/json'
+    });
   }
 
   // URL: api/Report/SaveReport
@@ -56,8 +61,14 @@ export class ReportService {
               return res;
           })
       );
-
-      console.log(result);
       return result;
+  }
+
+  getGitData() {
+    return this.http.get<any>(environment.apiUrl + `users/bushalin`).pipe(
+      map(res => {
+        return res;
+      })
+    );
   }
 }

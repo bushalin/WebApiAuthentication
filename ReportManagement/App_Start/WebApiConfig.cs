@@ -2,6 +2,8 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Web.Http;
+using System.Web.Http.Cors;
+using Microsoft.Owin.Cors;
 
 namespace ReportManagement
 {
@@ -13,6 +15,7 @@ namespace ReportManagement
 
             // Web API routes
             config.MapHttpAttributeRoutes();
+            //config.EnableCors(new EnableCorsAttribute("*", "*", "GET, POST, OPTIONS, PUT, DELETE"));
 
             config.Routes.MapHttpRoute(
                 name: "DefaultApi",

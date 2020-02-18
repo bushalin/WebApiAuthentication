@@ -14,6 +14,7 @@ using Owin;
 using ReportManagement.Model;
 using ReportManagement.Model.User;
 using ReportManagement.Providers;
+using Microsoft.Owin.Cors;
 
 [assembly: OwinStartup(typeof(ReportManagement.Startup))]
 
@@ -25,8 +26,8 @@ namespace ReportManagement
         {
             // For more information on how to configure your application, visit https://go.microsoft.com/fwlink/?LinkID=316888
 
-            HttpConfiguration httpConfig = new HttpConfiguration();
             app.UseCors(Microsoft.Owin.Cors.CorsOptions.AllowAll);
+            HttpConfiguration httpConfig = new HttpConfiguration();
             ConfigureOAuthTokenGeneration(app);
             ConfigureOAuthTokenConsumption(app);
             ConfigureWebApi(httpConfig);
