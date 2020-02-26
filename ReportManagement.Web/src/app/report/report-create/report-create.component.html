@@ -19,10 +19,10 @@
           <div class="col-md-6">
             <div class="row">
               <div class="offset-md-4 col-md-4">
-                <button type="button" (click)="addReports()" class="btn btn-block btn-primary">Add report</button>
+                <button type="button" (click)="addReports()" class="btn btn-block btn-sm btn-primary">Add report</button>
               </div>
               <div class="col-md-4">
-                <button type="button" (click)="removeReports()" class="btn btn-block btn-danger">Remove report</button>
+                <button type="button" (click)="removeReports()" class="btn btn-block btn-sm btn-danger">Remove report</button>
               </div>
             </div>
           </div>
@@ -38,7 +38,7 @@
               <div class="form-group col-md-4">
                 <label for="createdDate" class="px-2">Date</label>
                 <input id="reportCreateDate" class="form-control" formControlName="createdDate" placeholder="Datepicker"
-                  bsDatepicker [minDate]="minDate" [maxDate]="maxDate">
+                  bsDatepicker [minDate]="minDate" [maxDate]="maxDate" [bsConfig]="{dateInputFormat: 'YYYY/MM/DD'}">
               </div>
             </div>
             

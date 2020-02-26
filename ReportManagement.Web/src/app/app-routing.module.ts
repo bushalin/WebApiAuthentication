@@ -17,7 +17,7 @@ const routes: Routes = [
   { path: 'create-report', component: ReportCreateComponent },
   { path: 'view-report', component: ReportUserViewComponent },
   { path: 'check-report', component: ReportCheckComponent },
-  { path: 'view-previledged-report', component: ReportPreviledgedViewComponent },
+  { path: 'view-privileged-report', component: ReportPreviledgedViewComponent },
   { path: 'create-comment', component: ReportCommentComponent },
   { path: 'profile', component: UserProfileComponent },
   { path: 'profile-create', component: UserProfileCreateComponent },

@@ -55,6 +55,8 @@ export class ReportService {
     );
   }
 
+  
+
   getTestData() {
       const result =  this.http.get<any>(environment.apiUrl + `test/GetTestData`).pipe(
           map(res => {

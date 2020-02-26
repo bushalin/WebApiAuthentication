@@ -1,0 +1,12 @@
+/* :host ::ng-deep .card.customClass,
+:host ::ng-deep .card.customClass .card-header,
+:host ::ng-deep .panel.customClass {
+  padding: 0px;
+  margin: 0px;
+  border: none;
+  background-color: #fff;
+}
+
+:host ::ng-deep .panel.customClass .panel-body {
+  background-color: #f7f7f7;
+} */

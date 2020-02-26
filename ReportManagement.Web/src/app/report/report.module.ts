@@ -12,6 +12,10 @@ import { AppRoutingModule } from '../app-routing.module';
 import { BsDatepickerModule } from 'ngx-bootstrap/datepicker';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ReportCommentComponent } from './report-comment/report-comment.component';
+import { AccordionModule } from 'ngx-bootstrap';
+import { CollapseModule } from 'ngx-bootstrap/collapse';
+import { NgaReadMoreModule } from 'nga-read-more';
+import { TypeaheadModule } from 'ngx-bootstrap/typeahead';
 
 
 
@@ -23,7 +27,11 @@ import { ReportCommentComponent } from './report-comment/report-comment.componen
     FormsModule,
     ReactiveFormsModule,
     BsDatepickerModule.forRoot(),
-    BrowserAnimationsModule
+    BrowserAnimationsModule,
+    AccordionModule.forRoot(),
+    CollapseModule.forRoot(),
+    NgaReadMoreModule,
+    TypeaheadModule.forRoot(),
   ],
   exports: [ReportCreateComponent, TopBarComponent],
   providers: [ReportService]
