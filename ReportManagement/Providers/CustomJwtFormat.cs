@@ -38,9 +38,17 @@ namespace ReportManagement.Providers
 
             var issued = data.Properties.IssuedUtc;
             var expires = data.Properties.ExpiresUtc;
+            
+
+            var handler = new JwtSecurityTokenHandler
+            {
+                MapInboundClaims = false
+            };
+            // we are clearing the map of the rename of the properties. see https://mderriey.com/2019/06/23/where-are-my-jwt-claims/ for details
+            //handler.InboundClaimTypeMap.Clear();
+
             var token = new JwtSecurityToken(_issuer, audienceId, data.Identity.Claims, issued.Value.UtcDateTime, expires.Value.UtcDateTime, signingCredentials);
 
-            var handler = new JwtSecurityTokenHandler();
             var jwt = handler.WriteToken(token);
 
             return jwt;

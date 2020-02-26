@@ -11,6 +11,7 @@ namespace ReportManagement.Controllers
     [RoutePrefix("api/accounts")]
     public class AccountsController : BaseApiController
     {
+        // URL: api/accounts/users
         [Authorize(Roles = "Admin")]
         [Route("users")]
         public IHttpActionResult GetUsers()
@@ -18,6 +19,7 @@ namespace ReportManagement.Controllers
             return Ok(this.AppUserManager.Users.ToList().Select(u => this.TheModelFactory.Create(u)));
         }
 
+        // URL: api/accounts/
         [Authorize(Roles = "Admin")]
         [Route("user/{id:guid}", Name = "GetUserById")]
         public async Task<IHttpActionResult> GetUser(string Id)
@@ -32,6 +34,7 @@ namespace ReportManagement.Controllers
             return NotFound();
         }
 
+        // URL: api/accounts/user/{username}
         [Authorize(Roles = "Admin")]
         [Route("user/{userName}")]
         public async Task<IHttpActionResult> GetUserByName(string username)
@@ -45,6 +48,7 @@ namespace ReportManagement.Controllers
             return NotFound();
         }
 
+        // URL: api/accounts/create
         [AllowAnonymous]
         [Route("create")]
         public async Task<IHttpActionResult> CreateUser(AccountCreateBindingModels accountCreateBindingModels)
@@ -82,6 +86,7 @@ namespace ReportManagement.Controllers
             return Created(locationHeader, TheModelFactory.Create(user));
         }
 
+        // URL: api/accounts/ChangePassword
         [Authorize]
         [Route("ChangePassword")]
         public async Task<IHttpActionResult> ChangePassword(ChangePasswordBindingModel model)
@@ -102,8 +107,9 @@ namespace ReportManagement.Controllers
             return Ok();
         }
 
+        // URL: api/accounts/user/delete/{id}
         [Authorize(Roles = "Admin")]
-        [Route("user/{id:guid}")]
+        [Route("user/delete/{id:guid}")]
         public async Task<IHttpActionResult> DeleteUser(string id)
         {
             // only superadmin or admin can delete users
@@ -126,6 +132,7 @@ namespace ReportManagement.Controllers
         }
 
 
+        // URL: api/accounts/user/{id}/roles
         [Authorize(Roles = "Admin")]
         [Route("user/{id:guid}/roles")]
         [HttpPut]

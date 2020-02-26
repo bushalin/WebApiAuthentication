@@ -7,13 +7,18 @@ import { AppComponent } from './app.component';
 // import ngx-translate and http loader
 import { TranslateLoader, TranslateModule } from '@ngx-translate/core';
 import { TranslateHttpLoader } from '@ngx-translate/http-loader';
-import { HttpClient, HttpClientModule } from '@angular/common/http';
+import { HttpClient, HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { ReportModule } from './report/report.module';
 import { CommonService } from 'src/services/common.services';
 import { PageNotFoundComponent } from './common/page-not-found/page-not-found.component';
 import { UserProfileComponent } from './user/user-profile/user-profile.component';
 import { UserProfileCreateComponent } from './user/user-profile-create/user-profile-create.component';
 import { UserProfileEditComponent } from './user/user-profile-edit/user-profile-edit.component';
+import { AuthenticationService } from 'src/services/authentication.service';
+import { LoginComponent } from './common/login/login.component';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { HttpInterceptorService } from 'src/services/http-interceptor.service';
+import { ErrorInterceptorService } from 'src/services/error-interceptor.service';
 
 @NgModule({
   declarations: [
@@ -22,11 +27,14 @@ import { UserProfileEditComponent } from './user/user-profile-edit/user-profile-
     UserProfileComponent,
     UserProfileCreateComponent,
     UserProfileEditComponent,
+    LoginComponent,
   ],
   imports: [
     ReportModule,
     BrowserModule,
     AppRoutingModule,
+    FormsModule,
+    ReactiveFormsModule,
     
     // configure translate module
     HttpClientModule,
@@ -38,7 +46,8 @@ import { UserProfileEditComponent } from './user/user-profile-edit/user-profile-
       }
     })
   ],
-  providers: [CommonService],
+  providers: [CommonService, AuthenticationService, {provide: HTTP_INTERCEPTORS, useClass: HttpInterceptorService, multi: true},
+    { provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptorService, multi: true}],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

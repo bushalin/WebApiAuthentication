@@ -9,19 +9,22 @@ import { ReportCommentComponent } from './report/report-comment/report-comment.c
 import { UserProfileComponent } from './user/user-profile/user-profile.component';
 import { UserProfileCreateComponent } from './user/user-profile-create/user-profile-create.component';
 import { UserProfileEditComponent } from './user/user-profile-edit/user-profile-edit.component';
+import { LoginComponent } from './common/login/login.component';
+import { AuthGuard } from './guards/auth.guard';
 
 
 const routes: Routes = [
   
   { path: '', redirectTo: '/view-report', pathMatch: 'full' },
-  { path: 'create-report', component: ReportCreateComponent },
-  { path: 'view-report', component: ReportUserViewComponent },
-  { path: 'check-report', component: ReportCheckComponent },
-  { path: 'view-previledged-report', component: ReportPreviledgedViewComponent },
-  { path: 'create-comment', component: ReportCommentComponent },
-  { path: 'profile', component: UserProfileComponent },
-  { path: 'profile-create', component: UserProfileCreateComponent },
-  { path: 'profile-edit', component: UserProfileEditComponent },
+  { path: 'login', component: LoginComponent },
+  { path: 'create-report', component: ReportCreateComponent, canActivate: [AuthGuard] },
+  { path: 'view-report', component: ReportUserViewComponent, canActivate: [AuthGuard]},
+  { path: 'check-report', component: ReportCheckComponent, canActivate: [AuthGuard] },
+  { path: 'view-previledged-report', component: ReportPreviledgedViewComponent, canActivate: [AuthGuard] },
+  { path: 'create-comment', component: ReportCommentComponent, canActivate: [AuthGuard] },
+  { path: 'profile', component: UserProfileComponent, canActivate: [AuthGuard] },
+  { path: 'profile-create', component: UserProfileCreateComponent, canActivate: [AuthGuard] },
+  { path: 'profile-edit', component: UserProfileEditComponent, canActivate: [AuthGuard] },
   { path: '**', component: PageNotFoundComponent }
 ];
 

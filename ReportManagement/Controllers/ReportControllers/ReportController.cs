@@ -17,15 +17,15 @@ namespace ReportManagement.Controllers.ReportControllers
         }
 
         // URL: api/Report/GetReportByName?username=something
-        [Route("GetReportByName")]
+        [Route("GetReportByUserName")]
         [HttpGet]
         public IHttpActionResult GetReportByName(string username)
         {
-            return Ok(_reportServices.GetReportByName(username).Data);
+            return Ok(_reportServices.GetReportByUserName(username).Data);
         }
 
         // URL: api/Report/GetReportById/1dd77da5-8a67-4729-923c-3224bbccf460
-        [Route("GetReportById/{id:guid}")]
+        [Route("GetReportByUserId/{id:guid}")]
         [HttpGet]
         public IHttpActionResult GetReportById(string id)
         {
@@ -34,9 +34,10 @@ namespace ReportManagement.Controllers.ReportControllers
                 return BadRequest();
             }
 
-            return Ok(_reportServices.GetReportById(id).Data);
+            return Ok(_reportServices.GetReportByUserId(id).Data);
         }
 
+        // URL: api/Report/GetAllReports/
         [Route("GetAllReports")]
         [HttpGet]
         public IHttpActionResult GetAllReports()
@@ -49,10 +50,23 @@ namespace ReportManagement.Controllers.ReportControllers
             return Ok(_reportServices.GetAllReports().Data);
         }
 
+        // URL: api/Report/GetRecentReports/
+        [Route("GetRecentReports")]
+        [HttpGet]
+        public IHttpActionResult GetRecentReports()
+        {
+            if(!ModelState.IsValid)
+            {
+                return BadRequest();
+            }
+
+            return Ok(_reportServices.GetRecentReports().Data);
+        }
+
         // URL: api/Report/SaveReport
         [Route("SaveReport")]
         [HttpPost]
-        public IHttpActionResult SaveReport(JObject obj)
+        public IHttpActionResult SaveReport([FromBody]JObject obj)
         {
             if (!ModelState.IsValid)
             {

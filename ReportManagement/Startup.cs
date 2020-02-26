@@ -15,6 +15,10 @@ using ReportManagement.Model;
 using ReportManagement.Model.User;
 using ReportManagement.Providers;
 using Microsoft.Owin.Cors;
+using System.IdentityModel.Tokens.Jwt;
+using System.Collections.Generic;
+using System.Security.Claims;
+using System.Web.Helpers;
 
 [assembly: OwinStartup(typeof(ReportManagement.Startup))]
 

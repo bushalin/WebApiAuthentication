@@ -22,11 +22,11 @@ export class ReportService {
   }
 
   // URL: api/Report/SaveReport
-  saveReport(saveReportObject: any) {
+  saveReport(saveReportObj: any) {
     return this.http
       .post<any>(
         environment.apiUrl + `Report/SaveReport`,
-        JSON.stringify({ saveReportObject }),
+        JSON.stringify(saveReportObj),
         { headers: this.header }
       )
       .pipe(
@@ -39,7 +39,7 @@ export class ReportService {
   // URL: api/Report/GetReportById/1dd77da5-8a67-4729-923c-3224bbccf460
   getReportById(id) {
     return this.http
-      .get<any>(environment.apiUrl + `report/getreportbyid/` + id)
+      .get<any>(environment.apiUrl + `report/getreportbyuserid/` + id)
       .pipe(
         map(res => {
           return res;
@@ -55,13 +55,23 @@ export class ReportService {
     );
   }
 
+  getRecentReports() {
+    return this.http.get<any>(environment.apiUrl + `Report/GetRecentReports`).pipe(
+      map(res => {
+        return res;
+      })
+    );
+  }
+
   getTestData() {
-      const result =  this.http.get<any>(environment.apiUrl + `test/GetTestData`).pipe(
-          map(res => {
-              return res;
-          })
+    const result = this.http
+      .get<any>(environment.apiUrl + `test/GetTestData`)
+      .pipe(
+        map(res => {
+          return res;
+        })
       );
-      return result;
+    return result;
   }
 
   getGitData() {

@@ -36,7 +36,7 @@ namespace ReportManagement.Providers
                 context.SetError("invalid_grant", "User did not confirm email");
             }
 
-            ClaimsIdentity oAuthIdentity = await user.GenerateUserIdentityAsync(userManager, "JWT");
+            ClaimsIdentity oAuthIdentity = await user.GenerateUserIdentityAsync(userManager, "JWT", user);
 
             // We need to call the method "GetClaims" so the "Technical" claim will be associated with the authenticated user identity
             //oAuthIdentity.AddClaims(ExtendedClaimsProvider.GetClaims(user));

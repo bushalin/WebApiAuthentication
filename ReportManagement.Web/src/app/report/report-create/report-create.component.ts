@@ -56,9 +56,9 @@ export class ReportCreateComponent implements OnInit {
 
   createReports(): FormGroup{
     return this.formBuilder.group({
-      reportPlan: '',
-      reportDetail: '',
-      reportProgress: ''
+      Plan: '',
+      Details: '',
+      Progress: ''
     })
   }
 

@@ -31,13 +31,51 @@ namespace ReportManagement.Services.Reports
             };
         }
 
-        public JsonResult GetReportById(string id)
+        public JsonResult GetRecentReports()
+        {
+            var result = _context.UserInfo.Select(x => new
+            {
+                x.UserId,
+                x.FirstName,
+                x.LastName
+            })
+                .Join(_context.Report,
+                    u => u.UserId,
+                    v => v.UserId,
+                    (u, v) => new { User = u, Report = v })
+                .Select(x => new
+                {
+                    x.User.FirstName,
+                    x.User.LastName,
+                    x.User.UserId,
+                    reportId = x.Report.id,
+                    x.Report.Remarks,
+                    x.Report.ReportStatus,
+                    x.Report.CreatedDate,
+
+                    ReportDetail = _context.ReportDetail.Where(r => r.ReportId == x.Report.id)
+                        .Select(rd => new
+                        {
+                            rd.Plan,
+                            rd.Details,
+                            rd.Progress
+                        }).ToList()
+                }).OrderByDescending(x => x.CreatedDate);
+
+            return new JsonResult
+            {
+                Data = result,
+                JsonRequestBehavior = JsonRequestBehavior.AllowGet
+            };
+        }
+
+        public JsonResult GetReportByUserId(string id)
         {
             var result = _context.UserInfo.Where(x => x.UserId == id)
                 .Join(_context.Report,
                     u => u.UserId,
                     v => v.UserId,
-                    (u, v) => new {User = u, Report = v})
+                    (u, v) => new { User = u, Report = v })
                 .Select(t => new
                 {
                     t.User.FirstName,
@@ -57,7 +95,7 @@ namespace ReportManagement.Services.Reports
                             rd.Details,
                             rd.Progress
                         }).ToList()
-                });
+                }).OrderByDescending(x => x.CreatedDate);
 
             return new JsonResult
             {
@@ -66,7 +104,7 @@ namespace ReportManagement.Services.Reports
             };
         }
 
-        public JsonResult GetReportByName(string username)
+        public JsonResult GetReportByUserName(string username)
         {
             var userId = _context.UserInfo.Where(x => x.FirstName == username || x.LastName == username).Select(x=> x.UserId).FirstOrDefault();
             if (userId == null)
@@ -116,11 +154,10 @@ namespace ReportManagement.Services.Reports
         public JsonResult SaveReport(JObject obj)
         {
             var message = "";
-
             var report = obj["report"].ToObject<Report>();
-            var reportDetail = obj["reportDetail"].ToObject<List<ReportDetail>>();
+            report.ReportDetails = obj["reportDetail"].ToObject<List<ReportDetail>>();
 
-            report.CreatedDate = DateTime.Today;
+            //report.CreatedDate = DateTime.Today;
 
             if (report.ReportStatus == false)
             {
@@ -134,7 +171,7 @@ namespace ReportManagement.Services.Reports
                     _services.SaveChanges();
                     var reportId = report.id;
 
-                    foreach (var item in reportDetail)
+                    foreach (var item in report.ReportDetails)
                     {
                         item.ReportId = reportId;
                         _detailServices.Save(item);
@@ -165,9 +202,10 @@ namespace ReportManagement.Services.Reports
 
     public interface IReportServices
     {
-        JsonResult GetReportById(string Id);
-        JsonResult GetReportByName(string username);
+        JsonResult GetReportByUserId(string Id);
+        JsonResult GetReportByUserName(string username);
         JsonResult GetAllReports();
+        JsonResult GetRecentReports();
         JsonResult SaveReport(JObject obj);
     }
 }
