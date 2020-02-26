@@ -16,6 +16,17 @@ export class CommonService {
     // Common Request Urls
   // Get List
   // Url: http://127.0.0.1:3000/company/
+
+  // Fetch all employee data
+  getAllUsers() {
+    return this.http.get<any>(environment.apiUrl + `user/getallUserInfo`).pipe(
+      map(res => {
+        return res;
+      })
+    );
+  }
+
+
   getList(url) {
     return this.http.get<any>(environment.apiUrl + url).pipe(
       map(res => {

@@ -20,7 +20,7 @@ const routes: Routes = [
   { path: 'create-report', component: ReportCreateComponent, canActivate: [AuthGuard] },
   { path: 'view-report', component: ReportUserViewComponent, canActivate: [AuthGuard]},
   { path: 'check-report', component: ReportCheckComponent, canActivate: [AuthGuard] },
-  { path: 'view-previledged-report', component: ReportPreviledgedViewComponent, canActivate: [AuthGuard] },
+  { path: 'view-privileged-report', component: ReportPreviledgedViewComponent, canActivate: [AuthGuard] },
   { path: 'create-comment', component: ReportCommentComponent, canActivate: [AuthGuard] },
   { path: 'profile', component: UserProfileComponent, canActivate: [AuthGuard] },
   { path: 'profile-create', component: UserProfileCreateComponent, canActivate: [AuthGuard] },

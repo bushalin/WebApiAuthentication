@@ -1,7 +1,5 @@
 <app-top-bar></app-top-bar>
 
-
-
 <div class="container">
   <div class="col-md-12 mt-5">
     <div class="card">
@@ -15,18 +13,30 @@
 
       <div class="card-body">
         <form>
-
           <div class="form-group">
             <div class="form-inline">
-              <label class="col-md-2" for="employeeNameSearch">Employee Name</label>
-              <input class="form-control col-md-3" id="employeeNameSearch">
+              <label class="col-md-2" for="employeeNameSearch"
+                >Employee Name</label
+              >
+              <input class="form-control col-md-3" id="employeeNameSearch" />
+              <!-- <input class="form-control col-md-3"
+                [(ngModel)]="selectedValue"
+                [typeahead]="states"
+                typeaheadOptionField="name"
+                (typeaheadOnSelect)="onSelect($event)"
+              /> -->
             </div>
           </div>
 
           <div class="form-group">
             <div class="form-inline">
               <label class="col-md-2" for="dateSearch">Date Search</label>
-              <input type="text" id="dateSearch" class="form-control col-md-3" bsDatepicker>
+              <input
+                type="text"
+                id="dateSearch"
+                class="form-control col-md-3"
+                bsDatepicker
+              />
             </div>
           </div>
 
@@ -41,17 +51,13 @@
               <button class="btn btn-primary offset-md-2">Search</button>
             </div>
           </div>
-
         </form>
-
       </div>
     </div>
   </div>
 
   <div class="col-md-12 mt-5">
-
     <div class="card">
-
       <div class="card-header">
         <div class="row">
           <div class="col-md-12">
@@ -61,79 +67,102 @@
       </div>
 
       <div class="card-body">
-
         <div class="row">
           <div class="col-md-12">
-            <table class="table table-bordered table-striped">
+            <table class="table table-responsive-md table-bordered">
               <thead>
                 <tr>
                   <th>#</th>
-                  <th>Name</th>
+                  <th>Date</th>
                   <th>Title</th>
                   <th>Detail</th>
                   <th>Progress</th>
                   <th>Comment</th>
+                  <th>Action</th>
                 </tr>
               </thead>
               <tbody>
-                <tr>
-                  <td>1</td>
-                  <td>something</td>
-                  <td>something</td>
-                  <td>something</td>
-                  <td>something</td>
-                  <td>something</td>
-                </tr>
-                <tr>
-                  <td>2</td>
-                  <td>something</td>
-                  <td>something</td>
-                  <td>something</td>
-                  <td>something</td>
-                  <td>something</td>
-                </tr>
-                <tr>
-                  <td>3</td>
-                  <td>something</td>
-                  <td>something</td>
-                  <td>something</td>
-                  <td>something</td>
-                  <td>something</td>
-                </tr>
-                <tr>
-                  <td>4</td>
-                  <td>something</td>
-                  <td>something</td>
-                  <td>something</td>
-                  <td>something</td>
-                  <td>something</td>
-                </tr>
-                <tr>
-                  <td>5</td>
-                  <td>something</td>
-                  <td>something</td>
-                  <td>something</td>
-                  <td>something</td>
-                  <td>something</td>
-                </tr>
-                <tr>
-                  <td>6</td>
-                  <td>something</td>
-                  <td>something</td>
-                  <td>something</td>
-                  <td>something</td>
-                  <td>something</td>
-                </tr>
-                <tr>
-                  <td>7</td>
-                  <td>something</td>
-                  <td>something</td>
-                  <td>something</td>
-                  <td>something</td>
-                  <td>something</td>
+                <tr *ngFor="let item of reportList; let i = index">
+                  <td>{{ i + 1 }}</td>
+                  <td>{{ item.createdDate | date: "yyyy/MM/dd" }}</td>
+                  <td>
+                    <ul>
+                      <li
+                        *ngFor="let subItem of item.reportDetail; let n = index"
+                      >
+                        Lorem Ipsum is simply dummy text of the printing and
+                        <!-- {{ subItem.plan }} -->
+                      </li>
+                    </ul>
+                  </td>
+                  <td style="width:30%;">
+                    <ul>
+                      <li
+                        *ngFor="let subItem of item.reportDetail; let n = index"
+                      >
+                        <!-- <accordion [isAnimated]="true">
+                          <accordion-group
+                            heading="クリックしてごください"
+                            [panelClass]="customClass"
+                            [isOpen]="isFirstOpen"
+                          >
+                            Lorem Ipsum is simply dummy text of the printing and
+                            typesetting industry. Lorem Ipsum has been the
+                            industry's standard dummy text ever since the 1500s,
+                            when an unknown printer took a galley of type and
+                            scrambled it to make a type specimen book. It has
+                            survived not only five centuries, but also the leap
+                            into electronic typesetting, remaining essentially
+                            unchanged. It was popularised in the 1960s with the
+                            release of Letraset sheets containing Lorem Ipsum
+                            passages, and more recently with desktop publishing
+                            software like Aldus PageMaker including versions of
+                            Lorem Ipsum.
+                          </accordion-group>
+                          {{ subItem.details }}
+                        </accordion> -->
+
+                        <!-- <p [hidden]="!myVar.more">
+                          {{ longText | slice: 0:50 }}
+                          <a href="#" onclick="return false;"
+                            (click)="myVar.more = !myVar.more"
+                            >More</a
+                          >
+                        </p>
+
+                        <p [hidden]="myVar.less">
+                          {{ longText }}
+                          <a href="#" onclick="return false;"
+                            (click)="myVar.less = !myVar.more"
+                            >Less</a>
+                        </p> -->
+
+                        <nga-read-more
+                          class="font-self-14"
+                          [text]="text"
+                          [textLength]="28"
+                        ></nga-read-more>
+                      </li>
+                    </ul>
+                  </td>
+                  <td>
+                    <ul>
+                      <li
+                        *ngFor="let subItem of item.reportDetail; let n = index"
+                      >
+                        50%
+                        <!-- {{ subItem.progress }} -->
+                      </li>
+                    </ul>
+                  </td>
+                  <td>{{ item.remarks }}</td>
+                  <td>
+                    <a class="btn btn-primary btn-sm btn-block" href="#">
+                      <i class="fa fa-comments-o" aria-hidden="true"></i>
+                    </a>
+                  </td>
                 </tr>
               </tbody>
-
             </table>
           </div>
         </div>

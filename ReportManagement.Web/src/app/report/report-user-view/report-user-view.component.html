@@ -1,6 +1,5 @@
 <app-top-bar></app-top-bar>
 
-
 <!-- Main body area -->
 
 <div class="container">
@@ -14,21 +13,28 @@
             </div>
             <div class="col-md-8 d-flex flex-row justify-content-end">
               <!-- <a [routerLink]="'/checkreport'" class="col-md-3">Check Report</a> -->
-              <button type="button" [routerLink]="'/check-report'" class="col-md-3 btn btn-block btn-info">Check
-                Report</button>
+              <button
+                type="button"
+                [routerLink]="'/check-report'"
+                class="col-md-3 btn btn-block btn-info"
+              >
+                Check Report
+              </button>
             </div>
           </div>
-          <h6>Name : {{userName}}</h6>
-          <!-- ==========================eikhane pashapashi sundor kore imran vai username anbe================================ -->
+          <!-- NOTICE: should change the method of setting the user information. 
+            user information will be set using login service.  -->
+          <h6 *ngFor="let userData of reportList | slice: 0:1">  
+            Name : {{ userData.firstName }} {{ userData.lastName }} 
+          </h6>
         </div>
       </div>
     </div>
 
     <div class="card-body">
-
       <div class="row">
         <div class="col-md-12">
-          <table class="table table-responsive-md table-bordered table-striped">
+          <table class="table table-responsive-md table-bordered">
             <thead>
               <tr>
                 <th>#</th>
@@ -40,34 +46,63 @@
               </tr>
             </thead>
             <tbody>
-              <tr *ngFor="let item of reportList; let i=index">
-                <td>{{i+1}}</td>
-                <td>{{item.createdDate}}</td>
+              <tr *ngFor="let item of reportList; let i = index">
+                <td>{{ i + 1 }}</td>
+                <td>{{ item.createdDate | date: "yyyy/MM/dd" }}</td>
                 <td>
                   <ul>
-                    <li *ngFor="let subItem of item.reportDetail; let n=index">
-                      {{subItem.plan}}
+                    <li
+                      *ngFor="let subItem of item.reportDetail; let n = index"
+                    >
+                      Lorem Ipsum is simply dummy text of the printing and
+                      <!-- {{ subItem.plan }} -->
+                    </li>
+                  </ul>
+                </td>
+                <td style="width:30%;">
+                  <ul>
+                    <li
+                      *ngFor="let subItem of item.reportDetail; let n = index"
+                    >
+                      <!-- <accordion [isAnimated]="true">
+                        <accordion-group
+                          heading="クリックしてごください"
+                          [panelClass]="customClass"
+                          [isOpen]="isFirstOpen"
+                        >
+                          Lorem Ipsum is simply dummy text of the printing and
+                          typesetting industry. Lorem Ipsum has been the
+                          industry's standard dummy text ever since the 1500s,
+                          when an unknown printer took a galley of type and
+                          scrambled it to make a type specimen book. It has
+                          survived not only five centuries, but also the leap
+                          into electronic typesetting, remaining essentially
+                          unchanged. It was popularised in the 1960s with the
+                          release of Letraset sheets containing Lorem Ipsum
+                          passages, and more recently with desktop publishing
+                          software like Aldus PageMaker including versions of
+                          Lorem Ipsum.
+                        </accordion-group>
+                        {{ subItem.details }}
+                      </accordion> -->
+
+                      <nga-read-more class="font-self-14" [text]=text [textLength]="28"></nga-read-more>
                     </li>
                   </ul>
                 </td>
                 <td>
                   <ul>
-                    <li *ngFor="let subItem of item.reportDetail; let n=index">
-                      {{subItem.details}}
+                    <li
+                      *ngFor="let subItem of item.reportDetail; let n = index"
+                    >
+                      50%
+                      <!-- {{ subItem.progress }} -->
                     </li>
                   </ul>
                 </td>
-                <td>
-                  <ul>
-                    <li *ngFor="let subItem of item.reportDetail; let n=index">
-                      {{subItem.progress}}
-                    </li>
-                  </ul>
-                </td>
-                <td>{{item.remarks}}</td>
+                <td>{{ item.remarks }}</td>
               </tr>
             </tbody>
-
           </table>
         </div>
       </div>
