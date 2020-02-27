@@ -12,19 +12,34 @@
       </div>
 
       <div class="card-body">
-        <form>
+        <form autocomplete="off">
           <div class="form-group">
             <div class="form-inline">
               <label class="col-md-2" for="employeeNameSearch"
                 >Employee Name</label
               >
-              <input class="form-control col-md-3" id="employeeNameSearch" />
+              <!-- <input class="form-control col-md-3" id="employeeNameSearch" /> -->
               <!-- <input class="form-control col-md-3"
                 [(ngModel)]="selectedValue"
-                [typeahead]="states"
-                typeaheadOptionField="name"
+                [typeahead]="userList"
+                typeaheadOptionField="firstName"
                 (typeaheadOnSelect)="onSelect($event)"
+                name="userName"
               /> -->
+              <select
+                name="selectedValue"
+                class="form-control col-md-3"
+                [(ngModel)]="selectedValue"
+              >
+                <option [selected]="true" [ngValue]="title"
+                  >Select Employee</option
+                >
+                <option
+                  *ngFor="let options of userList"
+                  [value]="options.userId"
+                  >{{ options.firstName }} {{ options.lastName }}</option
+                >
+              </select>
             </div>
           </div>
 
@@ -39,12 +54,6 @@
               />
             </div>
           </div>
-
-          <!-- <div class="row">
-            <div class="col-xs-12 col-12 col-md-4 form-group">
-              <input type="text" placeholder="Datepicker" id="date" class="form-control" bsDatepicker>
-            </div>
-          </div> -->
 
           <div class="row">
             <div class="form-group col-md-12">
@@ -90,8 +99,7 @@
                       <li
                         *ngFor="let subItem of item.reportDetail; let n = index"
                       >
-                        Lorem Ipsum is simply dummy text of the printing and
-                        <!-- {{ subItem.plan }} -->
+                        {{ subItem.plan }}
                       </li>
                     </ul>
                   </td>
@@ -100,46 +108,9 @@
                       <li
                         *ngFor="let subItem of item.reportDetail; let n = index"
                       >
-                        <!-- <accordion [isAnimated]="true">
-                          <accordion-group
-                            heading="クリックしてごください"
-                            [panelClass]="customClass"
-                            [isOpen]="isFirstOpen"
-                          >
-                            Lorem Ipsum is simply dummy text of the printing and
-                            typesetting industry. Lorem Ipsum has been the
-                            industry's standard dummy text ever since the 1500s,
-                            when an unknown printer took a galley of type and
-                            scrambled it to make a type specimen book. It has
-                            survived not only five centuries, but also the leap
-                            into electronic typesetting, remaining essentially
-                            unchanged. It was popularised in the 1960s with the
-                            release of Letraset sheets containing Lorem Ipsum
-                            passages, and more recently with desktop publishing
-                            software like Aldus PageMaker including versions of
-                            Lorem Ipsum.
-                          </accordion-group>
-                          {{ subItem.details }}
-                        </accordion> -->
-
-                        <!-- <p [hidden]="!myVar.more">
-                          {{ longText | slice: 0:50 }}
-                          <a href="#" onclick="return false;"
-                            (click)="myVar.more = !myVar.more"
-                            >More</a
-                          >
-                        </p>
-
-                        <p [hidden]="myVar.less">
-                          {{ longText }}
-                          <a href="#" onclick="return false;"
-                            (click)="myVar.less = !myVar.more"
-                            >Less</a>
-                        </p> -->
-
                         <nga-read-more
                           class="font-self-14"
-                          [text]="text"
+                          [text]="subItem.details"
                           [textLength]="28"
                         ></nga-read-more>
                       </li>
@@ -150,8 +121,7 @@
                       <li
                         *ngFor="let subItem of item.reportDetail; let n = index"
                       >
-                        50%
-                        <!-- {{ subItem.progress }} -->
+                        {{ subItem.progress }}
                       </li>
                     </ul>
                   </td>

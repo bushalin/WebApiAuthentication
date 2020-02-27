@@ -36,13 +36,13 @@ export class ReportPreviledgedViewComponent implements OnInit {
     private http: HttpClient
   ) {
     this.getReportListByUserId();
-    // this.getAllUsers();
+    this.getAllUsers();
 
   }
 
   ngOnInit() {
     console.log(this.reportList);
-    // console.log(this.userList);
+    console.log(this.userList);
   }
 
   getReportListByUserId() {
@@ -65,19 +65,19 @@ export class ReportPreviledgedViewComponent implements OnInit {
     );
   }
 
-  // getAllUsers() {
-  //   this.commonService.getAllUsers().subscribe(
-  //     data => {
-  //       Object.entries(data).map(res => {
-  //         this.userList.push(res[1]);
-  //       });
-  //     },
-  //     err => {}
-  //   );
-  // }
+  getAllUsers() {
+    this.commonService.getAllUsers().subscribe(
+      data => {
+        Object.entries(data).map(res => {
+          this.userList.push(res[1]);
+        });
+      },
+      err => {}
+    );
+  }
 
 
   onSelect(event: TypeaheadMatch): void {
-    this.selectedOption = event.item;
+    this.selectedOption = event.item['userId'];
   }
 }

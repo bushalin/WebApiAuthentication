@@ -26,6 +26,15 @@ export class CommonService {
     );
   }
 
+  //fetching REPORT data
+  getReports() {
+    return this.http.get<any>(environment.apiUrl + `user/getallUserInfo`).pipe(
+      map(res => {
+        return res;
+      })
+    );
+  }
+
 
   getList(url) {
     return this.http.get<any>(environment.apiUrl + url).pipe(
