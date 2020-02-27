@@ -44,7 +44,7 @@ export class AuthenticationService {
       const decodeUserDetails = JSON.parse(window.atob(localStorage.getItem('authToken').split('.')[1]));
       userDetails.userId = decodeUserDetails['http://schemas.xmlsoap.org/ws/2005/05/identity/claims/nameidentifier'];
       userDetails.role = decodeUserDetails['http://schemas.microsoft.com/ws/2008/06/identity/claims/role'];
-
+      userDetails.fullName = decodeUserDetails['http://schemas.xmlsoap.org/ws/2005/05/identity/claims/givenname'];
       console.log(userDetails);
 
       this.userData.next(userDetails);

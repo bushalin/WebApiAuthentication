@@ -36,11 +36,14 @@ export class AuthGuard implements CanActivate {
     | Promise<boolean | UrlTree>
     | boolean
     | UrlTree {
-    this.userData.role.forEach(element => {
-      if (element === UserRole.Admin || element === UserRole.User) {
-        this.guardFlag = true;
+      if(this.userData === null) {
+
       }
-    });
+      this.userData.role.forEach(element => {
+        if (element === UserRole.Admin || element === UserRole.User) {
+          this.guardFlag = true;
+        }
+      });
 
     if (this.guardFlag === true) {
       return true;

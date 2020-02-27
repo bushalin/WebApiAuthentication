@@ -16,6 +16,8 @@ namespace ReportManagement.Model.User
 
         public async Task<ClaimsIdentity> GenerateUserIdentityAsync(UserManager<ApplicationUser> manager, string authenticationType, ApplicationUser user)
         {
+            ApplicationDbContext _context = new ApplicationDbContext();
+
             //JwtSecurityTokenHandler.DefaultInboundClaimTypeMap = new Dictionary<string, string>();
             //AntiForgeryConfig.UniqueClaimTypeIdentifier = ClaimTypes.NameIdentifier;
             var userIdentity = await manager.CreateIdentityAsync(this, authenticationType);
@@ -52,6 +54,10 @@ namespace ReportManagement.Model.User
             //}
             //userIdentity.AddClaims(claims);
             #endregion
+
+            var userInfo = _context.UserInfo.Find(user.Id);
+            var fullName = userInfo.FirstName + " " + userInfo.LastName;
+            userIdentity.AddClaim(new Claim(ClaimTypes.GivenName, fullName));
 
 
 
