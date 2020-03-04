@@ -7,6 +7,7 @@ import {
 import { environment } from "../environments/environment";
 import { Observable, throwError } from "rxjs";
 import { map } from "rxjs/operators";
+import { Report } from "src/models/report";
 
 @Injectable()
 export class ReportService {
@@ -16,9 +17,38 @@ export class ReportService {
     // this.header.set("Accept", "application/json");
 
     this.header = new HttpHeaders({
-      'Content-Type': 'application/json',
-      'Accept': 'application/json'
+      "Content-Type": "application/json",
+      Accept: "application/json"
     });
+  }
+
+  searchReport(employeeId, createdDate) {
+    let searchParams: URLSearchParams = new URLSearchParams();
+    searchParams.set("employeeId", employeeId);
+    searchParams.set("createdDate", createdDate);
+    return this.http
+      .get<any>(environment.apiUrl + `Report/SearchReport`, {
+        params: { employeeId: employeeId, createdDate: createdDate }
+      })
+      .pipe(
+        map(res => {
+          return res;
+        })
+      );
+  }
+
+  UpdateRemarks(remarksObj: Report) {
+    return this.http
+      .patch<Report>(
+        environment.apiUrl + `Report/UpdateRemarks`,
+        JSON.stringify(remarksObj),
+        { headers: this.header }
+      )
+      .pipe(
+        map(res => {
+          return res;
+        })
+      );
   }
 
   // URL: api/Report/SaveReport
@@ -36,8 +66,18 @@ export class ReportService {
       );
   }
 
-  // URL: api/Report/GetReportById/1dd77da5-8a67-4729-923c-3224bbccf460
   getReportById(id) {
+    return this.http
+      .get<any>(environment.apiUrl + `report/getReportById/` + id)
+      .pipe(
+        map(res => {
+          return res;
+        })
+      );
+  }
+
+  // URL: api/Report/GetReportById/1dd77da5-8a67-4729-923c-3224bbccf460
+  getReportByUserId(id) {
     return this.http
       .get<any>(environment.apiUrl + `report/getreportbyuserid/` + id)
       .pipe(
@@ -56,13 +96,14 @@ export class ReportService {
   }
 
   getRecentReports() {
-    return this.http.get<any>(environment.apiUrl + `Report/GetRecentReports`).pipe(
-      map(res => {
-        return res;
-      })
-    );
+    return this.http
+      .get<any>(environment.apiUrl + `Report/GetRecentReports`)
+      .pipe(
+        map(res => {
+          return res;
+        })
+      );
   }
-  
 
   getTestData() {
     const result = this.http

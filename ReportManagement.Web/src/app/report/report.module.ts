@@ -1,26 +1,34 @@
-import { NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
-import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { ReportCreateComponent } from './report-create/report-create.component';
-import { ReportUserViewComponent } from './report-user-view/report-user-view.component';
-import { ReportService } from 'src/services/report.services';
-import { TopBarComponent } from '../layout/top-bar/top-bar.component';
-import { SidebarComponent } from '../layout/sidebar/sidebar.component';
-import { ReportPreviledgedViewComponent } from './report-previledged-view/report-previledged-view.component';
-import { ReportCheckComponent } from './report-check/report-check.component';
-import { AppRoutingModule } from '../app-routing.module';
-import { BsDatepickerModule } from 'ngx-bootstrap/datepicker';
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { ReportCommentComponent } from './report-comment/report-comment.component';
-import { AccordionModule } from 'ngx-bootstrap';
-import { CollapseModule } from 'ngx-bootstrap/collapse';
-import { NgaReadMoreModule } from 'nga-read-more';
-import { TypeaheadModule } from 'ngx-bootstrap/typeahead';
-
-
+import { NgModule } from "@angular/core";
+import { CommonModule, DatePipe } from "@angular/common";
+import { FormsModule, ReactiveFormsModule } from "@angular/forms";
+import { ReportCreateComponent } from "./report-create/report-create.component";
+import { ReportUserViewComponent } from "./report-user-view/report-user-view.component";
+import { ReportService } from "src/services/report.services";
+import { TopBarComponent } from "../layout/top-bar/top-bar.component";
+import { SidebarComponent } from "../layout/sidebar/sidebar.component";
+import { ReportPreviledgedViewComponent } from "./report-previledged-view/report-previledged-view.component";
+import { ReportCheckComponent } from "./report-check/report-check.component";
+import { AppRoutingModule } from "../app-routing.module";
+import { BsDatepickerModule } from "ngx-bootstrap/datepicker";
+import { BrowserAnimationsModule } from "@angular/platform-browser/animations";
+import { ReportCommentComponent } from "./report-comment/report-comment.component";
+import { AccordionModule } from "ngx-bootstrap";
+import { CollapseModule } from "ngx-bootstrap/collapse";
+import { NgaReadMoreModule } from "nga-read-more";
+import { TypeaheadModule } from "ngx-bootstrap/typeahead";
+import { ReportSearchComponent } from './report-search/report-search.component';
 
 @NgModule({
-  declarations: [ReportCreateComponent, ReportUserViewComponent, TopBarComponent, SidebarComponent, ReportPreviledgedViewComponent, ReportCheckComponent, ReportCommentComponent],
+  declarations: [
+    ReportCreateComponent,
+    ReportUserViewComponent,
+    TopBarComponent,
+    SidebarComponent,
+    ReportPreviledgedViewComponent,
+    ReportCheckComponent,
+    ReportCommentComponent,
+    ReportSearchComponent
+  ],
   imports: [
     AppRoutingModule,
     CommonModule,
@@ -31,9 +39,9 @@ import { TypeaheadModule } from 'ngx-bootstrap/typeahead';
     AccordionModule.forRoot(),
     CollapseModule.forRoot(),
     NgaReadMoreModule,
-    TypeaheadModule.forRoot(),
+    TypeaheadModule.forRoot()
   ],
   exports: [ReportCreateComponent, TopBarComponent],
-  providers: [ReportService]
+  providers: [ReportService, DatePipe]
 })
-export class ReportModule { }
+export class ReportModule {}

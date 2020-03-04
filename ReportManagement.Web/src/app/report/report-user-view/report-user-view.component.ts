@@ -3,6 +3,7 @@ import { Router } from "@angular/router";
 import { ReportService } from "src/services/report.services";
 import { element } from "protractor";
 import { HttpClient } from "@angular/common/http";
+import { AuthenticationService } from 'src/services/authentication.service';
 
 @Component({
   selector: "app-report-user-view",
@@ -10,36 +11,40 @@ import { HttpClient } from "@angular/common/http";
   styleUrls: ["./report-user-view.component.css"]
 })
 export class ReportUserViewComponent implements OnInit {
-  userId = "1dd77da5-8a67-4729-923c-3224bbccf460"; // NOTICE: should change the method of setting the user information.
-  userName = "Imran"; // user information will be set using login service.
+  userId;
+  userName;
   githubData: any;
+
+  userDataSubscription;
+  userData;
 
   customClass = "customClass";
   isFirstOpen = false;
 
   // list for showing the form data
   reportList: any[] = [];
-  testList = [];
-  test_oneList: any;
-  // text =
-  //   "著ての時詳てり講民25況ヨテク回聞オイヲエ技外クヌ情海津イしラさ申式原ぐらルわ知8権メルタ多情ぎぼッ全4三戸ツハヒラ員路吾暖ずん。選長スやを世画トすぐそ青受ッつぜ稿合し賞複おせ江株ばさ形宝ろゃや別権セラエサ着続さょ者投容イべぼ年聞ト査受そ屈出ロホマエ経連ほ。3師ら来業況ウヒハ整暴事ヌ長保リコ化真つえよ環童メシウ士本ヨヤヱ場戦活ハユ行盛ユウ険国もドるて。";
-
 
   constructor(
     private route: Router,
     private reportService: ReportService,
+    private authService: AuthenticationService,
     private http: HttpClient
   ) {
+    this.userDataSubscription = this.authService.userData.asObservable().subscribe(data => {
+      this.userData = data;
+      //This will come from the seperate api call of login function. not from token
+      this.userName = this.userData.fullName;
+      this.userId = this.userData.userId;
+    })
     this.getReportListByUserId();
   }
 
   ngOnInit() {
     console.log(this.reportList);
-    //this.getAllReportList();
   }
 
   getReportListByUserId() {
-    this.reportService.getReportById(this.userId).subscribe(
+    this.reportService.getReportByUserId(this.userId).subscribe(
       data => {
         Object.entries(data).map(res => {
           this.reportList.push(res[1]);
@@ -57,27 +62,4 @@ export class ReportUserViewComponent implements OnInit {
       err => {}
     );
   }
-
-  getAllReportList() {
-    this.reportService.getAllReports().subscribe(
-      data => {
-        this.test_oneList = data;
-      },
-      err => {}
-    );
-  }
-
-  // getTestData() {
-  //   this.reportService.getTestData().subscribe(
-  //     data => {
-  //       data.forEach(element => {
-  //         this.test_oneList.push({
-  //           Id: element.Id,
-  //           Name: element.Name,
-  //           Description: element.Description
-  //         })
-  //       });
-  //     }
-  //   );
-  // }
 }

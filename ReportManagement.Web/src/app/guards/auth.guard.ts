@@ -18,6 +18,7 @@ export class AuthGuard implements CanActivate {
   userDataSubscription: any;
   userData = new User();
   guardFlag = false;
+  userRoles: any[] = [];
   constructor(
     private router: Router,
     private authService: AuthenticationService
@@ -36,9 +37,6 @@ export class AuthGuard implements CanActivate {
     | Promise<boolean | UrlTree>
     | boolean
     | UrlTree {
-      if(this.userData === null) {
-
-      }
       this.userData.role.forEach(element => {
         if (element === UserRole.Admin || element === UserRole.User) {
           this.guardFlag = true;

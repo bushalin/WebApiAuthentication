@@ -1,6 +1,6 @@
 <app-top-bar></app-top-bar>
 
-<div class="container">
+<div class="container mb-3">
   <div class="col-md-12 mt-5">
     <div class="card">
       <div class="card-header">
@@ -12,7 +12,7 @@
       </div>
 
       <div class="card-body">
-        <form autocomplete="off">
+        <form autocomplete="off" [formGroup]="reportSearchForm">
           <div class="form-group">
             <div class="form-inline">
               <label class="col-md-2" for="employeeNameSearch"
@@ -25,19 +25,18 @@
                 typeaheadOptionField="firstName"
                 (typeaheadOnSelect)="onSelect($event)"
                 name="userName"
-              /> -->
+              /> FOR FUTURE REFERENCE --> 
               <select
-                name="selectedValue"
+                name="employeeNameSelectedValue"
                 class="form-control col-md-3"
-                [(ngModel)]="selectedValue"
+                formControlName="employeeNameSelectedValue"
               >
                 <option [selected]="true" [ngValue]="title"
-                  >Select Employee</option
-                >
+                  >Select Employee</option>
                 <option
-                  *ngFor="let options of userList"
-                  [value]="options.userId"
-                  >{{ options.firstName }} {{ options.lastName }}</option
+                  *ngFor="let item of userList"
+                  [value]="item.userId"
+                  >{{ item.firstName }} {{ item.lastName }}</option
                 >
               </select>
             </div>
@@ -50,6 +49,7 @@
                 type="text"
                 id="dateSearch"
                 class="form-control col-md-3"
+                formControlName="dateSelectedValue"
                 bsDatepicker
               />
             </div>
@@ -57,7 +57,7 @@
 
           <div class="row">
             <div class="form-group col-md-12">
-              <button class="btn btn-primary offset-md-2">Search</button>
+              <button class="btn btn-primary offset-md-2" (click)="onClickSearch()">Search</button>
             </div>
           </div>
         </form>
@@ -83,6 +83,7 @@
                 <tr>
                   <th>#</th>
                   <th>Date</th>
+                  <th>Employee Name</th>
                   <th>Title</th>
                   <th>Detail</th>
                   <th>Progress</th>
@@ -94,6 +95,7 @@
                 <tr *ngFor="let item of reportList; let i = index">
                   <td>{{ i + 1 }}</td>
                   <td>{{ item.createdDate | date: "yyyy/MM/dd" }}</td>
+                  <td>{{ item.firstName}} {{item.lastName}}</td>
                   <td>
                     <ul>
                       <li
@@ -127,7 +129,7 @@
                   </td>
                   <td>{{ item.remarks }}</td>
                   <td>
-                    <a class="btn btn-primary btn-sm btn-block" href="#">
+                    <a class="btn btn-primary btn-sm btn-block" [routerLink]="['/create-comment', item.reportId]">
                       <i class="fa fa-comments-o" aria-hidden="true"></i>
                     </a>
                   </td>

@@ -3,6 +3,7 @@ using ReportManagement.Model;
 using ReportManagement.Model.Reports;
 using System;
 using System.Collections.Generic;
+using System.Data.Entity;
 using System.Linq;
 using System.Web.Mvc;
 
@@ -24,6 +25,153 @@ namespace ReportManagement.Services.Reports
         public JsonResult GetAllReports()
         {
             var result = _context.Report.Select(x => x.id);
+            return new JsonResult
+            {
+                Data = result,
+                JsonRequestBehavior = JsonRequestBehavior.AllowGet
+            };
+        }
+
+        public JsonResult SearchReportByEmployeeId(string employeeId)
+        {
+            var result = _context.Report.Where(x => x.UserId == employeeId)
+                .Join(_context.UserInfo,
+                u => u.UserId,
+                v => v.UserId,
+                (u, v) => new { Report = u, User = v })
+                .Select(x => new
+                {
+                    userId = x.User.UserId,
+                    reportId = x.Report.id,
+                    x.User.FirstName,
+                    x.User.LastName,
+                    x.User.JobTitle,
+                    x.Report.ReportStatus,
+                    x.Report.Remarks,
+
+                    reportDetail = _context.ReportDetail.Where(rd => rd.ReportId == x.Report.id)
+                        .Select(v => new
+                        {
+                            v.Plan,
+                            v.Progress,
+                            v.Details
+                        }).ToList()
+                }).ToList();
+
+            return new JsonResult
+            {
+                Data = result,
+                JsonRequestBehavior = JsonRequestBehavior.AllowGet
+            };
+        }
+
+        public JsonResult SearchReport(string employeeId, DateTime createdDate)
+        {
+            var message = "";
+
+            if((employeeId == null || employeeId == "null") && createdDate != null)
+            {
+                var result = _context.Report.Where(x => x.CreatedDate.Value != null && DbFunctions.TruncateTime(x.CreatedDate) == createdDate.Date)
+                    .Join(_context.UserInfo,
+                    u => u.UserId,
+                    v => v.UserId,
+                    (u, v) => new { Report = u, User = v })
+                    .Select(x => new
+                    {
+                        userId = x.User.UserId,
+                        reportId = x.Report.id,
+                        x.User.FirstName,
+                        x.User.LastName,
+                        x.User.JobTitle,
+                        x.Report.ReportStatus,
+                        x.Report.Remarks,
+                        x.Report.CreatedDate,
+
+                        reportDetail = _context.ReportDetail.Where(rd => rd.ReportId == x.Report.id)
+                            .Select(rd => new
+                            {
+                                rd.Plan,
+                                rd.Progress,
+                                rd.Details
+                            }).ToList()
+                    }).ToList();
+
+                return new JsonResult
+                {
+                    Data = result,
+                    JsonRequestBehavior = JsonRequestBehavior.AllowGet
+                };
+            }
+
+            if(employeeId != null && createdDate != null)
+            {
+                var result = _context.Report.Where(x => x.UserId == employeeId && DbFunctions.TruncateTime(x.CreatedDate) == createdDate.Date)
+                    .Join(_context.UserInfo,
+                    u => u.UserId,
+                    v => v.UserId,
+                    (u, v) => new { Report = u, User = v })
+                    .Select(x => new
+                    {
+                        userId = x.User.UserId,
+                        reportId = x.Report.id,
+                        x.User.FirstName,
+                        x.User.LastName,
+                        x.User.JobTitle,
+                        x.Report.ReportStatus,
+                        x.Report.Remarks,
+                        x.Report.CreatedDate,
+
+                        reportDetail = _context.ReportDetail.Where(rd => rd.ReportId == x.Report.id)
+                            .Select(rd => new
+                            {
+                                rd.Plan,
+                                rd.Progress,
+                                rd.Details
+                            }).ToList()
+                    }).ToList();
+
+                return new JsonResult
+                {
+                    Data = result,
+                    JsonRequestBehavior = JsonRequestBehavior.AllowGet
+                };
+            }
+
+            return new JsonResult
+            {
+                Data = message,
+                JsonRequestBehavior = JsonRequestBehavior.AllowGet
+            };
+
+        }
+
+        public JsonResult GetReportById(int reportId)
+        {
+            var result = _context.Report.Where(x => x.id == reportId)
+                .Join(_context.UserInfo,
+                u => u.UserId,
+                v => v.UserId,
+                (u, v) => new { Report = u, User = v })
+                .Select(x => new
+                {
+                    reportId = x.Report.id,
+                    userId = x.User.UserId,
+                    x.User.FirstName,
+                    x.User.LastName,
+                    x.User.JobTitle,
+                    x.Report.CreatedDate,
+                    x.Report.Remarks,
+                    x.Report.ReportStatus,
+
+                    ReportDetail = _context.ReportDetail.Where(r => r.ReportId == x.Report.id)
+                        .Select(rd => new
+                        {
+                            rd.Plan,
+                            rd.Details,
+                            rd.Progress
+                        }).ToList()
+                }).FirstOrDefault();
+
             return new JsonResult
             {
                 Data = result,
@@ -198,14 +346,54 @@ namespace ReportManagement.Services.Reports
             };
         }
 
+        public JsonResult UpdateRemarks(Report reportObj)
+        {
+            var message = "";
+
+            if(string.IsNullOrWhiteSpace(reportObj.Remarks))
+            {
+                message = "Please provide a remarks";
+
+                return new JsonResult
+                {
+                    Data = message,
+                    JsonRequestBehavior = JsonRequestBehavior.AllowGet
+                };
+            }
+
+            try
+            {
+                var report = _context.Report.Where(x => x.id == reportObj.id)
+                    .Select(x => x).FirstOrDefault();
+
+                report.Remarks = reportObj.Remarks;
+                _services.SaveChanges();
+                message = "Remarks updated successfully";
+            }
+            catch(Exception ex)
+            {
+                message = ex.Message;
+            }
+
+            return new JsonResult
+            {
+                Data = message,
+                JsonRequestBehavior = JsonRequestBehavior.AllowGet
+            };
+        }
+
     }
 
     public interface IReportServices
     {
+        JsonResult SearchReport(string employeeId, DateTime createdDate);
+        JsonResult SearchReportByEmployeeId(string employeeId);
+        JsonResult GetReportById(int reportId);
         JsonResult GetReportByUserId(string Id);
         JsonResult GetReportByUserName(string username);
         JsonResult GetAllReports();
         JsonResult GetRecentReports();
         JsonResult SaveReport(JObject obj);
+        JsonResult UpdateRemarks(Report report);
     }
 }

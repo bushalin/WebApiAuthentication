@@ -1,4 +1,5 @@
 export class Report {
+    id: number;
     Remarks : string;
     ReportStatus : boolean;
     UserId : string;

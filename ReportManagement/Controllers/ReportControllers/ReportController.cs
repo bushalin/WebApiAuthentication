@@ -1,4 +1,5 @@
 ﻿using Newtonsoft.Json.Linq;
+using ReportManagement.Model.Reports;
 using ReportManagement.Services.Reports;
 using System.Web.Http;
 
@@ -16,12 +17,34 @@ namespace ReportManagement.Controllers.ReportControllers
             _reportDetailServices = new ReportDetailServices();
         }
 
+        [Route("GetReportById/{reportId}")]
+        [HttpGet]
+        public IHttpActionResult GetReportById(int reportId)
+        {
+            return Ok(_reportServices.GetReportById(reportId).Data);
+        }
+
         // URL: api/Report/GetReportByName?username=something
         [Route("GetReportByUserName")]
         [HttpGet]
         public IHttpActionResult GetReportByName(string username)
         {
             return Ok(_reportServices.GetReportByUserName(username).Data);
+        }
+
+        // URL: api/Report/SearchReport?employeeId=something&createdDate=1324-234-14
+        [Route("SearchReport")]
+        [HttpGet]
+        public IHttpActionResult SearchReport(string createdDate = null, string employeeId = null)
+        {
+            System.DateTime parsedDate;
+            bool convertSuccess = System.DateTime.TryParse(createdDate, out parsedDate);
+            if(parsedDate == System.DateTime.MinValue)
+            {
+                return Ok(_reportServices.SearchReportByEmployeeId(employeeId).Data);
+            }
+
+            return Ok(_reportServices.SearchReport(employeeId, parsedDate).Data);
         }
 
         // URL: api/Report/GetReportById/1dd77da5-8a67-4729-923c-3224bbccf460
@@ -74,6 +97,18 @@ namespace ReportManagement.Controllers.ReportControllers
             }
 
             return Ok(_reportServices.SaveReport(obj).Data);
+        }
+
+        [Route("UpdateRemarks")]
+        [HttpPatch]
+        public IHttpActionResult UpdateRemarks(Report reportObj)
+        {
+            if(!ModelState.IsValid)
+            {
+                return BadRequest();
+            }
+
+            return Ok(_reportServices.UpdateRemarks(reportObj).Data);
         }
     }
 }

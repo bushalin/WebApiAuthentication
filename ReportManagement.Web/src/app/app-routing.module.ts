@@ -11,6 +11,8 @@ import { UserProfileCreateComponent } from './user/user-profile-create/user-prof
 import { UserProfileEditComponent } from './user/user-profile-edit/user-profile-edit.component';
 import { LoginComponent } from './common/login/login.component';
 import { AuthGuard } from './guards/auth.guard';
+import { AdminGuard } from './guards/admin.guard';
+import { ReportSearchComponent } from './report/report-search/report-search.component';
 
 
 const routes: Routes = [
@@ -20,8 +22,9 @@ const routes: Routes = [
   { path: 'create-report', component: ReportCreateComponent, canActivate: [AuthGuard] },
   { path: 'view-report', component: ReportUserViewComponent, canActivate: [AuthGuard]},
   { path: 'check-report', component: ReportCheckComponent, canActivate: [AuthGuard] },
-  { path: 'view-privileged-report', component: ReportPreviledgedViewComponent, canActivate: [AuthGuard] },
-  { path: 'create-comment', component: ReportCommentComponent, canActivate: [AuthGuard] },
+  { path: 'view-privileged-report', component: ReportPreviledgedViewComponent, canActivate: [AdminGuard] },
+  { path: 'create-comment/:id', component: ReportCommentComponent, canActivate: [AuthGuard] },
+  { path: 'search-report', component: ReportSearchComponent, canActivate: [AuthGuard] },
   { path: 'profile', component: UserProfileComponent, canActivate: [AuthGuard] },
   { path: 'profile-create', component: UserProfileCreateComponent, canActivate: [AuthGuard] },
   { path: 'profile-edit', component: UserProfileEditComponent, canActivate: [AuthGuard] },

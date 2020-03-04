@@ -5,6 +5,10 @@ import { CommonService } from "src/services/common.services";
 import { element } from "protractor";
 import { HttpClient } from "@angular/common/http";
 import { TypeaheadMatch } from 'ngx-bootstrap/typeahead/typeahead-match.class';
+import { isUndefined } from 'util';
+import { FormGroup, FormBuilder } from '@angular/forms';
+import { DatePipe } from '@angular/common';
+import { datepickerAnimation } from 'ngx-bootstrap/datepicker/datepicker-animations';
 
 @Component({
   selector: "app-report-previledged-view",
@@ -12,30 +16,23 @@ import { TypeaheadMatch } from 'ngx-bootstrap/typeahead/typeahead-match.class';
   styleUrls: ["./report-previledged-view.component.css"]
 })
 export class ReportPreviledgedViewComponent implements OnInit {
-  userId = "632922b2-5375-4aff-93a7-d552dca01a38";
-  userName = "Imran";
-
-  // longText =
-  //   "Bacon ipsum dolor amet bacon t-bone tongue ball tip salami, flank capicola. Leberkas ribeye pork pork loin. Biltong porchetta picanha capicola tri-tip boudin. Tenderloin leberkas chicken, ham pig pork loin flank salami ham hock chuck meatball kevin. Meatloaf capicola landjaeger ground round ham hock ball tip boudin shank pork chop ribeye rump frankfurter turkey. Spare ribs short loin pork chop, biltong capicola shoulder pig drumstick pork porchetta brisket venison turducken sausage. Pig alcatra short loin jowl, prosciutto leberkas ham chuck.";
-
+  reportSearchForm: FormGroup;
   reportList: any[] = [];
-  selectedValue: string;
+  employeeId: string;
+  createdDate: string;
   selectedOption: any;
   userList:  any[] = [];
-  // isFirstOpen = false;
-  customClass = "customClass";
-  // myVar: any = { more: true, less: true };
-
-  text =
-    "著ての時詳てり講民25況ヨテク回聞オイヲエ技外クヌ情海津イしラさ申式原ぐらルわ知8権メルタ多情ぎぼッ全4三戸ツハヒラ員路吾暖ずん。選長スやを世画トすぐそ青受ッつぜ稿合し賞複おせ江株ばさ形宝ろゃや別権セラエサ着続さょ者投容イべぼ年聞ト査受そ屈出ロホマエ経連ほ。3師ら来業況ウヒハ整暴事ヌ長保リコ化真つえよ環童メシウ士本ヨヤヱ場戦活ハユ行盛ユウ険国もドるて。";
 
   constructor(
     private route: Router,
     private reportService: ReportService,
     private commonService: CommonService,
-    private http: HttpClient
+    private http: HttpClient,
+    private formBuilder: FormBuilder,
+    private datePipe: DatePipe
   ) {
-    this.getReportListByUserId();
+    this.getRecentReports();
+    console.log(this.reportList);
     this.getAllUsers();
 
   }
@@ -43,27 +40,27 @@ export class ReportPreviledgedViewComponent implements OnInit {
   ngOnInit() {
     console.log(this.reportList);
     console.log(this.userList);
+    this.reportSearchForm = this.formBuilder.group({
+      employeeNameSelectedValue: [''],
+      dateSelectedValue: ['']
+    });
   }
 
-  getReportListByUserId() {
-    this.reportService.getReportById(this.userId).subscribe(
+  get f(){
+    return this.reportSearchForm.controls;
+  }
+
+  getRecentReports() {
+    this.reportService.getRecentReports().subscribe(
       data => {
         Object.entries(data).map(res => {
           this.reportList.push(res[1]);
         });
-
-        // data.foreach(element => {
-        //   this.reportList.push({
-        //     firstName : element.FirstName,
-        //     lastName: element.lastName
-        //   })
-        // })
-        //this.reportList = JSON.parse(JSON.stringify(data));
-        //this.reportList = data.value;
       },
       err => {}
     );
   }
+
 
   getAllUsers() {
     this.commonService.getAllUsers().subscribe(
@@ -76,8 +73,33 @@ export class ReportPreviledgedViewComponent implements OnInit {
     );
   }
 
+  onClickSearch() {
+      this.employeeId = this.reportSearchForm.controls['employeeNameSelectedValue'].value;
+      let tempDate = this.reportSearchForm.controls['dateSelectedValue'].value;
+      this.createdDate = this.datePipe.transform(tempDate, 'yyyy-MM-dd');
+      // console.log(this.employeeId);
+      // console.log(this.createdDate);
+      if(isUndefined(this.employeeId)) {this.employeeId = ''};
+      if((this.employeeId === '' && this.createdDate !== '') || isUndefined(this.employeeId)) {
+        this.route.navigate(["/search-report"], { queryParams: { createdDate: this.createdDate }});
+        console.log(this.createdDate);
+      }
+      if(this.employeeId !== '' && this.createdDate === '') {
+        this.route.navigate(["/search-report"], { queryParams: { employeeId: this.employeeId }});
+        console.log(this.employeeId);
+      }
+      if(this.employeeId !== '' && this.createdDate !== '') {
+        this.route.navigate(["/search-report"], { queryParams: { employeeId: this.employeeId, createdDate: this.createdDate }});
+        console.log(this.employeeId);
+        console.log(this.createdDate);
+      }
+      if((this.employeeId === '' && this.createdDate === '') || isUndefined(this.employeeId)) { console.log("putki mara kha!")};
+      //this.route.navigate(["/search-report"], { queryParams: { employeeId: this.employeeId, createdDate: this.createdDate }});
 
-  onSelect(event: TypeaheadMatch): void {
-    this.selectedOption = event.item['userId'];
   }
+
+
+  // onSelect(event: TypeaheadMatch): void {
+  //   this.selectedOption = event.item['userId'];
+  // }
 }

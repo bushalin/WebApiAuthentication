@@ -58,6 +58,7 @@ namespace ReportManagement.Model.User
             var userInfo = _context.UserInfo.Find(user.Id);
             var fullName = userInfo.FirstName + " " + userInfo.LastName;
             userIdentity.AddClaim(new Claim(ClaimTypes.GivenName, fullName));
+            userIdentity.AddClaim(new Claim(ClaimTypes.Role, "Flag"));
 
 
 

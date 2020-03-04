@@ -38,10 +38,30 @@ namespace ReportManagement.Services.Users
                 JsonRequestBehavior = JsonRequestBehavior.AllowGet
             };
         }
+
+        public JsonResult GetUserDetailById(string Id)
+        {
+            var result = _context.UserInfo.Where(x => x.UserId == Id)
+                .Select(x => new
+                {
+                    x.FirstName,
+                    x.LastName,
+                    x.JobTitle,
+                    x.Address,
+                    x.Sex
+                }).FirstOrDefault();
+
+            return new JsonResult
+            {
+                Data = result,
+                JsonRequestBehavior = JsonRequestBehavior.AllowGet
+            };
+        }
     }
 
     public interface IUserServices
     {
         JsonResult GetAllUserInfo();
+        JsonResult GetUserDetailById(string Id);
     }
 }

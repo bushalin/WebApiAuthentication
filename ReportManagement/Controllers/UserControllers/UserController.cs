@@ -29,5 +29,12 @@ namespace ReportManagement.Controllers.UserControllers
 
             return Ok(_service.GetAllUserInfo().Data);
         }
+
+        [Route("GetUserDetailById/{id:Guid}")]
+        [HttpGet]
+        public IHttpActionResult GetUserDetailById(string id)
+        {
+            return Ok(_service.GetUserDetailById(id).Data);
+        }
     }
 }

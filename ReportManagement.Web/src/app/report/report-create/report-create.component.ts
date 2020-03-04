@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, FormArray } from '@angular/forms';
 import { Router } from '@angular/router';
 import { ReportService } from 'src/services/report.services';
+import { AuthenticationService } from 'src/services/authentication.service';
 
 @Component({
   selector: 'app-report-create',
@@ -10,6 +11,9 @@ import { ReportService } from 'src/services/report.services';
 })
 export class ReportCreateComponent implements OnInit {
 
+  userDataSubscription;
+  userData;
+  userName;
   reportCreateForm : FormGroup;
   public reportDetailList: FormArray;
   reportFormData : any = {}
@@ -19,11 +23,17 @@ export class ReportCreateComponent implements OnInit {
 
   constructor(private router: Router,
     private reportService: ReportService,
+    private authService: AuthenticationService,
     private formBuilder: FormBuilder) {
       this.minDate = new Date();
       this.maxDate = new Date();
       this.minDate.setDate(this.minDate.getDate() - 1);
       this.maxDate.setDate(this.maxDate.getDate());
+
+      this.userDataSubscription = this.authService.userData.asObservable().subscribe(data => {
+        this.userData = data;
+        this.userName = this.userData.fullName;
+      })
      }
 
   ngOnInit() {
@@ -84,7 +94,7 @@ export class ReportCreateComponent implements OnInit {
 
   onFormSubmit(){
     this.reportFormData = {'report' : {}, 'reportDetail' : []};
-    this.reportFormData.report.UserID = "1dd77da5-8a67-4729-923c-3224bbccf460";
+    this.reportFormData.report.UserID = this.userData.userId;
     this.reportFormData.report.ReportStatus = true;
     this.reportFormData.report.CreatedDate = this.reportCreateForm.controls['createdDate'].value;
     this.reportFormData.reportDetail = this.reportDetailList.value;
