@@ -5,7 +5,8 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Router } from '@angular/router';
 import { environment } from 'src/environments/environment';
 import { map } from 'rxjs/operators';
-import { isUndefined } from 'util';
+import { ReportService } from './report.services';
+import * as jwt_decode from 'jwt-decode';
 
 @Injectable({
   providedIn: 'root'
@@ -17,7 +18,7 @@ export class AuthenticationService {
 
   header;
 
-  constructor(private http: HttpClient, private router: Router) {
+  constructor(private http: HttpClient, private router: Router, private reportService: ReportService) {
     this.header = new HttpHeaders({
       'Content-Type': 'application/x-www-form-urlencoded'
     })
@@ -43,27 +44,43 @@ export class AuthenticationService {
   setUserDetails() {
     if(localStorage.getItem('authToken')) {
       const userDetails = new User();
-      const decodeUserDetails = JSON.parse(window.atob(localStorage.getItem('authToken').split('.')[1]));
+      //const decodeUserDetails = JSON.parse(window.atob(localStorage.getItem('authToken').split('.')[1]));
+      const decodeUserDetails = jwt_decode(localStorage.getItem('authToken'));
       userDetails.userId = decodeUserDetails['http://schemas.xmlsoap.org/ws/2005/05/identity/claims/nameidentifier'];
       userDetails.role = decodeUserDetails['http://schemas.microsoft.com/ws/2008/06/identity/claims/role'];
       userDetails.fullName = decodeUserDetails['http://schemas.xmlsoap.org/ws/2005/05/identity/claims/givenname'];
-      //console.log(userDetails);
-
-
       console.log(userDetails);
+
+      // this.getUserAdditionalDetail(userDetails.userId).subscribe(
+      //   data => {
+      //     console.log(data);
+      //     userDetails.firstName = data.firstName;
+      //     userDetails.lastName = data.lastName;
+      //     userDetails.address = data.address;
+      //     userDetails.jobTitle = data.jobTitle;
+      //     userDetails.sex = data.sex;
+      //   }
+      // )
+
+      //userDetails.fullName = userDetails.firstName + userDetails.lastName;
+
+      //console.log(userDetails);
+      //console.log(this.userData);
       this.userData.next(userDetails);
     }
   }
 
-  getUserAdditionalDetail(id) {
-    return this.http
-      .get<any>(environment.apiUrl + `user/GetUserDetailById/` + id)
-      .pipe(
-        map(res => {
-          return res;
-        })
-      );
-  }
+  
+  // getUserAdditionalDetail(id) {
+  //   return this.http
+  //     .get<any>(environment.apiUrl + `user/GetUserDetailById/` + id)
+  //     .pipe(
+  //       map(res => {
+  //         return res;
+  //       })
+  //     );
+  // }
+
 
   logout() {
     localStorage.removeItem('authToken');

@@ -133,4 +133,15 @@ export class ReportService {
       })
     );
   }
+
+
+  getUserAdditionalDetail(id) {
+    return this.http
+      .get<any>(environment.apiUrl + `user/GetUserDetailById/` + id)
+      .pipe(
+        map(res => {
+          return res;
+        })
+      );
+  }
 }

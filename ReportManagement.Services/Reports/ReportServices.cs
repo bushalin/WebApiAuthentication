@@ -48,6 +48,7 @@ namespace ReportManagement.Services.Reports
                     x.User.JobTitle,
                     x.Report.ReportStatus,
                     x.Report.Remarks,
+                    x.Report.CreatedDate,
 
                     reportDetail = _context.ReportDetail.Where(rd => rd.ReportId == x.Report.id)
                         .Select(v => new
