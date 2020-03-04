@@ -6,6 +6,8 @@ import { PageNotFoundComponent } from './common/page-not-found/page-not-found.co
 import { ReportCheckComponent } from './report/report-check/report-check.component';
 import { ReportPreviledgedViewComponent } from './report/report-previledged-view/report-previledged-view.component';
 import { ReportCommentComponent } from './report/report-comment/report-comment.component';
+import { ReportSearchNameComponent } from './report/report-search-name/report-search-name.component';
+import { ReportSearchDateComponent } from './report/report-search-date/report-search-date.component';
 import { UserProfileComponent } from './user/user-profile/user-profile.component';
 import { UserProfileCreateComponent } from './user/user-profile-create/user-profile-create.component';
 import { UserProfileEditComponent } from './user/user-profile-edit/user-profile-edit.component';
@@ -21,6 +23,8 @@ const routes: Routes = [
   { path: 'view-report', component: ReportUserViewComponent, canActivate: [AuthGuard]},
   { path: 'check-report', component: ReportCheckComponent, canActivate: [AuthGuard] },
   { path: 'view-privileged-report', component: ReportPreviledgedViewComponent, canActivate: [AuthGuard] },
+  { path: 'report-search-name', component: ReportSearchNameComponent, canActivate: [AuthGuard] },
+  { path: 'report-search-date', component: ReportSearchDateComponent, canActivate: [AuthGuard] },
   { path: 'create-comment', component: ReportCommentComponent, canActivate: [AuthGuard] },
   { path: 'profile', component: UserProfileComponent, canActivate: [AuthGuard] },
   { path: 'profile-create', component: UserProfileCreateComponent, canActivate: [AuthGuard] },

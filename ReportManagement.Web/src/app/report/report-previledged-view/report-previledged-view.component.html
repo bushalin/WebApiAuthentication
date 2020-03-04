@@ -75,7 +75,7 @@
         </div>
       </div>
 
-      <div class="card-body">
+      <div class="card-body overflow-auto">
         <div class="row">
           <div class="col-md-12">
             <table class="table table-responsive-md table-bordered">
@@ -83,6 +83,7 @@
                 <tr>
                   <th>#</th>
                   <th>Date</th>
+                  <th>Name</th>
                   <th>Title</th>
                   <th>Detail</th>
                   <th>Progress</th>
@@ -94,6 +95,7 @@
                 <tr *ngFor="let item of reportList; let i = index">
                   <td>{{ i + 1 }}</td>
                   <td>{{ item.createdDate | date: "yyyy/MM/dd" }}</td>
+                  <td style="width:30%;">{{ item.firstName }} {{ item.lastName }}</td>
                   <td>
                     <ul>
                       <li
@@ -103,7 +105,7 @@
                       </li>
                     </ul>
                   </td>
-                  <td style="width:30%;">
+                  <td class="w-50">
                     <ul>
                       <li
                         *ngFor="let subItem of item.reportDetail; let n = index"
@@ -127,7 +129,7 @@
                   </td>
                   <td>{{ item.remarks }}</td>
                   <td>
-                    <a class="btn btn-primary btn-sm btn-block" href="#">
+                    <a class="btn btn-primary btn-sm btn-block" [routerLink]="'/create-comment/'">
                       <i class="fa fa-comments-o" aria-hidden="true"></i>
                     </a>
                   </td>

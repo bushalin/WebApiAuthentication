@@ -16,11 +16,13 @@ import { AccordionModule } from 'ngx-bootstrap';
 import { CollapseModule } from 'ngx-bootstrap/collapse';
 import { NgaReadMoreModule } from 'nga-read-more';
 import { TypeaheadModule } from 'ngx-bootstrap/typeahead';
+import { ReportSearchNameComponent } from './report-search-name/report-search-name.component';
+import { ReportSearchDateComponent } from './report-search-date/report-search-date.component';
 
 
 
 @NgModule({
-  declarations: [ReportCreateComponent, ReportUserViewComponent, TopBarComponent, SidebarComponent, ReportPreviledgedViewComponent, ReportCheckComponent, ReportCommentComponent],
+  declarations: [ReportCreateComponent, ReportUserViewComponent, TopBarComponent, SidebarComponent, ReportPreviledgedViewComponent, ReportCheckComponent, ReportCommentComponent, ReportSearchNameComponent, ReportSearchDateComponent],
   imports: [
     AppRoutingModule,
     CommonModule,
