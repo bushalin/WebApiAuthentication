@@ -2,30 +2,19 @@
 
 <!-- Main body area -->
 
-<div class="container mb-3">
+<div class="container">
   <div class="card mt-5">
     <div class="card-header">
       <div class="row">
         <div class="col-md-12">
           <div class="row">
             <div class="col-md-4">
-              <h5>Report Home</h5>
-            </div>
-            <div class="col-md-8 d-flex flex-row justify-content-end">
-              <!-- <a [routerLink]="'/checkreport'" class="col-md-3">Check Report</a> -->
-              <button
-                type="button"
-                [routerLink]="'/check-report'"
-                class="col-md-3 btn btn-block btn-info"
-              >
-                Check Report
-              </button>
+              <h5>Latest Reports</h5>
             </div>
           </div>
-          <!-- NOTICE: should change the method of setting the user information. 
-            user information will be set using login service.  -->
+          <!-- NOTICE: should change the method of setting the information by Report Date.   -->
           <h6 *ngFor="let userData of reportList | slice: 0:1">  
-            Name : {{ userData.firstName }} {{ userData.lastName }} 
+            Date : 
           </h6>
         </div>
       </div>
@@ -38,17 +27,20 @@
             <thead>
               <tr>
                 <th>#</th>
-                <th>Date</th>
+                <th>Name</th>
                 <th>Title</th>
                 <th>Detail</th>
                 <th>Progress</th>
                 <th>Comment</th>
+                <th>Action</th>
               </tr>
             </thead>
+
+            <!-- NOTICE: should change the method of setting the information by Report Date.   -->
             <tbody>
               <tr *ngFor="let item of reportList; let i = index">
                 <td>{{ i + 1 }}</td>
-                <td>{{ item.createdDate | date: "yyyy/MM/dd" }}</td>
+                <td>{{ item.firstName }} {{ item.lastName }}</td>
                 <td>
                   <ul>
                     <li
@@ -82,6 +74,11 @@
                   </ul>
                 </td>
                 <td>{{ item.remarks }}</td>
+                <td>
+                    <a class="btn btn-primary btn-sm btn-block" [routerLink]="'/create-comment/'">
+                      <i class="fa fa-comments-o" aria-hidden="true"></i>
+                    </a>
+                  </td>
               </tr>
             </tbody>
           </table>
@@ -90,3 +87,4 @@
     </div>
   </div>
 </div>
+

@@ -87,6 +87,16 @@ export class ReportService {
       );
   }
 
+  getReportByDate(date) {
+    return this.http
+      .get<any>(environment.apiUrl + `report/getreportbydate/` + date)
+      .pipe(
+        map(res => {
+          return res;
+        })
+      );
+  }
+
   getAllReports() {
     return this.http.get<any>(environment.apiUrl + `report/getallreports`).pipe(
       map(res => {

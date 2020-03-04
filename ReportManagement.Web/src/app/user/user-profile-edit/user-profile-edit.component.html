@@ -12,19 +12,27 @@
       </div>
 
       <div class="card-body">
-        <form class="">
+        <form [formGroup]="profileUpdateForm" (ngSubmit)="onSubmit()">
           <div class="py-1 col-md-12">
             <div class="form-group row">
               <label for="firstName" class="col-md-3">First Name</label>
               <div class="col-md-8">
-                <input formControlName="firstName" class="form-control" />
+                <input formControlName="firstName" class="form-control"    
+                [ngClass]="{ 'is-invalid': submitted && profileUpdateFormControl.firstName.errors }" />
+                <div *ngIf="submitted && profileUpdateFormControl.firstName.errors" class="invalid-feedback">    
+                  <div *ngIf="profileUpdateFormControl.firstName.errors.required">First Name is required</div>    
+                </div> 
               </div>
             </div>
 
             <div class="form-group row">
               <label for="lastName" class="col-md-3">Last Name</label>
               <div class="col-md-8">
-                <input formControlName="lastName" class="form-control" />
+                <input formControlName="lastName" class="form-control" 
+                [ngClass]="{ 'is-invalid': submitted && profileUpdateFormControl.lastName.errors }" />
+                <div *ngIf="submitted && profileUpdateFormControl.lastName.errors" class="invalid-feedback">    
+                  <div *ngIf="profileUpdateFormControl.lastName.errors.required">Last Name is required</div>    
+                </div> 
               </div>
             </div>
 
@@ -32,13 +40,22 @@
               <label for="reportPlan" class="col-md-3">Gender</label>
               <div class="col-md-8">
 
-                <div class="custom-control custom-radio custom-control-inline">
-                  <input type="radio" formControlName="gender" id="customRadioInline1" name="gender" value="Male" class="custom-control-input">
+                <div class="custom-control custom-radio">
+                  <input type="radio" formControlName="gender" id="customRadioInline1" 
+                  name="gender" value="Male" class="custom-control-input" 
+                  [ngClass]="{ 'is-invalid': submitted && profileUpdateFormControl.gender.errors }">
+                  
                   <label class="custom-control-label" for="customRadioInline1">Male</label>
                 </div>
-                <div class="custom-control custom-radio custom-control-inline">
-                  <input type="radio" formControlName="gender" id="customRadioInline2" name="gender" value="Female" class="custom-control-input">
+                <div class="custom-control custom-radio">
+                  <input type="radio" formControlName="gender" id="customRadioInline2" 
+                  name="gender" value="Female" class="custom-control-input"
+                  [ngClass]="{ 'is-invalid': submitted && profileUpdateFormControl.gender.errors }">
+                  
                   <label class="custom-control-label" for="customRadioInline2">Female</label>
+                  <div *ngIf="submitted && profileUpdateFormControl.gender.errors" class="invalid-feedback">    
+                    <div class="offset-md-2" *ngIf="profileUpdateFormControl.gender.errors.required">Gender is required</div>    
+                  </div> 
                 </div>
                 
               </div>
@@ -48,15 +65,24 @@
             <div class="form-group row">
               <label for="phone" class="col-md-3">Phone</label>
               <div class="col-md-8">
-                <input formControlName="phone" class="form-control" />
+                <input formControlName="phone" class="form-control" 
+                [ngClass]="{ 'is-invalid': submitted && profileUpdateFormControl.phone.errors }"/>
+                <div *ngIf="submitted && profileUpdateFormControl.phone.errors" class="invalid-feedback">    
+                  <div *ngIf="profileUpdateFormControl.phone.errors.required">Phone is required</div>    
+                </div>
               </div>
             </div>
 
             <div class="form-group row">
               <label for="jobTitle" class="col-md-3">Job Title</label>
               <div class="col-md-8">
-                <input formControlName="jobTitle" class="form-control" />
+                <input formControlName="jobTitle" class="form-control" 
+                [ngClass]="{ 'is-invalid': submitted && profileUpdateFormControl.jobTitle.errors }"/>
+                <div *ngIf="submitted && profileUpdateFormControl.jobTitle.errors" class="invalid-feedback">    
+                  <div *ngIf="profileUpdateFormControl.jobTitle.errors.required">Jobtitle is required</div>    
+                </div>
               </div>
+      
             </div>
 
             <div class="form-group row">
@@ -68,7 +94,11 @@
                     <div class="input-group-prepend">
                       <span class="input-group-text" id="inputGroupPrepend">〒</span>
                     </div>
-                    <input formControlName="post_address" class="form-control"  aria-describedby="inputGroupPrepend">
+                    <input formControlName="post_address" class="form-control" aria-describedby="inputGroupPrepend"
+                    [ngClass]="{ 'is-invalid': submitted && profileUpdateFormControl.post_address.errors }">
+                    <div *ngIf="submitted && profileUpdateFormControl.post_address.errors" class="invalid-feedback">    
+                      <div *ngIf="profileUpdateFormControl.post_address.errors.required">Post Code is required</div>    
+                    </div>
                   </div>
                 </div>
 
@@ -79,8 +109,11 @@
                     cols="55"
                     formControlName="address"
                     class="form-control"
-                    placeholder=""
-                  ></textarea>
+                    placeholder="" [ngClass]="{ 'is-invalid': submitted && profileUpdateFormControl.address.errors }"
+                    ></textarea>
+                    <div *ngIf="submitted && profileUpdateFormControl.address.errors" class="invalid-feedback">    
+                      <div *ngIf="profileUpdateFormControl.address.errors.required">Address is required</div>    
+                    </div>
                   </div>
                   
                 </div>
@@ -89,13 +122,12 @@
             </div>
 
             <div class="offset-md-4 col-md-4 mt-5">
-              <button
-              type="button"
-              (click)="onFormSubmit()"
-              class="btn btn-block btn-info">Submit</button>
+              <button [disabled]="loading" class="btn btn-block btn-sm btn-primary">    
+                <span *ngIf="loading" class="spinner-border spinner-border-sm mr-1"></span>    
+                Submit    
+              </button>
             </div>
             
-
           </div>
 
         </form>
