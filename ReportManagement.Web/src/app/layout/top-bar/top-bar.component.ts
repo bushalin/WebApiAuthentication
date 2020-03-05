@@ -18,24 +18,27 @@ export class TopBarComponent implements OnInit {
     this.userDataSubscription = this.authService.userData.asObservable().subscribe(data => {
       this.userData = data;
       this.userName = this.userData.fullName;
+      console.log(this.userData);
+      console.log(this.userData.firstName);
     });
-    //this.getAdditionalUserInfo();
    }
 
   ngOnInit() {
+
+    //this.getAdditionalUserInfo();
   }
 
-  getAdditionalUserInfo() {
-    this.userAdditionalInfo = this.authService.getUserAdditionalDetail(this.userData.userId).subscribe(
-      data => {
-        this.userAdditionalInfo.firstName = data.firstName;
-        this.userAdditionalInfo.lastName = data.lastName;
-        this.userAdditionalInfo.sex = data.sex;
-        this.userAdditionalInfo.address = data.address;
-      }
-    );
-    localStorage.setItem("userInfo", this.userAdditionalInfo);
-  }  
+  // getAdditionalUserInfo() {
+  //   this.userAdditionalInfo = this.authService.getUserAdditionalDetail(this.userData.userId).subscribe(
+  //     data => {
+  //       this.userAdditionalInfo.firstName = data.firstName;
+  //       this.userAdditionalInfo.lastName = data.lastName;
+  //       this.userAdditionalInfo.sex = data.sex;
+  //       this.userAdditionalInfo.address = data.address;
+  //     }
+  //   );
+  //   localStorage.setItem("userInfo", this.userAdditionalInfo);
+  // }  
   
   onLogout() {
     this.authService.logout();
