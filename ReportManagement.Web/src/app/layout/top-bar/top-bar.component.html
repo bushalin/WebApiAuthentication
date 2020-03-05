@@ -38,11 +38,11 @@
         </div>
       </li> -->
       <li class="nav-item ">
-        <a class="nav-link nav-link-item" [routerLink]="'/view-report'">Home<span class="sr-only">(current)</span></a>
+        <a class="nav-link nav-link-item" [routerLink]="'/view-report'">{{'TOP_BAR.HOME' | translate}}<span class="sr-only">(current)</span></a>
       </li>
       <span class="btn-separator"></span>
       <li class="nav-item">
-        <a class="nav-link nav-link-item" [routerLink]="'/create-report'">Create Report<span class="sr-only">(current)</span></a>
+        <a class="nav-link nav-link-item" [routerLink]="'/create-report'">{{'TOP_BAR.CREATE_REPORT' | translate}}<span class="sr-only">(current)</span></a>
       </li>
       <span class="btn-separator"></span>
       <li class="nav-item">
@@ -50,7 +50,7 @@
       </li>
       
       <li class="nav-item">
-        <button type="button" class="btn btn-outline-info" (click)="onLogout()">Logout</button>
+        <button type="button" class="btn btn-outline-info" (click)="onLogout()">{{'TOP_BAR.LOGOUT' | translate}}</button>
       </li>
     </ul>
   </div>

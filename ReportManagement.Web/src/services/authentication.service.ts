@@ -48,38 +48,38 @@ export class AuthenticationService {
       const decodeUserDetails = jwt_decode(localStorage.getItem('authToken'));
       userDetails.userId = decodeUserDetails['http://schemas.xmlsoap.org/ws/2005/05/identity/claims/nameidentifier'];
       userDetails.role = decodeUserDetails['http://schemas.microsoft.com/ws/2008/06/identity/claims/role'];
-      userDetails.fullName = decodeUserDetails['http://schemas.xmlsoap.org/ws/2005/05/identity/claims/givenname'];
+      //userDetails.fullName = decodeUserDetails['http://schemas.xmlsoap.org/ws/2005/05/identity/claims/givenname'];
       console.log(userDetails);
-
-      // this.getUserAdditionalDetail(userDetails.userId).subscribe(
-      //   data => {
-      //     console.log(data);
-      //     userDetails.firstName = data.firstName;
-      //     userDetails.lastName = data.lastName;
-      //     userDetails.address = data.address;
-      //     userDetails.jobTitle = data.jobTitle;
-      //     userDetails.sex = data.sex;
-      //   }
-      // )
-
-      //userDetails.fullName = userDetails.firstName + userDetails.lastName;
-
-      //console.log(userDetails);
-      //console.log(this.userData);
+      
       this.userData.next(userDetails);
+
+      this.getUserAdditionalDetail(userDetails.userId).subscribe(
+        data => {
+          console.log(data);
+          userDetails.firstName = data.firstName;
+          userDetails.lastName = data.lastName;
+          userDetails.address = data.address;
+          userDetails.jobTitle = data.jobTitle;
+          userDetails.sex = data.sex;
+          userDetails.fullName = userDetails.firstName + " " + userDetails.lastName;
+
+          this.userData.next(userDetails);
+        }
+      )
+      
     }
   }
 
   
-  // getUserAdditionalDetail(id) {
-  //   return this.http
-  //     .get<any>(environment.apiUrl + `user/GetUserDetailById/` + id)
-  //     .pipe(
-  //       map(res => {
-  //         return res;
-  //       })
-  //     );
-  // }
+  getUserAdditionalDetail(id) {
+    return this.http
+      .get<any>(environment.apiUrl + `user/GetUserDetailById/` + id)
+      .pipe(
+        map(res => {
+          return res;
+        })
+      );
+  }
 
 
   logout() {

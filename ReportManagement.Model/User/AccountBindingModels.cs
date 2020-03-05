@@ -73,4 +73,27 @@ namespace ReportManagement.Model.User
         public string ConfirmPassword { get; set; }
 
     }
+
+    public class EditUserProfileBindingModel
+    {
+        public string UserId { get; set; }
+
+        [Display(Name = "First Name")]
+        public string FirstName { get; set; }
+
+        [Display(Name = "Last Name")]
+        public string LastName { get; set; }
+
+        [Display(Name = "Gender")]
+        public string Sex { get; set; }
+
+        [Display(Name = "Phone No.")]
+        public string Phone { get; set; }
+
+        [Display(Name = "Job Title")]
+        public string JobTitle { get; set; }
+
+        [Display(Name = "Address")]
+        public string Address { get; set; }
+    }
 }

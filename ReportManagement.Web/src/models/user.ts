@@ -10,3 +10,13 @@ export class User{
     isLoggedIn: boolean;
     role: string[];
 }
+
+export class UserProfileEdit {
+    UserId: string;
+    FirstName: string;
+    LastName: string;
+    Sex: string;
+    Phone: string;
+    JobTitle: string;
+    Address: string;
+}

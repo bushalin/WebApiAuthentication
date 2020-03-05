@@ -3,6 +3,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { environment } from '../environments/environment';
 import { Observable, throwError } from 'rxjs';
 import { map } from 'rxjs/operators';
+import { UserProfileEdit } from 'src/models/user';
 
 @Injectable()
 export class CommonService {
@@ -236,6 +237,7 @@ export class CommonService {
         })
       );
   }
+  
   getCityByPrefectureID (id, lang) {
     return this.http
     .get<any>(environment.apiUrl + `City/GetCityByPrefectureId/` + id + `/` + lang)
@@ -258,6 +260,22 @@ export class CommonService {
     );
   }
 
+  getUserInfoById(id) {
+    return this.http.get<any>(environment.apiUrl + `user/GetUserDetailById/` + id)
+    .pipe(
+      map(res => {
+        return res;
+      })
+    );
+  }
 
+  updateProfile(userProfile) {
+    return this.http.put<UserProfileEdit>(environment.apiUrl + `user/UpdateUserProfile`, userProfile, {headers: this.header})
+    .pipe(
+      map(res => {
+        return res;
+      })
+    )
+  }
 
 }

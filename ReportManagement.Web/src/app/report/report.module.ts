@@ -17,6 +17,7 @@ import { CollapseModule } from "ngx-bootstrap/collapse";
 import { NgaReadMoreModule } from "nga-read-more";
 import { TypeaheadModule } from "ngx-bootstrap/typeahead";
 import { ReportSearchComponent } from './report-search/report-search.component';
+import { TranslateModule } from '@ngx-translate/core';
 
 @NgModule({
   declarations: [
@@ -30,6 +31,7 @@ import { ReportSearchComponent } from './report-search/report-search.component';
     ReportSearchComponent
   ],
   imports: [
+    TranslateModule,
     AppRoutingModule,
     CommonModule,
     FormsModule,
@@ -41,7 +43,7 @@ import { ReportSearchComponent } from './report-search/report-search.component';
     NgaReadMoreModule,
     TypeaheadModule.forRoot()
   ],
-  exports: [ReportCreateComponent, TopBarComponent],
+  exports: [ReportCreateComponent, TopBarComponent, TranslateModule],
   providers: [ReportService, DatePipe]
 })
 export class ReportModule {}

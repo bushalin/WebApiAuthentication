@@ -1,4 +1,5 @@
-﻿using ReportManagement.Services.Users;
+﻿using ReportManagement.Model.User;
+using ReportManagement.Services.Users;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -35,6 +36,17 @@ namespace ReportManagement.Controllers.UserControllers
         public IHttpActionResult GetUserDetailById(string id)
         {
             return Ok(_service.GetUserDetailById(id).Data);
+        }
+
+        [Route("UpdateUserProfile")]
+        [HttpPut]
+        public IHttpActionResult UpdateUserProfile(EditUserProfileBindingModel user)
+        {
+            if(!ModelState.IsValid)
+            {
+                return BadRequest();
+            }
+            return Ok(_service.UpdateUserProfile(user).Data);
         }
     }
 }

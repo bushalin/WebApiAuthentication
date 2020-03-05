@@ -367,9 +367,18 @@ namespace ReportManagement.Services.Reports
                 var report = _context.Report.Where(x => x.id == reportObj.id)
                     .Select(x => x).FirstOrDefault();
 
-                report.Remarks = reportObj.Remarks;
-                _services.SaveChanges();
-                message = "Remarks updated successfully";
+                try
+                {
+                    report.Remarks = reportObj.Remarks;
+                    _services.SaveChanges();
+
+                    message = "Remarks updated successfully";
+                }
+                catch(Exception ex)
+                {
+                    message = ex.Message;
+                }
+
             }
             catch(Exception ex)
             {

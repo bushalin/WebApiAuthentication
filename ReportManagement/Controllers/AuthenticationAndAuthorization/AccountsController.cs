@@ -81,6 +81,15 @@ namespace ReportManagement.Controllers
                 return GetErrorResult(addUserResult);
             }
 
+            // assigning default user role to user
+            var addedUser = this.AppUserManager.FindByName(user.UserName);
+            IdentityResult assignRolesResult = await AppUserManager.AddToRoleAsync(addedUser.Id, "User").ConfigureAwait(true);
+
+            if(!assignRolesResult.Succeeded)
+            {
+                return GetErrorResult(assignRolesResult);
+            }
+
             Uri locationHeader = new Uri(Url.Link("GetUserById", new { id = user.Id }));
 
             return Created(locationHeader, TheModelFactory.Create(user));

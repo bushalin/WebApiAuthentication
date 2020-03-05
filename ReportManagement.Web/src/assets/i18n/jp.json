@@ -2,5 +2,11 @@
     "DEMO": {
         "TITLE": "Translation demo",
         "TEXT": "This is a simple demonstration app for ngx-translate"
+    },
+
+    "TOP_BAR": {
+        "HOME": "ホーム",
+        "CREATE_REPORT" : "レポートを作成",
+        "LOGOUT": "ログアウト"
     }
 }

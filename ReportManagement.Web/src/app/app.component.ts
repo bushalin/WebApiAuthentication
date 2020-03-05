@@ -1,5 +1,6 @@
 import { Component, AfterViewInit, Renderer2 } from '@angular/core';
 import { AuthenticationService } from 'src/services/authentication.service';
+import { TranslateService } from '@ngx-translate/core';
 
 @Component({
   selector: "app-root",
@@ -8,10 +9,14 @@ import { AuthenticationService } from 'src/services/authentication.service';
 })
 export class AppComponent {
   title = 'reportmanagement-web';
-  constructor(private authService: AuthenticationService) {
+  constructor(private authService: AuthenticationService,
+    translate: TranslateService) {
     if(localStorage.getItem('authToken')) {
       this.authService.setUserDetails();
     }
+
+    //setting the default language
+    translate.setDefaultLang('jp');
   }
 }
 // export class AppComponent implements AfterViewInit {

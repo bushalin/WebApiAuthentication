@@ -57,11 +57,69 @@ namespace ReportManagement.Services.Users
                 JsonRequestBehavior = JsonRequestBehavior.AllowGet
             };
         }
+
+        public JsonResult UpdateUserProfile(EditUserProfileBindingModel user)
+        {
+            var message = "";
+
+            if(user == null)
+            {
+                message = "Please provide valid user data";
+                return new JsonResult
+                {
+                    Data = message,
+                    JsonRequestBehavior = JsonRequestBehavior.AllowGet
+                };
+            }
+
+            var userInfo = _context.Users.Find(user.UserId);
+            var userDetail = _context.UserInfo.Find(user.UserId);
+
+            if(userInfo != null)
+            {
+                userInfo.PhoneNumber = user.Phone;
+
+                try
+                {
+                    _services.SaveChanges();
+                    message = "Phone no updated successfully";
+                }
+                catch(Exception ex)
+                {
+                    message = ex.Message;
+                }
+            }
+            if(userDetail != null)
+            {
+                userDetail.FirstName = user.FirstName;
+                userDetail.LastName = user.LastName;
+                userDetail.JobTitle = user.JobTitle;
+                userDetail.Sex = user.Sex;
+                userDetail.Address = user.Address;
+
+                try
+                {
+                    _services.SaveChanges();
+                    message = "User information updated successfully";
+                }
+                catch(Exception ex)
+                {
+                    message = ex.Message;
+                }
+            }
+
+            return new JsonResult
+            {
+                Data = message,
+                JsonRequestBehavior = JsonRequestBehavior.AllowGet
+            };
+        }
     }
 
     public interface IUserServices
     {
         JsonResult GetAllUserInfo();
         JsonResult GetUserDetailById(string Id);
+        JsonResult UpdateUserProfile(EditUserProfileBindingModel user);
     }
 }
