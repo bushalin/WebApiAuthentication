@@ -10,3 +10,16 @@ export class User{
     isLoggedIn: boolean;
     role: string[];
 }
+
+export class UserCreate{
+    UserName: string;
+    Password : string;
+    ConfirmPassword: string;
+    Email : string;
+    FirstName: string;
+    LastName: string;
+    JobTitle: string;
+    Address: string;
+    Sex: string;
+    RoleName: string;
+}
