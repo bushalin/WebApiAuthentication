@@ -15,12 +15,18 @@ import { LoginComponent } from './common/login/login.component';
 import { AuthGuard } from './guards/auth.guard';
 import { AdminGuard } from './guards/admin.guard';
 import { ReportSearchComponent } from './report/report-search/report-search.component';
+import { LandingPageComponent } from './common/landing-page/landing-page.component';
+import { UserRegistrationComponent } from './user/user-registration/user-registration.component';
+import { UserListComponent } from './user/user-list/user-list.component';
 
 
 const routes: Routes = [
   
   { path: '', redirectTo: '/view-report', pathMatch: 'full' },
   { path: 'login', component: LoginComponent },
+  { path: 'landing-page', component: LandingPageComponent },
+  { path: 'user-registration', component: UserRegistrationComponent },
+  { path: 'user-list', component: UserListComponent },
   { path: 'create-report', component: ReportCreateComponent, canActivate: [AuthGuard] },
   { path: 'view-report', component: ReportUserViewComponent, canActivate: [AuthGuard]},
   { path: 'check-report', component: ReportCheckComponent, canActivate: [AuthGuard] },
@@ -34,7 +40,7 @@ const routes: Routes = [
 ];
 
 @NgModule({
-  imports: [RouterModule.forRoot(routes)],
+  imports: [RouterModule.forRoot(routes, { onSameUrlNavigation: 'reload' })],
   exports: [RouterModule]
 })
 export class AppRoutingModule { }

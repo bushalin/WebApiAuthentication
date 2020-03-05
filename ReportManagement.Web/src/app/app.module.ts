@@ -19,6 +19,9 @@ import { LoginComponent } from './common/login/login.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpInterceptorService } from 'src/services/http-interceptor.service';
 import { ErrorInterceptorService } from 'src/services/error-interceptor.service';
+import { LandingPageComponent } from './common/landing-page/landing-page.component';
+import { UserRegistrationComponent } from './user/user-registration/user-registration.component';
+import { UserListComponent } from './user/user-list/user-list.component';
 
 @NgModule({
   declarations: [
@@ -28,6 +31,9 @@ import { ErrorInterceptorService } from 'src/services/error-interceptor.service'
     UserProfileCreateComponent,
     UserProfileEditComponent,
     LoginComponent,
+    LandingPageComponent,
+    UserRegistrationComponent,
+    UserListComponent,
   ],
   imports: [
     ReportModule,

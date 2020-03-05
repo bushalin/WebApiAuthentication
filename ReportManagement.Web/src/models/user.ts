@@ -20,3 +20,15 @@ export class UserProfileEdit {
     JobTitle: string;
     Address: string;
 }
+export class UserCreate{
+    UserName: string;
+    Password : string;
+    ConfirmPassword: string;
+    Email : string;
+    FirstName: string;
+    LastName: string;
+    JobTitle: string;
+    Address: string;
+    Sex: string;
+    RoleName: string;
+}

@@ -4,6 +4,7 @@ import { environment } from '../environments/environment';
 import { Observable, throwError } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { UserProfileEdit } from 'src/models/user';
+import { UserCreate } from 'src/models/user';
 
 @Injectable()
 export class CommonService {
@@ -88,6 +89,15 @@ export class CommonService {
         return res;
       })
     );
+  }
+
+  userRegistration(userData) {
+    return this.http.post<UserCreate>(environment.apiUrl + `accounts/create`, JSON.stringify(userData), {headers: this.header})
+    .pipe(
+      map(res => {
+        return res;
+      })
+    )
   }
 
   getCountryList(lang) {
