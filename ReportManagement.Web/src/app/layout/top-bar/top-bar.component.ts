@@ -19,7 +19,6 @@ export class TopBarComponent implements OnInit {
       this.userData = data;
       this.userName = this.userData.fullName;
       console.log(this.userData);
-      console.log(this.userData.firstName);
     });
    }
 

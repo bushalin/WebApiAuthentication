@@ -1,3 +1,43 @@
 <app-top-bar></app-top-bar>
 
-<p>user-list works!</p>
+<div class="container mb-3">
+    <div class="col-md-12 mt-5">
+        <div class="card">
+          <div class="card-header">
+            <div class="row">
+              <div class="col-md-12">
+                <h5>{{'CARD.CARD_HEADER_USER_LIST' | translate}}</h5>
+              </div>
+            </div>
+          </div>
+    
+          <div class="card-body overflow-auto">
+            <div class="row">
+              <div class="col-md-12">
+                <table class="table table-responsive-md table-bordered">
+                  <thead>
+                    <tr>
+                      <th>#</th>
+                      <th>{{'TABLE.TABLE_NAME' | translate}}</th>
+                      <th>{{'TABLE.TABLE_JOBTITLE' | translate}}</th>
+                      <th>{{'TABLE.TABLE_ADDRESS' | translate}}</th>
+                      <th>{{'TABLE.TABLE_GENDER' | translate}}</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr *ngFor="let item of userList; let i = index">
+                      <td>{{ i + 1 }}</td>
+                      <td>{{ item.firstName }} {{ item.lastName }}</td>
+                      <td>{{ item.jobTitle }}</td>
+                      <td>{{ item.address }}</td>
+                      <td>{{ item.sex }}</td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+</div>

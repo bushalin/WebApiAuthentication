@@ -7,7 +7,7 @@
       <div class="card-header">
         <div class="row">
           <div class="col-md-12">
-            <h5>Latest Reports</h5>
+            <h5>{{'CARD.CARD_HEADER_REPORT_LIST' | translate}}</h5>
           </div>
         </div>
       </div>
@@ -16,24 +16,24 @@
         <div class="row">
           <div class="col-md-12">
             <table class="table table-responsive-md table-bordered">
-              <thead>
+              <thead align="center" class="text-nowrap font-self-14">
                 <tr>
                   <th>#</th>
-                  <th>Date</th>
-                  <th>Name</th>
-                  <th>Title</th>
-                  <th>Detail</th>
-                  <th>Progress</th>
-                  <th>Comment</th>
-                  <th>Action</th>
+                  <th>{{'TABLE.TABLE_DATE' | translate}}</th>
+                  <th>{{'TABLE.TABLE_NAME' | translate}}</th>
+                  <th>{{'TABLE.TABLE_PLAN' | translate}}</th>
+                  <th>{{'TABLE.TABLE_DETAIL' | translate}}</th>
+                  <th>{{'TABLE.TABLE_PROGRESS' | translate}}</th>
+                  <th>{{'TABLE.TABLE_COMMENT' | translate}}</th>
+                  <th>{{'TABLE.TABLE_ACTION' | translate}}</th>
                 </tr>
               </thead>
-              <tbody>
+              <tbody class="font-self-14">
                 <tr *ngFor="let item of reportList; let i = index">
                   <td>{{ i + 1 }}</td>
                   <td>{{ item.createdDate | date: "yyyy/MM/dd" }}</td>
-                  <td style="width:30%;">{{ item.firstName }} {{ item.lastName }}</td>
-                  <td>
+                  <td>{{ item.firstName }} {{ item.lastName }}</td>
+                  <td class="w-25">
                     <ul>
                       <li
                         *ngFor="let subItem of item.reportDetail; let n = index"
@@ -55,7 +55,7 @@
                       </li>
                     </ul>
                   </td>
-                  <td>
+                  <td class="pl-0">
                     <ul>
                       <li
                         *ngFor="let subItem of item.reportDetail; let n = index"
@@ -64,7 +64,7 @@
                       </li>
                     </ul>
                   </td>
-                  <td>{{ item.remarks }}</td>
+                  <td class="w-25">{{ item.remarks }}</td>
                   <td>
                     <a class="btn btn-primary btn-sm btn-block" [routerLink]="['/create-comment', item.reportId]">
                       <i class="fa fa-comments-o" aria-hidden="true"></i>

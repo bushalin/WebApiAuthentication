@@ -22,6 +22,7 @@ import { ErrorInterceptorService } from 'src/services/error-interceptor.service'
 import { LandingPageComponent } from './common/landing-page/landing-page.component';
 import { UserRegistrationComponent } from './user/user-registration/user-registration.component';
 import { UserListComponent } from './user/user-list/user-list.component';
+import { AdminHomeComponent } from './admin/admin-home/admin-home.component';
 
 @NgModule({
   declarations: [
@@ -34,6 +35,7 @@ import { UserListComponent } from './user/user-list/user-list.component';
     LandingPageComponent,
     UserRegistrationComponent,
     UserListComponent,
+    AdminHomeComponent,
   ],
   imports: [
     ReportModule,
