@@ -16,6 +16,7 @@ import { ReportSearchComponent } from './report/report-search/report-search.comp
 import { LandingPageComponent } from './common/landing-page/landing-page.component';
 import { UserRegistrationComponent } from './user/user-registration/user-registration.component';
 import { UserListComponent } from './user/user-list/user-list.component';
+import { AdminHomeComponent } from './admin/admin-home/admin-home.component';
 
 
 const routes: Routes = [

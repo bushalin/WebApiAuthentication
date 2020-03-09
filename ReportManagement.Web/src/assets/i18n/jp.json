@@ -5,8 +5,85 @@
     },
 
     "TOP_BAR": {
-        "HOME": "ホーム",
-        "CREATE_REPORT" : "レポートを作成",
+        "HOME": "Home",
+        "CREATE_REPORT" : "日報を作成",
         "LOGOUT": "ログアウト"
+    },
+
+
+
+    "CARD": {
+        "CARD_HEADER_COMMENT": "社長指示事項",
+        "CARD_HEADER_LOGIN": "株式会社盛武組",
+        "CARD_HEADER_REPORT_USER": "日報リスト",
+        "CARD_HEADER_USER_NAME": "名前",
+        "CARD_HEADER_CHECK_REPORT_BTN": "提出状況確認",
+        "CARD_HEADER_REPORT_CREATE": "日報を作成",
+        "CARD_HEADER_ADD_REPORT_BTN": "業務を追加",
+        "CARD_HEADER_REMOVE_REPORT_BTN": "業務を削除",
+        "CARD_HEADER_SEARCH": "日報を検索",
+        "CARD_HEADER_USER_PROFILE": "ユーザープロフィール",
+        "CARD_HEADER_EDIT_PROFILE_BTN": "プロファイルを更新",
+        "CARD_HEADER_REPORT_LIST": "最新の日報",
+        "CARD_HEADER_EDIT_PROFILE": "プロファイルを更新",
+        "CARD_HEADER_USER_REGISTRATION": "ユーザー登録",
+        "CARD_HEADER_USER_LIST": "ユーザーリスト",
+        "CARD_BODY_EMPLOYEE_NAME": "従業員名",
+        "CARD_BODY_DATE": "年月日"
+    },
+
+    "FORM": {
+        "FORM_INFO_SEARCH": "※) どちらか片方でも検索可",
+        "FORM_DATE": "年月日",
+        "FORM_PLAN": "計画",
+        "FORM_PROGRESS": "実績",
+        "FORM_DETAIL": "業務内容",
+        "FORM_SUBMIT_BTN": "提出",
+        "FORM_SEARCH_EMPLOYEE_NAME": "従業員名",
+        "FORM_SEARCH_SELECT_EMPLOYEE": "--従業員を選択--",
+        "FORM_SEARCH_DATE": "日付",
+        "FORM_SEARCH_BTN": "検索",
+        "FORM_FIRST_NAME": "姓",
+        "FORM_LAST_NAME": "名",
+        "FORM_GENDER": "性別",
+        "FORM_MALE": "男性",
+        "FORM_FEMALE": "女性",
+        "FORM_PHONE": "電話番号",
+        "FORM_JOBTITLE": "役職名",
+        "FORM_ADDRESS": "住所",
+        "FORM_EMAIL": "メール",
+        "FORM_USERNAME": "ユーザー名",
+        "FORM_PASSWORD": "パスワード",
+        "FORM_REGISTRATION_PASSWORD": "パスワード(半角6文字)",
+        "FORM_CONFIRM_PASSWORD": "パスワードを再入力"
+    },
+
+    "FORM_ERROR": {
+        "FORM_ERROR_EMAIL_REQUIRED": "メールアドレスを入力してください",
+        "FORM_ERROR_EMAIL_VALID": "正しいメールアドレスを入力してください",
+        "FORM_ERROR_USERNAME_REQUIRED": "ユーザー名を入力してください",
+        "FORM_ERROR_FIRSTNAME_REQUIRED": "姓を入力してください",
+        "FORM_ERROR_LASTNAME_REQUIRED": "名を入力してください",
+        "FORM_ERROR_PASSWORD_REQUIRED": "パスワードを入力してください",
+        "FORM_ERROR_PASSWORD_CHAR": "6 文字でパスワードを入力してください",
+        "FORM_ERROR_CONFIRM_PASSWORD_REQUIRED": "パスワードを再入力してください",
+        "FORM_ERROR_PASSWORD_MATCH": "パスワードが一致していません"
+    },
+
+    "TABLE": {
+        "TABLE_DATE":"年月日",
+        "TABLE_PLAN":"計画",
+        "TABLE_DETAIL":"業務内容",
+        "TABLE_PROGRESS":"実績",
+        "TABLE_COMMENT":"社長指示事項",
+        "TABLE_ACTION": "コメント作成",
+        "TABLE_FIRST_NAME": "姓",
+        "TABLE_LAST_NAME": "名",
+        "TABLE_PHONE": "電話番号",
+        "TABLE_NAME": "名前",
+        "TABLE_JOBTITLE": "役職名",
+        "TABLE_ADDRESS": "住所",
+        "TABLE_GENDER": "性別"
     }
+
 }

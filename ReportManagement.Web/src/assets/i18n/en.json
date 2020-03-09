@@ -7,5 +7,80 @@
         "HOME": "Home",
         "CREATE_REPORT" : "Create Report",
         "LOGOUT": "Logout"
+    },
+
+    "CARD": {
+        "CARD_HEADER_COMMENT": "Comment",
+        "CARD_HEADER_LOGIN": "Moritake-gumi",
+        "CARD_HEADER_REPORT_USER": "Report List",
+        "CARD_HEADER_USER_NAME": "Name",
+        "CARD_HEADER_CHECK_REPORT_BTN": "Check Report",
+        "CARD_HEADER_REPORT_CREATE": "Create Report",
+        "CARD_HEADER_ADD_REPORT_BTN": "Add Report",
+        "CARD_HEADER_REMOVE_REPORT_BTN": "Remove Report",
+        "CARD_HEADER_SEARCH": "Search Report",
+        "CARD_HEADER_USER_PROFILE": "User Profile",
+        "CARD_HEADER_EDIT_PROFILE_BTN": "Edit Profile",
+        "CARD_HEADER_REPORT_LIST": "Latest Reports",
+        "CARD_HEADER_EDIT_PROFILE": "Update Profile",
+        "CARD_HEADER_USER_REGISTRATION": "User Registration",
+        "CARD_HEADER_USER_LIST": "List of Users",
+        "CARD_BODY_EMPLOYEE_NAME": "Employee Name",
+        "CARD_BODY_DATE": "Date"
+    },
+
+    "FORM": {
+        "FORM_INFO_SEARCH": "**You can search either by employee or by date",
+        "FORM_DATE": "Date",
+        "FORM_PLAN": "Plan",
+        "FORM_PROGRESS": "Progress",
+        "FORM_DETAIL": "Details",
+        "FORM_SUBMIT_BTN": "Submit",
+        "FORM_SEARCH_EMPLOYEE_NAME": "Employee Name",
+        "FORM_SEARCH_SELECT_EMPLOYEE": "--Select Employee--",
+        "FORM_SEARCH_DATE": "Date Search",
+        "FORM_SEARCH_BTN": "Search",
+        "FORM_FIRST_NAME": "First Name",
+        "FORM_LAST_NAME": "Last Name",
+        "FORM_GENDER": "Gender",
+        "FORM_MALE": "Male",
+        "FORM_FEMALE": "Female",
+        "FORM_PHONE": "Phone",
+        "FORM_JOBTITLE": "Job Title",
+        "FORM_ADDRESS": "Address",
+        "FORM_EMAIL": "Email Id",
+        "FORM_USERNAME": "Username",
+        "FORM_PASSWORD": "Password",
+        "FORM_REGISTRATION_PASSWORD": "Atleast 6 Characters",
+        "FORM_CONFIRM_PASSWORD": "Confirm Password"
+    },
+
+    "FORM_ERROR": {
+        "FORM_ERROR_EMAIL_REQUIRED": "Email Id is required",
+        "FORM_ERROR_EMAIL_VALID": "Email must be a valid email address",
+        "FORM_ERROR_USERNAME_REQUIRED": "Username is required",
+        "FORM_ERROR_FIRSTNAME_REQUIRED": "First Name is required",
+        "FORM_ERROR_LASTNAME_REQUIRED": "Last Name is required",
+        "FORM_ERROR_PASSWORD_REQUIRED": "Password is required",
+        "FORM_ERROR_PASSWORD_CHAR": "Password must be at least 6 characters",
+        "FORM_ERROR_CONFIRM_PASSWORD_REQUIRED": "Confirm Password is required",
+        "FORM_ERROR_PASSWORD_MATCH": "Passwords must match"
+    },
+
+    "TABLE": {
+        "TABLE_DATE": "Date",
+        "TABLE_PLAN": "Plan",
+        "TABLE_DETAIL": "Detail",
+        "TABLE_PROGRESS": "Progress",
+        "TABLE_COMMENT": "Comment",
+        "TABLE_ACTION": "Action",
+        "TABLE_FIRST_NAME": "First Name",
+        "TABLE_LAST_NAME": "Last Name",
+        "TABLE_PHONE": "Phone",
+        "TABLE_NAME": "Name",
+        "TABLE_JOBTITLE": "Job Title",
+        "TABLE_ADDRESS": "Address",
+        "TABLE_GENDER": "Gender"
     }
+
 }

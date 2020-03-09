@@ -5,21 +5,21 @@
     <div class="col-md-12">
       <div class="card mt-5">
         <div class="card-header">
-          <h4>Comment</h4>
+          <h4>{{'CARD.CARD_HEADER_COMMENT' | translate}}</h4>
         </div>
 
         <div class="card-body">
           <div class="row">
             <div class="col-md-6">
               <div class="row">
-                <h6 class="col-md-4">Employee Name:</h6>
+                <h6 class="col-md-4">{{'CARD.CARD_BODY_EMPLOYEE_NAME' | translate}}:</h6>
                 <h6 class="col-md-4">{{report?.firstName}} {{report?.lastName}}</h6>
               </div>
             </div>
 
             <div class="col-md-6">
               <div class="row">
-                <h6 class="col-md-4">Date:</h6>
+                <h6 class="col-md-4">{{'CARD.CARD_BODY_DATE' | translate}}:</h6>
                 <h6 class="col-md-4">{{report?.createdDate | date: "yyyy/MM/dd"}}</h6>
               </div>
             </div>
@@ -27,21 +27,21 @@
 
           <br>
 
-          <table class="table table-bordered table-striped">
-            <thead>
+          <table class="table table-responsive-md table-bordered table-striped">
+            <thead align="center">
               <tr>
-                <th>Plan no.</th>
-                <th>Plan</th>
-                <th>Progress</th>
-                <th>Details</th>
+                <th>#</th>
+                <th>{{'TABLE.TABLE_PLAN' | translate}}</th>
+                <th>{{'TABLE.TABLE_PROGRESS' | translate}}</th>
+                <th>{{'TABLE.TABLE_DETAIL' | translate}}</th>
               </tr>
             </thead>
             <tbody>
               <tr *ngFor="let item of report.reportDetail; let i = index">
-                <td>{{i + 1}}</td>
+                <td align="center">{{i + 1}}</td>
                 <td>{{item?.plan}}</td>
                 <td>{{item?.progress}}</td>
-                <td>{{item?.details}}</td>
+                <td class="w-75">{{item?.details}}</td>
               </tr>
             </tbody>
           </table>
