@@ -37,7 +37,7 @@
           </div>
 
           <div formArrayName="reportsdetails" class="py-1 col-md-12"
-            *ngFor="let item of reportCreateForm.get('reportsdetails').controls; let i = index">
+            *ngFor="let item of f.reportsdetails.value; let i = index">
             <div [formGroupName]="i">
               <div class="row">
                 <div class="form-group col-md-4">
@@ -63,7 +63,7 @@
 
           <button type="button" (click)="onFormSubmit()"
             class="btn btn-block btn-info offset-md-10 col-md-2 mt-5">Submit</button>
-
+          <label class="text-center col-md-12 mt-5">{{showFeedback}}</label>
         </form>
       </div>
     </div>

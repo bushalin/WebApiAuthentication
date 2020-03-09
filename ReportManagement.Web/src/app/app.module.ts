@@ -8,34 +8,31 @@ import { AppComponent } from './app.component';
 import { TranslateLoader, TranslateModule } from '@ngx-translate/core';
 import { TranslateHttpLoader } from '@ngx-translate/http-loader';
 import { HttpClient, HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+
 import { ReportModule } from './report/report.module';
 import { CommonService } from 'src/services/common.services';
-import { PageNotFoundComponent } from './common/page-not-found/page-not-found.component';
-import { UserProfileComponent } from './user/user-profile/user-profile.component';
-import { UserProfileCreateComponent } from './user/user-profile-create/user-profile-create.component';
-import { UserProfileEditComponent } from './user/user-profile-edit/user-profile-edit.component';
 import { AuthenticationService } from 'src/services/authentication.service';
-import { LoginComponent } from './common/login/login.component';
-import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpInterceptorService } from 'src/services/http-interceptor.service';
 import { ErrorInterceptorService } from 'src/services/error-interceptor.service';
+
+// import application modules and components
+import { PageNotFoundComponent } from './common/page-not-found/page-not-found.component';
+import { LoginComponent } from './common/login/login.component';
 import { LandingPageComponent } from './common/landing-page/landing-page.component';
-import { UserRegistrationComponent } from './user/user-registration/user-registration.component';
-import { UserListComponent } from './user/user-list/user-list.component';
+
+import { UserModule } from './user/user.module';
+
 
 @NgModule({
   declarations: [
     AppComponent,
     PageNotFoundComponent,
-    UserProfileComponent,
-    UserProfileCreateComponent,
-    UserProfileEditComponent,
     LoginComponent,
     LandingPageComponent,
-    UserRegistrationComponent,
-    UserListComponent,
   ],
   imports: [
+    UserModule,
     ReportModule,
     BrowserModule,
     AppRoutingModule,

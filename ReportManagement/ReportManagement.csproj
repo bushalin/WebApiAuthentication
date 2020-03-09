@@ -262,6 +262,7 @@
     <Content Include="Views\web.config" />
     <Content Include="Keys.config" />
     <None Include="packages.config" />
+    <None Include="Properties\PublishProfiles\FolderProfile.pubxml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

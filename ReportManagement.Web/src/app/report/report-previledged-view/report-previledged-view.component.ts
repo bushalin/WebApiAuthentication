@@ -81,15 +81,15 @@ export class ReportPreviledgedViewComponent implements OnInit {
       // console.log(this.createdDate);
       if(isUndefined(this.employeeId)) {this.employeeId = ''};
       if((this.employeeId === '' && this.createdDate !== '') || isUndefined(this.employeeId)) {
-        this.route.navigate(["/search-report"], { queryParams: { createdDate: this.createdDate }});
+        this.route.navigate(["/report/show/search"], { queryParams: { createdDate: this.createdDate }});
         console.log(this.createdDate);
       }
       if(this.employeeId !== '' && this.createdDate === '') {
-        this.route.navigate(["/search-report"], { queryParams: { employeeId: this.employeeId }});
+        this.route.navigate(["/report/show/search"], { queryParams: { employeeId: this.employeeId }});
         console.log(this.employeeId);
       }
       if(this.employeeId !== '' && this.createdDate !== '') {
-        this.route.navigate(["/search-report"], { queryParams: { employeeId: this.employeeId, createdDate: this.createdDate }});
+        this.route.navigate(["/report/show/search"], { queryParams: { employeeId: this.employeeId, createdDate: this.createdDate }});
         console.log(this.employeeId);
         console.log(this.createdDate);
       }
