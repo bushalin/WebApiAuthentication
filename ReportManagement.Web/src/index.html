@@ -1,24 +1,99 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
-<head>
-  <meta charset="utf-8">
-  <title>Report Management</title>
-  <base href="/">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <link rel="icon" type="image/x-icon" href="favicon.ico">
-  <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" rel="stylesheet">
-  <link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" />
-</head>
-<body>
-  <!-- <div id="loader">
+  <head>
+    <meta charset="utf-8" />
+    <title>Report Management</title>
+    <base href="/" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="icon" type="image/x-icon" href="favicon.ico" />
+    <link
+      href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+      rel="stylesheet"
+    />
+    <link
+      rel="stylesheet"
+      type="text/css"
+      href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css"
+    />
+  </head>
+  <body>
+    <div id="showMsg">
+      <div class="center">
+        <h2 style="color: red;">!!!ブラウザエラー!!!</h2>
+        <img src="assets/images/caution.png" height="auto" width="200px">
+        <h5>ブラウザはマイクロソフトエッジ、グーグルクローム、<br>ファイアーフォックスを使ってください</h5>
+          <img
+          height="auto"
+          width="70px"
+          src="assets/images/edge-icon.png"
+          alt="Microsoft Edge"
+        />
+          <img
+          height="auto"
+          width="70px"
+          src="assets/images/Chrome-icon.png"
+          alt="Google Chrome"
+        />
+          <img
+          height="auto"
+          width="70px"
+          src="assets/images/Firefox-icon.png"
+          alt="Mozilla Firefox"
+        />
+ 
+      </div>
+    </div>
+    <!-- <div id="loader">
     <div class="application-loading-container">
       <div class="application-loading-box"><img 
         class=""
         src="../../../assets/images/35.gif"/></div>
     </div>
   </div> -->
-  <app-root>
-    
-  </app-root>
-</body>
+    <app-root> </app-root>
+  </body>
+
+  <script>
+    document.getElementById("showMsg").style.display = "none";
+    // Opera 8.0+
+    var isOpera =
+      (!!window.opr && !!opr.addons) ||
+      !!window.opera ||
+      navigator.userAgent.indexOf(" OPR/") >= 0;
+
+    // Firefox 1.0+
+    var isFirefox = typeof InstallTrigger !== "undefined";
+
+    // Safari 3.0+ "[object HTMLElementConstructor]"
+    var isSafari =
+      /constructor/i.test(window.HTMLElement) ||
+      (function(p) {
+        return p.toString() === "[object SafariRemoteNotification]";
+      })(
+        !window["safari"] ||
+          (typeof safari !== "undefined" && safari.pushNotification)
+      );
+
+    // Internet Explorer 6-11
+    var isIE = /*@cc_on!@*/ false || !!document.documentMode;
+
+    // Edge 20+
+    var isEdge = !isIE && !!window.StyleMedia;
+
+    // Chrome 1+
+    var isChrome = !!window.chrome;
+
+    // Blink engine detection
+    var isBlink = (isChrome || isOpera) && !!window.CSS;
+    if (isIE) {
+      document.getElementById("showMsg").style.display = "block";
+    }
+  </script>
+
+  <style>
+    .center {
+      padding: 200px 0;
+      text-align: center;
+    }
+  </style>
 </html>

@@ -23,6 +23,11 @@ import { LandingPageComponent } from './common/landing-page/landing-page.compone
 import { UserRegistrationComponent } from './user/user-registration/user-registration.component';
 import { UserListComponent } from './user/user-list/user-list.component';
 import { AdminHomeComponent } from './admin/admin-home/admin-home.component';
+import { RoleCreationComponent } from './admin/role/role-creation/role-creation.component';
+import { RoleEditComponent } from './admin/role/role-edit/role-edit.component';
+import { RoleDeleteComponent } from './admin/role/role-delete/role-delete.component';
+import { RoleAssignComponent } from './admin/role/role-assign/role-assign.component';
+import { SetDefaultPasswordComponent } from './admin/set-default-password/set-default-password.component';
 
 @NgModule({
   declarations: [
@@ -36,6 +41,11 @@ import { AdminHomeComponent } from './admin/admin-home/admin-home.component';
     UserRegistrationComponent,
     UserListComponent,
     AdminHomeComponent,
+    RoleCreationComponent,
+    RoleEditComponent,
+    RoleDeleteComponent,
+    RoleAssignComponent,
+    SetDefaultPasswordComponent,
   ],
   imports: [
     ReportModule,
