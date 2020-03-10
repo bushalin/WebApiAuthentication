@@ -22,6 +22,7 @@ import { LoginComponent } from './common/login/login.component';
 import { LandingPageComponent } from './common/landing-page/landing-page.component';
 
 import { UserModule } from './user/user.module';
+import { AdminHomeComponent } from './admin/admin-home/admin-home.component';
 
 
 @NgModule({
@@ -30,6 +31,7 @@ import { UserModule } from './user/user.module';
     PageNotFoundComponent,
     LoginComponent,
     LandingPageComponent,
+    AdminHomeComponent
   ],
   imports: [
     UserModule,
