@@ -70,7 +70,6 @@ export class AuthenticationService {
     }
   }
 
-  
   getUserAdditionalDetail(id) {
     return this.http
       .get<any>(environment.apiUrl + `user/GetUserDetailById/` + id)
@@ -84,7 +83,7 @@ export class AuthenticationService {
 
   logout() {
     localStorage.removeItem('authToken');
-    this.router.navigate(['/login']);
+    this.router.navigate(['/']);
     this.userData.next(new User());
   }
 }

@@ -21,6 +21,8 @@ export class ReportCreateComponent implements OnInit {
   minDate: Date;
   maxDate: Date;
 
+  showFeedback;
+
   constructor(private router: Router,
     private reportService: ReportService,
     private authService: AuthenticationService,
@@ -91,25 +93,40 @@ export class ReportCreateComponent implements OnInit {
     
   }
 
+  checkDate() {
+    if(this.reportCreateForm.get('createdDate').value === "") {
+      let date: Date = new Date();
+      this.reportFormData.report.CreatedDate = date;
+      console.log(this.reportFormData.report.CreatedDate);
+    }
+    else {
+      console.log(this.reportCreateForm.get('createdDate').value);
+    }
+  }
+
 
   onFormSubmit(){
     this.reportFormData = {'report' : {}, 'reportDetail' : []};
     this.reportFormData.report.UserID = this.userData.userId;
+
+    this.checkDate();
     this.reportFormData.report.ReportStatus = true;
-    this.reportFormData.report.CreatedDate = this.reportCreateForm.controls['createdDate'].value;
+    //this.reportFormData.report.CreatedDate = this.reportCreateForm.controls['createdDate'].value;
     this.reportFormData.reportDetail = this.reportDetailList.value;
-    localStorage.setItem('report-create-data', JSON.stringify(this.reportFormData));
+    //localStorage.setItem('report-create-data', JSON.stringify(this.reportFormData));
 
 
     this.reportService.saveReport(this.reportFormData).subscribe(data =>{
       console.log(data);
+      this.showFeedback = data.message;
     },
-    error => {}
+    error => {
+      this.showFeedback = error;
+    }
     );
+    //this.router.navigate(['/report'])
 
-    this.router.navigate(['/view-report'])
-
-    //console.log("report added succesfully");
+    console.log("report added succesfully");
   }
 
 }

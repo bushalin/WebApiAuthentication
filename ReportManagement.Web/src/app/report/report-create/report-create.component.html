@@ -11,10 +11,12 @@
           <div class="col-md-6">
             <div class="row">
               <div class="offset-md-4 col-md-4">
-                <button type="button" (click)="addReports()" class="btn btn-block btn-sm btn-primary">{{'CARD.CARD_HEADER_ADD_REPORT_BTN' | translate}}</button>
+                <button type="button" (click)="addReports()"
+                  class="btn btn-block btn-sm btn-primary">{{'CARD.CARD_HEADER_ADD_REPORT_BTN' | translate}}</button>
               </div>
               <div class="col-md-4">
-                <button type="button" (click)="removeReports()" class="btn btn-block btn-sm btn-danger">{{'CARD.CARD_HEADER_REMOVE_REPORT_BTN' | translate}}</button>
+                <button type="button" (click)="removeReports()"
+                  class="btn btn-block btn-sm btn-danger">{{'CARD.CARD_HEADER_REMOVE_REPORT_BTN' | translate}}</button>
               </div>
             </div>
           </div>
@@ -29,25 +31,27 @@
             <div class="row">
               <div class="form-group col-md-4">
                 <label for="createdDate" class="px-2">{{'FORM.FORM_DATE' | translate}}</label>
-                <input id="reportCreateDate" class="form-control col-md-10" formControlName="createdDate" placeholder="{{'FORM.FORM_DATE' | translate}}"
-                  bsDatepicker [minDate]="minDate" [maxDate]="maxDate" [bsConfig]="{dateInputFormat: 'YYYY/MM/DD'}">
+                <input id="reportCreateDate" class="form-control col-md-10" formControlName="createdDate"
+                  placeholder="{{'FORM.FORM_DATE' | translate}}" bsDatepicker [minDate]="minDate" [maxDate]="maxDate"
+                  [bsConfig]="{dateInputFormat: 'YYYY/MM/DD'}">
               </div>
             </div>
-            
+
           </div>
 
           <hr>
 
           <div formArrayName="reportsdetails" class="py-1 col-md-12"
-            *ngFor="let item of reportCreateForm.get('reportsdetails').controls; let i = index">
+            *ngFor="let item of f.reportsdetails.value; let i = index">
             <div [formGroupName]="i">
               <div class="py-1 offset-md-2">
                 <div class="form-group row">
                   <label for="reportPlan" class="col-md-2">{{'FORM.FORM_PLAN' | translate}} {{i+1}}</label>
                   <div class="col-md-6">
-                    <input formControlName="Plan" class="form-control" id="reportPlan" autocomplete="off" placeholder="{{'FORM.FORM_PLAN' | translate}} {{i+1}}">
+                    <input formControlName="Plan" class="form-control" id="reportPlan" autocomplete="off"
+                      placeholder="{{'FORM.FORM_PLAN' | translate}} {{i+1}}">
                   </div>
-                  
+
                 </div>
 
                 <div class="form-group row">
@@ -55,9 +59,9 @@
 
                   <div class="col-md-6">
                     <input formControlName="Progress" class="form-control" id="reportProgress" autocomplete="off"
-                    placeholder="{{'FORM.FORM_PROGRESS' | translate}} {{i+1}}">
+                      placeholder="{{'FORM.FORM_PROGRESS' | translate}} {{i+1}}">
                   </div>
-                  
+
                 </div>
 
                 <div class="form-group row">
@@ -65,20 +69,21 @@
 
                   <div class="col-md-6">
                     <textarea rows="3" cols="55" formControlName="Details" class="form-control" id="reportDetail"
-                    placeholder="{{'FORM.FORM_DETAIL' | translate}} {{i+1}}"></textarea>
+                      placeholder="{{'FORM.FORM_DETAIL' | translate}} {{i+1}}"></textarea>
                   </div>
-                  
+
                 </div>
 
-                
+
               </div>
               <hr>
             </div>
-           
+
           </div>
 
           <button type="button" (click)="onFormSubmit()"
             class="btn btn-block btn-info offset-md-10 col-md-2 mt-5">{{'FORM.FORM_SUBMIT_BTN' | translate}}</button>
+          <label class="text-center col-md-12 mt-5">{{showFeedback}}</label>
 
         </form>
       </div>

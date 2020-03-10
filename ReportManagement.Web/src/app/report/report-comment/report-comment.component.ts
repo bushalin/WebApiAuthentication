@@ -15,11 +15,11 @@ export class ReportCommentComponent implements OnInit {
   reportModel = new Report();
   reportId: string;
   reportList: any[] = [];
-  report = {};
+  report;
   constructor(private actRoute: ActivatedRoute,
     private reportService: ReportService) {
       this.actRoute.params.pipe(switchMap((params: Params) => this.reportService.getReportById(+params['id']))).subscribe(
-        data => {
+        (data) => {
           this.report = data;
           this.reportModel.id = data.reportId;
           this.reportModel.UserId = data.userId;
