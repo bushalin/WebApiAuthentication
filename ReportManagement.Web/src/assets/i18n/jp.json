@@ -35,10 +35,12 @@
     "FORM": {
         "FORM_INFO_SEARCH": "※) どちらか片方でも検索可",
         "FORM_DATE": "年月日",
-        "FORM_PLAN": "計画",
-        "FORM_PROGRESS": "実績",
+        "FORM_PLAN": "業務タイトル",
+        "FORM_PROGRESS": "進捗(%)",
+        "FORM_PROGRESS_PLACEHOLDER": "小数点1桁まで",
         "FORM_DETAIL": "業務内容",
         "FORM_SUBMIT_BTN": "提出",
+        "FORM_BACK_BTN": "戻る",
         "FORM_SEARCH_EMPLOYEE_NAME": "従業員名",
         "FORM_SEARCH_SELECT_EMPLOYEE": "--従業員を選択--",
         "FORM_SEARCH_DATE": "日付",
@@ -55,10 +57,16 @@
         "FORM_USERNAME": "ユーザー名",
         "FORM_PASSWORD": "パスワード",
         "FORM_REGISTRATION_PASSWORD": "パスワード(半角6文字)",
-        "FORM_CONFIRM_PASSWORD": "パスワードを再入力"
+        "FORM_CONFIRM_PASSWORD": "パスワードを再入力",
+        "FORM_COMMENT": "コメント"
     },
 
     "FORM_ERROR": {
+        "FORM_ERROR_PLAN_REQUIRED": "業務タイトルを入力してください",
+        "FORM_ERROR_DETAILS_REQUIRED": "業務内容を入力してください",
+        "FORM_ERROR_PROGRESS_REQUIRED": "進捗を入力してください",
+        "FORM_ERROR_BETWEEN_RANGE": "0〜100の数字を入力してください",
+        "FORM_ERROR_BETWEEN_DECIMALS": "半角数字で桁数を合わせてください",
         "FORM_ERROR_EMAIL_REQUIRED": "メールアドレスを入力してください",
         "FORM_ERROR_EMAIL_VALID": "正しいメールアドレスを入力してください",
         "FORM_ERROR_USERNAME_REQUIRED": "ユーザー名を入力してください",
@@ -73,9 +81,9 @@
 
     "TABLE": {
         "TABLE_DATE":"年月日",
-        "TABLE_PLAN":"計画",
+        "TABLE_PLAN":"業務タイトル",
         "TABLE_DETAIL":"業務内容",
-        "TABLE_PROGRESS":"実績",
+        "TABLE_PROGRESS":"進捗(%)",
         "TABLE_COMMENT":"社長指示事項",
         "TABLE_ACTION": "コメント作成",
         "TABLE_FIRST_NAME": "姓",
@@ -84,7 +92,8 @@
         "TABLE_NAME": "名前",
         "TABLE_JOBTITLE": "役職名",
         "TABLE_ADDRESS": "住所",
-        "TABLE_GENDER": "性別"
+        "TABLE_GENDER": "性別",
+        "MODAL_TITLE": "提出しますか？"
     }
 
 }

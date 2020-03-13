@@ -9,6 +9,10 @@ import { isUndefined } from 'util';
 import { FormGroup, FormBuilder } from '@angular/forms';
 import { DatePipe } from '@angular/common';
 import { datepickerAnimation } from 'ngx-bootstrap/datepicker/datepicker-animations';
+import { BsLocaleService } from 'ngx-bootstrap/datepicker';
+import { defineLocale } from "ngx-bootstrap/chronos";
+import { jaLocale } from "ngx-bootstrap/locale";
+defineLocale("ja", jaLocale);
 
 @Component({
   selector: "app-report-previledged-view",
@@ -29,8 +33,10 @@ export class ReportPreviledgedViewComponent implements OnInit {
     private commonService: CommonService,
     private http: HttpClient,
     private formBuilder: FormBuilder,
-    private datePipe: DatePipe
+    private datePipe: DatePipe,
+    private bsLocaleService: BsLocaleService
   ) {
+    this.bsLocaleService.use('ja');
     this.getRecentReports();
     console.log(this.reportList);
     this.getAllUsers();

@@ -1,10 +1,14 @@
 import { Component, OnInit, TemplateRef } from "@angular/core";
-import { FormGroup, FormBuilder, FormArray } from "@angular/forms";
+import { FormGroup, FormBuilder, FormArray, Validators } from "@angular/forms";
 import { Router } from "@angular/router";
 import { ReportService } from "src/services/report.services";
 import { AuthenticationService } from "src/services/authentication.service";
 import { map } from "rxjs/operators";
 import { BsModalRef, BsModalService } from "ngx-bootstrap";
+import { BsLocaleService } from 'ngx-bootstrap/datepicker';
+import { defineLocale } from "ngx-bootstrap/chronos";
+import { jaLocale } from "ngx-bootstrap/locale";
+defineLocale("ja", jaLocale);
 
 @Component({
   selector: "app-report-create",
@@ -22,17 +26,25 @@ export class ReportCreateComponent implements OnInit {
   minDate: Date;
   maxDate: Date;
 
-  showFeedback;
+  loading = false;
+  submitted = false;
 
   modalRef: BsModalRef;
+  modalConfig = {
+    backdrop: true,
+    ignoreBackdropClick: true,
+    class: "modal-xl"
+  };
 
   constructor(
     private router: Router,
     private reportService: ReportService,
     private authService: AuthenticationService,
     private formBuilder: FormBuilder,
-    private modalService: BsModalService
+    private modalService: BsModalService,
+    private bsLocaleService: BsLocaleService
   ) {
+    this.bsLocaleService.use('ja');
     this.minDate = new Date();
     this.maxDate = new Date();
     this.minDate.setDate(this.minDate.getDate() - 1);
@@ -95,9 +107,9 @@ export class ReportCreateComponent implements OnInit {
 
   createReports(): FormGroup {
     return this.formBuilder.group({
-      Plan: "",
-      Details: "",
-      Progress: ""
+      Plan: ['', Validators.required],
+      Details: ['', Validators.required],
+      Progress: ['', [Validators.pattern("^[0-9]+(.[0-9])?$"),Validators.min(0),Validators.max(100)]]
     });
   }
 
@@ -115,6 +127,8 @@ export class ReportCreateComponent implements OnInit {
     }
   }
 
+  createReportData() {}
+
   checkDate() {
     if (this.reportCreateForm.get("createdDate").value === "") {
       let date: Date = new Date();
@@ -125,7 +139,28 @@ export class ReportCreateComponent implements OnInit {
     }
   }
 
+  numberOnly(event): boolean {
+    const charCode = (event.which) ? event.which : event.keyCode;
+    const num = (event.which) ? event.which : event.value;
+    if (charCode != 46 && charCode > 31 && (charCode < 48 || charCode > 57)) {
+      return false;
+    }
+    // if(event.target.value >10){
+      
+    //   return false;
+    // }
+    return true;
+
+  }
+
   onFormSubmit(template: TemplateRef<any>) {
+
+    this.submitted = true;
+    if (this.reportCreateForm.invalid) {
+      return;
+    }
+    this.loading = true;
+
     this.reportFormData = { report: {}, reportDetail: [] };
     this.reportFormData.report.UserID = this.userData.userId;
 
@@ -149,7 +184,7 @@ export class ReportCreateComponent implements OnInit {
     );
     console.log(this.reportFormData);
 
-    this.modalRef = this.modalService.show(template, { class: "modal-xl" });
+    this.modalRef = this.modalService.show(template, this.modalConfig);
 
     //console.log("report added succesfully");
   }
@@ -171,6 +206,12 @@ export class ReportCreateComponent implements OnInit {
   }
 
   modalDecline() {
+    this.submitted = false;
+    if (this.reportCreateForm.invalid) {
+      return;
+    }
+    this.loading = false;
+
     this.modalRef.hide();
   }
 }

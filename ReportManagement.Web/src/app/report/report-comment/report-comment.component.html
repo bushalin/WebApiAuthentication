@@ -27,7 +27,7 @@
 
           <br>
 
-          <table class="table table-responsive-md table-bordered table-striped">
+          <table class="table table-responsive-md table-bordered table-striped mb-5">
             <thead align="center">
               <tr>
                 <th>#</th>
@@ -46,16 +46,16 @@
             </tbody>
           </table>
 
-          <br>
-
           <div class="row align-items-center">
-            <label for="comment" class="col-md-2 ml-2">Comments</label>
+            <label for="comment" class="col-md-2 ml-2">{{'FORM.FORM_COMMENT' | translate}}</label>
             <textarea id="comment" class="col-md-9" cols="120" rows="5" [(ngModel)]="remarks"></textarea>
           </div>
-
-          <br>
-          <div class="row">
-              <button class="btn btn-info offset-md-10" (click)="onSubmit()">Submit</button>
+          
+          <div class="row mt-3">
+            <div class="col-md-12">
+              <button class="btn btn-info float-right" (click)="onSubmit()">{{'FORM.FORM_SUBMIT_BTN' | translate}}</button>
+              <button [routerLink]="['/report/show/']" class="btn btn-info float-right mr-2" (click)="onSubmit()">{{'FORM.FORM_BACK_BTN' | translate}}</button>
+            </div>
           </div>
 
         </div>

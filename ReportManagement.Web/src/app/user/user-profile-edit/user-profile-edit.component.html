@@ -98,11 +98,15 @@
                 <span *ngIf="loading" class="spinner-border spinner-border-sm mr-1"></span>    
                 {{'FORM.FORM_SUBMIT_BTN' | translate}}    
               </button>
+              <button [routerLink]="['/user']" class="btn btn-block btn-sm btn-primary" 
+              (click)="onSubmit()">{{'FORM.FORM_BACK_BTN' | translate}}</button>
+
             </div>
             
           </div>
 
         </form>
+
       </div>
     </div>
   </div>

@@ -34,8 +34,10 @@
         "FORM_DATE": "Date",
         "FORM_PLAN": "Plan",
         "FORM_PROGRESS": "Progress",
+        "FORM_PROGRESS_PLACEHOLDER": "Progress Percent",
         "FORM_DETAIL": "Details",
         "FORM_SUBMIT_BTN": "Submit",
+        "FORM_BACK_BTN": "Back",
         "FORM_SEARCH_EMPLOYEE_NAME": "Employee Name",
         "FORM_SEARCH_SELECT_EMPLOYEE": "--Select Employee--",
         "FORM_SEARCH_DATE": "Date Search",
@@ -52,10 +54,16 @@
         "FORM_USERNAME": "Username",
         "FORM_PASSWORD": "Password",
         "FORM_REGISTRATION_PASSWORD": "Atleast 6 Characters",
-        "FORM_CONFIRM_PASSWORD": "Confirm Password"
+        "FORM_CONFIRM_PASSWORD": "Confirm Password",
+        "FORM_COMMENT": "Comments"
     },
 
     "FORM_ERROR": {
+        "FORM_ERROR_PLAN_REQUIRED": "Plan is required",
+        "FORM_ERROR_DETAILS_REQUIRED": "Detils is required",
+        "FORM_ERROR_PROGRESS_REQUIRED": "Progress is required",
+        "FORM_ERROR_BETWEEN_RANGE": "Please enter number between 0-100",
+        "FORM_ERROR_BETWEEN_DECIMALS": "Please insert 1 digit after decimal",
         "FORM_ERROR_EMAIL_REQUIRED": "Email Id is required",
         "FORM_ERROR_EMAIL_VALID": "Email must be a valid email address",
         "FORM_ERROR_USERNAME_REQUIRED": "Username is required",
@@ -81,7 +89,8 @@
         "TABLE_NAME": "Name",
         "TABLE_JOBTITLE": "Job Title",
         "TABLE_ADDRESS": "Address",
-        "TABLE_GENDER": "Gender"
+        "TABLE_GENDER": "Gender",
+        "MODAL_TITLE": "Do you want to submit the report?"
     }
 
 }

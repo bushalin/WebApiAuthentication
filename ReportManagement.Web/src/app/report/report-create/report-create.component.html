@@ -25,7 +25,7 @@
 
       </div>
       <div class="card-body">
-        <form [formGroup]="reportCreateForm">
+        <form [formGroup]="reportCreateForm" (ngSubmit)="onFormSubmit(template)">
 
           <div class="py-1 col-md-12">
             <div class="row">
@@ -49,7 +49,26 @@
                   <label for="reportPlan" class="col-md-2">{{'FORM.FORM_PLAN' | translate}} {{i+1}}</label>
                   <div class="col-md-6">
                     <input formControlName="Plan" class="form-control" id="reportPlan" autocomplete="off"
-                      placeholder="{{'FORM.FORM_PLAN' | translate}} {{i+1}}">
+                    [ngClass]="{ 'is-invalid': submitted && detailsFormData.controls[i].controls.Plan.errors }"
+                      placeholder="{{'FORM.FORM_PLAN' | translate}}">
+                      <div *ngIf="submitted && detailsFormData.controls[i].controls.Plan.errors" class="invalid-feedback">    
+                        <div *ngIf="detailsFormData.controls[i].controls.Plan.errors.required">{{'FORM_ERROR.FORM_ERROR_PLAN_REQUIRED' | translate}}</div>    
+                      </div>
+                  </div>
+
+                </div>
+
+
+                <div class="form-group row">
+                  <label for="reportDetail" class="col-md-2">{{'FORM.FORM_DETAIL' | translate}} {{i+1}}</label>
+
+                  <div class="col-md-6">
+                    <textarea rows="3" cols="55" formControlName="Details" class="form-control" id="reportDetail"
+                    [ngClass]="{ 'is-invalid': submitted && detailsFormData.controls[i].controls.Details.errors }"
+                      placeholder="{{'FORM.FORM_DETAIL' | translate}}"></textarea>
+                      <div *ngIf="submitted && detailsFormData.controls[i].controls.Details.errors" class="invalid-feedback">    
+                        <div *ngIf="detailsFormData.controls[i].controls.Details.errors.required">{{'FORM_ERROR.FORM_ERROR_DETAILS_REQUIRED' | translate}}</div>     
+                      </div>
                   </div>
 
                 </div>
@@ -57,23 +76,21 @@
                 <div class="form-group row">
                   <label for="reportProgress" class="col-md-2">{{'FORM.FORM_PROGRESS' | translate}} {{i+1}}</label>
 
-                  <div class="col-md-6">
-                    <input formControlName="Progress" class="form-control" id="reportProgress" autocomplete="off"
-                      placeholder="{{'FORM.FORM_PROGRESS' | translate}} {{i+1}}">
+                  <div class="col-md-3">
+                    <input (keypress)="numberOnly($event)" type="text" formControlName="Progress" class="form-control" id="reportProgress" autocomplete="off"
+                    [ngClass]="{ 'is-invalid': submitted && reportCreateForm.controls.reportsdetails.controls[i].controls.Progress.errors }"
+                      placeholder="{{'FORM.FORM_PROGRESS_PLACEHOLDER' | translate}}">
+                      <div *ngIf="submitted && detailsFormData.controls[i].controls.Progress.errors" class="invalid-feedback">    
+                        <!-- <div *ngIf="detailsFormData.controls[i].controls.Progress.errors.required">{{'FORM_ERROR.FORM_ERROR_PROGRESS_REQUIRED' | translate}}</div>     -->
+                        <div *ngIf="detailsFormData.controls[i].controls.Progress.errors.min">{{'FORM_ERROR.FORM_ERROR_BETWEEN_RANGE' | translate}}</div>    
+                        <div *ngIf="detailsFormData.controls[i].controls.Progress.errors.max">{{'FORM_ERROR.FORM_ERROR_BETWEEN_RANGE' | translate}}</div>    
+                        <div *ngIf="detailsFormData.controls[i].controls.Progress.errors.pattern">{{'FORM_ERROR.FORM_ERROR_BETWEEN_DECIMALS' | translate}}</div>    
+                      </div>
                   </div>
 
-                </div>
-
-                <div class="form-group row">
-                  <label for="reportDetail" class="col-md-2">{{'FORM.FORM_DETAIL' | translate}} {{i+1}}</label>
-
-                  <div class="col-md-6">
-                    <textarea rows="3" cols="55" formControlName="Details" class="form-control" id="reportDetail"
-                      placeholder="{{'FORM.FORM_DETAIL' | translate}} {{i+1}}"></textarea>
-                  </div>
+                  <div class="col-md-1 d-flex align-items-center p-0"><span>%</span></div>
 
                 </div>
-
 
               </div>
               <hr>
@@ -81,34 +98,41 @@
 
           </div>
 
-          <button type="button" (click)="onFormSubmit(template)"
-            class="btn btn-block btn-info offset-md-10 col-md-2 mt-5">{{'FORM.FORM_SUBMIT_BTN' | translate}}</button>
-          <!-- <label class="text-center col-md-12 mt-5">{{showFeedback}}</label> -->
+          <div class="row mt-3">
+            <div class="col-md-12">
+              <button [disabled]="loading" class="btn btn-info float-right">    
+                <span *ngIf="loading" class="spinner-border spinner-border-sm mr-1"></span>    
+                {{'FORM.FORM_SUBMIT_BTN' | translate}}    
+              </button>
+              <button [routerLink]="['/report/']" class="btn btn-info float-right mr-2">{{'FORM.FORM_BACK_BTN' | translate}}</button>
+            </div>
+          </div>
+
+          
+          <!-- <button type="button" (click)="onFormSubmit()"
+            class="btn btn-block btn-info offset-md-10 col-md-2 mt-5">{{'FORM.FORM_SUBMIT_BTN' | translate}}</button> -->
 
         </form>
 
         <ng-template #template>
           <div class="modal-header">
-            <h4 class="modal-title pull-left">Do you want to save this report?</h4>
+            <h4 class="modal-title pull-left">{{'TABLE.MODAL_TITLE' | translate}}</h4>
             <button type="button" class="close pull-right" aria-label="Close" (click)="modalRef.hide()">
               <span aria-hidden="true">&times;</span>
             </button>
           </div>
           <div class="modal-body">
             <div class="card">
-              <div class="card-header">
-                <p>Preview</p>
-              </div>
               <div class="card-body overflow-auto">
                 <div class="row">
                   <div class="col-md-12">
-                    <p>Date : {{reportFormData.report.CreatedDate | date: "yyyy/MM/dd"}}</p>
+                    <p>{{'TABLE.TABLE_DATE' | translate}} : {{reportFormData.report.CreatedDate | date: "yyyy/MM/dd"}}</p>
                     <table class="table table-responsive-sm table-bordered">
                       <thead align="center" class="text-nowrap">
                         <tr>
-                          <th>Plan</th>
-                          <th>Detail</th>
-                          <th>Progress</th>
+                          <th>{{'TABLE.TABLE_PLAN' | translate}}</th>
+                          <th>{{'TABLE.TABLE_PROGRESS' | translate}}</th>
+                          <th>{{'TABLE.TABLE_DETAIL' | translate}}</th>
                         </tr>
                       </thead>
                       <tbody>
