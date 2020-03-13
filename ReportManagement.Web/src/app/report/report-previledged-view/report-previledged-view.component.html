@@ -31,7 +31,7 @@
                 class="form-control col-md-3"
                 formControlName="employeeNameSelectedValue"
               >
-                <option [selected]="true"
+                <option value="" [disabled]="true"
                   >{{'FORM.FORM_SEARCH_SELECT_EMPLOYEE' | translate}}</option>
                 <option
                   *ngFor="let item of userList"
@@ -136,7 +136,7 @@
                   </td>
                   <td>{{ item.remarks }}</td>
                   <td align="center">
-                    <a class="btn btn-primary btn-sm" [routerLink]="['/create-comment', item.reportId]">
+                    <a class="btn btn-primary btn-sm" [routerLink]="['/report/show/', item.reportId]">
                       <i class="fa fa-comments-o" aria-hidden="true"></i>
                     </a>
                   </td>

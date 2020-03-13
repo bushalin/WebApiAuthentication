@@ -25,13 +25,13 @@
 
       </div>
       <div class="card-body">
-        <form [formGroup]="reportCreateForm">
+        <form [formGroup]="reportCreateForm" (ngSubmit)="onFormSubmit()">
 
           <div class="py-1 col-md-12">
             <div class="row">
               <div class="form-group col-md-4">
                 <label for="createdDate" class="px-2">{{'FORM.FORM_DATE' | translate}}</label>
-                <input id="reportCreateDate" class="form-control col-md-10" formControlName="createdDate"
+                <input autocomplete="off" id="reportCreateDate" class="form-control col-md-10" formControlName="createdDate"   
                   placeholder="{{'FORM.FORM_DATE' | translate}}" bsDatepicker [minDate]="minDate" [maxDate]="maxDate"
                   [bsConfig]="{dateInputFormat: 'YYYY/MM/DD'}">
               </div>
@@ -42,14 +42,33 @@
           <hr>
 
           <div formArrayName="reportsdetails" class="py-1 col-md-12"
-            *ngFor="let item of f.reportsdetails.value; let i = index">
+            *ngFor="let item of f.reportsdetails.controls; let i = index">
             <div [formGroupName]="i">
               <div class="py-1 offset-md-2">
                 <div class="form-group row">
                   <label for="reportPlan" class="col-md-2">{{'FORM.FORM_PLAN' | translate}} {{i+1}}</label>
                   <div class="col-md-6">
                     <input formControlName="Plan" class="form-control" id="reportPlan" autocomplete="off"
-                      placeholder="{{'FORM.FORM_PLAN' | translate}} {{i+1}}">
+                    [ngClass]="{ 'is-invalid': submitted && reportCreateForm.controls.reportsdetails.controls[i].controls.Plan.errors }"
+                      placeholder="{{'FORM.FORM_PLAN' | translate}}">
+                      <div *ngIf="submitted && reportCreateForm.controls.reportsdetails.controls[i].controls.Plan.errors" class="invalid-feedback">    
+                        <div *ngIf="reportCreateForm.controls.reportsdetails.controls[i].controls.Plan.errors.required">{{'FORM_ERROR.FORM_ERROR_PLAN_REQUIRED' | translate}}</div>    
+                      </div>
+                  </div>
+
+                </div>
+
+
+                <div class="form-group row">
+                  <label for="reportDetail" class="col-md-2">{{'FORM.FORM_DETAIL' | translate}} {{i+1}}</label>
+
+                  <div class="col-md-6">
+                    <textarea rows="3" cols="55" formControlName="Details" class="form-control" id="reportDetail"
+                    [ngClass]="{ 'is-invalid': submitted && reportCreateForm.controls.reportsdetails.controls[i].controls.Details.errors }"
+                      placeholder="{{'FORM.FORM_DETAIL' | translate}}"></textarea>
+                      <div *ngIf="submitted && reportCreateForm.controls.reportsdetails.controls[i].controls.Details.errors" class="invalid-feedback">    
+                        <div *ngIf="reportCreateForm.controls.reportsdetails.controls[i].controls.Details.errors.required">{{'FORM_ERROR.FORM_ERROR_DETAILS_REQUIRED' | translate}}</div>     
+                      </div>
                   </div>
 
                 </div>
@@ -57,23 +76,21 @@
                 <div class="form-group row">
                   <label for="reportProgress" class="col-md-2">{{'FORM.FORM_PROGRESS' | translate}} {{i+1}}</label>
 
-                  <div class="col-md-6">
-                    <input formControlName="Progress" class="form-control" id="reportProgress" autocomplete="off"
-                      placeholder="{{'FORM.FORM_PROGRESS' | translate}} {{i+1}}">
+                  <div class="col-md-3">
+                    <input (keypress)="numberOnly($event)" type="text" formControlName="Progress" class="form-control" id="reportProgress" autocomplete="off"
+                    [ngClass]="{ 'is-invalid': submitted && reportCreateForm.controls.reportsdetails.controls[i].controls.Progress.errors }"
+                      placeholder="{{'FORM.FORM_PROGRESS_PLACEHOLDER' | translate}}">
+                      <div *ngIf="submitted && reportCreateForm.controls.reportsdetails.controls[i].controls.Progress.errors" class="invalid-feedback">    
+                        <!-- <div *ngIf="reportCreateForm.controls.reportsdetails.controls[i].controls.Progress.errors.required">{{'FORM_ERROR.FORM_ERROR_PROGRESS_REQUIRED' | translate}}</div>     -->
+                        <div *ngIf="reportCreateForm.controls.reportsdetails.controls[i].controls.Progress.errors.min">{{'FORM_ERROR.FORM_ERROR_BETWEEN_RANGE' | translate}}</div>    
+                        <div *ngIf="reportCreateForm.controls.reportsdetails.controls[i].controls.Progress.errors.max">{{'FORM_ERROR.FORM_ERROR_BETWEEN_RANGE' | translate}}</div>    
+                        <div *ngIf="reportCreateForm.controls.reportsdetails.controls[i].controls.Progress.errors.pattern">{{'FORM_ERROR.FORM_ERROR_BETWEEN_DECIMALS' | translate}}</div>    
+                      </div>
                   </div>
 
-                </div>
-
-                <div class="form-group row">
-                  <label for="reportDetail" class="col-md-2">{{'FORM.FORM_DETAIL' | translate}} {{i+1}}</label>
-
-                  <div class="col-md-6">
-                    <textarea rows="3" cols="55" formControlName="Details" class="form-control" id="reportDetail"
-                      placeholder="{{'FORM.FORM_DETAIL' | translate}} {{i+1}}"></textarea>
-                  </div>
+                  <div class="col-md-2">%</div>
 
                 </div>
-
 
               </div>
               <hr>
@@ -81,8 +98,19 @@
 
           </div>
 
-          <button type="button" (click)="onFormSubmit()"
-            class="btn btn-block btn-info offset-md-10 col-md-2 mt-5">{{'FORM.FORM_SUBMIT_BTN' | translate}}</button>
+          <div class="row mt-3">
+            <div class="col-md-12">
+              <button [disabled]="loading" class="btn btn-info float-right">    
+                <span *ngIf="loading" class="spinner-border spinner-border-sm mr-1"></span>    
+                {{'FORM.FORM_SUBMIT_BTN' | translate}}    
+              </button>
+              <button [routerLink]="['/report/']" class="btn btn-info float-right mr-2" (click)="onSubmit()">{{'FORM.FORM_BACK_BTN' | translate}}</button>
+            </div>
+          </div>
+
+          
+          <!-- <button type="button" (click)="onFormSubmit()"
+            class="btn btn-block btn-info offset-md-10 col-md-2 mt-5">{{'FORM.FORM_SUBMIT_BTN' | translate}}</button> -->
           <label class="text-center col-md-12 mt-5">{{showFeedback}}</label>
 
         </form>

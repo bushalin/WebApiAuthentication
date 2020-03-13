@@ -1,58 +1,72 @@
-import { Component, OnInit } from '@angular/core';
-import { FormGroup, FormBuilder, FormArray } from '@angular/forms';
-import { Router } from '@angular/router';
-import { ReportService } from 'src/services/report.services';
-import { AuthenticationService } from 'src/services/authentication.service';
+import { Component, OnInit } from "@angular/core";
+import { FormGroup, FormBuilder, FormArray, Validators } from "@angular/forms";
+import { Router } from "@angular/router";
+import { ReportService } from "src/services/report.services";
+import { AuthenticationService } from "src/services/authentication.service";
+import { BsLocaleService } from 'ngx-bootstrap/datepicker';
+import { defineLocale } from "ngx-bootstrap/chronos";
+import { jaLocale } from "ngx-bootstrap/locale";
+defineLocale("ja", jaLocale);
 
 @Component({
-  selector: 'app-report-create',
-  templateUrl: './report-create.component.html',
-  styleUrls: ['./report-create.component.css']
+  selector: "app-report-create",
+  templateUrl: "./report-create.component.html",
+  styleUrls: ["./report-create.component.css"]
 })
 export class ReportCreateComponent implements OnInit {
+  loading = false;
+  submitted = false;
 
   userDataSubscription;
   userData;
   userName;
-  reportCreateForm : FormGroup;
+  reportCreateForm: FormGroup;
   public reportDetailList: FormArray;
-  reportFormData : any = {}
+  reportFormData: any = {};
 
   minDate: Date;
   maxDate: Date;
 
   showFeedback;
 
-  constructor(private router: Router,
+  constructor(
+    private router: Router,
     private reportService: ReportService,
     private authService: AuthenticationService,
-    private formBuilder: FormBuilder) {
-      this.minDate = new Date();
-      this.maxDate = new Date();
-      this.minDate.setDate(this.minDate.getDate() - 1);
-      this.maxDate.setDate(this.maxDate.getDate());
+    private formBuilder: FormBuilder,
+    private bsLocaleService: BsLocaleService
+  ) {
+    this.bsLocaleService.use('ja');
+    
+    this.minDate = new Date();
+    this.maxDate = new Date();
+    this.minDate.setDate(this.minDate.getDate() - 1);
+    this.maxDate.setDate(this.maxDate.getDate());
 
-      this.userDataSubscription = this.authService.userData.asObservable().subscribe(data => {
+    this.userDataSubscription = this.authService.userData
+      .asObservable()
+      .subscribe(data => {
         this.userData = data;
         this.userName = this.userData.fullName;
-      })
-     }
+      });
+  }
 
   ngOnInit() {
     this.reportCreateForm = this.formBuilder.group({
-      createdDate: [''],
+      createdDate: [""],
       reportsdetails: this.formBuilder.array([this.createReports()])
     });
 
-    this.reportDetailList = this.reportCreateForm.get('reportsdetails') as FormArray;
+    this.reportDetailList = this.reportCreateForm.get(
+      "reportsdetails"
+    ) as FormArray;
 
-    const formData = JSON.parse(localStorage.getItem('report-create-data'));
-    if(JSON.parse(localStorage.getItem('report-create-data'))) {
-      const formData = JSON.parse(localStorage.getItem('report-create-data'));
+    const formData = JSON.parse(localStorage.getItem("report-create-data"));
+    if (JSON.parse(localStorage.getItem("report-create-data"))) {
+      const formData = JSON.parse(localStorage.getItem("report-create-data"));
       console.log(formData);
       //this.reportCreateForm.controls = formData;
 
-      
       // formData.reportDetail.forEach(element => {
       //   console.log(element.reportPlan);
       //   console.log(element.reportDetail);
@@ -62,16 +76,17 @@ export class ReportCreateComponent implements OnInit {
     }
   }
 
-  get f(){
+  get f() {
     return this.reportCreateForm.controls;
   }
 
-  createReports(): FormGroup{
+
+  createReports(): FormGroup {
     return this.formBuilder.group({
-      Plan: '',
-      Details: '',
-      Progress: ''
-    })
+      Plan: ['', Validators.required],
+      Details: ['', Validators.required],
+      Progress: ['', [Validators.pattern("^[0-9]+(.[0-9])?$"),Validators.min(0),Validators.max(100)]]
+    });
   }
 
   addReports() {
@@ -81,32 +96,49 @@ export class ReportCreateComponent implements OnInit {
     }
   }
 
-  removeReports(){
+  removeReports() {
     if (this.reportDetailList.length > 1) {
       this.reportDetailList.removeAt(this.reportDetailList.length - 1);
       console.log(this.reportCreateForm.controls.reportsdetails.value);
     }
   }
 
-
-  createReportData(){
-    
-  }
+  createReportData() {}
 
   checkDate() {
-    if(this.reportCreateForm.get('createdDate').value === "") {
+    if (this.reportCreateForm.get("createdDate").value === "") {
       let date: Date = new Date();
       this.reportFormData.report.CreatedDate = date;
       console.log(this.reportFormData.report.CreatedDate);
-    }
-    else {
-      console.log(this.reportCreateForm.get('createdDate').value);
+    } else {
+      console.log(this.reportCreateForm.get("createdDate").value);
     }
   }
 
+  numberOnly(event): boolean {
+    const charCode = (event.which) ? event.which : event.keyCode;
+    const num = (event.which) ? event.which : event.value;
+    if (charCode != 46 && charCode > 31 && (charCode < 48 || charCode > 57)) {
+      return false;
+    }
+    // if(event.target.value >10){
+      
+    //   return false;
+    // }
+    return true;
 
-  onFormSubmit(){
-    this.reportFormData = {'report' : {}, 'reportDetail' : []};
+  }
+
+  onFormSubmit() {
+    this.submitted = true;
+    if (this.reportCreateForm.invalid) {
+      return;
+    }
+    this.loading = true;
+
+    console.log(this.reportCreateForm.errors);
+
+    this.reportFormData = { report: {}, reportDetail: [] };
     this.reportFormData.report.UserID = this.userData.userId;
 
     this.checkDate();
@@ -115,18 +147,17 @@ export class ReportCreateComponent implements OnInit {
     this.reportFormData.reportDetail = this.reportDetailList.value;
     //localStorage.setItem('report-create-data', JSON.stringify(this.reportFormData));
 
-
-    this.reportService.saveReport(this.reportFormData).subscribe(data =>{
-      console.log(data);
-      this.showFeedback = data.message;
-    },
-    error => {
-      this.showFeedback = error;
-    }
+    this.reportService.saveReport(this.reportFormData).subscribe(
+      data => {
+        console.log(data);
+        this.showFeedback = data.message;
+      },
+      error => {
+        this.showFeedback = error;
+      }
     );
     //this.router.navigate(['/report'])
 
     console.log("report added succesfully");
   }
-
 }
