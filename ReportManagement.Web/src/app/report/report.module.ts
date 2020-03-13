@@ -12,7 +12,7 @@ import { AppRoutingModule } from "../app-routing.module";
 import { BsDatepickerModule } from "ngx-bootstrap/datepicker";
 import { BrowserAnimationsModule } from "@angular/platform-browser/animations";
 import { ReportCommentComponent } from "./report-comment/report-comment.component";
-import { AccordionModule } from "ngx-bootstrap";
+import { AccordionModule, ModalModule } from "ngx-bootstrap";
 import { CollapseModule } from "ngx-bootstrap/collapse";
 import { NgaReadMoreModule } from "nga-read-more";
 import { TypeaheadModule } from "ngx-bootstrap/typeahead";
@@ -45,6 +45,7 @@ import { ReportRoutingModule } from './report-routing.module';
     CollapseModule.forRoot(),
     NgaReadMoreModule,
     TypeaheadModule.forRoot(),
+    ModalModule.forRoot()
   ],
   exports: [ReportCreateComponent, TopBarComponent, TranslateModule],
   providers: [ReportService, DatePipe]

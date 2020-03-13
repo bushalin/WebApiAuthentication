@@ -20,9 +20,16 @@ import { ErrorInterceptorService } from 'src/services/error-interceptor.service'
 import { PageNotFoundComponent } from './common/page-not-found/page-not-found.component';
 import { LoginComponent } from './common/login/login.component';
 import { LandingPageComponent } from './common/landing-page/landing-page.component';
+import { UserRegistrationComponent } from './user/user-registration/user-registration.component';
+import { UserListComponent } from './user/user-list/user-list.component';
+import { AdminHomeComponent } from './admin/admin-home/admin-home.component';
+import { RoleCreationComponent } from './admin/role/role-creation/role-creation.component';
+import { RoleEditComponent } from './admin/role/role-edit/role-edit.component';
+import { RoleDeleteComponent } from './admin/role/role-delete/role-delete.component';
+import { RoleAssignComponent } from './admin/role/role-assign/role-assign.component';
+import { SetDefaultPasswordComponent } from './admin/set-default-password/set-default-password.component';
 
 import { UserModule } from './user/user.module';
-import { AdminHomeComponent } from './admin/admin-home/admin-home.component';
 
 
 @NgModule({
@@ -31,7 +38,12 @@ import { AdminHomeComponent } from './admin/admin-home/admin-home.component';
     PageNotFoundComponent,
     LoginComponent,
     LandingPageComponent,
-    AdminHomeComponent
+    AdminHomeComponent,
+    RoleCreationComponent,
+    RoleEditComponent,
+    RoleDeleteComponent,
+    RoleAssignComponent,
+    SetDefaultPasswordComponent,
   ],
   imports: [
     UserModule,
@@ -59,5 +71,5 @@ export class AppModule { }
 
 // required for AOT compilation
 export function HttpLoaderFactory(http: HttpClient){
-  return new TranslateHttpLoader(http);
+  return new TranslateHttpLoader(http, '../assets/i18n/', '.json');
 }

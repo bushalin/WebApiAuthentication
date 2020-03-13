@@ -10,6 +10,8 @@ import { Observable } from "rxjs";
 import { User } from "src/models/user";
 import { AuthenticationService } from "src/services/authentication.service";
 import { UserRole } from "src/models/roles";
+import { isDefined } from '@angular/compiler/src/util';
+import { isUndefined } from 'util';
 
 @Injectable({
   providedIn: "root"
@@ -37,17 +39,19 @@ export class AuthGuard implements CanActivate {
     | Promise<boolean | UrlTree>
     | boolean
     | UrlTree {
+    if (!isUndefined(this.userData.role)) {
       this.userData.role.forEach(element => {
         if (element === UserRole.Admin || element === UserRole.User) {
           this.guardFlag = true;
         }
       });
 
-    if (this.guardFlag === true) {
-      return true;
+      if (this.guardFlag === true) {
+        return true;
+      }
     }
 
-    this.router.navigate(["/login"], { queryParams: { returnUrl: state.url } });
+    this.router.navigate(["/landing-page"], { queryParams: { returnUrl: state.url } });
     return false;
   }
 }

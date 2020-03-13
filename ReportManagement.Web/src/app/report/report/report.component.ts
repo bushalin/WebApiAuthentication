@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { TranslateService } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-report',
@@ -7,9 +8,23 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ReportComponent implements OnInit {
 
-  constructor() { }
+  constructor(private translate: TranslateService) {
+    let userLanguage;
+    userLanguage = navigator.language;
+    console.log(userLanguage);
+
+    if(userLanguage === "en-US") {
+      userLanguage = "en"
+    }
+    if(userLanguage === "ja") {
+      userLanguage = "jp"
+    }
+    console.log(userLanguage);
+    translate.use(userLanguage);
+   }
 
   ngOnInit() {
+
   }
 
 }

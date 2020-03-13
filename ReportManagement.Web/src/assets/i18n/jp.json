@@ -67,7 +67,8 @@
         "FORM_ERROR_PASSWORD_REQUIRED": "パスワードを入力してください",
         "FORM_ERROR_PASSWORD_CHAR": "6 文字でパスワードを入力してください",
         "FORM_ERROR_CONFIRM_PASSWORD_REQUIRED": "パスワードを再入力してください",
-        "FORM_ERROR_PASSWORD_MATCH": "パスワードが一致していません"
+        "FORM_ERROR_PASSWORD_MATCH": "パスワードが一致していません",
+        "FORM_ERROR_INCORRECT_USER_PASS": "ユーザー名かパスワードが間違っています"
     },
 
     "TABLE": {

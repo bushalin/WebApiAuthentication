@@ -1,6 +1,7 @@
 import { Component, AfterViewInit, Renderer2 } from '@angular/core';
 import { AuthenticationService } from 'src/services/authentication.service';
 import { TranslateService } from '@ngx-translate/core';
+import { browser } from 'protractor';
 
 @Component({
   selector: "app-root",

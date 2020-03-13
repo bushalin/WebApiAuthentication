@@ -42,7 +42,7 @@
           <hr>
 
           <div formArrayName="reportsdetails" class="py-1 col-md-12"
-            *ngFor="let item of f.reportsdetails.value; let i = index">
+            *ngFor="let item of detailsFormData.controls; let i = index">
             <div [formGroupName]="i">
               <div class="py-1 offset-md-2">
                 <div class="form-group row">
@@ -81,12 +81,63 @@
 
           </div>
 
-          <button type="button" (click)="onFormSubmit()"
+          <button type="button" (click)="onFormSubmit(template)"
             class="btn btn-block btn-info offset-md-10 col-md-2 mt-5">{{'FORM.FORM_SUBMIT_BTN' | translate}}</button>
-          <label class="text-center col-md-12 mt-5">{{showFeedback}}</label>
+          <!-- <label class="text-center col-md-12 mt-5">{{showFeedback}}</label> -->
 
         </form>
+
+        <ng-template #template>
+          <div class="modal-header">
+            <h4 class="modal-title pull-left">Do you want to save this report?</h4>
+            <button type="button" class="close pull-right" aria-label="Close" (click)="modalRef.hide()">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="modal-body">
+            <div class="card">
+              <div class="card-header">
+                <p>Preview</p>
+              </div>
+              <div class="card-body overflow-auto">
+                <div class="row">
+                  <div class="col-md-12">
+                    <p>Date : {{reportFormData.report.CreatedDate | date: "yyyy/MM/dd"}}</p>
+                    <table class="table table-responsive-sm table-bordered">
+                      <thead align="center" class="text-nowrap">
+                        <tr>
+                          <th>Plan</th>
+                          <th>Detail</th>
+                          <th>Progress</th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        <tr *ngFor="let item of reportFormData.reportDetail;">
+                          <td align="center">{{item.Plan}}</td>
+                          <td>{{item.Progress}}</td>
+                          <td class="w-75">{{item.Details}}</td>
+                        </tr>
+                      </tbody>
+                    </table>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="row mt-5">
+              <div class="col-md-12">
+                <button class="btn btn-success col-md-1 btn-sm ml-2 float-right" (click)="modalConfirm()" tooltip="fuck this shit">Yes</button>
+                <button class="btn btn-danger col-md-1 btn-sm float-right" (click)="modalDecline()">No</button>
+              </div>
+            </div>
+
+          </div>
+        </ng-template>
+        
       </div>
     </div>
   </div>
 </div>
+
+
+<!-- onFormSubmit() -->

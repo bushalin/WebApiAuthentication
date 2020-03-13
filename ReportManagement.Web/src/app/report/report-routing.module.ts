@@ -8,17 +8,20 @@ import { ReportCheckComponent } from './report-check/report-check.component';
 import { ReportPreviledgedViewComponent } from './report-previledged-view/report-previledged-view.component';
 import { ReportCommentComponent } from './report-comment/report-comment.component';
 import { ReportSearchComponent } from './report-search/report-search.component';
+import { AuthGuard } from '../guards/auth.guard';
+import { AdminGuard } from '../guards/admin.guard';
 
 const reportRoutes: Routes = [
   {
     path: 'report',
     component: ReportComponent,
     children: [
-      {path: '', component: ReportUserViewComponent},
+      {path: '', component: ReportUserViewComponent, canActivate: [AuthGuard]},
       {path: 'create', component: ReportCreateComponent},
       {path: 'check', component: ReportCheckComponent},
       {
         path: 'show',
+        canActivate: [AdminGuard],
         children: [
           { path: '', component: ReportPreviledgedViewComponent },
           { path: 'search', component: ReportSearchComponent},

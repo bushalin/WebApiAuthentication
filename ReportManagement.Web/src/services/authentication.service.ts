@@ -83,7 +83,7 @@ export class AuthenticationService {
 
   logout() {
     localStorage.removeItem('authToken');
-    this.router.navigate(['/']);
+    this.router.navigate(['/landing-page']);
     this.userData.next(new User());
   }
 }

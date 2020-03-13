@@ -17,13 +17,26 @@ import { LandingPageComponent } from './common/landing-page/landing-page.compone
 import { UserRegistrationComponent } from './user/user-registration/user-registration.component';
 import { UserListComponent } from './user/user-list/user-list.component';
 import { AdminHomeComponent } from './admin/admin-home/admin-home.component';
+import { RoleCreationComponent } from './admin/role/role-creation/role-creation.component';
+import { RoleEditComponent } from './admin/role/role-edit/role-edit.component';
+import { RoleDeleteComponent } from './admin/role/role-delete/role-delete.component';
+import { RoleAssignComponent } from './admin/role/role-assign/role-assign.component';
+import { SetDefaultPasswordComponent } from './admin/set-default-password/set-default-password.component';
 
 
 const routes: Routes = [
-  
-  { path: '', redirectTo: '/landing-page', pathMatch: 'full' },
+  { path: '', redirectTo: '/report', pathMatch: 'full' },
   { path: 'login', component: LoginComponent },
   { path: 'landing-page', component: LandingPageComponent },
+  
+  { path: 'admin-home', component: AdminHomeComponent },
+  { path: 'role-create', component: RoleCreationComponent },
+  { path: 'role-edit', component: RoleEditComponent },
+  { path: 'role-delete', component: RoleDeleteComponent },
+  { path: 'role-assign', component: RoleAssignComponent },
+  { path: 'set-default-password', component: SetDefaultPasswordComponent },
+
+
 
   // { path: 'create-report', component: ReportCreateComponent, canActivate: [AuthGuard] },
   // { path: 'view-report', component: ReportUserViewComponent, canActivate: [AuthGuard]},

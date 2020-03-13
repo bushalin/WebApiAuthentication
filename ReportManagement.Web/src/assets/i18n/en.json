@@ -64,7 +64,8 @@
         "FORM_ERROR_PASSWORD_REQUIRED": "Password is required",
         "FORM_ERROR_PASSWORD_CHAR": "Password must be at least 6 characters",
         "FORM_ERROR_CONFIRM_PASSWORD_REQUIRED": "Confirm Password is required",
-        "FORM_ERROR_PASSWORD_MATCH": "Passwords must match"
+        "FORM_ERROR_PASSWORD_MATCH": "Passwords must match",
+        "FORM_ERROR_INCORRECT_USER_PASS": "Username or Password is incorrect"
     },
 
     "TABLE": {
