@@ -25,6 +25,13 @@ export class RoleCreationComponent implements OnInit {
     return this.roleCreateForm.controls;
   }
 
-  onSubmit() {}
+  onSubmit() {
+    this.submitted = true;
+    if (this.roleCreateForm.invalid) {
+      return;
+    }
+    this.loading = true;
+    console.log(this.roleCreateForm.controls['roleCreate'].value);
+  }
 
 }

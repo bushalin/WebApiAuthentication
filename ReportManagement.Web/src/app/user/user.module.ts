@@ -11,6 +11,7 @@ import { UserRoutingModule } from './user-routing.module';
 import { ReportModule } from '../report/report.module';
 import { RouterModule } from '@angular/router';
 import { UserComponent } from './user/user.component';
+import { UserChangePasswordComponent } from './user-change-password/user-change-password.component';
 
 
 
@@ -21,7 +22,8 @@ import { UserComponent } from './user/user.component';
     UserProfileEditComponent,
     UserRegistrationComponent,
     UserListComponent,
-    UserComponent
+    UserComponent,
+    UserChangePasswordComponent
   ],
   imports: [
     CommonModule,

@@ -1,4 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, TemplateRef } from '@angular/core';
+import { FormGroup, FormBuilder, Validators } from '@angular/forms';
+import { CommonService } from 'src/services/common.services';
+import { BsModalService, BsModalRef } from 'ngx-bootstrap';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-role-delete',
@@ -7,9 +11,74 @@ import { Component, OnInit } from '@angular/core';
 })
 export class RoleDeleteComponent implements OnInit {
 
-  constructor() { }
+  loading = false;
+  roleDeleteForm: FormGroup;
+  submitted = false;
+  roleList:  any[] = [];
+  roleData: any = {};
+
+  modalRef: BsModalRef;
+  modalConfig = {
+    backdrop: true,
+    ignoreBackdropClick: true,
+    class: "modal-xl"
+  };
+
+  constructor(
+    private formBuilder: FormBuilder,
+    private commonService: CommonService,
+    private modalService: BsModalService,
+    private router: Router,
+  ) {
+    this.getAllRoles();
+   }
 
   ngOnInit() {
+    this.roleDeleteForm = this.formBuilder.group({
+      roleId: ['', Validators.required]
+    });
   }
 
+  get roleDeleteFormControl() {
+    return this.roleDeleteForm.controls;
+  }
+
+  getAllRoles() {
+    this.commonService.getAllRoles().subscribe(
+      data => {
+        Object.entries(data).map(res => {
+          this.roleList.push(res[1]);
+        });
+      },
+      err => {}
+    );
+  }
+
+  onSubmit(template: TemplateRef<any>){
+    this.submitted = true;
+    if (this.roleDeleteForm.invalid) {
+      return;
+    }
+    this.loading = true;
+    this.modalRef = this.modalService.show(template, this.modalConfig);
+  }
+
+  modalConfirm() {
+    this.modalRef.hide();
+    
+    this.roleData.id = this.roleDeleteForm.controls['roleId'].value;
+
+    //this.router.navigate(["/report"]);
+    console.log(this.roleData);
+  }
+
+  modalDecline() {
+    this.submitted = false;
+    if (this.roleDeleteForm.invalid) {
+      return;
+    }
+    this.loading = false;
+
+    this.modalRef.hide();
+  }
 }

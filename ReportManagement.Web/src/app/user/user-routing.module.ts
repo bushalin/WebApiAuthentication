@@ -8,6 +8,7 @@ import { UserProfileCreateComponent } from "./user-profile-create/user-profile-c
 import { UserProfileEditComponent } from "./user-profile-edit/user-profile-edit.component";
 import { UserComponent } from './user/user.component';
 import { AuthGuard } from '../guards/auth.guard';
+import { UserChangePasswordComponent } from './user-change-password/user-change-password.component';
 
 const userRoutes: Routes = [
   {
@@ -21,7 +22,8 @@ const userRoutes: Routes = [
         path: "",
         children: [
           { path: "", component: UserProfileComponent },
-          { path: "edit", component: UserProfileEditComponent }
+          { path: "edit", component: UserProfileEditComponent },
+          { path: "changePassword", component: UserChangePasswordComponent }
         ]
       },
       { path: "create", component: UserProfileCreateComponent }

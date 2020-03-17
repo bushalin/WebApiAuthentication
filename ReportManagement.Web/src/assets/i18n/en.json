@@ -12,6 +12,7 @@
     },
 
     "CARD": {
+        "CARD_HEADER_CHANGE_PASWORD": "Change password",
         "CARD_HEADER_COMMENT": "Comment",
         "CARD_HEADER_LOGIN": "Moritake-gumi",
         "CARD_HEADER_REPORT_USER": "Report List",
@@ -55,14 +56,16 @@
         "FORM_EMAIL": "Email Id",
         "FORM_USERNAME": "Username",
         "FORM_PASSWORD": "Password",
-        "FORM_REGISTRATION_PASSWORD": "Atleast 6 Characters",
+        "FORM_NEW_PASSWORD": "New Password",
+        "FORM_PASSWORD_SIX_CHAR": "Atleast 6 Characters",
         "FORM_CONFIRM_PASSWORD": "Confirm Password",
+        "FORM_PREVIOUS_PASSWORD": "Previous Password",
         "FORM_COMMENT": "Comments"
     },
 
     "FORM_ERROR": {
         "FORM_ERROR_PLAN_REQUIRED": "Plan is required",
-        "FORM_ERROR_DETAILS_REQUIRED": "Detils is required",
+        "FORM_ERROR_DETAILS_REQUIRED": "Details is required",
         "FORM_ERROR_PROGRESS_REQUIRED": "Progress is required",
         "FORM_ERROR_BETWEEN_RANGE": "Please enter number between 0-100",
         "FORM_ERROR_BETWEEN_DECIMALS": "Please insert 1 digit after decimal",
@@ -71,6 +74,8 @@
         "FORM_ERROR_USERNAME_REQUIRED": "Username is required",
         "FORM_ERROR_FIRSTNAME_REQUIRED": "First Name is required",
         "FORM_ERROR_LASTNAME_REQUIRED": "Last Name is required",
+        "FORM_ERROR_PREVIOUS_PASSWORD_REQUIRED": "Previous password is required",
+        "FORM_ERROR_NEW_PASSWORD_REQUIRED": "New password is required",
         "FORM_ERROR_PASSWORD_REQUIRED": "Password is required",
         "FORM_ERROR_PASSWORD_CHAR": "Password must be at least 6 characters",
         "FORM_ERROR_CONFIRM_PASSWORD_REQUIRED": "Confirm Password is required",
@@ -92,6 +97,7 @@
         "TABLE_JOBTITLE": "Job Title",
         "TABLE_ADDRESS": "Address",
         "TABLE_GENDER": "Gender",
+        "TABLE_CHANGE_PASSWORD": "Change Password",
         "MODAL_TITLE": "Do you want to submit the report?"
     },
 

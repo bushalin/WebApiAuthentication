@@ -48,8 +48,10 @@ export class UserProfileEditComponent implements OnInit {
         this.profileUpdateForm.get("jobTitle").patchValue(data.jobTitle);
         this.profileUpdateForm.get("address").patchValue(data.address);
         this.profileUpdateForm.get("phone").patchValue(data.phone);
+        this.profileUpdateForm.get("gender").setValue(data.sex);
       }
     )
+    
   }
 
   get profileUpdateFormControl() {
@@ -78,6 +80,7 @@ export class UserProfileEditComponent implements OnInit {
     this.commonService.updateProfile(profileEditModel).subscribe(
       data => {
         console.log(data);
+        this.router.navigate(['/user']);
       },
       error => {
         console.log(error);
