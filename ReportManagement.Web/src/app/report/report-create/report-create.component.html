@@ -49,10 +49,10 @@
                   <label for="reportPlan" class="col-md-2">{{'FORM.FORM_PLAN' | translate}} {{i+1}}</label>
                   <div class="col-md-6">
                     <input formControlName="Plan" class="form-control" id="reportPlan" autocomplete="off"
-                    [ngClass]="{ 'is-invalid': submitted && detailsFormData.controls[i].controls.Plan.errors }"
+                    [ngClass]="{ 'is-invalid': submitted && detailsFormData.controls[i]['controls'].Plan.errors }"
                       placeholder="{{'FORM.FORM_PLAN' | translate}}">
-                      <div *ngIf="submitted && detailsFormData.controls[i].controls.Plan.errors" class="invalid-feedback">    
-                        <div *ngIf="detailsFormData.controls[i].controls.Plan.errors.required">{{'FORM_ERROR.FORM_ERROR_PLAN_REQUIRED' | translate}}</div>    
+                      <div *ngIf="submitted && detailsFormData.controls[i]['controls'].Plan.errors" class="invalid-feedback">    
+                        <div *ngIf="detailsFormData.controls[i]['controls'].Plan.errors.required">{{'FORM_ERROR.FORM_ERROR_PLAN_REQUIRED' | translate}}</div>    
                       </div>
                   </div>
 
@@ -64,10 +64,10 @@
 
                   <div class="col-md-6">
                     <textarea rows="3" cols="55" formControlName="Details" class="form-control" id="reportDetail"
-                    [ngClass]="{ 'is-invalid': submitted && detailsFormData.controls[i].controls.Details.errors }"
+                    [ngClass]="{ 'is-invalid': submitted && detailsFormData.controls[i]['controls'].Details.errors }"
                       placeholder="{{'FORM.FORM_DETAIL' | translate}}"></textarea>
-                      <div *ngIf="submitted && detailsFormData.controls[i].controls.Details.errors" class="invalid-feedback">    
-                        <div *ngIf="detailsFormData.controls[i].controls.Details.errors.required">{{'FORM_ERROR.FORM_ERROR_DETAILS_REQUIRED' | translate}}</div>     
+                      <div *ngIf="submitted && detailsFormData.controls[i]['controls'].Details.errors" class="invalid-feedback">    
+                        <div *ngIf="detailsFormData.controls[i]['controls'].Details.errors.required">{{'FORM_ERROR.FORM_ERROR_DETAILS_REQUIRED' | translate}}</div>     
                       </div>
                   </div>
 
@@ -78,13 +78,13 @@
 
                   <div class="col-md-3">
                     <input (keypress)="numberOnly($event)" type="text" formControlName="Progress" class="form-control" id="reportProgress" autocomplete="off"
-                    [ngClass]="{ 'is-invalid': submitted && reportCreateForm.controls.reportsdetails.controls[i].controls.Progress.errors }"
+                    [ngClass]="{ 'is-invalid': submitted && detailsFormData.controls[i]['controls'].Progress.errors }"
                       placeholder="{{'FORM.FORM_PROGRESS_PLACEHOLDER' | translate}}">
-                      <div *ngIf="submitted && detailsFormData.controls[i].controls.Progress.errors" class="invalid-feedback">    
+                      <div *ngIf="submitted && detailsFormData.controls[i]['controls'].Progress.errors" class="invalid-feedback">    
                         <!-- <div *ngIf="detailsFormData.controls[i].controls.Progress.errors.required">{{'FORM_ERROR.FORM_ERROR_PROGRESS_REQUIRED' | translate}}</div>     -->
-                        <div *ngIf="detailsFormData.controls[i].controls.Progress.errors.min">{{'FORM_ERROR.FORM_ERROR_BETWEEN_RANGE' | translate}}</div>    
-                        <div *ngIf="detailsFormData.controls[i].controls.Progress.errors.max">{{'FORM_ERROR.FORM_ERROR_BETWEEN_RANGE' | translate}}</div>    
-                        <div *ngIf="detailsFormData.controls[i].controls.Progress.errors.pattern">{{'FORM_ERROR.FORM_ERROR_BETWEEN_DECIMALS' | translate}}</div>    
+                        <div *ngIf="detailsFormData.controls[i]['controls'].Progress.errors.min">{{'FORM_ERROR.FORM_ERROR_BETWEEN_RANGE' | translate}}</div>    
+                        <div *ngIf="detailsFormData.controls[i]['controls'].Progress.errors.max">{{'FORM_ERROR.FORM_ERROR_BETWEEN_RANGE' | translate}}</div>    
+                        <div *ngIf="detailsFormData.controls[i]['controls'].Progress.errors.pattern">{{'FORM_ERROR.FORM_ERROR_BETWEEN_DECIMALS' | translate}}</div>    
                       </div>
                   </div>
 

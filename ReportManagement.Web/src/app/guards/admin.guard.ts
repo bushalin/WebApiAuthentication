@@ -10,7 +10,8 @@ import { Observable } from "rxjs";
 import { User } from "src/models/user";
 import { AuthenticationService } from "src/services/authentication.service";
 import { UserRole } from "src/models/roles";
-import { isUndefined } from 'util';
+import { isUndefined } from "util";
+import { UserService } from "src/services/user.service";
 
 @Injectable({
   providedIn: "root"
@@ -21,7 +22,8 @@ export class AdminGuard implements CanActivate {
   guardFlag = false;
   constructor(
     private router: Router,
-    private authService: AuthenticationService
+    private authService: AuthenticationService,
+    private userService: UserService
   ) {
     this.userDataSubscription = this.authService.userData
       .asObservable()
@@ -37,17 +39,22 @@ export class AdminGuard implements CanActivate {
     | Promise<boolean | UrlTree>
     | boolean
     | UrlTree {
-      
-      if(!isUndefined(this.userData.role)) {
-        this.userData.role.forEach(element => {
-          if (element === UserRole.Admin) {
-            this.guardFlag = true;
-          }
-        });
-        if(this.guardFlag === true) { return true };
-      }
+    // if(!isUndefined(this.userData.role)) {
+    //   this.userData.role.forEach(element => {
+    //     if (element === UserRole.Admin) {
+    //       this.guardFlag = true;
+    //     }
+    //   });
+    //   if(this.guardFlag === true) { return true };
+    // }
 
-    this.router.navigate(["/landing-page"], { queryParams: { returnUrl: state.url } });
+    if(this.userService.roleMatch(['Admin'])) {
+      return true;
+    }
+
+    this.router.navigate(["/landing-page"], {
+      queryParams: { returnUrl: state.url }
+    });
     return false;
   }
 }

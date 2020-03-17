@@ -3,6 +3,7 @@ import { FormBuilder, Validators, FormGroup } from '@angular/forms';
 import { UserProfileEdit, User } from 'src/models/user';
 import { AuthenticationService } from 'src/services/authentication.service';
 import { CommonService } from 'src/services/common.services';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-user-profile-edit',
@@ -19,7 +20,8 @@ export class UserProfileEditComponent implements OnInit {
   constructor(
     private formBuilder: FormBuilder,
     private authService: AuthenticationService,
-    private commonService: CommonService) {
+    private commonService: CommonService,
+    private router: Router) {
       this.userDataSubscription = this.authService.userData.asObservable().subscribe(data => {
         this.userData = data;
       });
@@ -45,6 +47,7 @@ export class UserProfileEditComponent implements OnInit {
         this.profileUpdateForm.get("lastName").patchValue(data.lastName);
         this.profileUpdateForm.get("jobTitle").patchValue(data.jobTitle);
         this.profileUpdateForm.get("address").patchValue(data.address);
+        this.profileUpdateForm.get("phone").patchValue(data.phone);
       }
     )
   }
@@ -80,6 +83,7 @@ export class UserProfileEditComponent implements OnInit {
         console.log(error);
       }
     )
+    this.router.navigate(['/user']);
     //this.loading = true;
   }
 

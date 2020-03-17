@@ -99,7 +99,7 @@
                 </tr>
               </thead>
               <tbody class="font-self-14">
-                <tr *ngFor="let item of reportList; let i = index">
+                <tr *ngFor="let item of reportList | paginate: { id:'reportPage', itemsPerPage: 25, currentPage: pageNumber} ; let i = index">
                   <td>{{ i + 1 }}</td>
                   <td>{{ item.createdDate | date: "yyyy/MM/dd" }}</td>
                   <td>{{ item.firstName }} {{ item.lastName }}</td>
@@ -130,7 +130,7 @@
                       <li
                         *ngFor="let subItem of item.reportDetail; let n = index"
                       >
-                        {{ subItem.progress }}
+                        {{ subItem.progress }}%
                       </li>
                     </ul>
                   </td>
@@ -143,6 +143,9 @@
                 </tr>
               </tbody>
             </table>
+            <div class="col-md-12 d-flex justify-content-center">
+              <pagination-controls id="reportPage" previousLabel="{{'UTILS.PAGINATION_PREVIOUS' | translate}}" nextLabel="{{'UTILS.PAGINATION_NEXT' | translate}}" directionLinks="true" screenReaderPageLabel="page" screenReaderCurrentLabel="You're on page" (pageChange)="pageNumber = $event"></pagination-controls>
+            </div>
           </div>
         </div>
       </div>

@@ -7,7 +7,8 @@ export class User{
     jobTitle: string;
     address: string;
     sex: string;
-    isLoggedIn: boolean;
+    phone: string;
+    isLoggedIn: boolean = false;
     role: string[];
 }
 

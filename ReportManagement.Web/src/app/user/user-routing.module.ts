@@ -6,10 +6,14 @@ import { UserListComponent } from "./user-list/user-list.component";
 import { UserProfileComponent } from "./user-profile/user-profile.component";
 import { UserProfileCreateComponent } from "./user-profile-create/user-profile-create.component";
 import { UserProfileEditComponent } from "./user-profile-edit/user-profile-edit.component";
+import { UserComponent } from './user/user.component';
+import { AuthGuard } from '../guards/auth.guard';
 
 const userRoutes: Routes = [
   {
     path: "user",
+    component: UserComponent,
+    canActivate: [AuthGuard],
     children: [
       { path: "registration", component: UserRegistrationComponent },
       { path: "list", component: UserListComponent },
@@ -29,7 +33,7 @@ const userRoutes: Routes = [
   declarations: [],
   imports: [
     CommonModule,
-    RouterModule.forChild(userRoutes)
+    RouterModule.forRoot(userRoutes, { onSameUrlNavigation: 'reload' })
   ]
 })
 export class UserRoutingModule {}

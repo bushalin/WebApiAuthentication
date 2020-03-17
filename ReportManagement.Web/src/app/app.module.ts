@@ -10,6 +10,7 @@ import { TranslateHttpLoader } from '@ngx-translate/http-loader';
 import { HttpClient, HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
+
 import { ReportModule } from './report/report.module';
 import { CommonService } from 'src/services/common.services';
 import { AuthenticationService } from 'src/services/authentication.service';

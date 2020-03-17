@@ -48,8 +48,10 @@ export class AuthenticationService {
       const decodeUserDetails = jwt_decode(localStorage.getItem('authToken'));
       userDetails.userId = decodeUserDetails['http://schemas.xmlsoap.org/ws/2005/05/identity/claims/nameidentifier'];
       userDetails.role = decodeUserDetails['http://schemas.microsoft.com/ws/2008/06/identity/claims/role'];
+      localStorage.setItem('user-role', JSON.stringify(userDetails.role));
       //userDetails.fullName = decodeUserDetails['http://schemas.xmlsoap.org/ws/2005/05/identity/claims/givenname'];
-      console.log(userDetails);
+      //console.log(userDetails);
+      userDetails.isLoggedIn = true;
       
       this.userData.next(userDetails);
 
@@ -62,6 +64,7 @@ export class AuthenticationService {
           userDetails.jobTitle = data.jobTitle;
           userDetails.sex = data.sex;
           userDetails.fullName = userDetails.firstName + " " + userDetails.lastName;
+          userDetails.phone = data.phone;
 
           this.userData.next(userDetails);
         }

@@ -1,9 +1,10 @@
 import { Component, OnInit } from "@angular/core";
-import { Router } from "@angular/router";
+import { Router, NavigationEnd } from "@angular/router";
 import { ReportService } from "src/services/report.services";
 import { element } from "protractor";
 import { HttpClient } from "@angular/common/http";
 import { AuthenticationService } from 'src/services/authentication.service';
+import { UserService } from 'src/services/user.service';
 
 @Component({
   selector: "app-report-user-view",
@@ -13,7 +14,10 @@ import { AuthenticationService } from 'src/services/authentication.service';
 export class ReportUserViewComponent implements OnInit {
   userId;
   userName;
-  githubData: any;
+
+  pageNumber: number = 1;
+  // TODO: use totalRec for server side pagination
+  //totalRec: number;
 
   userDataSubscription;
   userData;
@@ -24,10 +28,13 @@ export class ReportUserViewComponent implements OnInit {
   // list for showing the form data
   reportList: any[] = [];
 
+  mySubscription: any;
+
   constructor(
     private route: Router,
     private reportService: ReportService,
     private authService: AuthenticationService,
+    private userService: UserService,
     private http: HttpClient
   ) {
     this.userDataSubscription = this.authService.userData.asObservable().subscribe(data => {
@@ -37,9 +44,24 @@ export class ReportUserViewComponent implements OnInit {
       this.userId = this.userData.userId;
     })
     this.getReportListByUserId();
+
+    // FOR RELOADING THE SPECIFIC PAGE 
+    this.route.routeReuseStrategy.shouldReuseRoute = function () {
+      return false;
+    };
+    this.mySubscription = this.route.events.subscribe((event) => {
+      if (event instanceof NavigationEnd) {
+        // Trick the Router into believing it's last link wasn't previously loaded
+        this.route.navigated = false;
+      }
+    });
+
   }
 
   ngOnInit() {
+    if(this.userService.roleMatch(['Shacho'])) {
+      this.route.navigate(['/report/show']);
+    }
     console.log(this.reportList);
   }
 

@@ -5,7 +5,9 @@
     },
     "TOP_BAR": {
         "HOME": "Home",
+        "ADMIN": "ADMIN",
         "CREATE_REPORT" : "Create Report",
+        "SHOW_REPORT" : "Show Report",
         "LOGOUT": "Logout"
     },
 
@@ -91,6 +93,11 @@
         "TABLE_ADDRESS": "Address",
         "TABLE_GENDER": "Gender",
         "MODAL_TITLE": "Do you want to submit the report?"
+    },
+
+    "UTILS" : {
+        "PAGINATION_NEXT": "Next",
+        "PAGINATION_PREVIOUS": "Previous"
     }
 
 }

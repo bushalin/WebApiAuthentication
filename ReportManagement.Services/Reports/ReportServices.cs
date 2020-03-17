@@ -57,7 +57,7 @@ namespace ReportManagement.Services.Reports
                             v.Progress,
                             v.Details
                         }).ToList()
-                }).ToList();
+                }).OrderByDescending(x => x.CreatedDate);
 
             return new JsonResult
             {
@@ -95,7 +95,7 @@ namespace ReportManagement.Services.Reports
                                 rd.Progress,
                                 rd.Details
                             }).ToList()
-                    }).ToList();
+                    }).OrderByDescending(x => x.CreatedDate);
 
                 return new JsonResult
                 {
@@ -129,7 +129,7 @@ namespace ReportManagement.Services.Reports
                                 rd.Progress,
                                 rd.Details
                             }).ToList()
-                    }).ToList();
+                    }).OrderByDescending(x => x.CreatedDate);
 
                 return new JsonResult
                 {

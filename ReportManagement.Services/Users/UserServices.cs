@@ -1,8 +1,11 @@
 ﻿using ReportManagement.Model;
 using ReportManagement.Model.User;
+using ReportManagement.Services.PhotoExtension;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
+using System.Net.Http;
 using System.Text;
 using System.Threading.Tasks;
 using System.Web.Mvc;
@@ -41,6 +44,7 @@ namespace ReportManagement.Services.Users
 
         public JsonResult GetUserDetailById(string Id)
         {
+            var user = _context.Users.Find(Id);
             var result = _context.UserInfo.Where(x => x.UserId == Id)
                 .Select(x => new
                 {
@@ -48,7 +52,8 @@ namespace ReportManagement.Services.Users
                     x.LastName,
                     x.JobTitle,
                     x.Address,
-                    x.Sex
+                    x.Sex,
+                    phone = user.PhoneNumber
                 }).FirstOrDefault();
 
             return new JsonResult
@@ -114,6 +119,37 @@ namespace ReportManagement.Services.Users
                 JsonRequestBehavior = JsonRequestBehavior.AllowGet
             };
         }
+
+        public JsonResult UploadPicture(HttpPostedData data, string id)
+        {
+            var message = "";
+
+            byte[] bytes;
+
+            bytes = data.Files["file"].File;
+
+            var userInfo = _context.UserInfo.Find(id);
+            if(bytes != null)
+            {
+                userInfo.Photo = bytes;
+                try
+                {
+                    _services.SaveChanges();
+
+                    message = "Photo Uploaded Successfully";
+                }
+                catch(Exception ex)
+                {
+                    message = ex.Message;
+                }
+            }
+
+            return new JsonResult
+            {
+                Data = message,
+                JsonRequestBehavior = JsonRequestBehavior.AllowGet
+            };
+        }
     }
 
     public interface IUserServices
@@ -121,5 +157,6 @@ namespace ReportManagement.Services.Users
         JsonResult GetAllUserInfo();
         JsonResult GetUserDetailById(string Id);
         JsonResult UpdateUserProfile(EditUserProfileBindingModel user);
+        JsonResult UploadPicture(HttpPostedData data, string id);
     }
 }

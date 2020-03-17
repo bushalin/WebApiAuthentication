@@ -11,6 +11,8 @@ namespace ReportManagement.Controllers
     [RoutePrefix("api/accounts")]
     public class AccountsController : BaseApiController
     {
+        // TODO: have to redo these by service architecture
+
         // URL: api/accounts/users
         [Authorize(Roles = "Admin")]
         [Route("users")]

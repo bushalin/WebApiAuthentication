@@ -10,18 +10,20 @@ import { ReportCommentComponent } from './report-comment/report-comment.componen
 import { ReportSearchComponent } from './report-search/report-search.component';
 import { AuthGuard } from '../guards/auth.guard';
 import { AdminGuard } from '../guards/admin.guard';
+import { ShachoGuard } from '../guards/shacho.guard';
 
 const reportRoutes: Routes = [
   {
     path: 'report',
     component: ReportComponent,
+    canActivate: [AuthGuard],
     children: [
-      {path: '', component: ReportUserViewComponent, canActivate: [AuthGuard]},
+      {path: '', component: ReportUserViewComponent},
       {path: 'create', component: ReportCreateComponent},
       {path: 'check', component: ReportCheckComponent},
       {
         path: 'show',
-        canActivate: [AdminGuard],
+        canActivate: [ShachoGuard],
         children: [
           { path: '', component: ReportPreviledgedViewComponent },
           { path: 'search', component: ReportSearchComponent},
@@ -36,7 +38,7 @@ const reportRoutes: Routes = [
   declarations: [],
   imports: [
     CommonModule,
-    RouterModule.forChild(reportRoutes)
+    RouterModule.forRoot(reportRoutes, { onSameUrlNavigation: 'reload' })
   ],
   exports: [RouterModule]
 })

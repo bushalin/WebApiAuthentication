@@ -1,6 +1,7 @@
 import { NgModule } from "@angular/core";
 import { CommonModule, DatePipe } from "@angular/common";
 import { FormsModule, ReactiveFormsModule } from "@angular/forms";
+import { NgxPaginationModule } from 'ngx-pagination';
 import { ReportCreateComponent } from "./report-create/report-create.component";
 import { ReportUserViewComponent } from "./report-user-view/report-user-view.component";
 import { ReportService } from "src/services/report.services";
@@ -37,6 +38,7 @@ import { ReportRoutingModule } from './report-routing.module';
     ReportRoutingModule,
     TranslateModule,
     CommonModule,
+    NgxPaginationModule,
     FormsModule,
     ReactiveFormsModule,
     BsDatepickerModule.forRoot(),

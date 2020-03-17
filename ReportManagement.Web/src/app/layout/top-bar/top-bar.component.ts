@@ -3,6 +3,7 @@ import { User } from 'src/models/user';
 import { AuthenticationService } from 'src/services/authentication.service';
 import { UserRole } from 'src/models/roles';
 import { Router } from '@angular/router';
+import { UserService } from 'src/services/user.service';
 
 @Component({
   selector: 'app-top-bar',
@@ -14,7 +15,9 @@ export class TopBarComponent implements OnInit {
   userData = new User();
   userName = '';
   userAdditionalInfo;
-  constructor(private authService: AuthenticationService, private route: Router) {
+  constructor(private authService: AuthenticationService,
+    private userService: UserService,
+    private route: Router) {
     this.userDataSubscription = this.authService.userData.asObservable().subscribe(data => {
       this.userData = data;
       this.userName = this.userData.fullName;

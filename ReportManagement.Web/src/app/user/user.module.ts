@@ -10,6 +10,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { UserRoutingModule } from './user-routing.module';
 import { ReportModule } from '../report/report.module';
 import { RouterModule } from '@angular/router';
+import { UserComponent } from './user/user.component';
 
 
 
@@ -19,7 +20,8 @@ import { RouterModule } from '@angular/router';
     UserProfileCreateComponent,
     UserProfileEditComponent,
     UserRegistrationComponent,
-    UserListComponent
+    UserListComponent,
+    UserComponent
   ],
   imports: [
     CommonModule,

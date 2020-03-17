@@ -192,15 +192,15 @@ export class ReportCreateComponent implements OnInit {
   modalConfirm() {
     // calling api to save data
     console.log(this.reportFormData);
-    // this.reportService.saveReport(this.reportFormData).subscribe(
-    //   data => {
-    //     console.log(data);
-    //     this.showFeedback = data.message;
-    //   },
-    //   error => {
-    //     this.showFeedback = error;
-    //   }
-    // );
+    this.reportService.saveReport(this.reportFormData).subscribe(
+      data => {
+        console.log(data);
+        //this.showFeedback = data.message;
+      },
+      error => {
+        //this.showFeedback = error;
+      }
+    );
     this.modalRef.hide();
     this.router.navigate(["/report"]);
   }

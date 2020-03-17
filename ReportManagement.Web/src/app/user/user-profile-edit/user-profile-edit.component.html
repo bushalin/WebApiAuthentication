@@ -17,7 +17,8 @@
             <div class="form-group row">
               <label for="firstName" class="col-md-3">{{'FORM.FORM_FIRST_NAME' | translate}}</label>
               <div class="col-md-8">
-                <input formControlName="firstName" placeholder="{{'FORM.FORM_FIRST_NAME' | translate}}" class="form-control"/>
+                <input formControlName="firstName" placeholder="{{'FORM.FORM_FIRST_NAME' | translate}}"
+                  class="form-control" />
 
               </div>
             </div>
@@ -25,7 +26,8 @@
             <div class="form-group row">
               <label for="lastName" class="col-md-3">{{'FORM.FORM_LAST_NAME' | translate}}</label>
               <div class="col-md-8">
-                <input formControlName="lastName" placeholder="{{'FORM.FORM_LAST_NAME' | translate}}" class="form-control"/>
+                <input formControlName="lastName" placeholder="{{'FORM.FORM_LAST_NAME' | translate}}"
+                  class="form-control" />
               </div>
             </div>
 
@@ -34,35 +36,37 @@
               <div class="col-md-8">
 
                 <div class="custom-control custom-radio">
-                  <input type="radio" formControlName="gender" id="customRadioInline1" 
-                  name="gender" value="Male" class="custom-control-input">
-                  
+                  <input type="radio" formControlName="gender" id="customRadioInline1" name="gender" value="Male"
+                    class="custom-control-input">
+
                   <label class="custom-control-label" for="customRadioInline1">{{'FORM.FORM_MALE' | translate}}</label>
                 </div>
                 <div class="custom-control custom-radio">
-                  <input type="radio" formControlName="gender" id="customRadioInline2" 
-                  name="gender" value="Female" class="custom-control-input" ng-checked="true">
-                  
-                  <label class="custom-control-label" for="customRadioInline2">{{'FORM.FORM_FEMALE' | translate}}</label>
+                  <input type="radio" formControlName="gender" id="customRadioInline2" name="gender" value="Female"
+                    class="custom-control-input" ng-checked="true">
+
+                  <label class="custom-control-label"
+                    for="customRadioInline2">{{'FORM.FORM_FEMALE' | translate}}</label>
                 </div>
-                
+
               </div>
-              
+
             </div>
 
             <div class="form-group row">
               <label for="phone" class="col-md-3">{{'FORM.FORM_PHONE' | translate}}</label>
               <div class="col-md-8">
-                <input formControlName="phone" placeholder="{{'FORM.FORM_PHONE' | translate}}" class="form-control"/>
+                <input formControlName="phone" placeholder="{{'FORM.FORM_PHONE' | translate}}" class="form-control" />
               </div>
             </div>
 
             <div class="form-group row">
               <label for="jobTitle" class="col-md-3">{{'FORM.FORM_JOBTITLE' | translate}}</label>
               <div class="col-md-8">
-                <input formControlName="jobTitle" placeholder="{{'FORM.FORM_JOBTITLE' | translate}}" class="form-control"/>
+                <input formControlName="jobTitle" placeholder="{{'FORM.FORM_JOBTITLE' | translate}}"
+                  class="form-control" />
               </div>
-      
+
             </div>
 
             <div class="form-group row">
@@ -80,29 +84,25 @@
 
                 <div class="row">
                   <div class="col-md-12 mt-3">
-                    <textarea
-                    rows="2"
-                    cols="55"
-                    formControlName="address"
-                    class="form-control"
-                    placeholder="{{'FORM.FORM_ADDRESS' | translate}}"></textarea>
+                    <textarea rows="2" cols="55" formControlName="address" class="form-control"
+                      placeholder="{{'FORM.FORM_ADDRESS' | translate}}"></textarea>
                   </div>
-                  
+
                 </div>
-                
+
               </div>
             </div>
 
             <div class="offset-md-4 col-md-4 mt-5">
-              <button (click)="onSubmit()" [disabled]="loading" class="btn btn-block btn-sm btn-primary">    
-                <span *ngIf="loading" class="spinner-border spinner-border-sm mr-1"></span>    
-                {{'FORM.FORM_SUBMIT_BTN' | translate}}    
+              <button (click)="onSubmit()" [disabled]="loading" class="btn btn-block btn-sm btn-primary">
+                <span *ngIf="loading" class="spinner-border spinner-border-sm mr-1"></span>
+                {{'FORM.FORM_SUBMIT_BTN' | translate}}
               </button>
-              <button [routerLink]="['/user']" class="btn btn-block btn-sm btn-primary" 
-              (click)="onSubmit()">{{'FORM.FORM_BACK_BTN' | translate}}</button>
+              <button [routerLink]="['/user']"
+                class="btn btn-block btn-sm btn-primary">{{'FORM.FORM_BACK_BTN' | translate}}</button>
 
             </div>
-            
+
           </div>
 
         </form>
