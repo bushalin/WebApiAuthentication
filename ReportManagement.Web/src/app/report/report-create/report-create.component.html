@@ -76,10 +76,13 @@
                 <div class="form-group row">
                   <label for="reportProgress" class="col-md-2">{{'FORM.FORM_PROGRESS' | translate}} {{i+1}}</label>
 
-                  <div class="col-md-3">
+                  <div class="input-group col-md-3">
                     <input (keypress)="numberOnly($event)" type="text" formControlName="Progress" class="form-control" id="reportProgress" autocomplete="off"
                     [ngClass]="{ 'is-invalid': submitted && reportCreateForm.controls.reportsdetails.controls[i].controls.Progress.errors }"
                       placeholder="{{'FORM.FORM_PROGRESS_PLACEHOLDER' | translate}}">
+                      <div class="input-group-append">
+                        <span class="input-group-text" id="inputGroupPrepend">%</span>
+                      </div>
                       <div *ngIf="submitted && detailsFormData.controls[i].controls.Progress.errors" class="invalid-feedback">    
                         <!-- <div *ngIf="detailsFormData.controls[i].controls.Progress.errors.required">{{'FORM_ERROR.FORM_ERROR_PROGRESS_REQUIRED' | translate}}</div>     -->
                         <div *ngIf="detailsFormData.controls[i].controls.Progress.errors.min">{{'FORM_ERROR.FORM_ERROR_BETWEEN_RANGE' | translate}}</div>    
@@ -88,7 +91,7 @@
                       </div>
                   </div>
 
-                  <div class="col-md-1 d-flex align-items-center p-0"><span>%</span></div>
+                  <!-- <div class="col-md-1 d-flex align-items-center p-0"><span>%</span></div> -->
 
                 </div>
 
@@ -150,7 +153,7 @@
 
             <div class="row mt-5">
               <div class="col-md-12">
-                <button class="btn btn-success col-md-1 btn-sm ml-2 float-right" (click)="modalConfirm()" tooltip="fuck this shit">Yes</button>
+                <button class="btn btn-success col-md-1 btn-sm ml-2 float-right" (click)="modalConfirm()">Yes</button>
                 <button class="btn btn-danger col-md-1 btn-sm float-right" (click)="modalDecline()">No</button>
               </div>
             </div>

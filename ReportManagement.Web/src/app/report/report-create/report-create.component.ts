@@ -5,7 +5,7 @@ import { ReportService } from "src/services/report.services";
 import { AuthenticationService } from "src/services/authentication.service";
 import { map } from "rxjs/operators";
 import { BsModalRef, BsModalService } from "ngx-bootstrap";
-import { BsLocaleService } from 'ngx-bootstrap/datepicker';
+import { BsLocaleService } from "ngx-bootstrap/datepicker";
 import { defineLocale } from "ngx-bootstrap/chronos";
 import { jaLocale } from "ngx-bootstrap/locale";
 defineLocale("ja", jaLocale);
@@ -44,7 +44,7 @@ export class ReportCreateComponent implements OnInit {
     private modalService: BsModalService,
     private bsLocaleService: BsLocaleService
   ) {
-    this.bsLocaleService.use('ja');
+    this.bsLocaleService.use("ja");
     this.minDate = new Date();
     this.maxDate = new Date();
     this.minDate.setDate(this.minDate.getDate() - 1);
@@ -107,9 +107,16 @@ export class ReportCreateComponent implements OnInit {
 
   createReports(): FormGroup {
     return this.formBuilder.group({
-      Plan: ['', Validators.required],
-      Details: ['', Validators.required],
-      Progress: ['', [Validators.pattern("^[0-9]+(.[0-9])?$"),Validators.min(0),Validators.max(100)]]
+      Plan: ["", Validators.required],
+      Details: ["", Validators.required],
+      Progress: [
+        "",
+        [
+          Validators.pattern("^[0-9]+(.[0-9])?$"),
+          Validators.min(0),
+          Validators.max(100)
+        ]
+      ]
     });
   }
 
@@ -140,21 +147,19 @@ export class ReportCreateComponent implements OnInit {
   }
 
   numberOnly(event): boolean {
-    const charCode = (event.which) ? event.which : event.keyCode;
-    const num = (event.which) ? event.which : event.value;
+    const charCode = event.which ? event.which : event.keyCode;
+    const num = event.which ? event.which : event.value;
     if (charCode != 46 && charCode > 31 && (charCode < 48 || charCode > 57)) {
       return false;
     }
     // if(event.target.value >10){
-      
+
     //   return false;
     // }
     return true;
-
   }
 
   onFormSubmit(template: TemplateRef<any>) {
-
     this.submitted = true;
     if (this.reportCreateForm.invalid) {
       return;
@@ -192,15 +197,12 @@ export class ReportCreateComponent implements OnInit {
   modalConfirm() {
     // calling api to save data
     console.log(this.reportFormData);
-    // this.reportService.saveReport(this.reportFormData).subscribe(
-    //   data => {
-    //     console.log(data);
-    //     this.showFeedback = data.message;
-    //   },
-    //   error => {
-    //     this.showFeedback = error;
-    //   }
-    // );
+    this.reportService.saveReport(this.reportFormData).subscribe(
+      data => {
+        console.log(data);
+      },
+      error => {}
+    );
     this.modalRef.hide();
     this.router.navigate(["/report"]);
   }

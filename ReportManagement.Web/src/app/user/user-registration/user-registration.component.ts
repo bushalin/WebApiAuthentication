@@ -65,7 +65,7 @@ export class UserRegistrationComponent implements OnInit {
   
       this.commonService.userRegistration(userModel).subscribe(data =>{
         console.log(data);
-        this.router.navigate(['/user-list']);
+        this.router.navigate(['/user/list']);
       },
       error => {}
       );

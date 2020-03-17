@@ -1,1 +1,52 @@
-<p>role-assign works!</p>
+<div class="container">
+  <div class="col-md-7 offset-md-2 mt-5">
+    <div class="card">
+      <div class="card-header">
+        <div class="row">
+          <div class="col-md-6">
+            <h5>Role Assign</h5>
+          </div>
+        </div>
+      </div>
+
+      <div class="card-body">
+        <form [formGroup]="roleAssignForm" (ngSubmit)="onSubmit()">
+          <div class="py-1 col-md-12">
+            <div class="form-group row">
+              <label for="employeeNameSelectedValue" class="col-md-4">User</label>
+              <div class="col-md-7">
+                <select formControlName="employeeNameSelectedValue" class="form-control">
+                    <option value="" [disabled]="true"
+                    >--Select User--</option>
+                  <option
+                    *ngFor="let item of userList"
+                    [value]="item.userId"
+                    >{{ item.firstName }} {{ item.lastName }}</option
+                  >
+                </select>
+              </div>
+            </div>
+
+            <div class="form-group row">
+              <label for="roleSelectedValue" class="col-md-4">Assign Roles</label>
+              <div class="col-md-7">
+                <div *ngFor="let item of roleList; let i=index" class="form-check">
+                    <input class="form-check-input" type="checkbox" [value]="item.name" (change)="onCheckboxChange($event)">
+                    <label class="form-check-label" for="defaultCheck1">
+                        {{ item.name }}
+                    </label>
+                  </div>
+              </div>
+            </div>
+
+            <div class="offset-md-4 col-md-4 mt-5">
+              <button class="btn btn-block btn-sm btn-primary">
+                Assign
+              </button>
+            </div>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>

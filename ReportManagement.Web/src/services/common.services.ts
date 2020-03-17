@@ -8,8 +8,17 @@ import { UserCreate } from 'src/models/user';
 
 @Injectable()
 export class CommonService {
-  header
+  
+  header;
+  headerToken;
   constructor(private http: HttpClient) {
+    this.headerToken = new HttpHeaders({
+      "Content-Type": "application/json",
+      Accept: "application/json",
+      Authorization : "Bearer " + localStorage.getItem('authToken')
+    });
+
+    
     this.header = new HttpHeaders()
     .set('Content-type', 'application/json');
     this.header.set('Accept', 'application/json');
@@ -26,6 +35,23 @@ export class CommonService {
         return res;
       })
     );
+  }
+
+  getAllRoles() {
+    return this.http.get<any>(environment.apiUrl + `roles`, {headers: this.headerToken}).pipe(
+      map(res => {
+        return res;
+      })
+    );
+  }
+
+  asignRole(roleData, employeeId) {
+    return this.http.put<any>(environment.apiUrl + `accounts/user/` + employeeId + 'role', JSON.stringify(roleData), {headers: this.headerToken})
+    .pipe(
+      map(res => {
+        return res;
+      })
+    )
   }
 
   //fetching REPORT data

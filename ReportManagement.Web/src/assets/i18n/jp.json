@@ -13,6 +13,7 @@
 
 
     "CARD": {
+        "CARD_HEADER_CHANGE_PASWORD": "パスワードを変更する",
         "CARD_HEADER_COMMENT": "社長指示事項",
         "CARD_HEADER_LOGIN": "株式会社盛武組",
         "CARD_HEADER_REPORT_USER": "日報リスト",
@@ -56,8 +57,10 @@
         "FORM_EMAIL": "メール",
         "FORM_USERNAME": "ユーザー名",
         "FORM_PASSWORD": "パスワード",
-        "FORM_REGISTRATION_PASSWORD": "パスワード(半角6文字)",
+        "FORM_NEW_PASSWORD": "新しいパスワード(半角6文字)",
+        "FORM_PASSWORD_SIX_CHAR": "パスワード(半角6文字)",
         "FORM_CONFIRM_PASSWORD": "パスワードを再入力",
+        "FORM_PREVIOUS_PASSWORD": "以前のパスワード",
         "FORM_COMMENT": "コメント"
     },
 
@@ -73,6 +76,8 @@
         "FORM_ERROR_FIRSTNAME_REQUIRED": "姓を入力してください",
         "FORM_ERROR_LASTNAME_REQUIRED": "名を入力してください",
         "FORM_ERROR_PASSWORD_REQUIRED": "パスワードを入力してください",
+        "FORM_ERROR_PREVIOUS_PASSWORD_REQUIRED": "以前のパスワードを入力してください",
+        "FORM_ERROR_NEW_PASSWORD_REQUIRED": "新しいパスワードを入力してください",
         "FORM_ERROR_PASSWORD_CHAR": "6 文字でパスワードを入力してください",
         "FORM_ERROR_CONFIRM_PASSWORD_REQUIRED": "パスワードを再入力してください",
         "FORM_ERROR_PASSWORD_MATCH": "パスワードが一致していません",
@@ -93,6 +98,7 @@
         "TABLE_JOBTITLE": "役職名",
         "TABLE_ADDRESS": "住所",
         "TABLE_GENDER": "性別",
+        "TABLE_CHANGE_PASSWORD": "パスワードを変更する",
         "MODAL_TITLE": "提出しますか？"
     }
 

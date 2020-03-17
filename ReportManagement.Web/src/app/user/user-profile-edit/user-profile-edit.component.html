@@ -34,14 +34,14 @@
               <div class="col-md-8">
 
                 <div class="custom-control custom-radio">
-                  <input type="radio" formControlName="gender" id="customRadioInline1" 
+                  <input type="radio" [checked]="gender=='Male'? true: false" formControlName="gender" id="customRadioInline1" 
                   name="gender" value="Male" class="custom-control-input">
                   
                   <label class="custom-control-label" for="customRadioInline1">{{'FORM.FORM_MALE' | translate}}</label>
                 </div>
                 <div class="custom-control custom-radio">
-                  <input type="radio" formControlName="gender" id="customRadioInline2" 
-                  name="gender" value="Female" class="custom-control-input" ng-checked="true">
+                  <input type="radio" formControlName="gender" [checked]="gender=='Female'? true: false" id="customRadioInline2" 
+                  name="gender" value="Female" class="custom-control-input">
                   
                   <label class="custom-control-label" for="customRadioInline2">{{'FORM.FORM_FEMALE' | translate}}</label>
                 </div>
@@ -99,7 +99,7 @@
                 {{'FORM.FORM_SUBMIT_BTN' | translate}}    
               </button>
               <button [routerLink]="['/user']" class="btn btn-block btn-sm btn-primary" 
-              (click)="onSubmit()">{{'FORM.FORM_BACK_BTN' | translate}}</button>
+              >{{'FORM.FORM_BACK_BTN' | translate}}</button>
 
             </div>
             
