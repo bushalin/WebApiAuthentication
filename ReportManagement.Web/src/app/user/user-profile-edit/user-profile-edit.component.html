@@ -36,13 +36,13 @@
               <div class="col-md-8">
 
                 <div class="custom-control custom-radio">
-                  <input type="radio" [checked]="gender=='Male'? true: false" formControlName="gender" id="customRadioInline1" 
+                  <input type="radio" checked="{{gender}}=='Male'? true: false" formControlName="gender" id="customRadioInline1" 
                   name="gender" value="Male" class="custom-control-input">
                   
                   <label class="custom-control-label" for="customRadioInline1">{{'FORM.FORM_MALE' | translate}}</label>
                 </div>
                 <div class="custom-control custom-radio">
-                  <input type="radio" formControlName="gender" [checked]="gender=='Female'? true: false" id="customRadioInline2" 
+                  <input type="radio" formControlName="gender" checked="{{gender}}=='Female'? true: false" id="customRadioInline2" 
                   name="gender" value="Female" class="custom-control-input">
                   
                   <label class="custom-control-label" for="customRadioInline2">{{'FORM.FORM_FEMALE' | translate}}</label>

@@ -16,6 +16,7 @@ export class UserProfileEditComponent implements OnInit {
   loading = false;
   profileUpdateForm: FormGroup;
   submitted = false;
+  gender: string;
 
   constructor(
     private formBuilder: FormBuilder,
@@ -38,6 +39,7 @@ export class UserProfileEditComponent implements OnInit {
       address: [""]
     });
     this.setUserData();
+    this.gender = this.userData.sex;
   }
 
   setUserData() {
@@ -77,16 +79,16 @@ export class UserProfileEditComponent implements OnInit {
 
     console.log(this.profileUpdateForm.value);
     console.log(profileEditModel);
-    this.commonService.updateProfile(profileEditModel).subscribe(
-      data => {
-        console.log(data);
-        this.router.navigate(['/user']);
-      },
-      error => {
-        console.log(error);
-      }
-    )
-    this.router.navigate(['/user']);
+    // this.commonService.updateProfile(profileEditModel).subscribe(
+    //   data => {
+    //     console.log(data);
+    //     this.router.navigate(['/user']);
+    //   },
+    //   error => {
+    //     console.log(error);
+    //   }
+    // )
+    // this.router.navigate(['/user']);
     //this.loading = true;
   }
 
