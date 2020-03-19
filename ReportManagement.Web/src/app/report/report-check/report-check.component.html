@@ -46,7 +46,7 @@
           <br />
           <!-- <pre class="card card-block card-header">Model: {{show | json}}</pre> -->
           <table
-            *ngIf="showDates.length !== 0"
+            *ngIf="staticDays.length !== 0"
             class="table table-bordered mb-5 table-header-rotated"
           >
             <thead align="center">
@@ -58,7 +58,7 @@
               <tr>
                 <th rowspan="5">Zodiac</th>
                 <td></td>
-                <td *ngFor="let items of showDates; let x = index">
+                <td *ngFor="let items of staticDays; let x = index">
                   {{ items }}
                 </td>
               </tr>
@@ -67,10 +67,13 @@
                   <span *ngIf="subItems === items"> 2</span>
                 </td>
               </tr> -->
-              <tr *ngFor="let item of test">
-                <th>{{item}}</th>
-                <td *ngFor="let subitems of showDates">
-                    <span *ngIf="subitems === item">○</span>
+              <tr *ngFor="let item of reportData">
+                <th>{{item.firstName}} {{item.lastName}}</th>
+                <td *ngFor="let subitems of staticDays">
+                  <div *ngFor="let itemss of item.reports">
+                    <span *ngIf="subitems === (itemss.createdDate | date:'yyyy-MM-dd')">〇</span>
+                  </div>
+                    <!-- <span *ngIf="subitems === item.reports.createdDate">○</span> -->
                     <!-- <span *ngIf="subitems !== item">×</span> -->
                     <!-- <div *ngFor="let subitems of test">
                         <span *ngIf="subitems === item">○</span>

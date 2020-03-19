@@ -37,6 +37,15 @@ export class ReportService {
       );
   }
 
+  reportCheck() {
+    return this.http.get<any>(environment.apiUrl + `Report/CheckReport`)
+      .pipe(
+        map(res => {
+          return res;
+        })
+      );
+  }
+
   UpdateRemarks(remarksObj: Report) {
     return this.http
       .patch<Report>(

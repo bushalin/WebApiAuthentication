@@ -1,64 +1,75 @@
-import { Component, OnInit } from '@angular/core';
-import { DatePipe } from '@angular/common';
-import { BsDatepickerConfig, BsDatepickerViewMode } from 'ngx-bootstrap/datepicker';
+import { Component, OnInit } from "@angular/core";
+import { DatePipe } from "@angular/common";
+import {
+  BsDatepickerConfig,
+  BsDatepickerViewMode
+} from "ngx-bootstrap/datepicker";
+import { ReportService } from 'src/services/report.services';
 
 @Component({
-  selector: 'app-report-check',
-  templateUrl: './report-check.component.html',
-  styleUrls: ['./report-check.component.css']
+  selector: "app-report-check",
+  templateUrl: "./report-check.component.html",
+  styleUrls: ["./report-check.component.css"]
 })
 export class ReportCheckComponent implements OnInit {
-
+  // BsDatePicker config
   bsValue: Date = new Date();
-  minMode: BsDatepickerViewMode = 'month';
-
-  name = ['Hasib', 'Imran','Ichinose'];
-
-
-  collectedDate;
-  transFormedDate;
-  days = [];
-  showDates = [];
-  test = ["2020-06-01","2020-06-02", "2020-06-25", "2020-06-29"];
-  
- 
   bsConfig: Partial<BsDatepickerConfig>;
+  minMode: BsDatepickerViewMode = "month";
 
-   date = new Date(2020, 6, 1);
-  //  date = new Date(Number(this.datePipe.transform(this.collectedDate, 'yyyy')), Number(this.datePipe.transform(this.collectedDate, 'MM')) - 1, 1);
-   
-  constructor(
-    private datePipe: DatePipe,
-  ) { }
+  // For table draw dates
+  collectedDate;
+  staticDays = [];
+  staticDate = new Date();
+  reportData: any[] = [];
+
+  test = ["2020-06-01", "2020-06-02", "2020-06-25", "2020-06-29"];
+
+  constructor(private datePipe: DatePipe,
+    private reportService: ReportService) {
+    }
 
   ngOnInit() {
-    this.bsConfig = Object.assign({}, {
-      minMode : this.minMode
+    this.bsConfig = Object.assign(
+      {},
+      {
+        minMode: this.minMode
+      }
+    );
+
+    this.getReportData();
+    console.log(this.reportData);
+  }
+
+  getReportData() {
+    this.reportService.reportCheck().subscribe(data => {
+      Object.entries(data).map(res => {
+        this.reportData.push(res[1]);
+      });
     });
-  //  this.days = this.getDaysInMonth(0, 2020);
-   console.log(this.days);
   }
 
-   getDaysInMonth(month, year) {
-         
-    while (this.date.getMonth() === month) {
-      this.days.push(this.datePipe.transform(this.date, 'yyyy-MM-dd'));
-      this.date.setDate(this.date.getDate() + 1);
+  // For populating selected month's day info
+  getDaysInMonth(month) {
+    while (this.staticDate.getMonth() === month) {
+      console.log(this.staticDate.getMonth());
+      this.staticDays.push(
+        this.datePipe.transform(this.staticDate, "yyyy-MM-dd")
+      );
+      this.staticDate.setDate(this.staticDate.getDate() + 1);
     }
-    return this.days;
   }
 
-  onPressed(){
-    //console.log(this.date);
-    this.date = new Date(Number(this.datePipe.transform(this.collectedDate, 'yyyy')), Number(this.datePipe.transform(this.collectedDate, 'MM')), 1);
-    let month = Number(this.datePipe.transform(this.collectedDate, 'MM'));
-    let year = Number(this.datePipe.transform(this.collectedDate, 'yyyy'));
-    console.log(month);
-    console.log(year);
-    this.showDates = this.getDaysInMonth(month, year);
-    this.transFormedDate = this.datePipe.transform(this.collectedDate, 'yyyy-MM-dd');
-    console.log(this.days);
-    console.log(this.transFormedDate);
-    this.days = [];
+  onPressed() {
+    this.staticDays = [];
+    let setStaticDate_Year = Number(
+      this.datePipe.transform(this.collectedDate, "yyyy")
+    );
+    let setStaticDate_Month =
+      Number(this.datePipe.transform(this.collectedDate, "MM")) - 1;
+    this.staticDate = new Date(setStaticDate_Year, setStaticDate_Month, 1);
+
+    this.getDaysInMonth(setStaticDate_Month);
+    console.log(this.staticDays);
   }
 }
