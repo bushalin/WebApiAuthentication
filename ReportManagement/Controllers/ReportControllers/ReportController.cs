@@ -110,5 +110,12 @@ namespace ReportManagement.Controllers.ReportControllers
 
             return Ok(_reportServices.UpdateRemarks(reportObj).Data);
         }
+
+        [Route("CheckReport")]
+        [HttpGet]
+        public IHttpActionResult CheckReport()
+        {
+            return Ok(_reportServices.ReportCheckData().Data);
+        }
     }
 }

@@ -19,7 +19,7 @@
   <body>
     <div id="showMsg">
       <div class="center">
-        <h2 style="color: red;">!!!ブラウザエラー!!!</h2>
+        <h2 class="text-danger">!!!ブラウザエラー!!!</h2>
         <img src="assets/images/caution.png" height="auto" width="200px">
         <h5>ブラウザはマイクロソフトエッジ、グーグルクローム、<br>ファイアーフォックスを使ってください</h5>
           <img
@@ -50,7 +50,10 @@
         src="../../../assets/images/35.gif"/></div>
     </div>
   </div> -->
+  <div id="showApp">
     <app-root> </app-root>
+  </div>
+    
   </body>
 
   <script>
@@ -87,6 +90,7 @@
     var isBlink = (isChrome || isOpera) && !!window.CSS;
     if (isIE) {
       document.getElementById("showMsg").style.display = "block";
+      document.getElementById("showApp").style.display = "none";
     }
   </script>
 

@@ -27,6 +27,10 @@ export class ReportPreviledgedViewComponent implements OnInit {
   selectedOption: any;
   userList:  any[] = [];
 
+  maxDate : Date;
+
+  pageNumber: number;
+
   constructor(
     private route: Router,
     private reportService: ReportService,
@@ -37,6 +41,11 @@ export class ReportPreviledgedViewComponent implements OnInit {
     private bsLocaleService: BsLocaleService
   ) {
     this.bsLocaleService.use('ja');
+
+    this.maxDate = new Date();
+    this.maxDate.setDate(this.maxDate.getDate());
+    //console.log(this.maxDate);
+
     this.getRecentReports();
     console.log(this.reportList);
     this.getAllUsers();

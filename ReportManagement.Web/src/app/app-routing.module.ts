@@ -25,7 +25,7 @@ import { SetDefaultPasswordComponent } from './admin/set-default-password/set-de
 
 
 const routes: Routes = [
-  { path: '', redirectTo: '/report', pathMatch: 'full' },
+  { path: '', redirectTo: '/landing-page', pathMatch: 'full' },
   { path: 'login', component: LoginComponent },
   { path: 'landing-page', component: LandingPageComponent },
   

@@ -16,7 +16,7 @@ export class TopBarComponent implements OnInit {
   userName = '';
   userAdditionalInfo;
   constructor(private authService: AuthenticationService,
-    private userService: UserService,
+    public userService: UserService,
     private route: Router) {
     this.userDataSubscription = this.authService.userData.asObservable().subscribe(data => {
       this.userData = data;

@@ -34,7 +34,7 @@ export class ReportUserViewComponent implements OnInit {
     private route: Router,
     private reportService: ReportService,
     private authService: AuthenticationService,
-    private userService: UserService,
+    public userService: UserService,
     private http: HttpClient
   ) {
     this.userDataSubscription = this.authService.userData.asObservable().subscribe(data => {
@@ -43,12 +43,12 @@ export class ReportUserViewComponent implements OnInit {
       this.userName = this.userData.fullName;
       this.userId = this.userData.userId;
     })
-    this.getReportListByUserId();
 
     // FOR RELOADING THE SPECIFIC PAGE 
     this.route.routeReuseStrategy.shouldReuseRoute = function () {
       return false;
     };
+
     this.mySubscription = this.route.events.subscribe((event) => {
       if (event instanceof NavigationEnd) {
         // Trick the Router into believing it's last link wasn't previously loaded
@@ -62,6 +62,9 @@ export class ReportUserViewComponent implements OnInit {
     if(this.userService.roleMatch(['Shacho'])) {
       this.route.navigate(['/report/show']);
     }
+
+    
+    this.getReportListByUserId();
     console.log(this.reportList);
   }
 

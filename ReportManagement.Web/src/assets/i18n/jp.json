@@ -43,6 +43,7 @@
         "FORM_PROGRESS_PLACEHOLDER": "小数点1桁まで",
         "FORM_DETAIL": "業務内容",
         "FORM_SUBMIT_BTN": "提出",
+        "FORM_UPDATE_BTN": "更新",
         "FORM_BACK_BTN": "戻る",
         "FORM_SEARCH_EMPLOYEE_NAME": "従業員名",
         "FORM_SEARCH_SELECT_EMPLOYEE": "--従業員を選択--",

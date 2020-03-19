@@ -17,6 +17,8 @@ export class UserProfileEditComponent implements OnInit {
   profileUpdateForm: FormGroup;
   submitted = false;
 
+  gender: string;
+
   constructor(
     private formBuilder: FormBuilder,
     private authService: AuthenticationService,
@@ -38,6 +40,7 @@ export class UserProfileEditComponent implements OnInit {
       address: [""]
     });
     this.setUserData();
+    this.gender = this.userData.sex;
   }
 
   setUserData() {

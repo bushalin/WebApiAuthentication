@@ -21,7 +21,7 @@ export class LandingPageComponent implements OnInit {
 
   ngOnInit() {
     if(this.userData.isLoggedIn ===true) {
-      this.route.navigate(['/']);
+      this.route.navigate(['/report']);
     }
   }
 

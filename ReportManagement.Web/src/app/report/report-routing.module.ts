@@ -16,11 +16,10 @@ const reportRoutes: Routes = [
   {
     path: 'report',
     component: ReportComponent,
-    canActivate: [AuthGuard],
     children: [
-      {path: '', component: ReportUserViewComponent},
-      {path: 'create', component: ReportCreateComponent},
-      {path: 'check', component: ReportCheckComponent},
+      {path: '', component: ReportUserViewComponent, canActivate: [AuthGuard],},
+      {path: 'create', component: ReportCreateComponent, canActivate: [AuthGuard],},
+      {path: 'check', component: ReportCheckComponent, canActivate: [AuthGuard],},
       {
         path: 'show',
         canActivate: [ShachoGuard],

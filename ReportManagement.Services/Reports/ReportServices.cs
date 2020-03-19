@@ -392,6 +392,33 @@ namespace ReportManagement.Services.Reports
             };
         }
 
+        public JsonResult ReportCheckData()
+        {
+            var message = "";
+
+            var userIds = _context.Users.Select(x => x.Id).ToList();
+
+            var result = _context.UserInfo.Select(x => new
+            {
+                x.UserId,
+                x.FirstName,
+                x.LastName,
+
+                reports = _context.Report.Where(t => t.UserId == x.UserId)
+                    .Select(rd => new 
+                    {
+                        rd.CreatedDate,
+                        rd.ReportStatus
+                    }).ToList()
+            }).ToList();
+
+            return new JsonResult
+            {
+                Data = result,
+                JsonRequestBehavior = JsonRequestBehavior.AllowGet
+            };
+        }
+
     }
 
     public interface IReportServices
@@ -405,5 +432,6 @@ namespace ReportManagement.Services.Reports
         JsonResult GetRecentReports();
         JsonResult SaveReport(JObject obj);
         JsonResult UpdateRemarks(Report report);
+        JsonResult ReportCheckData();
     }
 }
