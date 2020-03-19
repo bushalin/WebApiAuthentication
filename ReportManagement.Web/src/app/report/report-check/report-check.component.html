@@ -9,10 +9,10 @@
             <div class="col-md-12">
               <div class="row">
                 <div class="col-md-4">
-                  <h5>Report Check</h5>
+                  <h5>Report Check {{ collectedDate | date:'- M月 y'}}</h5>
                 </div>
                 <div class="col-md-8 d-flex flex-row justify-content-end">
-                  <!-- <h6>Year: 2020 Month: 6</h6> -->
+                  <h6> </h6>
                 </div>
               </div>
             </div>
@@ -28,6 +28,7 @@
                 [(ngModel)]="collectedDate"
                 [bsConfig]="bsConfig"
                 bsDatepicker
+                [maxDate]="maxDate"
               />
             </div>
             <div class="col-xs-12 col-12 col-md-3 form-group">
@@ -36,7 +37,7 @@
                 (click)="onPressed()"
                 type="button"
               >
-                Date Picker
+               Show
               </button>
             </div>
           </div>
@@ -44,62 +45,35 @@
           <div></div>
 
           <br />
-          <!-- <pre class="card card-block card-header">Model: {{show | json}}</pre> -->
           <table
             *ngIf="staticDays.length !== 0"
-            class="table table-bordered mb-5 table-header-rotated"
+            class="table table-bordered mb-5"
           >
             <thead align="center">
               <tr>
-                <th colspan="5">Mars</th>
+                <th colspan="100%">Days</th>
               </tr>
             </thead>
             <tbody>
               <tr>
-                <th rowspan="5">Zodiac</th>
+                <th rowspan="100%" class="align-middle rotate">Employees</th>
                 <td></td>
                 <td *ngFor="let items of staticDays; let x = index">
-                  {{ items }}
+                  {{ items | date:'dd'}}
                 </td>
               </tr>
-              <!-- <tr *ngFor="let items of showDates; let x = index">
-                <td *ngFor="let subItems of test">
-                  <span *ngIf="subItems === items"> 2</span>
-                </td>
-              </tr> -->
               <tr *ngFor="let item of reportData">
                 <th>{{item.firstName}} {{item.lastName}}</th>
                 <td *ngFor="let subitems of staticDays">
                   <div *ngFor="let itemss of item.reports">
                     <span *ngIf="subitems === (itemss.createdDate | date:'yyyy-MM-dd')">〇</span>
                   </div>
-                    <!-- <span *ngIf="subitems === item.reports.createdDate">○</span> -->
-                    <!-- <span *ngIf="subitems !== item">×</span> -->
-                    <!-- <div *ngFor="let subitems of test">
-                        <span *ngIf="subitems === item">○</span>
-                    </div> -->
+                  <!-- <span *ngIf="(subitems | date:'EEEE') === 'Sunday'">休み</span> -->
                 </td>
               </tr>
     
             </tbody>
           </table>
-
-          <!-- <table class="table table-bordered table-striped">
-            <thead>
-              <tr>
-                <th>w</th>
-                <th>sw</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr *ngFor="let item of test">
-                  <td>{{item}}</td>
-                  <td *ngFor="let subitems of showDates">
-                      <span *ngIf="subitems == item">yes</span>
-                  </td>
-              </tr>
-            </tbody>
-          </table> -->
         </div>
       </div>
     </div>

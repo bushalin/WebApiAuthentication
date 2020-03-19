@@ -5,6 +5,10 @@ import {
   BsDatepickerViewMode
 } from "ngx-bootstrap/datepicker";
 import { ReportService } from 'src/services/report.services';
+import { BsLocaleService } from "ngx-bootstrap/datepicker";
+import { defineLocale } from "ngx-bootstrap/chronos";
+import { jaLocale } from "ngx-bootstrap/locale";
+defineLocale("ja", jaLocale);
 
 @Component({
   selector: "app-report-check",
@@ -16,6 +20,8 @@ export class ReportCheckComponent implements OnInit {
   bsValue: Date = new Date();
   bsConfig: Partial<BsDatepickerConfig>;
   minMode: BsDatepickerViewMode = "month";
+  maxDate: Date;
+
 
   // For table draw dates
   collectedDate;
@@ -24,14 +30,19 @@ export class ReportCheckComponent implements OnInit {
   reportData: any[] = [];
 
   constructor(private datePipe: DatePipe,
+    private bsLocaleService: BsLocaleService,
     private reportService: ReportService) {
+      this.bsLocaleService.use("ja");
+      this.maxDate = new Date();
+      this.maxDate.setDate(this.maxDate.getDate());
     }
 
   ngOnInit() {
     this.bsConfig = Object.assign(
       {},
       {
-        minMode: this.minMode
+        minMode: this.minMode,
+        dateInputFormat: 'MMM YYYY'
       }
     );
     this.collectedDate = new Date();
