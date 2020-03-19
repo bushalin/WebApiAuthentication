@@ -13,7 +13,7 @@ export class SetDefaultPasswordComponent implements OnInit {
   loading = false;
   submitted = false;
   employeeId: string;
-  //something
+  
   userList: any[] = [];
 
   constructor(
