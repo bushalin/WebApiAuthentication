@@ -1,2 +1,104 @@
 <app-top-bar></app-top-bar>
-<p>report-check works!</p>
+
+<div class="container-fluid">
+  <div class="row">
+    <div class="col-md-12">
+      <div class="card mt-5">
+        <div class="card-header">
+          <div class="row">
+            <div class="col-md-12">
+              <div class="row">
+                <div class="col-md-4">
+                  <h5>Report Check</h5>
+                </div>
+                <div class="col-md-8 d-flex flex-row justify-content-end">
+                  <!-- <h6>Year: 2020 Month: 6</h6> -->
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="card-body overflow-auto">
+          <div class="row">
+            <div class="col-xs-12 col-12 col-md-4 form-group">
+              <input
+                type="text"
+                class="form-control"
+                [(ngModel)]="collectedDate"
+                [bsConfig]="bsConfig"
+                bsDatepicker
+              />
+            </div>
+            <div class="col-xs-12 col-12 col-md-3 form-group">
+              <button
+                class="btn btn-success"
+                (click)="onPressed()"
+                type="button"
+              >
+                Date Picker
+              </button>
+            </div>
+          </div>
+
+          <div></div>
+
+          <br />
+          <!-- <pre class="card card-block card-header">Model: {{show | json}}</pre> -->
+          <table
+            *ngIf="showDates.length !== 0"
+            class="table table-bordered mb-5 table-header-rotated"
+          >
+            <thead align="center">
+              <tr>
+                <th colspan="5">Mars</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <th rowspan="5">Zodiac</th>
+                <td></td>
+                <td *ngFor="let items of showDates; let x = index">
+                  {{ items }}
+                </td>
+              </tr>
+              <!-- <tr *ngFor="let items of showDates; let x = index">
+                <td *ngFor="let subItems of test">
+                  <span *ngIf="subItems === items"> 2</span>
+                </td>
+              </tr> -->
+              <tr *ngFor="let item of test">
+                <th>{{item}}</th>
+                <td *ngFor="let subitems of showDates">
+                    <span *ngIf="subitems === item">○</span>
+                    <!-- <span *ngIf="subitems !== item">×</span> -->
+                    <!-- <div *ngFor="let subitems of test">
+                        <span *ngIf="subitems === item">○</span>
+                    </div> -->
+                </td>
+              </tr>
+    
+            </tbody>
+          </table>
+
+          <!-- <table class="table table-bordered table-striped">
+            <thead>
+              <tr>
+                <th>w</th>
+                <th>sw</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let item of test">
+                  <td>{{item}}</td>
+                  <td *ngFor="let subitems of showDates">
+                      <span *ngIf="subitems == item">yes</span>
+                  </td>
+              </tr>
+            </tbody>
+          </table> -->
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
