@@ -113,9 +113,11 @@ namespace ReportManagement.Controllers.ReportControllers
 
         [Route("CheckReport")]
         [HttpGet]
-        public IHttpActionResult CheckReport()
+        public IHttpActionResult CheckReport(string dateParam)
         {
-            return Ok(_reportServices.ReportCheckData().Data);
+            System.DateTime parsedDate;
+            bool convertSuccess = System.DateTime.TryParse(dateParam, out parsedDate);
+            return Ok(_reportServices.ReportCheckData(parsedDate).Data);
         }
     }
 }

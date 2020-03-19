@@ -23,8 +23,6 @@ export class ReportCheckComponent implements OnInit {
   staticDate = new Date();
   reportData: any[] = [];
 
-  test = ["2020-06-01", "2020-06-02", "2020-06-25", "2020-06-29"];
-
   constructor(private datePipe: DatePipe,
     private reportService: ReportService) {
     }
@@ -36,13 +34,15 @@ export class ReportCheckComponent implements OnInit {
         minMode: this.minMode
       }
     );
-
-    this.getReportData();
+    this.collectedDate = new Date();
+    this.onPressed();
+    // this.getReportData();
     console.log(this.reportData);
   }
 
-  getReportData() {
-    this.reportService.reportCheck().subscribe(data => {
+  getReportData(currentMonth) {
+    this.reportData = [];
+    this.reportService.reportCheck(currentMonth).subscribe(data => {
       Object.entries(data).map(res => {
         this.reportData.push(res[1]);
       });
@@ -62,6 +62,8 @@ export class ReportCheckComponent implements OnInit {
 
   onPressed() {
     this.staticDays = [];
+    let currentMonth = this.datePipe.transform(this.collectedDate, "yyyy-MM-dd");
+    this.getReportData(currentMonth);
     let setStaticDate_Year = Number(
       this.datePipe.transform(this.collectedDate, "yyyy")
     );

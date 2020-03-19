@@ -37,8 +37,10 @@ export class ReportService {
       );
   }
 
-  reportCheck() {
-    return this.http.get<any>(environment.apiUrl + `Report/CheckReport`)
+  reportCheck(dateParam) {
+    let searchParams: URLSearchParams = new URLSearchParams();
+    searchParams.set("dateParam", dateParam);
+    return this.http.get<any>(environment.apiUrl + `Report/CheckReport`, { params: { dateParam: dateParam } })
       .pipe(
         map(res => {
           return res;

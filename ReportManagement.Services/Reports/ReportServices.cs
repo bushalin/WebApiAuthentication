@@ -392,11 +392,11 @@ namespace ReportManagement.Services.Reports
             };
         }
 
-        public JsonResult ReportCheckData()
+        public JsonResult ReportCheckData(DateTime searchDate)
         {
             var message = "";
 
-            var userIds = _context.Users.Select(x => x.Id).ToList();
+            //var userIds = _context.Users.Select(x => x.Id).ToList();
 
             var result = _context.UserInfo.Select(x => new
             {
@@ -404,7 +404,7 @@ namespace ReportManagement.Services.Reports
                 x.FirstName,
                 x.LastName,
 
-                reports = _context.Report.Where(t => t.UserId == x.UserId)
+                reports = _context.Report.Where(t => t.UserId == x.UserId && t.CreatedDate.Value.Month == searchDate.Month)
                     .Select(rd => new 
                     {
                         rd.CreatedDate,
@@ -432,6 +432,6 @@ namespace ReportManagement.Services.Reports
         JsonResult GetRecentReports();
         JsonResult SaveReport(JObject obj);
         JsonResult UpdateRemarks(Report report);
-        JsonResult ReportCheckData();
+        JsonResult ReportCheckData(DateTime searchDate);
     }
 }
