@@ -34,7 +34,6 @@ export class ReportCreateComponent implements OnInit {
   modalRef: BsModalRef;
   modalConfig = {
     backdrop: true,
-    ignoreBackdropClick: true,
     class: "modal-xl"
   };
 
@@ -189,7 +188,6 @@ export class ReportCreateComponent implements OnInit {
     if (this.reportCreateForm.invalid) {
       return;
     }
-    this.loading = true;
 
     this.reportFormData = { report: {}, reportDetail: [] };
     this.reportFormData.report.UserID = this.userData.userId;
@@ -237,7 +235,19 @@ export class ReportCreateComponent implements OnInit {
       }
     );
     this.modalRef.hide();
-    this.router.navigate(["/report"]);
+    //"report show" page refresh bug when submitting a report is solved
+    // resource link : https://stackoverflow.com/questions/47813927/how-to-refresh-a-component-in-angular
+    this.router.navigateByUrl("/", { skipLocationChange: true }).then(() => {
+      this.router.navigate(["/report"]);
+    });
+  }
+
+  preventType(event): boolean {
+    return false;
+  }
+
+  preventBackspace(event): boolean {
+    return false;
   }
 
   modalDecline() {
@@ -245,7 +255,6 @@ export class ReportCreateComponent implements OnInit {
     if (this.reportCreateForm.invalid) {
       return;
     }
-    this.loading = false;
 
     this.modalRef.hide();
   }

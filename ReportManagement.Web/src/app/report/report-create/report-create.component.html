@@ -31,7 +31,7 @@
             <div class="row">
               <div class="form-group col-md-4">
                 <label for="createdDate" class="px-2">{{'FORM.FORM_DATE' | translate}}</label>
-                <input id="reportCreateDate" class="form-control col-md-10" autocomplete="off" formControlName="createdDate"
+                <input (keypress)="preventType($event)" (keydown)="preventBackspace($event)" id="reportCreateDate" class="form-control col-md-10" autocomplete="off" formControlName="createdDate"
                   placeholder="{{'FORM.FORM_DATE' | translate}}" bsDatepicker [minDate]="minDate" [maxDate]="maxDate"
                   [bsConfig]="{dateInputFormat: 'YYYY/MM/DD'}">
               </div>
@@ -117,7 +117,7 @@
         <ng-template #template>
           <div class="modal-header">
             <h4 class="modal-title pull-left">{{'TABLE.MODAL_TITLE' | translate}}</h4>
-            <button type="button" class="close pull-right" aria-label="Close" (click)="modalRef.hide()">
+            <button type="button" class="close pull-right" aria-label="Close" (click)="modalDecline()">
               <span aria-hidden="true">&times;</span>
             </button>
           </div>

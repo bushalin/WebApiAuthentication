@@ -45,7 +45,7 @@
           <div class="form-group">
             <div class="form-inline">
               <label class="col-md-2" for="dateSearch">{{'FORM.FORM_SEARCH_DATE' | translate}}</label>
-              <input
+              <input (keypress)="preventType($event)" (keydown)="preventBackspace($event)"
                 type="text"
                 id="dateSearch"
                 class="form-control col-md-3"
@@ -144,6 +144,9 @@
                 </tr>
               </tbody>
             </table>
+            <ngx-spinner bdColor="rgba(51, 51, 51, 0.8)" size="default" type="ball-spin-clockwise">  
+              <p style="color: white">{{'UTILS.PRELOADER_TEXT' | translate}} </p>  
+              </ngx-spinner>  
             <div class="col-md-12 d-flex justify-content-center">
               <pagination-controls id="reportPage" previousLabel="{{'UTILS.PAGINATION_PREVIOUS' | translate}}" nextLabel="{{'UTILS.PAGINATION_NEXT' | translate}}" directionLinks="true" screenReaderPageLabel="page" screenReaderCurrentLabel="You're on page" (pageChange)="pageNumber = $event"></pagination-controls>
             </div>

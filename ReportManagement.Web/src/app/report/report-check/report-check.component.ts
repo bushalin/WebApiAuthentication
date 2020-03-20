@@ -8,6 +8,7 @@ import { ReportService } from 'src/services/report.services';
 import { BsLocaleService } from "ngx-bootstrap/datepicker";
 import { defineLocale } from "ngx-bootstrap/chronos";
 import { jaLocale } from "ngx-bootstrap/locale";
+import { NgxSpinnerService } from 'ngx-spinner';
 defineLocale("ja", jaLocale);
 
 @Component({
@@ -31,7 +32,10 @@ export class ReportCheckComponent implements OnInit {
 
   constructor(private datePipe: DatePipe,
     private bsLocaleService: BsLocaleService,
-    private reportService: ReportService) {
+    private reportService: ReportService,
+    //Spinner effect implemented. spinner will work while data is being loaded from server
+    // resource: https://www.c-sharpcorner.com/article/how-to-add-loaderspinner-in-angular-8-application/
+    private SpinnerService: NgxSpinnerService) {
       this.bsLocaleService.use("ja");
       this.maxDate = new Date();
       this.maxDate.setDate(this.maxDate.getDate());
@@ -52,11 +56,16 @@ export class ReportCheckComponent implements OnInit {
   }
 
   getReportData(currentMonth) {
+    
     this.reportData = [];
+    //before fetching data, spinner effect shows
+    this.SpinnerService.show();
     this.reportService.reportCheck(currentMonth).subscribe(data => {
       Object.entries(data).map(res => {
         this.reportData.push(res[1]);
       });
+      //after fetching data, spinner will hide
+      this.SpinnerService.hide();
     });
   }
 
@@ -69,6 +78,14 @@ export class ReportCheckComponent implements OnInit {
       );
       this.staticDate.setDate(this.staticDate.getDate() + 1);
     }
+  }
+
+  preventType(event): boolean {
+    return false;
+  }
+
+  preventBackspace(event): boolean {
+    return false;
   }
 
   onPressed() {

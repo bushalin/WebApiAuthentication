@@ -1,6 +1,7 @@
 import { Component, OnInit } from "@angular/core";
 import { ActivatedRoute } from "@angular/router";
 import { ReportService } from "src/services/report.services";
+import { NgxSpinnerService } from 'ngx-spinner';
 
 @Component({
   selector: "app-report-search",
@@ -14,7 +15,10 @@ export class ReportSearchComponent implements OnInit {
 
   constructor(
     private route: ActivatedRoute,
-    private reportService: ReportService
+    private reportService: ReportService,
+    //Spinner effect implemented. spinner will work while data is being loaded from server
+    // resource: https://www.c-sharpcorner.com/article/how-to-add-loaderspinner-in-angular-8-application/
+    private SpinnerService: NgxSpinnerService
   ) {
     this.route.queryParamMap.subscribe(params => {
       if (params.has("employeeId")) {
@@ -38,12 +42,16 @@ export class ReportSearchComponent implements OnInit {
   ngOnInit() {}
 
   searchReport() {
+    //before fetching data, spinner effect shows
+    this.SpinnerService.show();
     this.reportService
       .searchReport(this.employeeId, this.createdDate)
       .subscribe(data => {
         Object.entries(data).map(res => {
           this.reportList.push(res[1]);
         });
+        //after fetching data, spinner will hide
+        this.SpinnerService.hide();
         console.log(this.reportList);
       });
   }

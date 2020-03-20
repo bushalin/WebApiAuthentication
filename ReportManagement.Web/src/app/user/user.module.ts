@@ -12,6 +12,7 @@ import { ReportModule } from '../report/report.module';
 import { RouterModule } from '@angular/router';
 import { UserComponent } from './user/user.component';
 import { UserChangePasswordComponent } from './user-change-password/user-change-password.component';
+import { NgxSpinnerModule } from "ngx-spinner";
 
 
 
@@ -32,7 +33,8 @@ import { UserChangePasswordComponent } from './user-change-password/user-change-
     ReportModule,
     ReactiveFormsModule,
     RouterModule,
-    UserRoutingModule
+    UserRoutingModule,
+    NgxSpinnerModule
   ]
 })
 export class UserModule { }
