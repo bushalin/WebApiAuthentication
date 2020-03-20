@@ -15,6 +15,12 @@ namespace ReportManagement.Model.User
         public string JobTitle { get; set; }
         public string Address { get; set; }
         public string Sex { get; set; }
+        
+        // For distinguishing different types of user profile
+        public bool IsEmployeeProfile { get; set; }
+
+        // for determining ex-employees
+        public bool IsActiveEmployee { get; set; }
         public byte[] Photo { get; set; }
 
         [Key, ForeignKey("ApplicationUser")]

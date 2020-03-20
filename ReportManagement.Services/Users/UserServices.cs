@@ -25,7 +25,7 @@ namespace ReportManagement.Services.Users
 
         public JsonResult GetAllUserInfo()
         {
-            var result = _context.UserInfo.Select(x => new
+            var result = _context.UserInfo.Where(x => x.IsActiveEmployee == true && x.IsEmployeeProfile == true).Select(x => new
             {
                 x.UserId,
                 x.FirstName,

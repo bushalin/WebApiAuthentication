@@ -8,6 +8,7 @@ import { BsModalRef, BsModalService } from "ngx-bootstrap";
 import { BsLocaleService } from "ngx-bootstrap/datepicker";
 import { defineLocale } from "ngx-bootstrap/chronos";
 import { jaLocale } from "ngx-bootstrap/locale";
+import { isNullOrUndefined, isNull } from 'util';
 defineLocale("ja", jaLocale);
 
 @Component({
@@ -29,6 +30,7 @@ export class ReportCreateComponent implements OnInit {
   loading = false;
   submitted = false;
 
+  // ngx-modal configuration and implementation
   modalRef: BsModalRef;
   modalConfig = {
     backdrop: true,
@@ -50,6 +52,7 @@ export class ReportCreateComponent implements OnInit {
     this.minDate.setDate(this.minDate.getDate() - 1);
     this.maxDate.setDate(this.maxDate.getDate());
 
+    // getting user data
     this.userDataSubscription = this.authService.userData
       .asObservable()
       .subscribe(data => {
@@ -136,15 +139,15 @@ export class ReportCreateComponent implements OnInit {
 
   createReportData() {}
 
-  checkDate() {
-    if (this.reportCreateForm.get("createdDate").value === "") {
-      let date: Date = new Date();
-      this.reportFormData.report.CreatedDate = date;
-      console.log(this.reportFormData.report.CreatedDate);
-    } else {
-      console.log(this.reportCreateForm.get("createdDate").value);
-    }
-  }
+  // checkDate() {
+  //   if (this.reportCreateForm.get("createdDate").value === "") {
+  //     let date: Date = new Date();
+  //     this.reportFormData.report.CreatedDate = date;
+  //     console.log(this.reportFormData.report.CreatedDate);
+  //   } else {
+  //     console.log(this.reportCreateForm.get("createdDate").value);
+  //   }
+  // }
 
   numberOnly(event): boolean {
     const charCode = event.which ? event.which : event.keyCode;
@@ -159,6 +162,28 @@ export class ReportCreateComponent implements OnInit {
     return true;
   }
 
+  // // for test purpose
+  // onFormSubmit(template: TemplateRef<any>) {
+  //   let inputedDate;
+  //   console.log(this.reportCreateForm.controls["createdDate"].value);
+  //   inputedDate = new Date(this.reportCreateForm.controls["createdDate"].value);
+  //   if(isNull(this.reportCreateForm.controls["createdDate"].value)) {
+  //     inputedDate = this.setDefaultDate();
+  //   }
+  //   if(inputedDate.toDateString() === "Invalid Date") {
+  //     inputedDate = this.setDefaultDate();
+  //     console.log(inputedDate);
+  //   } else {
+  //     console.log(inputedDate);
+  //   }
+  // }
+
+  setDefaultDate(){
+    let dateInput = new Date();
+    dateInput.setHours(dateInput.getHours() - dateInput.getTimezoneOffset() / 60);
+    return dateInput;
+  }
+
   onFormSubmit(template: TemplateRef<any>) {
     this.submitted = true;
     if (this.reportCreateForm.invalid) {
@@ -169,26 +194,31 @@ export class ReportCreateComponent implements OnInit {
     this.reportFormData = { report: {}, reportDetail: [] };
     this.reportFormData.report.UserID = this.userData.userId;
 
-    this.reportFormData.report.CreatedDate = this.reportCreateForm.controls[
-      "createdDate"
-    ].value;
-
-    if (this.reportCreateForm.get("createdDate").value === "") {
-      let date: Date = new Date();
-      this.reportFormData.report.CreatedDate = date;
-      console.log(this.reportFormData.report.CreatedDate);
+    let inputedDate;
+    inputedDate = new Date(this.reportCreateForm.controls["createdDate"].value);
+    if(isNull(this.reportCreateForm.controls["createdDate"].value)) {
+      inputedDate = this.setDefaultDate();
+    }
+    if(inputedDate.toDateString() === "Invalid Date") {
+      inputedDate = this.setDefaultDate();
+      console.log(inputedDate);
     } else {
-      console.log(this.reportCreateForm.get("createdDate").value);
+      inputedDate.setHours(inputedDate.getHours() - inputedDate.getTimezoneOffset() / 60);
+      console.log(inputedDate);
     }
 
+    this.reportFormData.report.CreatedDate = inputedDate;
     this.reportFormData.report.ReportStatus = true;
     this.reportFormData.reportDetail = this.reportDetailList.value;
+    // DEBUG PURPOSE ONLY
     localStorage.setItem(
       "report-create-data",
       JSON.stringify(this.reportFormData)
     );
     console.log(this.reportFormData);
+    // DEBUG PURPOSE ONLY
 
+    // CALLING THE MODAL
     this.modalRef = this.modalService.show(template, this.modalConfig);
 
     //console.log("report added succesfully");

@@ -39,6 +39,7 @@ namespace ReportManagement.Services.Reports
                 u => u.UserId,
                 v => v.UserId,
                 (u, v) => new { Report = u, User = v })
+                .Where(c => c.User.IsActiveEmployee == true && c.User.IsEmployeeProfile == true)
                 .Select(x => new
                 {
                     userId = x.User.UserId,
@@ -77,6 +78,7 @@ namespace ReportManagement.Services.Reports
                     u => u.UserId,
                     v => v.UserId,
                     (u, v) => new { Report = u, User = v })
+                    .Where(c => c.User.IsActiveEmployee == true && c.User.IsEmployeeProfile == true)
                     .Select(x => new
                     {
                         userId = x.User.UserId,
@@ -182,7 +184,7 @@ namespace ReportManagement.Services.Reports
 
         public JsonResult GetRecentReports()
         {
-            var result = _context.UserInfo.Select(x => new
+            var result = _context.UserInfo.Where(x => x.IsActiveEmployee == true && x.IsEmployeeProfile == true).Select(x => new
             {
                 x.UserId,
                 x.FirstName,
@@ -398,7 +400,7 @@ namespace ReportManagement.Services.Reports
 
             //var userIds = _context.Users.Select(x => x.Id).ToList();
 
-            var result = _context.UserInfo.Select(x => new
+            var result = _context.UserInfo.Where(x => x.IsActiveEmployee == true && x.IsEmployeeProfile == true).Select(x => new
             {
                 x.UserId,
                 x.FirstName,
