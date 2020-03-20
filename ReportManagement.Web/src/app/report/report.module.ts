@@ -21,6 +21,7 @@ import { ReportSearchComponent } from './report-search/report-search.component';
 import { TranslateModule } from '@ngx-translate/core';
 import { ReportComponent } from './report/report.component';
 import { ReportRoutingModule } from './report-routing.module';
+import { NgxSpinnerModule } from "ngx-spinner"; 
 
 @NgModule({
   declarations: [
@@ -47,7 +48,8 @@ import { ReportRoutingModule } from './report-routing.module';
     CollapseModule.forRoot(),
     NgaReadMoreModule,
     TypeaheadModule.forRoot(),
-    ModalModule.forRoot()
+    ModalModule.forRoot(),
+    NgxSpinnerModule,
   ],
   exports: [ReportCreateComponent, TopBarComponent, TranslateModule],
   providers: [ReportService, DatePipe]

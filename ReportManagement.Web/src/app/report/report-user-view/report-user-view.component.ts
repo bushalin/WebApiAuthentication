@@ -5,6 +5,7 @@ import { element } from "protractor";
 import { HttpClient } from "@angular/common/http";
 import { AuthenticationService } from 'src/services/authentication.service';
 import { UserService } from 'src/services/user.service';
+import { NgxSpinnerService } from "ngx-spinner";  
 
 @Component({
   selector: "app-report-user-view",
@@ -35,7 +36,10 @@ export class ReportUserViewComponent implements OnInit {
     private reportService: ReportService,
     private authService: AuthenticationService,
     public userService: UserService,
-    private http: HttpClient
+    private http: HttpClient,
+    //Spinner effect implemented. spinner will work while data is being loaded from server
+    // resource: https://www.c-sharpcorner.com/article/how-to-add-loaderspinner-in-angular-8-application/
+    private SpinnerService: NgxSpinnerService
   ) {
     this.userDataSubscription = this.authService.userData.asObservable().subscribe(data => {
       this.userData = data;
@@ -69,12 +73,15 @@ export class ReportUserViewComponent implements OnInit {
   }
 
   getReportListByUserId() {
+    //before fetching data, spinner effect shows
+    this.SpinnerService.show();
     this.reportService.getReportByUserId(this.userId).subscribe(
       data => {
         Object.entries(data).map(res => {
           this.reportList.push(res[1]);
         });
-
+        //after fetching data, spinner will hide
+        this.SpinnerService.hide();
         // data.foreach(element => {
         //   this.reportList.push({
         //     firstName : element.FirstName,

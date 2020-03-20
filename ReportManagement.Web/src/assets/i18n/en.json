@@ -28,8 +28,11 @@
         "CARD_HEADER_EDIT_PROFILE": "Update Profile",
         "CARD_HEADER_USER_REGISTRATION": "User Registration",
         "CARD_HEADER_USER_LIST": "List of Users",
+        "CARD_HEADER_REPORT_CHECK": "Report Check",
+
         "CARD_BODY_EMPLOYEE_NAME": "Employee Name",
-        "CARD_BODY_DATE": "Date"
+        "CARD_BODY_DATE": "Date",
+        "CARD_BODY_SHOW_BTN": "Show"
     },
 
     "FORM": {
@@ -99,12 +102,15 @@
         "TABLE_ADDRESS": "Address",
         "TABLE_GENDER": "Gender",
         "TABLE_CHANGE_PASSWORD": "Change Password",
-        "MODAL_TITLE": "Do you want to submit the report?"
+        "MODAL_TITLE": "Do you want to submit the report?",
+        "TABLE_EMPLOYEES": "Employees",
+        "TABLE_DAYS": "Days"
     },
 
     "UTILS" : {
         "PAGINATION_NEXT": "Next",
-        "PAGINATION_PREVIOUS": "Previous"
+        "PAGINATION_PREVIOUS": "Previous",
+        "PRELOADER_TEXT": "Please Wait"
     }
 
 }

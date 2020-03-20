@@ -56,6 +56,9 @@ export class ReportCommentComponent implements OnInit {
       },
       error => {}
     );
-    this.router.navigate(["/report/show"]);
+    this.router.navigateByUrl("/", { skipLocationChange: true }).then(() => {
+      this.router.navigate(["/report/show"]);
+    });
+    
   }
 }

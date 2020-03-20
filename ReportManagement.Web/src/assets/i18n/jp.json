@@ -31,8 +31,11 @@
         "CARD_HEADER_EDIT_PROFILE": "プロファイルを更新",
         "CARD_HEADER_USER_REGISTRATION": "ユーザー登録",
         "CARD_HEADER_USER_LIST": "ユーザーリスト",
+        "CARD_HEADER_REPORT_CHECK": "レポートチェック",
+
         "CARD_BODY_EMPLOYEE_NAME": "従業員名",
-        "CARD_BODY_DATE": "年月日"
+        "CARD_BODY_DATE": "年月日",
+        "CARD_BODY_SHOW_BTN": "見せる"
     },
 
     "FORM": {
@@ -102,12 +105,15 @@
         "TABLE_ADDRESS": "住所",
         "TABLE_GENDER": "性別",
         "TABLE_CHANGE_PASSWORD": "パスワードを変更する",
-        "MODAL_TITLE": "提出しますか？"
+        "MODAL_TITLE": "提出しますか？",
+        "TABLE_EMPLOYEES": "従業員",
+        "TABLE_DAYS": "日々"
     },
 
     "UTILS" : {
         "PAGINATION_NEXT": "次へ",
-        "PAGINATION_PREVIOUS": "前"
+        "PAGINATION_PREVIOUS": "前",
+        "PRELOADER_TEXT": "お待ちください"
     }
 
 }
