@@ -1,5 +1,5 @@
 import { BrowserModule } from '@angular/platform-browser';
-import { NgModule } from '@angular/core';
+import { NgModule, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -55,7 +55,6 @@ import { NgxSpinnerModule, NgxSpinnerService } from 'ngx-spinner';
     AppRoutingModule,
     FormsModule,
     ReactiveFormsModule,
-    NgxSpinnerModule,
     
     // configure translate module
     HttpClientModule,
@@ -67,7 +66,8 @@ import { NgxSpinnerModule, NgxSpinnerService } from 'ngx-spinner';
       }
     })
   ],
-  providers: [CommonService, AuthenticationService, NgxSpinnerService, {provide: HTTP_INTERCEPTORS, useClass: HttpInterceptorService, multi: true},
+  schemas: [CUSTOM_ELEMENTS_SCHEMA],
+  providers: [CommonService, AuthenticationService, {provide: HTTP_INTERCEPTORS, useClass: HttpInterceptorService, multi: true},
     { provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptorService, multi: true}],
   bootstrap: [AppComponent]
 })

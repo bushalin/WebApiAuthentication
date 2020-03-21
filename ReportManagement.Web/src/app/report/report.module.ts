@@ -1,4 +1,4 @@
-import { NgModule } from "@angular/core";
+import { NgModule, CUSTOM_ELEMENTS_SCHEMA } from "@angular/core";
 import { CommonModule, DatePipe } from "@angular/common";
 import { FormsModule, ReactiveFormsModule } from "@angular/forms";
 import { NgxPaginationModule } from 'ngx-pagination';
@@ -21,6 +21,7 @@ import { ReportSearchComponent } from './report-search/report-search.component';
 import { TranslateModule } from '@ngx-translate/core';
 import { ReportComponent } from './report/report.component';
 import { ReportRoutingModule } from './report-routing.module';
+import { NgxSpinnerModule, NgxSpinnerService } from 'ngx-spinner';
 
 @NgModule({
   declarations: [
@@ -35,6 +36,7 @@ import { ReportRoutingModule } from './report-routing.module';
     ReportComponent
   ],
   imports: [
+    NgxSpinnerModule,
     ReportRoutingModule,
     TranslateModule,
     CommonModule,
@@ -49,7 +51,8 @@ import { ReportRoutingModule } from './report-routing.module';
     TypeaheadModule.forRoot(),
     ModalModule.forRoot(),
   ],
+  schemas: [CUSTOM_ELEMENTS_SCHEMA],
   exports: [ReportCreateComponent, TopBarComponent, TranslateModule],
-  providers: [ReportService, DatePipe]
+  providers: [ReportService, DatePipe, NgxSpinnerService]
 })
 export class ReportModule {}

@@ -1,4 +1,4 @@
-import { NgModule } from '@angular/core';
+import { NgModule, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { UserProfileComponent } from './user-profile/user-profile.component';
 import { UserProfileCreateComponent } from './user-profile-create/user-profile-create.component';
@@ -12,6 +12,7 @@ import { ReportModule } from '../report/report.module';
 import { RouterModule } from '@angular/router';
 import { UserComponent } from './user/user.component';
 import { UserChangePasswordComponent } from './user-change-password/user-change-password.component';
+import { NgxSpinnerService, NgxSpinnerModule } from 'ngx-spinner';
 
 
 
@@ -32,7 +33,10 @@ import { UserChangePasswordComponent } from './user-change-password/user-change-
     ReportModule,
     ReactiveFormsModule,
     RouterModule,
-    UserRoutingModule
-  ]
+    UserRoutingModule,
+    NgxSpinnerModule
+  ],
+  schemas: [CUSTOM_ELEMENTS_SCHEMA],
+  providers: [NgxSpinnerService]
 })
 export class UserModule { }
