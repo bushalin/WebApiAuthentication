@@ -33,6 +33,8 @@ export class UserRegistrationComponent implements OnInit {
           email: ['', [Validators.required, Validators.email]],
           password: ['', [Validators.required, Validators.minLength(6)]],
           confirmPassword: ['', Validators.required],
+          isActiveEmployee: [true],
+          isEmployeeProfile: [true]
       }, {
           validator: MustMatch('password', 'confirmPassword')
       });
@@ -50,7 +52,7 @@ export class UserRegistrationComponent implements OnInit {
       if (this.userCreateForm.invalid) {
         return;
       }
-      this.loading = true;
+      //this.loading = true;
       let userModel = new UserCreate();
   
       userModel.Email = this.userCreateForm.controls['email'].value;
@@ -59,6 +61,8 @@ export class UserRegistrationComponent implements OnInit {
       userModel.UserName = this.userCreateForm.controls['userName'].value;
       userModel.Password = this.userCreateForm.controls['password'].value;
       userModel.ConfirmPassword = this.userCreateForm.controls['confirmPassword'].value;
+      userModel.IsActiveEmployee = this.userCreateForm.controls['isActiveEmployee'].value;
+      userModel.IsEmployeeProfile = this.userCreateForm.controls['isEmployeeProfile'].value;
   
       console.log(userModel);
       

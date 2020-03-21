@@ -32,4 +32,6 @@ export class UserCreate{
     Address: string;
     Sex: string;
     RoleName: string;
+    IsEmployeeProfile: boolean = true; 
+    IsActiveEmployee: boolean = true; 
 }
