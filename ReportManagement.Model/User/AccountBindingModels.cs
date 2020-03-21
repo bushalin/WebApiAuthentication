@@ -39,6 +39,12 @@ namespace ReportManagement.Model.User
 
         [Display(Name = "Role Name")]
         public string RoleName { get; set; }
+        
+        [Display(Name = "Is Employee Profile")]
+        public bool IsEmployeeProfile { get; set; }
+
+        [Display(Name = "Is Active Employee")]
+        public bool IsActiveEmployee { get; set; }
 
         [Required]
         [StringLength(100, ErrorMessage = "The {0} must be at least {2} characters long.", MinimumLength = 6)]

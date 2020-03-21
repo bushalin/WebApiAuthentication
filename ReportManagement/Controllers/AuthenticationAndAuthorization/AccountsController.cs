@@ -66,7 +66,9 @@ namespace ReportManagement.Controllers
                 LastName = accountCreateBindingModels.LastName,
                 JobTitle = accountCreateBindingModels.JobTitle,
                 Address = accountCreateBindingModels.Address,
-                Sex = accountCreateBindingModels.Sex
+                Sex = accountCreateBindingModels.Sex,
+                IsEmployeeProfile = accountCreateBindingModels.IsEmployeeProfile,
+                IsActiveEmployee = accountCreateBindingModels.IsActiveEmployee
             };
 
             var user = new ApplicationUser()

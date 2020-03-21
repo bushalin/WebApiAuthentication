@@ -32,6 +32,7 @@ import { SetDefaultPasswordComponent } from './admin/set-default-password/set-de
  
 
 import { UserModule } from './user/user.module';
+import { NgxSpinnerModule, NgxSpinnerService } from 'ngx-spinner';
 
 
 @NgModule({
@@ -54,6 +55,7 @@ import { UserModule } from './user/user.module';
     AppRoutingModule,
     FormsModule,
     ReactiveFormsModule,
+    NgxSpinnerModule,
     
     // configure translate module
     HttpClientModule,
@@ -65,7 +67,7 @@ import { UserModule } from './user/user.module';
       }
     })
   ],
-  providers: [CommonService, AuthenticationService, {provide: HTTP_INTERCEPTORS, useClass: HttpInterceptorService, multi: true},
+  providers: [CommonService, AuthenticationService, NgxSpinnerService, {provide: HTTP_INTERCEPTORS, useClass: HttpInterceptorService, multi: true},
     { provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptorService, multi: true}],
   bootstrap: [AppComponent]
 })
