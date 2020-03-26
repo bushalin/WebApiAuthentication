@@ -82,13 +82,16 @@ export class UserProfileEditComponent implements OnInit {
     this.commonService.updateProfile(profileEditModel).subscribe(
       data => {
         console.log(data);
-        this.router.navigate(['/user']);
+        //this.router.navigate(['/user']);
       },
       error => {
         console.log(error);
       }
     )
-    this.router.navigate(['/user']);
+    this.router.navigateByUrl("/", { skipLocationChange: true }).then(() => {
+      this.router.navigate(['/user']);
+    });
+    
     this.loading = true;
   }
 

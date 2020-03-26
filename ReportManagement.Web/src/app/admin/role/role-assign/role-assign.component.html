@@ -30,11 +30,16 @@
             <div class="form-group row">
               <label for="roleSelectedValue" class="col-md-4">Assign Roles</label>
               <div class="col-md-7">
+                
                 <div *ngFor="let item of roleList; let i=index" class="form-check">
-                    <input class="form-check-input" type="checkbox" [value]="item.name" (change)="onCheckboxChange($event)">
-                    <label class="form-check-label" for="defaultCheck1">
-                        {{ item.name }}
-                    </label>
+                  
+                    <input [checked]="testData1.indexOf(item.name) !== -1 ? true : false"
+                     class="form-check-input" type="checkbox" [value]="item.name" 
+                     (change)="onCheckboxChange($event)">
+                    
+                  <label class="form-check-label" for="defaultCheck1">
+                    {{ item.name }}
+                </label>
                   </div>
               </div>
             </div>
