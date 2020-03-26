@@ -43,7 +43,7 @@
               </tr>
               <tr>
                 <td class="compact-row"><b>{{'TABLE.TABLE_ADDRESS' | translate}}: </b></td>
-                <td>{{userData.address}}</td>
+                <td>〒 {{userData.address_PostCode}} {{userData.address}}</td>
               </tr>
               <tr>
                 <td></td>
@@ -58,7 +58,7 @@
 
         <div class="row mt-3">
           <div class="col-md-12">
-            <button [routerLink]="['/report/']" class="btn btn-info float-right mr-2">{{'FORM.FORM_BACK_BTN' | translate}}</button>
+            <button type="button" [routerLink]="['/report/']" class="btn btn-info float-right mr-2">{{'FORM.FORM_BACK_BTN' | translate}}</button>
           </div>
         </div>
       </div>

@@ -101,5 +101,8 @@ namespace ReportManagement.Model.User
 
         [Display(Name = "Address")]
         public string Address { get; set; }
+
+        [Display(Name = "Post Code")]
+        public string Address_PostCode { get; set; }
     }
 }

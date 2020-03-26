@@ -61,6 +61,7 @@ export class AuthenticationService {
           userDetails.firstName = data.firstName;
           userDetails.lastName = data.lastName;
           userDetails.address = data.address;
+          userDetails.address_PostCode = data.address_PostCode;
           userDetails.jobTitle = data.jobTitle;
           userDetails.sex = data.sex;
           userDetails.fullName = userDetails.firstName + " " + userDetails.lastName;
