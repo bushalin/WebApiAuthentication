@@ -8,6 +8,7 @@ using System.Net;
 using System.Net.Http;
 using System.Web;
 using System.Web.Http;
+using System.Web.Http.Cors;
 
 namespace ReportManagement.Controllers.UserControllers
 {
@@ -40,6 +41,7 @@ namespace ReportManagement.Controllers.UserControllers
             return Ok(_service.GetUserDetailById(id).Data);
         }
 
+        //[EnableCors(origins: "http://localhost", headers: "*", methods: "*")]
         [Route("UpdateUserProfile")]
         [HttpPut]
         public IHttpActionResult UpdateUserProfile(EditUserProfileBindingModel user)

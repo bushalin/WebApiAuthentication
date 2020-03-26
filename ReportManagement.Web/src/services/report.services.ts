@@ -18,7 +18,8 @@ export class ReportService {
 
     this.header = new HttpHeaders({
       "Content-Type": "application/json",
-      Accept: "application/json"
+      Accept: "application/json",
+      Authorization: "Bearer " + localStorage.getItem('authToken')
     });
   }
 
@@ -126,22 +127,4 @@ export class ReportService {
       );
   }
 
-  getTestData() {
-    const result = this.http
-      .get<any>(environment.apiUrl + `test/GetTestData`)
-      .pipe(
-        map(res => {
-          return res;
-        })
-      );
-    return result;
-  }
-
-  getGitData() {
-    return this.http.get<any>(environment.apiUrl + `users/bushalin`).pipe(
-      map(res => {
-        return res;
-      })
-    );
-  }
 }

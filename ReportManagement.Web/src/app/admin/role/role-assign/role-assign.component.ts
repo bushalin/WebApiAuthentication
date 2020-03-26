@@ -80,7 +80,7 @@ export class RoleAssignComponent implements OnInit {
     this.employeeId = this.roleAssignForm.controls['employeeNameSelectedValue'].value;
     this.roleData = this.roleDataForm.value;
 
-    this.commonService.asignRole(this.roleData,this.employeeId).subscribe(
+    this.commonService.assignRole(this.roleData,this.employeeId).subscribe(
       data => {
         console.log(data);
       },

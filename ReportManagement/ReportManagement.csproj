@@ -246,6 +246,7 @@
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="Controllers\AuthenticationAndAuthorization\AccountsController.cs" />
     <Compile Include="Controllers\AuthenticationAndAuthorization\BaseApiController.cs" />
+    <Compile Include="Controllers\BroadcastMessageControllers\BroadcastMessageController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ReportControllers\ReportController.cs" />
     <Compile Include="Controllers\AuthenticationAndAuthorization\RolesController.cs" />

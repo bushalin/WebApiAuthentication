@@ -29,11 +29,10 @@ namespace ReportManagement
         public void Configuration(IAppBuilder app)
         {
             // For more information on how to configure your application, visit https://go.microsoft.com/fwlink/?LinkID=316888
-
             app.UseCors(Microsoft.Owin.Cors.CorsOptions.AllowAll);
-            HttpConfiguration httpConfig = new HttpConfiguration();
             ConfigureOAuthTokenGeneration(app);
             ConfigureOAuthTokenConsumption(app);
+            HttpConfiguration httpConfig = new HttpConfiguration();
             ConfigureWebApi(httpConfig);
             app.UseWebApi(httpConfig);
         }

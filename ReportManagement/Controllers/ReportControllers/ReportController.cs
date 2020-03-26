@@ -17,6 +17,7 @@ namespace ReportManagement.Controllers.ReportControllers
             _reportDetailServices = new ReportDetailServices();
         }
 
+        [Authorize]
         [Route("GetReportById/{reportId}")]
         [HttpGet]
         public IHttpActionResult GetReportById(int reportId)
@@ -47,6 +48,7 @@ namespace ReportManagement.Controllers.ReportControllers
             return Ok(_reportServices.SearchReport(employeeId, parsedDate).Data);
         }
 
+        [Authorize]
         // URL: api/Report/GetReportById/1dd77da5-8a67-4729-923c-3224bbccf460
         [Route("GetReportByUserId/{id:guid}")]
         [HttpGet]

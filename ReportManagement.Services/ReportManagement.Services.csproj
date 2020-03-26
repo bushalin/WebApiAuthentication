@@ -125,6 +125,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="BroadcastMessages\BroadcastMessageService.cs" />
     <Compile Include="EntityServices.cs" />
     <Compile Include="PhotoExtension\HttpContentExtensions.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

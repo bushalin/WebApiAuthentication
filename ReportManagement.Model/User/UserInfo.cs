@@ -14,6 +14,7 @@ namespace ReportManagement.Model.User
         public string LastName { get; set; }
         public string JobTitle { get; set; }
         public string Address { get; set; }
+        public string Address_PostCode { get; set; }
         public string Sex { get; set; }
         
         // For distinguishing different types of user profile

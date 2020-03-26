@@ -185,7 +185,7 @@ namespace ReportManagement.Controllers
                 return BadRequest(ModelState);
             }
 
-            return Ok();
+            return Ok(addResult);
         }
 
     }

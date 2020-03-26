@@ -6,6 +6,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Microsoft.AspNet.Identity.EntityFramework;
+using ReportManagement.Model.BroadcastMessages;
 using ReportManagement.Model.Reports;
 using ReportManagement.Model.User;
 
@@ -35,5 +36,6 @@ namespace ReportManagement.Model
         public DbSet<UserInfo> UserInfo { get; set; }
         public DbSet<Report> Report { get; set; }
         public DbSet<ReportDetail> ReportDetail { get; set; }
+        public DbSet<Broadcast_Message> BroadcastMessage { get; set; }
     }
 }

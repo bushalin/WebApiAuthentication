@@ -22,6 +22,8 @@ namespace ReportManagement.Model.User
         public static ApplicationUserManager Create(IdentityFactoryOptions<ApplicationUserManager> options,
             IOwinContext context)
         {
+            //context.Response.Headers.Add("Access-Control-Allow-Origin", new[] { "*" });
+
             var appDbContext = context.Get<ApplicationDbContext>();
             var appUserManager = new ApplicationUserManager(new UserStore<ApplicationUser>(appDbContext));
 
