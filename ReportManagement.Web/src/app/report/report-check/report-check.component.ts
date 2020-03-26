@@ -26,6 +26,7 @@ export class ReportCheckComponent implements OnInit {
 
   // For table draw dates
   collectedDate;
+  showDateOnTable;
   staticDays = [];
   staticDate = new Date();
   reportData: any[] = [];
@@ -90,6 +91,7 @@ export class ReportCheckComponent implements OnInit {
 
   onPressed() {
     this.staticDays = [];
+    this.showDateOnTable = this.collectedDate;
     let currentMonth = this.datePipe.transform(this.collectedDate, "yyyy-MM-dd");
     this.getReportData(currentMonth);
     let setStaticDate_Year = Number(

@@ -34,15 +34,15 @@ export class UserProfileComponent implements OnInit {
       });
 
     // FOR RELOADING THE SPECIFIC PAGE
-    this.router.routeReuseStrategy.shouldReuseRoute = function() {
-      return false;
-    };
-    this.mySubscription = this.router.events.subscribe(event => {
-      if (event instanceof NavigationEnd) {
-        // Trick the Router into believing it's last link wasn't previously loaded
-        this.router.navigated = false;
-      }
-    });
+    // this.router.routeReuseStrategy.shouldReuseRoute = function() {
+    //   return false;
+    // };
+    // this.mySubscription = this.router.events.subscribe(event => {
+    //   if (event instanceof NavigationEnd) {
+    //     // Trick the Router into believing it's last link wasn't previously loaded
+    //     this.router.navigated = false;
+    //   }
+    // });
   }
 
   ngOnInit() {

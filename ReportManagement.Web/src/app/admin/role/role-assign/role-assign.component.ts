@@ -11,10 +11,13 @@ export class RoleAssignComponent implements OnInit {
 
   roleAssignForm: FormGroup;
   employeeId: string;
-  roleData: any = {};
+  roleData = [];
   userList:  any[] = [];
   roleList:  any[] = [];
   public roleDataForm: FormArray;
+  testData1 = ["Admin"];
+  testData2 = ["Admin", "Management"];
+  testData3 = ["Management"];
 
   constructor(
     private commonService: CommonService,
@@ -22,6 +25,7 @@ export class RoleAssignComponent implements OnInit {
   ) {
     this.getAllUsers();
     this.getAllRoles();
+    this.roleData = this.testData1;
 
    }
 
@@ -63,12 +67,19 @@ export class RoleAssignComponent implements OnInit {
   onCheckboxChange(e) {
   
     if (e.target.checked) {
+      
       this.roleDataForm.push(new FormControl(e.target.value));
     } else {
       let i: number = 0;
       this.roleDataForm.controls.forEach((item: FormControl) => {
         if (item.value == e.target.value) {
           this.roleDataForm.removeAt(i);
+          const index = this.roleData.indexOf(item.value);
+          if (index > -1) {
+            this.roleData.splice(index, 1);
+          }
+          
+          //this.roleData.splice(this.roleDataForm.controls.indexOf(item, 1));
           return;
         }
         i++;
@@ -78,7 +89,9 @@ export class RoleAssignComponent implements OnInit {
 
   onSubmit(){
     this.employeeId = this.roleAssignForm.controls['employeeNameSelectedValue'].value;
-    this.roleData = this.roleDataForm.value;
+    //this.roleData = this.roleDataForm.value;
+    this.roleData = this.roleData.concat(this.roleDataForm.value);
+    this.roleData = this.roleData.filter((item,index) => this.roleData.indexOf(item) === index);
 
     this.commonService.assignRole(this.roleData,this.employeeId).subscribe(
       data => {
@@ -88,8 +101,6 @@ export class RoleAssignComponent implements OnInit {
       }
     );
     console.log(this.roleData);
-
-    // TODO: error khay
   }
 
 }

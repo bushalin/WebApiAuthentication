@@ -9,23 +9,27 @@
         <div class="col-md-12">
           <div class="row">
             <div class="col-md-4">
-              <h5>{{'CARD.CARD_HEADER_REPORT_USER' | translate}}</h5>
+              <h5>{{ "CARD.CARD_HEADER_REPORT_USER" | translate }}</h5>
             </div>
-            <div class="col-md-8 d-flex flex-row justify-content-end" *ngIf="userService.roleMatch(['Management', 'Admin'])">
+            <div
+              class="col-md-8 d-flex flex-row justify-content-end"
+              *ngIf="userService.roleMatch(['Management', 'Admin'])"
+            >
               <!-- <a [routerLink]="'/checkreport'" class="col-md-3">Check Report</a> -->
               <button
                 type="button"
                 [routerLink]="'/report/check'"
                 class="col-md-3 btn btn-block btn-info"
               >
-              {{'CARD.CARD_HEADER_CHECK_REPORT_BTN' | translate}}
+                {{ "CARD.CARD_HEADER_CHECK_REPORT_BTN" | translate }}
               </button>
             </div>
           </div>
           <!-- NOTICE: should change the method of setting the user information. 
             user information will be set using login service.  -->
-          <h6 *ngFor="let userData of reportList | slice: 0:1">  
-            {{'CARD.CARD_HEADER_USER_NAME' | translate}} : {{ userData.firstName }} {{ userData.lastName }} 
+          <h6 *ngFor="let userData of reportList | slice: 0:1">
+            {{ "CARD.CARD_HEADER_USER_NAME" | translate }} :
+            {{ userData.firstName }} {{ userData.lastName }}
           </h6>
         </div>
       </div>
@@ -38,15 +42,26 @@
             <thead align="center" class="text-nowrap font-self-14">
               <tr>
                 <th>#</th>
-                <th>{{'TABLE.TABLE_DATE' | translate}}</th>
-                <th>{{'TABLE.TABLE_PLAN' | translate}}</th>
-                <th>{{'TABLE.TABLE_DETAIL' | translate}}</th>
-                <th>{{'TABLE.TABLE_PROGRESS' | translate}}</th>
-                <th>{{'TABLE.TABLE_COMMENT' | translate}}</th>
+                <th>{{ "TABLE.TABLE_DATE" | translate }}</th>
+                <th>{{ "TABLE.TABLE_PLAN" | translate }}</th>
+                <th>{{ "TABLE.TABLE_DETAIL" | translate }}</th>
+                <th>{{ "TABLE.TABLE_PROGRESS" | translate }}</th>
+                <th>{{ "TABLE.TABLE_COMMENT" | translate }}</th>
               </tr>
             </thead>
             <tbody class="font-self-14">
-              <tr *ngFor="let item of reportList | paginate: { id:'reportPage', itemsPerPage: 7, currentPage: pageNumber} ; let i = index">
+              <tr
+                *ngFor="
+                  let item of reportList
+                    | paginate
+                      : {
+                          id: 'reportPage',
+                          itemsPerPage: 7,
+                          currentPage: pageNumber
+                        };
+                  let i = index
+                "
+              >
                 <td align="center">{{ i + 1 }}</td>
                 <td>{{ item.createdDate | date: "yyyy/MM/dd" }}</td>
                 <td class="w-25">
@@ -60,12 +75,15 @@
                 </td>
                 <td class="w-50">
                   <ul>
-                    <li *ngFor="let subItem of item.reportDetail; let n = index">
-                      <nga-read-more
-                          class="font-self-14"
+                    <li
+                      *ngFor="let subItem of item.reportDetail; let n = index"
+                    >
+                      <div class="float-left font-self-14">
+                        <nga-read-more
                           [text]="subItem.details"
                           [textLength]="28"
                         ></nga-read-more>
+                      </div>
                     </li>
                   </ul>
                 </td>
@@ -80,14 +98,25 @@
                 </td>
                 <td class="w-25">{{ item.remarks }}</td>
               </tr>
-
             </tbody>
           </table>
-          <ngx-spinner bdColor="rgba(51, 51, 51, 0.8)" size="default" type="ball-spin-clockwise">  
-            <p style="color: white">{{'UTILS.PRELOADER_TEXT' | translate}} </p>  
-            </ngx-spinner>  
+          <ngx-spinner
+            bdColor="rgba(51, 51, 51, 0.8)"
+            size="default"
+            type="ball-spin-clockwise"
+          >
+            <p style="color: white">{{ "UTILS.PRELOADER_TEXT" | translate }}</p>
+          </ngx-spinner>
           <div class="col-md-12 d-flex justify-content-center">
-            <pagination-controls id="reportPage" previousLabel="{{'UTILS.PAGINATION_PREVIOUS' | translate}}" nextLabel="{{'UTILS.PAGINATION_NEXT' | translate}}" directionLinks="true" screenReaderPageLabel="page" screenReaderCurrentLabel="You're on page" (pageChange)="pageNumber = $event"></pagination-controls>
+            <pagination-controls
+              id="reportPage"
+              previousLabel="{{ 'UTILS.PAGINATION_PREVIOUS' | translate }}"
+              nextLabel="{{ 'UTILS.PAGINATION_NEXT' | translate }}"
+              directionLinks="true"
+              screenReaderPageLabel="page"
+              screenReaderCurrentLabel="You're on page"
+              (pageChange)="pageNumber = $event"
+            ></pagination-controls>
           </div>
         </div>
       </div>

@@ -1,17 +1,30 @@
-.rotate {
-  /* FF3.5+ */
+/* .rotate {
+  -webkit-writing-mode: vertical-rl;
+  -moz-writing-mode: vertical-rl;
+  -ms-writing-mode: vertical-rl;
+  writing-mode: vertical-rl;
+  
+  height: 1%;
+  padding-bottom: 15%;
+  display: flex;
+  justify-content: center; 
+  align-items: center; 
+} */
+
+/* .rotate {
+  
   -moz-transform: rotate(-90deg);
-  /* Opera 10.5 */
+ 
   -o-transform: rotate(-90deg);
-  /* Saf3.1+, Chrome */
+  
   -webkit-transform: rotate(-90deg);
-  /* IE6,IE7 */
+  
   filter: progid: DXImageTransform.Microsoft.BasicImage(rotation=0.083);
-  /* IE8 */
+ 
   -ms-filter: "progid:DXImageTransform.Microsoft.BasicImage(rotation=0.083)";
-  /* Standard */
+  
   transform: rotate(-90deg);
-}
+} */
 
 .table {
   white-space: nowrap;
