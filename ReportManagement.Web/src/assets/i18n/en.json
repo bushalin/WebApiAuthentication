@@ -1,10 +1,18 @@
 {
+    "LANDING_PAGE": {
+        "WELCOME_MESSAGE": "Welcome to Moritake Gumi",
+        "WELCOME_INSTRUCTION": "Please select login or registration.",
+        "LOGIN": "Login"
+    },
+
     "DEMO": {
         "TITLE": "Translation demo",
         "TEXT": "This is a simple demonstration app for ngx-translate"
     },
     "TOP_BAR": {
         "HOME": "Home",
+        "MY_REPORT": "MY REPORT",
+        "BROADCAST": "My Message",
         "ADMIN": "ADMIN",
         "CREATE_REPORT" : "Create Report",
         "SHOW_REPORT" : "Show Report",

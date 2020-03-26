@@ -6,8 +6,12 @@
     <div class="card">
       <div class="card-header">
         <div class="row">
-          <div class="col-md-12">
+          <div class="col-md-6">
             <h5>{{'CARD.CARD_HEADER_REPORT_LIST' | translate}}</h5>
+          </div>
+          <div class="col-md-6">
+            <button type="button" [routerLink]="['/report/show']"
+            class="btn btn-info back-btn">{{'FORM.FORM_BACK_BTN' | translate}}</button>
           </div>
         </div>
       </div>

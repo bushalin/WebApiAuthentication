@@ -49,6 +49,7 @@ export class UserProfileEditComponent implements OnInit {
         this.profileUpdateForm.get("lastName").patchValue(data.lastName);
         this.profileUpdateForm.get("jobTitle").patchValue(data.jobTitle);
         this.profileUpdateForm.get("address").patchValue(data.address);
+        this.profileUpdateForm.get("post_address").patchValue(data.address_PostCode);
         this.profileUpdateForm.get("phone").patchValue(data.phone);
         this.profileUpdateForm.get("gender").setValue(data.sex);
       }
@@ -73,6 +74,7 @@ export class UserProfileEditComponent implements OnInit {
     //profileEditModel.FirstName = this.profileUpdateForm.get('firstName').value;
     profileEditModel.LastName = this.profileUpdateForm.controls['lastName'].value; 
     profileEditModel.Address = this.profileUpdateForm.controls['address'].value; 
+    profileEditModel.Address_PostCode = this.profileUpdateForm.controls['post_address'].value; 
     profileEditModel.Phone = this.profileUpdateForm.controls['phone'].value; 
     profileEditModel.Sex = this.profileUpdateForm.controls['gender'].value; 
     profileEditModel.JobTitle = this.profileUpdateForm.controls['jobTitle'].value; 

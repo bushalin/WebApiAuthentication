@@ -2,17 +2,17 @@
   <div class="row">
     <div class="col-md-12">
       <div class="content-body">
-        <h1>Welcome to Moritake Gumi</h1>
+        <h1>{{'LANDING_PAGE.WELCOME_MESSAGE' | translate}}</h1>
         <div class="content">
-          Please select login or registration.
+          {{'LANDING_PAGE.WELCOME_INSTRUCTION' | translate}}
         </div>
         <div class="content-button">
           <a [routerLink]="'/login'" class="btn btn-primary btn-md"
-            ><span class="glyphicon glyphicon-home"></span> Login
+            ><span class="glyphicon glyphicon-home"></span> {{'LANDING_PAGE.LOGIN_BUTTON' | translate}}
           </a>
-          <a [routerLink]="'/user/registration'" class="btn btn-primary btn-md"
+          <!-- <a [routerLink]="'/user/registration'" class="btn btn-primary btn-md"
             ><span class="glyphicon glyphicon-home"></span> Registration
-          </a>
+          </a> -->
         </div>
       </div>
     </div>

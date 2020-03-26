@@ -28,6 +28,7 @@ import { UserListComponent } from './user/user-list/user-list.component';
 import { UserModule } from './user/user.module';
 import { NgxSpinnerModule, NgxSpinnerService } from 'ngx-spinner';
 import { AdminModule } from './admin/admin.module';
+import { BroadcastMessageModule } from './broadcast-message/broadcast-message.module';
 
 
 @NgModule({
@@ -41,6 +42,7 @@ import { AdminModule } from './admin/admin.module';
     UserModule,
     ReportModule,
     AdminModule,
+    BroadcastMessageModule,
     BrowserModule,
     AppRoutingModule,
     FormsModule,

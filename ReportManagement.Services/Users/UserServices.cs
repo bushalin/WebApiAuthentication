@@ -53,6 +53,7 @@ namespace ReportManagement.Services.Users
                     x.JobTitle,
                     x.Address,
                     x.Sex,
+                    x.Address_PostCode,
                     phone = user.PhoneNumber
                 }).FirstOrDefault();
 
@@ -101,6 +102,7 @@ namespace ReportManagement.Services.Users
                 userDetail.JobTitle = user.JobTitle;
                 userDetail.Sex = user.Sex;
                 userDetail.Address = user.Address;
+                userDetail.Address_PostCode = user.Address_PostCode;
 
                 try
                 {

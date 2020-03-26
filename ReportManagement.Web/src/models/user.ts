@@ -6,6 +6,7 @@ export class User{
     lastName: string;
     jobTitle: string;
     address: string;
+    address_PostCode: string;
     sex: string;
     phone: string;
     isLoggedIn: boolean = false;
@@ -20,6 +21,7 @@ export class UserProfileEdit {
     Phone: string;
     JobTitle: string;
     Address: string;
+    Address_PostCode: string;
 }
 export class UserCreate{
     UserName: string;

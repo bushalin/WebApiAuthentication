@@ -93,11 +93,11 @@
             </div>
 
             <div class="offset-md-4 col-md-4 mt-5">
-              <button (click)="onSubmit()" [disabled]="loading" class="btn btn-block btn-sm btn-primary">
+              <button type="button" (click)="onSubmit()" [disabled]="loading" class="btn btn-block btn-sm btn-primary">
                 <span *ngIf="loading" class="spinner-border spinner-border-sm mr-1"></span>
                 {{'FORM.FORM_UPDATE_BTN' | translate}}
               </button>
-              <button [routerLink]="['/user']"
+              <button type="button" [routerLink]="['/user']"
                 class="btn btn-block btn-sm btn-primary">{{'FORM.FORM_BACK_BTN' | translate}}</button>
 
             </div>

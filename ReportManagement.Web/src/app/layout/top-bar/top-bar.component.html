@@ -40,18 +40,32 @@
         <a class="nav-link nav-link-item" *ngIf="userService.roleMatch(['Admin'])" [routerLink]="'/admin'">{{'TOP_BAR.ADMIN' | translate}}<span class="sr-only">(current)</span></a>
       </li>
       <span class="btn-separator" *ngIf="userService.roleMatch(['Admin'])"></span>
+
       <li class="nav-item ">
-        <a class="nav-link nav-link-item" *ngIf="!userService.roleMatch(['Shacho'])" [routerLink]="'/report'">{{'TOP_BAR.HOME' | translate}}<span class="sr-only">(current)</span></a>
+        <a class="nav-link nav-link-item" *ngIf="!userService.roleMatch(['Shacho'])" [routerLink]="'/broadcast'">{{'TOP_BAR.HOME' | translate}}<span class="sr-only">(current)</span></a>
       </li>
       <span class="btn-separator" *ngIf="!userService.roleMatch(['Shacho'])"></span>
+
+      <li class="nav-item ">
+        <a class="nav-link nav-link-item" *ngIf="!userService.roleMatch(['Shacho'])" [routerLink]="'/report'">{{'TOP_BAR.MY_REPORT' | translate}}<span class="sr-only">(current)</span></a>
+      </li>
+      <span class="btn-separator" *ngIf="!userService.roleMatch(['Shacho'])"></span>
+
+      <li class="nav-item ">
+        <a class="nav-link nav-link-item" *ngIf="userService.roleMatch(['Shacho'])" [routerLink]="'/broadcast'">{{'TOP_BAR.BROADCAST' | translate}}<span class="sr-only">(current)</span></a>
+      </li>
+      <span class="btn-separator" *ngIf="userService.roleMatch(['Shacho'])"></span>
+
       <li class="nav-item">
         <a class="nav-link nav-link-item" *ngIf="!userService.roleMatch(['Shacho'])" [routerLink]="'/report/create'">{{'TOP_BAR.CREATE_REPORT' | translate}}<span class="sr-only">(current)</span></a>
       </li>
       <span class="btn-separator" *ngIf="!userService.roleMatch(['Shacho'])"></span>
+
       <li class="nav-item">
         <a class="nav-link nav-link-item" *ngIf="userService.roleMatch(['Shacho', 'Admin'])" [routerLink]="'/report/show'">{{'TOP_BAR.SHOW_REPORT' | translate}}<span class="sr-only">(current)</span></a>
       </li>
       <span class="btn-separator" *ngIf="userService.roleMatch(['Shacho', 'Admin'])"></span>
+
       <li class="nav-item">
         <a class="nav-link nav-link-profile" [routerLink]="'/user'"> {{userName}}</a>
       </li>
