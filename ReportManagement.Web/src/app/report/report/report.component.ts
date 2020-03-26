@@ -20,7 +20,7 @@ export class ReportComponent implements OnInit {
       userLanguage = "jp"
     }
     console.log(userLanguage);
-    //translate.use(userLanguage);
+    translate.use(userLanguage);
    }
 
   ngOnInit() {
