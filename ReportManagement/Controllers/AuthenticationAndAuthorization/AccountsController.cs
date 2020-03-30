@@ -109,10 +109,26 @@ namespace ReportManagement.Controllers
                 return BadRequest(ModelState);
             }
 
-            IdentityResult result = await this.AppUserManager.ChangePasswordAsync(User.Identity.GetUserId(),
-                model.OldPassword, model.NewPassword);
+            IdentityResult result = await this.AppUserManager.ChangePasswordAsync(User.Identity.GetUserId(), model.OldPassword, model.NewPassword);
 
             if (!result.Succeeded)
+            {
+                return GetErrorResult(result);
+            }
+
+            Uri locationHeader = new Uri(Url.Link("GetUserById", new { id = User.Identity.GetUserId() }));
+
+            return Ok(locationHeader);
+        }
+
+        [Authorize(Roles = "Admin")]
+        [Route("ResetPassword")]
+        public async Task<IHttpActionResult> ResetPassword(PasswordResetBindingModel model)
+        {
+            string resetToken = await this.AppUserManager.GeneratePasswordResetTokenAsync(model.UserId);
+            IdentityResult result = await this.AppUserManager.ResetPasswordAsync(model.UserId, resetToken, model.NewPassword);
+
+            if(!result.Succeeded)
             {
                 return GetErrorResult(result);
             }

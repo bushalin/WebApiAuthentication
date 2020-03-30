@@ -24,9 +24,11 @@ export class BroadcastMessageShowComponent implements OnInit {
   ) {}
 
   ngOnInit() {
-    if (this.userService.roleMatch(["Shacho"])) {
+    if (this.userService.roleMatch(["Shacho"]) && this.userService.userData.firstTimeLogIn === true) {
+      // FIRST TIME LOG IN IS FOR THE FIRST TIME REDIRECTION
+      this.userService.userData.firstTimeLogIn = false;
       //for redirection in the user role "show message"
-      //this.route.navigate(["/report/show"]);
+      this.route.navigate(["/report/show"]);
     }
     this.getRecentBroadcastMessage();
   }

@@ -3,7 +3,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { environment } from '../environments/environment';
 import { Observable, throwError } from 'rxjs';
 import { map } from 'rxjs/operators';
-import { UserProfileEdit } from 'src/models/user';
+import { UserProfileEdit, ChangePassword } from 'src/models/user';
 import { UserCreate } from 'src/models/user';
 
 @Injectable()
@@ -153,6 +153,15 @@ export class CommonService {
         return res;
       })
     )
+  }
+
+  changePassword(changePasswordModel) {
+    return this.http.post<ChangePassword>(environment.apiUrl + `accounts/ChangePassword`, changePasswordModel, {headers: this.header})
+    .pipe(
+      map(res => {
+        return res;
+      })
+    );
   }
 
 }

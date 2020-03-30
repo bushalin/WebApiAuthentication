@@ -9,7 +9,10 @@ export class User{
     address_PostCode: string;
     sex: string;
     phone: string;
+    // DETERMINING THE LOGGED IN PROPERTIES
     isLoggedIn: boolean = false;
+    // FIRST_TIME_LOGIN Attirbute
+    firstTimeLogIn: boolean = true;
     role: string[];
 }
 
@@ -36,4 +39,10 @@ export class UserCreate{
     RoleName: string;
     IsEmployeeProfile: boolean = true; 
     IsActiveEmployee: boolean = true; 
+}
+
+export class ChangePassword {
+    OldPassword: string;
+    NewPassword: string;
+    ConfirmPassword: string;
 }

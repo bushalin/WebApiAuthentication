@@ -3,7 +3,7 @@ import { environment } from "src/environments/environment";
 import { map } from "rxjs/operators";
 import { HttpClient } from "@angular/common/http";
 import { AuthenticationService } from './authentication.service';
-import { User } from 'src/models/user';
+import { User, ChangePassword } from 'src/models/user';
 
 @Injectable({
   providedIn: "root"

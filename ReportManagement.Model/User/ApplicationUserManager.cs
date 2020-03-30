@@ -35,8 +35,8 @@ namespace ReportManagement.Model.User
 
             appUserManager.PasswordValidator = new PasswordValidator()
             {
-                RequiredLength = 4,
-                RequireNonLetterOrDigit = true,
+                RequiredLength = 6,
+                RequireNonLetterOrDigit = false,
                 RequireDigit = false,
                 RequireLowercase = true,
                 RequireUppercase = true

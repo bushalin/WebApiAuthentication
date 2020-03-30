@@ -80,6 +80,14 @@ namespace ReportManagement.Model.User
 
     }
 
+    public class PasswordResetBindingModel
+    {
+        [Required]
+        public string UserId { get; set; }
+
+        public string NewPassword { get; set; }
+    }
+
     public class EditUserProfileBindingModel
     {
         public string UserId { get; set; }

@@ -113,7 +113,7 @@ export class RoleAssignComponent implements OnInit {
     this.roleData = this.roleData.concat(this.roleDataForm.value);
     this.roleData = this.roleData.filter((item,index) => this.roleData.indexOf(item) === index);
 
-    this.commonService.assignRole(this.roleData,this.employeeId).subscribe(
+    this.commonService.assignRole(this.roleData, this.employeeId).subscribe(
       data => {
         console.log(data);
       },
