@@ -13,11 +13,13 @@ import { RouterModule } from '@angular/router';
 import { UserComponent } from './user/user.component';
 import { UserChangePasswordComponent } from './user-change-password/user-change-password.component';
 import { NgxSpinnerService, NgxSpinnerModule } from 'ngx-spinner';
+import { TopBarComponent } from '../layout/top-bar/top-bar.component';
 
 
 
 @NgModule({
   declarations: [
+    // TopBarComponent,
     UserProfileComponent,
     UserProfileCreateComponent,
     UserProfileEditComponent,

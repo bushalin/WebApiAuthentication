@@ -1,1 +1,64 @@
-<p>broadcast-message-create works!</p>
+<app-top-bar></app-top-bar>
+
+<div class="container">
+  <div class="col-md-10 offset-md-1 mt-5">
+    <div class="card">
+      <div class="card-header">
+        <div class="row">
+          <div class="col-md-6">
+            <h5>{{ "CARD.CARD_HEADER_BROADCAST_CREATE_TITLE" | translate }}</h5>
+          </div>
+        </div>
+      </div>
+
+      <div class="card-body">
+        <form [formGroup]="messageCreateForm">
+          <div class="py-1 col-md-12">
+            <div class="form-group row">
+              <label for="messageTitle" class="col-md-3">{{
+                "CARD.CARD_HEADER_MESSAGE_TITLE" | translate
+              }}</label>
+              <div class="col-md-8">
+                <input 
+                  formControlName="messageTitle"
+                  placeholder="{{ 'CARD.CARD_HEADER_MESSAGE_TITLE' | translate }}"
+                  class="form-control"
+                  [ngClass]="{ 'is-invalid': submitted && messageCreateFormControl.messageTitle.errors }"
+                />
+                <div *ngIf="submitted && messageCreateFormControl.messageTitle.errors" class="invalid-feedback">    
+                  <div *ngIf="messageCreateFormControl.messageTitle.errors.required">{{'FORM_ERROR.FORM_ERROR_MESSAGE_TITLE_REQUIRED' | translate}}</div>    
+                </div> 
+              </div>
+            </div>
+
+            <div class="form-group row">
+              <label for="address" class="col-md-3">{{
+                "CARD.CARD_HEADER_BROADCAST_TITLE" | translate
+              }}</label>
+              <div class="col-md-8">
+                <textarea
+                  rows="7"
+                  cols="55"
+                  formControlName="messageBody"
+                  class="form-control"
+                  placeholder="{{ 'CARD.CARD_HEADER_BROADCAST_TITLE' | translate }}"
+                  [ngClass]="{ 'is-invalid': submitted && messageCreateFormControl.messageBody.errors }"
+                ></textarea>
+                <div *ngIf="submitted && messageCreateFormControl.messageBody.errors" class="invalid-feedback">    
+                  <div *ngIf="messageCreateFormControl.messageBody.errors.required">{{'FORM_ERROR.FORM_ERROR_MESSAGE_BODY_REQUIRED' | translate}}</div>    
+                </div> 
+              </div>
+            </div>
+          </div>
+
+          <div class="row mt-3">
+            <div class="col-md-12">
+              <button class="btn btn-info float-right" (click)="onSubmit()">{{'FORM.FORM_SUBMIT_BTN' | translate}}</button>
+              <button type="button" [routerLink]="['/broadcast']" class="btn btn-info float-right mr-2">{{'FORM.FORM_BACK_BTN' | translate}}</button>
+            </div>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>

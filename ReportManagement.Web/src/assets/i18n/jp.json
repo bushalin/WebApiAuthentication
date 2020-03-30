@@ -31,6 +31,7 @@
         "CARD_HEADER_CHECK_REPORT_BTN": "提出状況確認",
         "CARD_HEADER_REPORT_CREATE": "日報を作成",
         "CARD_HEADER_ADD_REPORT_BTN": "業務を追加",
+        "CARD_HEADER_ADD_MSG_BTN": "メッセージを追加",
         "CARD_HEADER_REMOVE_REPORT_BTN": "業務を削除",
         "CARD_HEADER_SEARCH": "日報を検索",
         "CARD_HEADER_USER_PROFILE": "ユーザープロフィール",
@@ -40,6 +41,12 @@
         "CARD_HEADER_USER_REGISTRATION": "ユーザー登録",
         "CARD_HEADER_USER_LIST": "ユーザーリスト",
         "CARD_HEADER_REPORT_CHECK": "レポートチェック",
+        "CARD_HEADER_BROADCAST_TITLE": "メッセージ",
+        "CARD_HEADER_BROADCAST_CREATE_TITLE": "メッセージを追加",
+        "CARD_HEADER_MESSAGE_FROM": "送信者",
+        "CARD_HEADER_MESSAGE_DATE": "年月日",
+        "CARD_HEADER_MESSAGE_TITLE": "タイトル",
+        
 
         "CARD_BODY_EMPLOYEE_NAME": "従業員名",
         "CARD_BODY_DATE": "年月日",
@@ -95,7 +102,9 @@
         "FORM_ERROR_PASSWORD_CHAR": "6 文字でパスワードを入力してください",
         "FORM_ERROR_CONFIRM_PASSWORD_REQUIRED": "パスワードを再入力してください",
         "FORM_ERROR_PASSWORD_MATCH": "パスワードが一致していません",
-        "FORM_ERROR_INCORRECT_USER_PASS": "ユーザー名かパスワードが間違っています"
+        "FORM_ERROR_INCORRECT_USER_PASS": "ユーザー名かパスワードが間違っています",
+        "FORM_ERROR_MESSAGE_TITLE_REQUIRED": "メッセージのタイトルを入力してください",
+        "FORM_ERROR_MESSAGE_BODY_REQUIRED": "メッセージを入力してください"
     },
 
     "TABLE": {
@@ -115,7 +124,8 @@
         "TABLE_CHANGE_PASSWORD": "パスワードを変更する",
         "MODAL_TITLE": "提出しますか？",
         "TABLE_EMPLOYEES": "従業員",
-        "TABLE_DAYS": "日々"
+        "TABLE_DAYS": "日々",
+        "TABLE_ME": "日々"
     },
 
     "UTILS" : {
