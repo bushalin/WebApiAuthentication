@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { CommonService } from 'src/services/common.services';
-import { FormGroup, FormBuilder, FormArray, FormControl } from '@angular/forms';
+import { FormGroup, FormBuilder, FormArray, FormControl, Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-role-assign',
@@ -9,15 +9,14 @@ import { FormGroup, FormBuilder, FormArray, FormControl } from '@angular/forms';
 })
 export class RoleAssignComponent implements OnInit {
 
+  submitted = false;
   roleAssignForm: FormGroup;
   employeeId: string;
   roleData = [];
   userList:  any[] = [];
   roleList:  any[] = [];
   public roleDataForm: FormArray;
-  testData1 = ["Admin"];
-  testData2 = ["Admin", "Management"];
-  testData3 = ["Management"];
+
 
   constructor(
     private commonService: CommonService,
@@ -25,7 +24,6 @@ export class RoleAssignComponent implements OnInit {
   ) {
     this.getAllUsers();
     this.getAllRoles();
-    this.roleData = this.testData1;
 
    }
 
@@ -33,13 +31,32 @@ export class RoleAssignComponent implements OnInit {
     console.log(this.userList);
     console.log(this.roleList);
     this.roleAssignForm = this.formBuilder.group({
-      employeeNameSelectedValue: [''],
+      employeeNameSelectedValue: ['',Validators.required],
       roleSelectedValue: this.formBuilder.array([])
     });
 
     this.roleDataForm = this.roleAssignForm.get(
       "roleSelectedValue"
     ) as FormArray;
+  }
+  
+
+  onOptionsSelected(value:string){
+    if(value){
+      this.submitted = true;
+    }
+    this.employeeId = value;
+    this.roleData = [];
+
+      this.commonService.getUserDetailsById(this.employeeId).subscribe(
+      data => {
+        Object.entries(data.roles).map(res => {
+          this.roleData.push(res[1]);
+        });
+      },
+      err => {}
+    );
+    console.log(this.roleData);
   }
 
   getAllUsers() {
@@ -88,8 +105,11 @@ export class RoleAssignComponent implements OnInit {
   }
 
   onSubmit(){
-    this.employeeId = this.roleAssignForm.controls['employeeNameSelectedValue'].value;
     //this.roleData = this.roleDataForm.value;
+    
+    if (this.roleAssignForm.invalid) {
+      return;
+    }
     this.roleData = this.roleData.concat(this.roleDataForm.value);
     this.roleData = this.roleData.filter((item,index) => this.roleData.indexOf(item) === index);
 
@@ -100,7 +120,7 @@ export class RoleAssignComponent implements OnInit {
       error => {
       }
     );
-    console.log(this.roleData);
+    console.log(this.roleData, this.employeeId);
   }
 
 }

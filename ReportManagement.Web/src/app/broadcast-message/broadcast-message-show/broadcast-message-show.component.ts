@@ -25,6 +25,7 @@ export class BroadcastMessageShowComponent implements OnInit {
 
   ngOnInit() {
     if (this.userService.roleMatch(["Shacho"])) {
+      //for redirection in the user role "show message"
       //this.route.navigate(["/report/show"]);
     }
     this.getRecentBroadcastMessage();

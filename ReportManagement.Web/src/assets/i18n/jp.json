@@ -12,7 +12,7 @@
 
     "TOP_BAR": {
         "HOME": "Home",
-        "MY_REPORT": "全社員に連絡",
+        "MY_REPORT": "日報履歴",
         "BROADCAST": "送信履歴",
         "ADMIN": "ADMIN",
         "CREATE_REPORT" : "日報を作成",

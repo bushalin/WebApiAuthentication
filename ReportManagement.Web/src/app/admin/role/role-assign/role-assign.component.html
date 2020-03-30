@@ -15,7 +15,7 @@
             <div class="form-group row">
               <label for="employeeNameSelectedValue" class="col-md-4">User</label>
               <div class="col-md-7">
-                <select formControlName="employeeNameSelectedValue" class="form-control">
+                <select #employeeSelectedId formControlName="employeeNameSelectedValue" (change)='onOptionsSelected(employeeSelectedId.value)' class="form-control">
                     <option value="" [disabled]="true"
                     >--Select User--</option>
                   <option
@@ -33,7 +33,7 @@
                 
                 <div *ngFor="let item of roleList; let i=index" class="form-check">
                   
-                    <input [checked]="testData1.indexOf(item.name) !== -1 ? true : false"
+                    <input [checked]="roleData.indexOf(item.name) !== -1 ? true : false"
                      class="form-check-input" type="checkbox" [value]="item.name" 
                      (change)="onCheckboxChange($event)">
                     
