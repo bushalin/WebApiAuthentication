@@ -1,7 +1,7 @@
-import { Component, AfterViewInit, Renderer2 } from '@angular/core';
-import { AuthenticationService } from 'src/services/authentication.service';
-import { TranslateService } from '@ngx-translate/core';
-import { browser } from 'protractor';
+import { Component, AfterViewInit, Renderer2 } from "@angular/core";
+import { AuthenticationService } from "src/services/authentication.service";
+import { TranslateService } from "@ngx-translate/core";
+import { browser } from "protractor";
 
 @Component({
   selector: "app-root",
@@ -9,15 +9,29 @@ import { browser } from 'protractor';
   styleUrls: ["./app.component.css"]
 })
 export class AppComponent {
-  title = 'reportmanagement-web';
-  constructor(private authService: AuthenticationService,
-    translate: TranslateService) {
-    if(localStorage.getItem('authToken')) {
+  title = "reportmanagement-web";
+  constructor(
+    private authService: AuthenticationService,
+    translate: TranslateService
+  ) {
+    if (localStorage.getItem("authToken")) {
       this.authService.setUserDetails();
     }
 
     //setting the default language
-    translate.setDefaultLang('jp');
+    translate.setDefaultLang("jp");
+
+    // DETECTING THE BROWSER LANGUAGE AND SET ACCORDINGLY
+    let userLanguage;
+    userLanguage = navigator.language;
+
+    if (userLanguage === "en-US") {
+      userLanguage = "en";
+    }
+    if (userLanguage === "ja") {
+      userLanguage = "jp";
+    }
+    translate.use(userLanguage);
   }
 }
 // export class AppComponent implements AfterViewInit {

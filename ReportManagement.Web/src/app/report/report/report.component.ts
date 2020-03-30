@@ -9,18 +9,16 @@ import { TranslateService } from '@ngx-translate/core';
 export class ReportComponent implements OnInit {
 
   constructor(private translate: TranslateService) {
-    let userLanguage;
-    userLanguage = navigator.language;
-    console.log(userLanguage);
+    // let userLanguage;
+    // userLanguage = navigator.language;
 
-    if(userLanguage === "en-US") {
-      userLanguage = "en"
-    }
-    if(userLanguage === "ja") {
-      userLanguage = "jp"
-    }
-    console.log(userLanguage);
-    translate.use(userLanguage);
+    // if(userLanguage === "en-US") {
+    //   userLanguage = "en"
+    // }
+    // if(userLanguage === "ja") {
+    //   userLanguage = "jp"
+    // }
+    // translate.use(userLanguage);
    }
 
   ngOnInit() {

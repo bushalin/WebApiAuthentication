@@ -65,6 +65,8 @@ namespace ReportManagement.Services.BroadcastMessages
                     JsonRequestBehavior = JsonRequestBehavior.AllowGet
                 };
             }
+
+            messageObj.CreatedDate = DateTime.Today;
             try
             {
                 _services.Save(messageObj);

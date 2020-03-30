@@ -4,6 +4,7 @@ import { BroadcastMessageCreateModel } from 'src/models/broadcastMessage';
 import { AuthenticationService } from 'src/services/authentication.service';
 import { Router } from '@angular/router';
 import { BsModalRef, BsModalService } from 'ngx-bootstrap';
+import { BroadcastMessageServiceService } from 'src/services/broadcast-message-service.service';
 
 @Component({
   selector: 'app-broadcast-message-create',
@@ -27,6 +28,7 @@ export class BroadcastMessageCreateComponent implements OnInit {
   constructor(
     private formBuilder: FormBuilder,
     private authService: AuthenticationService,
+    private broadcastService: BroadcastMessageServiceService,
     private router: Router,
     private modalService: BsModalService,
   ) {
@@ -57,9 +59,9 @@ export class BroadcastMessageCreateComponent implements OnInit {
     let messageModel = new BroadcastMessageCreateModel();
     this.messageFormData.messageTitle = this.messageCreateForm.controls["messageTitle"].value;
     this.messageFormData.messageBody = this.messageCreateForm.controls["messageBody"].value;
-    messageModel.UserId = this.userData.userId;
-    messageModel.MessageTitle = this.messageCreateForm.controls["messageTitle"].value;
-    messageModel.MessageBody = this.messageCreateForm.controls["messageBody"].value;
+
+
+
     this.modalRef = this.modalService.show(template, this.modalConfig);
     console.log(this.messageFormData);
     
@@ -76,7 +78,21 @@ export class BroadcastMessageCreateComponent implements OnInit {
         
     //   }
     // );
-    console.log(this.messageFormData);
+    let messageModel = new BroadcastMessageCreateModel();
+
+    messageModel.UserId = this.userData.userId;
+    messageModel.MessageTitle = this.messageFormData.messageTitle;
+    messageModel.MessageBody = this.messageFormData.messageBody;
+
+    this.broadcastService.saveBroadcastMessage(messageModel).subscribe(
+      data => {
+        console.log(data);
+      },
+      error => {
+
+      }
+    );
+    
     this.modalRef.hide();
 
     this.router.navigateByUrl("/", { skipLocationChange: true }).then(() => {
