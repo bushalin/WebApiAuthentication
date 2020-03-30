@@ -24,7 +24,7 @@ namespace ReportManagement.Services.BroadcastMessages
         {
             var message = "";
 
-            var result = _context.UserInfo.Where(x => x.IsActiveEmployee == true && x.IsEmployeeProfile == true).Select(x => new
+            var result = _context.UserInfo.Select(x => new
             {
                 x.UserId,
                 x.FirstName,
@@ -40,7 +40,8 @@ namespace ReportManagement.Services.BroadcastMessages
                 x.User.LastName,
                 x.Message.CreatedDate,
                 MessageId = x.Message.id,
-                x.Message.Message
+                x.Message.MessageTitle,
+                x.Message.MessageBody
             }).ToList()
             .OrderByDescending(x => x.CreatedDate);
 

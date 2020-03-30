@@ -11,9 +11,8 @@ namespace ReportManagement.Model.BroadcastMessages
 {
     public class Broadcast_Message : AuditableEntity<int>
     {
-        public string Message { get; set; }
-
-
+        public string MessageTitle { get; set; }
+        public string MessageBody { get; set; }
         public string UserId { get; set; }
         [ForeignKey("UserId")]
         public virtual ApplicationUser AppliactionUser { get; set; }
