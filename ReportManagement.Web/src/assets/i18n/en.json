@@ -28,6 +28,7 @@
         "CARD_HEADER_CHECK_REPORT_BTN": "Check Report",
         "CARD_HEADER_REPORT_CREATE": "Create Report",
         "CARD_HEADER_ADD_REPORT_BTN": "Add Report",
+        "CARD_HEADER_ADD_MSG_BTN": "Add Message",
         "CARD_HEADER_REMOVE_REPORT_BTN": "Remove Report",
         "CARD_HEADER_SEARCH": "Search Report",
         "CARD_HEADER_USER_PROFILE": "User Profile",
@@ -37,6 +38,11 @@
         "CARD_HEADER_USER_REGISTRATION": "User Registration",
         "CARD_HEADER_USER_LIST": "List of Users",
         "CARD_HEADER_REPORT_CHECK": "Report Check",
+        "CARD_HEADER_BROADCAST_TITLE": "Messages",
+        "CARD_HEADER_BROADCAST_CREATE_TITLE": "Create Message",
+        "CARD_HEADER_MESSAGE_FROM": "From",
+        "CARD_HEADER_MESSAGE_DATE": "Date",
+        "CARD_HEADER_MESSAGE_TITLE": "Title",
 
         "CARD_BODY_EMPLOYEE_NAME": "Employee Name",
         "CARD_BODY_DATE": "Date",
@@ -92,7 +98,9 @@
         "FORM_ERROR_PASSWORD_CHAR": "Password must be at least 6 characters",
         "FORM_ERROR_CONFIRM_PASSWORD_REQUIRED": "Confirm Password is required",
         "FORM_ERROR_PASSWORD_MATCH": "Passwords must match",
-        "FORM_ERROR_INCORRECT_USER_PASS": "Username or Password is incorrect"
+        "FORM_ERROR_INCORRECT_USER_PASS": "Username or Password is incorrect",
+        "FORM_ERROR_MESSAGE_TITLE_REQUIRED": "Message Title required",
+        "FORM_ERROR_MESSAGE_BODY_REQUIRED": "Message Body required"
     },
 
     "TABLE": {

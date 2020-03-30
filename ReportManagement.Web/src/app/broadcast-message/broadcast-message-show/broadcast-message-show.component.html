@@ -1,1 +1,110 @@
-<p>broadcast-message-show works!</p>
+<app-top-bar></app-top-bar>
+
+<!-- Main body area -->
+
+<div class="container mb-3">
+  <div class="col-md-12">
+    <div class="card mt-5">
+      <div class="card-header">
+        <div class="row">
+          <div class="col-md-12">
+            <div class="row">
+              <div class="col-md-4">
+                <h5>{{ "CARD.CARD_HEADER_BROADCAST_TITLE" | translate }}</h5>
+              </div>
+              <div
+                class="col-md-8 d-flex flex-row justify-content-end"
+                *ngIf="userService.roleMatch(['Shacho', 'Admin'])"
+              >
+                <!-- <a [routerLink]="'/checkreport'" class="col-md-3">Check Report</a> -->
+
+                <div class="col-md-12">
+                  <button
+                    type="button"
+                    class="btn btn-info float-right"
+                    [routerLink]="['/broadcast/create/']"
+                  >
+                    {{ "CARD.CARD_HEADER_ADD_MSG_BTN" | translate }}
+                  </button>
+                  <button
+                    type="button"
+                    class="btn btn-info float-right mr-2"
+                    [routerLink]="['/report/show/']"
+                  >
+                    {{ "FORM.FORM_BACK_BTN" | translate }}
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="card-body">
+        <div class=" col-md-12">
+          <div
+            *ngFor="
+              let item of messageList
+                | paginate
+                  : {
+                      id: 'reportPage',
+                      itemsPerPage: 10,
+                      currentPage: pageNumber
+                    };
+              let i = index
+            "
+            class="card mb-3"
+          >
+            <div
+              class="card-header messageFont"
+            >
+              <div>
+                {{ "CARD.CARD_HEADER_MESSAGE_DATE" | translate }} :
+                {{ item.createdDate | date: "yyyy/MM/dd" }}
+              </div>
+              <div>
+                <p>
+                  {{ "CARD.CARD_HEADER_MESSAGE_FROM" | translate }} :
+                  {{ item.firstName }} {{ item.lastName }}
+                </p>
+              </div>
+              <div>
+                {{ "CARD.CARD_HEADER_MESSAGE_TITLE" | translate }} :
+                <b>Lorem Ipsum</b>
+              </div>
+            </div>
+
+            <div class="card-body">
+              <div class="font-self-14">
+                <div class="m-2">
+                  <nga-read-more
+                    [text]="item.message"
+                    [textLength]="180"
+                  ></nga-read-more>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-12 d-flex justify-content-center">
+        <pagination-controls
+          id="reportPage"
+          previousLabel="{{ 'UTILS.PAGINATION_PREVIOUS' | translate }}"
+          nextLabel="{{ 'UTILS.PAGINATION_NEXT' | translate }}"
+          directionLinks="true"
+          screenReaderPageLabel="page"
+          screenReaderCurrentLabel="You're on page"
+          (pageChange)="pageNumber = $event"
+        ></pagination-controls>
+      </div>
+      <ngx-spinner
+            bdColor="rgba(51, 51, 51, 0.8)"
+            size="default"
+            type="ball-spin-clockwise"
+          >
+            <p style="color: white">{{ "UTILS.PRELOADER_TEXT" | translate }}</p>
+          </ngx-spinner>
+    </div>
+  </div>
+</div>

@@ -120,7 +120,7 @@
                   "
                 >
                   <td>{{ i + 1 }}</td>
-                  <td>{{ item.createdDate | date: "yyyy/MM/dd h:mm:ss" }}</td>
+                  <td>{{ item.createdDate | date: "yyyy/MM/dd h:mm a" }}</td>
                   <td>{{ item.firstName }} {{ item.lastName }}</td>
                   <td class="w-25">
                     <ul>
@@ -136,7 +136,7 @@
                       <li
                         *ngFor="let subItem of item.reportDetail; let n = index"
                       >
-                        <div class="float-left font-self-14">
+                        <div class="font-self-14">
                           <nga-read-more
                             class="font-self-14"
                             [text]="subItem.details"
