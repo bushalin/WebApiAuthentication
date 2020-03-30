@@ -91,6 +91,15 @@ export class CommonService {
     );
   }
 
+  getUserDetailsById(userId) {
+    return this.http.get<any>(environment.apiUrl + `accounts/user/` + userId , {headers: this.headerToken})
+    .pipe(
+      map(res => {
+        return res;
+      })
+    );
+  }
+
   assignRole(roleData, employeeId) {
     return this.http.put<any>(environment.apiUrl + `accounts/user/` + employeeId + '/role', JSON.stringify(roleData), {headers: this.headerToken})
     .pipe(
