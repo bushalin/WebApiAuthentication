@@ -57,6 +57,8 @@
         "FORM_PROGRESS_PLACEHOLDER": "Progress Percent",
         "FORM_DETAIL": "Details",
         "FORM_SUBMIT_BTN": "Submit",
+        "FORM_PASSWORD_UPDATE_BTN": "Update",
+        "FORM_SUBMIT_COMMENT_BTN": "Submit",
         "FORM_UPDATE_BTN": "Update",
         "FORM_BACK_BTN": "Back",
         "FORM_SEARCH_EMPLOYEE_NAME": "Employee Name",
