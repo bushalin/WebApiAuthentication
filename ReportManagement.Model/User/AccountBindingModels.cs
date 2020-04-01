@@ -113,4 +113,10 @@ namespace ReportManagement.Model.User
         [Display(Name = "Post Code")]
         public string Address_PostCode { get; set; }
     }
+
+    public class AssignRolesToUserBindingModel
+    {
+        public string UserId { get; set; }
+        public string[] RolesToAssign { get; set; }
+    }
 }

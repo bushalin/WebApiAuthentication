@@ -123,6 +123,7 @@ namespace ReportManagement.Controllers
 
         [Authorize(Roles = "Admin")]
         [Route("ResetPassword")]
+        [HttpGet]
         public async Task<IHttpActionResult> ResetPassword(PasswordResetBindingModel model)
         {
             string resetToken = await this.AppUserManager.GeneratePasswordResetTokenAsync(model.UserId);
@@ -194,6 +195,48 @@ namespace ReportManagement.Controllers
             }
 
             IdentityResult addResult = await this.AppUserManager.AddToRolesAsync(appUser.Id, rolesToAssign);
+
+            if (!addResult.Succeeded)
+            {
+                ModelState.AddModelError("", "Failed to add user roles");
+                return BadRequest(ModelState);
+            }
+
+            return Ok(addResult);
+        }
+
+        [Authorize(Roles = "Admin")]
+        [Route("user/AssignRolesToUser")]
+        [HttpPut]
+        public async Task<IHttpActionResult> AssignRolesToUser(AssignRolesToUserBindingModel model)
+        {
+            var appUser = await this.AppUserManager.FindByIdAsync(model.UserId);
+
+            if (appUser == null)
+            {
+                return NotFound();
+            }
+
+            var currentRoles = await this.AppUserManager.GetRolesAsync(appUser.Id);
+
+            var rolesNotExists = model.RolesToAssign.Except(this.AppRoleManager.Roles.Select(x => x.Name)).ToArray();
+
+            if (rolesNotExists.Count() > 0)
+            {
+                ModelState.AddModelError("", String.Format("Roles '{0}' does not exist in the sytem", string.Join(",", rolesNotExists)));
+                return BadRequest(ModelState);
+            }
+
+            IdentityResult removeResult =
+                await this.AppUserManager.RemoveFromRolesAsync(appUser.Id, currentRoles.ToArray());
+
+            if (!removeResult.Succeeded)
+            {
+                ModelState.AddModelError("", "Failed to remove user roles");
+                return BadRequest(ModelState);
+            }
+
+            IdentityResult addResult = await this.AppUserManager.AddToRolesAsync(appUser.Id, model.RolesToAssign);
 
             if (!addResult.Succeeded)
             {

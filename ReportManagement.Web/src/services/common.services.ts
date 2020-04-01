@@ -8,7 +8,7 @@ import { UserCreate } from 'src/models/user';
 
 @Injectable()
 export class CommonService {
-  
+  httpOptions;
   header;
   headerToken;
   constructor(private http: HttpClient) {
@@ -18,6 +18,13 @@ export class CommonService {
       Authorization : "Bearer " + localStorage.getItem('authToken'),
     });
 
+    this.httpOptions = {
+      headers: new HttpHeaders({
+        'Content-Type': 'application/json',
+        Accept: 'application/json'
+      }),
+      withCredentials: true,
+    };
     
     this.header = new HttpHeaders()
     .set('Content-type', 'application/json');
@@ -84,7 +91,7 @@ export class CommonService {
   }
 
   getAllRoles() {
-    return this.http.get<any>(environment.apiUrl + `roles`, {headers: this.headerToken}).pipe(
+    return this.http.get<any>(environment.apiUrl + `roles`, {headers: this.header}).pipe(
       map(res => {
         return res;
       })
@@ -92,7 +99,7 @@ export class CommonService {
   }
 
   getUserDetailsById(userId) {
-    return this.http.get<any>(environment.apiUrl + `accounts/user/` + userId , {headers: this.headerToken})
+    return this.http.get<any>(environment.apiUrl + `accounts/user/` + userId , {headers: this.header})
     .pipe(
       map(res => {
         return res;
@@ -100,8 +107,9 @@ export class CommonService {
     );
   }
 
-  assignRole(roleData, employeeId) {
-    return this.http.put<any>(environment.apiUrl + `accounts/user/` + employeeId + '/role', JSON.stringify(roleData), {headers: this.headerToken})
+  
+  assignRoletoUser(roleModel) {
+    return this.http.put<any>(environment.apiUrl + `accounts/user/AssignRolesToUser`, roleModel, {headers: this.header, withCredentials: true})
     .pipe(
       map(res => {
         return res;

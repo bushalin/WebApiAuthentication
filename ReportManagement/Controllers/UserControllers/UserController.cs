@@ -41,7 +41,6 @@ namespace ReportManagement.Controllers.UserControllers
             return Ok(_service.GetUserDetailById(id).Data);
         }
 
-        //[EnableCors(origins: "http://localhost", headers: "*", methods: "*")]
         [Route("UpdateUserProfile")]
         [HttpPut]
         public IHttpActionResult UpdateUserProfile(EditUserProfileBindingModel user)

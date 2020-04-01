@@ -1,3 +1,5 @@
+import { stringify } from 'querystring';
+
 export class User{
     userId: string;
     userName : string;
@@ -45,4 +47,9 @@ export class ChangePassword {
     OldPassword: string;
     NewPassword: string;
     ConfirmPassword: string;
+}
+
+export class AssignUserToRolesModel {
+    UserId: string;
+    RolesToAssign: string[] = [];
 }

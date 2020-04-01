@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { CommonService } from 'src/services/common.services';
 import { FormGroup, FormBuilder, FormArray, FormControl, Validators } from '@angular/forms';
+import { AssignUserToRolesModel } from 'src/models/user';
+import { element } from 'protractor';
 
 @Component({
   selector: 'app-role-assign',
@@ -105,7 +107,7 @@ export class RoleAssignComponent implements OnInit {
   }
 
   onSubmit(){
-    //this.roleData = this.roleDataForm.value;
+    // this.roleData = this.roleDataForm.value;
     
     if (this.roleAssignForm.invalid) {
       return;
@@ -113,14 +115,23 @@ export class RoleAssignComponent implements OnInit {
     this.roleData = this.roleData.concat(this.roleDataForm.value);
     this.roleData = this.roleData.filter((item,index) => this.roleData.indexOf(item) === index);
 
-    this.commonService.assignRole(this.roleData, this.employeeId).subscribe(
+
+    console.log(this.roleData);
+
+    let assignModel = new AssignUserToRolesModel();
+    assignModel.UserId = this.employeeId;
+    this.roleData.forEach(element => {
+      assignModel.RolesToAssign.push(element);
+    })
+
+    this.commonService.assignRoletoUser(assignModel).subscribe(
       data => {
         console.log(data);
       },
       error => {
       }
     );
-    console.log(this.roleData, this.employeeId);
+
   }
 
 }
