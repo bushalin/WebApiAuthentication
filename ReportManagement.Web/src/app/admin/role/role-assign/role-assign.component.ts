@@ -1,37 +1,40 @@
-import { Component, OnInit } from '@angular/core';
-import { CommonService } from 'src/services/common.services';
-import { FormGroup, FormBuilder, FormArray, FormControl, Validators } from '@angular/forms';
+import { Component, OnInit } from "@angular/core";
+import { CommonService } from "src/services/common.services";
+import {
+  FormGroup,
+  FormBuilder,
+  FormArray,
+  FormControl,
+  Validators
+} from "@angular/forms";
 
 @Component({
-  selector: 'app-role-assign',
-  templateUrl: './role-assign.component.html',
-  styleUrls: ['./role-assign.component.css']
+  selector: "app-role-assign",
+  templateUrl: "./role-assign.component.html",
+  styleUrls: ["./role-assign.component.css"]
 })
 export class RoleAssignComponent implements OnInit {
-
   submitted = false;
   roleAssignForm: FormGroup;
   employeeId: string;
   roleData = [];
-  userList:  any[] = [];
-  roleList:  any[] = [];
+  userList: any[] = [];
+  roleList: any[] = [];
   public roleDataForm: FormArray;
-
 
   constructor(
     private commonService: CommonService,
-    private formBuilder: FormBuilder,
+    private formBuilder: FormBuilder
   ) {
     this.getAllUsers();
     this.getAllRoles();
-
-   }
+  }
 
   ngOnInit() {
     console.log(this.userList);
     console.log(this.roleList);
     this.roleAssignForm = this.formBuilder.group({
-      employeeNameSelectedValue: ['',Validators.required],
+      employeeNameSelectedValue: ["", Validators.required],
       roleSelectedValue: this.formBuilder.array([])
     });
 
@@ -39,19 +42,23 @@ export class RoleAssignComponent implements OnInit {
       "roleSelectedValue"
     ) as FormArray;
   }
-  
 
-  onOptionsSelected(value:string){
-    if(value){
+  onOptionsSelected(value: string) {
+    while (this.roleDataForm.length !== 0) {
+      this.roleDataForm.removeAt(0);
+    }
+
+    if (value) {
       this.submitted = true;
     }
     this.employeeId = value;
     this.roleData = [];
 
-      this.commonService.getUserDetailsById(this.employeeId).subscribe(
+    this.commonService.getUserDetailsById(this.employeeId).subscribe(
       data => {
         Object.entries(data.roles).map(res => {
           this.roleData.push(res[1]);
+          this.roleDataForm.push(new FormControl(res[1]));
         });
       },
       err => {}
@@ -82,9 +89,7 @@ export class RoleAssignComponent implements OnInit {
   }
 
   onCheckboxChange(e) {
-  
     if (e.target.checked) {
-      
       this.roleDataForm.push(new FormControl(e.target.value));
     } else {
       let i: number = 0;
@@ -95,7 +100,7 @@ export class RoleAssignComponent implements OnInit {
           if (index > -1) {
             this.roleData.splice(index, 1);
           }
-          
+
           //this.roleData.splice(this.roleDataForm.controls.indexOf(item, 1));
           return;
         }
@@ -104,23 +109,24 @@ export class RoleAssignComponent implements OnInit {
     }
   }
 
-  onSubmit(){
+  onSubmit() {
     //this.roleData = this.roleDataForm.value;
-    
+
     if (this.roleAssignForm.invalid) {
       return;
     }
     this.roleData = this.roleData.concat(this.roleDataForm.value);
-    this.roleData = this.roleData.filter((item,index) => this.roleData.indexOf(item) === index);
-
-    this.commonService.assignRole(this.roleData, this.employeeId).subscribe(
-      data => {
-        console.log(data);
-      },
-      error => {
-      }
+    this.roleData = this.roleData.filter(
+      (item, index) => this.roleData.indexOf(item) === index
     );
+
+    // this.commonService.assignRole(this.roleData, this.employeeId).subscribe(
+    //   data => {
+    //     console.log(data);
+    //   },
+    //   error => {
+    //   }
+    // );
     console.log(this.roleData, this.employeeId);
   }
-
 }
