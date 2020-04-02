@@ -23,6 +23,7 @@ import { ReportComponent } from './report/report.component';
 import { ReportRoutingModule } from './report-routing.module';
 import { NgxSpinnerModule, NgxSpinnerService } from 'ngx-spinner';
 
+
 @NgModule({
   declarations: [
     ReportCreateComponent,

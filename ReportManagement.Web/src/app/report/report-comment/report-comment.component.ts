@@ -53,12 +53,13 @@ export class ReportCommentComponent implements OnInit {
     this.reportService.UpdateRemarks(this.reportModel).subscribe(
       data => {
         console.log(data);
+        this.router.navigateByUrl("/", { skipLocationChange: true }).then(() => {
+          this.router.navigate(["/report/show"]);
+        });
       },
       error => {}
     );
-    this.router.navigateByUrl("/", { skipLocationChange: true }).then(() => {
-      this.router.navigate(["/report/show"]);
-    });
+    
     
   }
 }

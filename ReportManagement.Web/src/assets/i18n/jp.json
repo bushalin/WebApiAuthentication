@@ -104,7 +104,9 @@
         "FORM_ERROR_PASSWORD_CHAR": "6 文字でパスワードを入力してください",
         "FORM_ERROR_CONFIRM_PASSWORD_REQUIRED": "パスワードを再入力してください",
         "FORM_ERROR_PASSWORD_MATCH": "パスワードが一致していません",
+        "FORM_ERROR_PASSWORD_ATLEAST": "大小のアルファベットを一つ入れてください",
         "FORM_ERROR_INCORRECT_USER_PASS": "ユーザー名かパスワードが間違っています",
+        "FORM_ERROR_INCORRECT_PREV_PASS": "以前のパスワードが間違っています",
         "FORM_ERROR_MESSAGE_TITLE_REQUIRED": "メッセージのタイトルを入力してください",
         "FORM_ERROR_MESSAGE_BODY_REQUIRED": "メッセージを入力してください"
     },

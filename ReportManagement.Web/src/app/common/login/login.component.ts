@@ -40,7 +40,7 @@ export class LoginComponent implements OnInit {
       return;
     }
     this.loading = true;
-    console.log(this.loginForm.value);
+    //console.log(this.loginForm.value);
     const returnUrl = this.route.snapshot.queryParamMap.get("returnUrl") || "/broadcast";
     this.authService
       .login(this.loginForm.value)
