@@ -87,6 +87,9 @@ export class BroadcastMessageCreateComponent implements OnInit {
     this.broadcastService.saveBroadcastMessage(messageModel).subscribe(
       data => {
         console.log(data);
+        this.router.navigateByUrl("/", { skipLocationChange: true }).then(() => {
+          this.router.navigate(["/broadcast"]);
+        });
       },
       error => {
 
@@ -95,9 +98,6 @@ export class BroadcastMessageCreateComponent implements OnInit {
     
     this.modalRef.hide();
 
-    this.router.navigateByUrl("/", { skipLocationChange: true }).then(() => {
-      this.router.navigate(["/broadcast"]);
-    });
   }
 
   modalDecline() {

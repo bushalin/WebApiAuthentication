@@ -228,6 +228,9 @@ export class ReportCreateComponent implements OnInit {
     this.reportService.saveReport(this.reportFormData).subscribe(
       data => {
         console.log(data);
+        this.router.navigateByUrl("/", { skipLocationChange: true }).then(() => {
+          this.router.navigate(["/report"]);
+        });
         //this.showFeedback = data.message;
       },
       error => {
@@ -237,9 +240,7 @@ export class ReportCreateComponent implements OnInit {
     this.modalRef.hide();
     //"report show" page refresh bug when submitting a report is solved
     // resource link : https://stackoverflow.com/questions/47813927/how-to-refresh-a-component-in-angular
-    this.router.navigateByUrl("/", { skipLocationChange: true }).then(() => {
-      this.router.navigate(["/report"]);
-    });
+    
   }
 
   preventType(event): boolean {

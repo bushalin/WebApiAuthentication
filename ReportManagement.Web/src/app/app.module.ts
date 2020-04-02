@@ -31,12 +31,13 @@ import { AdminModule } from './admin/admin.module';
 import { BroadcastMessageModule } from './broadcast-message/broadcast-message.module';
 
 
+
 @NgModule({
   declarations: [
     AppComponent,
     PageNotFoundComponent,
     LoginComponent,
-    LandingPageComponent
+    LandingPageComponent,
   ],
   imports: [
     UserModule,

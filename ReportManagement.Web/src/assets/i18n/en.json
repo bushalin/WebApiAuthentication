@@ -98,9 +98,11 @@
         "FORM_ERROR_NEW_PASSWORD_REQUIRED": "New password is required",
         "FORM_ERROR_PASSWORD_REQUIRED": "Password is required",
         "FORM_ERROR_PASSWORD_CHAR": "Password must be at least 6 characters",
+        "FORM_ERROR_PASSWORD_ATLEAST": "Password must be at least 1 uppercase letter, 1 lowercase letter and 1 digit",
         "FORM_ERROR_CONFIRM_PASSWORD_REQUIRED": "Confirm Password is required",
         "FORM_ERROR_PASSWORD_MATCH": "Passwords must match",
         "FORM_ERROR_INCORRECT_USER_PASS": "Username or Password is incorrect",
+        "FORM_ERROR_INCORRECT_PREV_PASS": "Previous Password is incorrect",
         "FORM_ERROR_MESSAGE_TITLE_REQUIRED": "Message Title required",
         "FORM_ERROR_MESSAGE_BODY_REQUIRED": "Message Body required"
     },
