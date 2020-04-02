@@ -66,7 +66,7 @@ namespace ReportManagement.Services.BroadcastMessages
                 };
             }
 
-            messageObj.CreatedDate = DateTime.Today;
+            messageObj.CreatedDate = DateTime.Now;
             try
             {
                 _services.Save(messageObj);
