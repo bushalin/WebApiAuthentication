@@ -12,7 +12,7 @@ using System.Web.Http.Cors;
 
 namespace ReportManagement.Controllers.UserControllers
 {
-    [RoutePrefix("api/User")]
+    [RoutePrefix("v1/User")]
     public class UserController : ApiController
     {
         private readonly IUserServices _service;

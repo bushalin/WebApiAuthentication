@@ -8,7 +8,7 @@ using System.Web.Http;
 namespace ReportManagement.Controllers
 {
 
-    [RoutePrefix("api/accounts")]
+    [RoutePrefix("v1/accounts")]
     public class AccountsController : BaseApiController
     {
         // TODO: have to redo these by service architecture

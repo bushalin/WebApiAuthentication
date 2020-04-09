@@ -5,7 +5,7 @@ using System.Web.Http;
 
 namespace ReportManagement.Controllers.ReportControllers
 {
-    [RoutePrefix("api/Report")]
+    [RoutePrefix("v1/Report")]
     public class ReportController : ApiController
     {
         private readonly IReportServices _reportServices;

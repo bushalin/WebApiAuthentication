@@ -52,7 +52,7 @@ namespace ReportManagement
             {
                 // For Dev environment only (on production should be AllowInsecureHttp = false)
                 AllowInsecureHttp = true,
-                TokenEndpointPath = new PathString("/api/login"),
+                TokenEndpointPath = new PathString("/v1/login"),
                 AccessTokenExpireTimeSpan = TimeSpan.FromDays(1),
                 Provider = new CustomOAuthProvider(),
                 AccessTokenFormat = new CustomJwtFormat("http://localhost:44330")

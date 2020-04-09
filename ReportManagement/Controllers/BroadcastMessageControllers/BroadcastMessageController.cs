@@ -9,7 +9,7 @@ using System.Web.Http;
 
 namespace ReportManagement.Controllers.BroadcastMessageControllers
 {
-    [RoutePrefix("api/Broadcast")]
+    [RoutePrefix("v1/Broadcast")]
     public class BroadcastMessageController : ApiController
     {
         private readonly IBroadcastMessageService _services;

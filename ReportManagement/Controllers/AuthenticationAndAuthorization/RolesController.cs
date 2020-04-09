@@ -13,7 +13,7 @@ namespace ReportManagement.Controllers
 {
 
     [Authorize(Roles = "Admin")]
-    [RoutePrefix("api/roles")]
+    [RoutePrefix("v1/roles")]
     public class RolesController : BaseApiController
     {
         [Route("{id:guid}", Name = "GetRoleById")]
