@@ -31,6 +31,7 @@ export class ReportPreviledgedViewComponent implements OnInit {
   maxDate : Date;
 
   pageNumber: number;
+  bsValue = new Date();
 
   constructor(
     private route: Router,

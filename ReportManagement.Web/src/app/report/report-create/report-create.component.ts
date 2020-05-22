@@ -20,6 +20,7 @@ export class ReportCreateComponent implements OnInit {
   userDataSubscription;
   userData;
   userName;
+  selectedDate;
   reportCreateForm: FormGroup;
   public reportDetailList: FormArray;
   reportFormData: any = {};
@@ -29,6 +30,8 @@ export class ReportCreateComponent implements OnInit {
 
   loading = false;
   submitted = false;
+
+  bsValue = new Date();
 
   // ngx-modal configuration and implementation
   modalRef: BsModalRef;
@@ -205,6 +208,7 @@ export class ReportCreateComponent implements OnInit {
       console.log(inputedDate);
     }
 
+    this.selectedDate = this.reportCreateForm.controls["createdDate"].value;
     this.reportFormData.report.CreatedDate = inputedDate;
     this.reportFormData.report.ReportStatus = true;
     this.reportFormData.reportDetail = this.reportDetailList.value;

@@ -55,6 +55,8 @@
                 formControlName="dateSelectedValue"
                 bsDatepicker
                 [maxDate]="maxDate"
+                [bsConfig]="{dateInputFormat: 'YYYY/MM/DD', showWeekNumbers:false}"
+                [(ngModel)]="bsValue"
               />
             </div>
           </div>

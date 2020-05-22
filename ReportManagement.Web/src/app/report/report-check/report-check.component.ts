@@ -47,7 +47,7 @@ export class ReportCheckComponent implements OnInit {
       {},
       {
         minMode: this.minMode,
-        dateInputFormat: 'MMM YYYY'
+        dateInputFormat: 'MMM YYYY',
       }
     );
     this.collectedDate = new Date();
