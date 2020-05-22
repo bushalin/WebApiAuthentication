@@ -36,14 +36,17 @@
                 "CARD.CARD_HEADER_BROADCAST_TITLE" | translate
               }}</label>
               <div class="col-md-8">
-                <textarea
+                <!-- <textarea
                   rows="7"
                   cols="55"
                   formControlName="messageBody"
                   class="form-control"
                   placeholder="{{ 'CARD.CARD_HEADER_BROADCAST_TITLE' | translate }}"
                   [ngClass]="{ 'is-invalid': submitted && messageCreateFormControl.messageBody.errors }"
-                ></textarea>
+                ></textarea> -->
+                <ckeditor tagName="textarea" formControlName="messageBody" rows="7" cols="55" [editor]="Editor"
+                [ngClass]="{ 'is-invalid': submitted && messageCreateFormControl.messageBody.errors }"
+                ></ckeditor>
                 <div *ngIf="submitted && messageCreateFormControl.messageBody.errors" class="invalid-feedback">    
                   <div *ngIf="messageCreateFormControl.messageBody.errors.required">{{'FORM_ERROR.FORM_ERROR_MESSAGE_BODY_REQUIRED' | translate}}</div>    
                 </div> 
@@ -81,7 +84,7 @@
                       <tbody>
                         <tr>
                           <td align="center">{{messageFormData.messageTitle}}</td>
-                          <td>{{messageFormData.messageBody}}</td>
+                          <td [innerHTML]="messageFormData.messageBody | safeHtml"></td>
                         </tr>
                       </tbody>
                     </table>

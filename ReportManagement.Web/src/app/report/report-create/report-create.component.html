@@ -33,7 +33,8 @@
                 <label for="createdDate" class="px-2">{{'FORM.FORM_DATE' | translate}}</label>
                 <input (keypress)="preventType($event)" (keydown)="preventBackspace($event)" id="reportCreateDate" class="form-control col-md-10" autocomplete="off" formControlName="createdDate"
                   placeholder="{{'FORM.FORM_DATE' | translate}}" bsDatepicker [minDate]="minDate" [maxDate]="maxDate"
-                  [bsConfig]="{dateInputFormat: 'YYYY/MM/DD'}">
+                  [bsConfig]="{dateInputFormat: 'YYYY/MM/DD', showWeekNumbers:false}"
+                  [(ngModel)]="bsValue">
               </div>
             </div>
 
@@ -126,7 +127,7 @@
               <div class="card-body overflow-auto">
                 <div class="row">
                   <div class="col-md-12">
-                    <p>{{'TABLE.TABLE_DATE' | translate}} : {{reportFormData.report.CreatedDate | date: "yyyy/MM/dd"}}</p>
+                    <p>{{'TABLE.TABLE_DATE' | translate}} : {{selectedDate | date: "yyyy/MM/dd"}}</p>
                     <table class="table table-responsive-sm table-bordered">
                       <thead align="center" class="text-nowrap">
                         <tr>

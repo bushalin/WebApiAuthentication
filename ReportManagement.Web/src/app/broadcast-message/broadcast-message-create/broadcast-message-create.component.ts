@@ -5,6 +5,7 @@ import { AuthenticationService } from 'src/services/authentication.service';
 import { Router } from '@angular/router';
 import { BsModalRef, BsModalService } from 'ngx-bootstrap';
 import { BroadcastMessageServiceService } from 'src/services/broadcast-message-service.service';
+import * as ClassicEditor from '@ckeditor/ckeditor5-build-classic';
 
 @Component({
   selector: 'app-broadcast-message-create',
@@ -12,6 +13,8 @@ import { BroadcastMessageServiceService } from 'src/services/broadcast-message-s
   styleUrls: ['./broadcast-message-create.component.css']
 })
 export class BroadcastMessageCreateComponent implements OnInit {
+
+  public Editor = ClassicEditor;
 
   messageCreateForm: FormGroup;
   submitted = false;
@@ -38,6 +41,25 @@ export class BroadcastMessageCreateComponent implements OnInit {
       .subscribe(data => {
         this.userData = data;
       });
+
+      ClassicEditor.defaultConfig = {
+        toolbar: {
+          items: [
+            'heading',
+            '|',
+            'bold',
+            'italic',
+            '|',
+            'bulletedList',
+            '|',
+            'undo',
+            'redo',
+            'fontColor',
+            'underline'
+          ]
+        },
+      };
+
    }
 
   ngOnInit() {

@@ -77,10 +77,11 @@
             <div class="card-body">
               <div class="font-self-14">
                 <div class="m-2">
-                  <nga-read-more
+                  <div [innerHTML]="item.messageBody | safeHtml"></div>
+                  <!-- <nga-read-more
                     [text]="item.messageBody"
                     [textLength]="180"
-                  ></nga-read-more>
+                  ></nga-read-more> -->
                 </div>
               </div>
             </div>

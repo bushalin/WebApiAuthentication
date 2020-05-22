@@ -22,7 +22,7 @@
           </div>
         </div>
 
-        <div class="card-body overflow-auto">
+        <div class="card-body">
           <div class="row">
             <div class="col-xs-12 col-12 col-md-4 form-group">
               <input
@@ -56,24 +56,75 @@
           >
             <thead align="center">
               <tr>
-                <th colspan="100%">{{ showDateOnTable | date: "M月 y" }}</th>
+                <th class="table-fixed-month" colspan="100%">{{ showDateOnTable | date: "M月 y" }}</th>
               </tr>
             </thead>
             <tbody>
-              <tr>
+              <tr class="table-shrink">
                 <th rowspan="100%" class="align-middle">
                   <div>
                     従<br>業<br>員 
-                  </div>
-                  
+                  </div>                 
                 </th>
-                <td></td>
-                <td *ngFor="let items of staticDays; let x = index"
+                <td class="table-fixed-days"></td>
+                <td class="table-fixed-days" *ngFor="let items of staticDays; let x = index"
                 [ngClass]="{
                   saturdayClass: (items | date: 'EEEE') === 'Saturday',
                   sundayClass: (items | date: 'EEEE') === 'Sunday'
                 }">
                   {{ items | date: "dd" }}
+                </td>
+              </tr>
+              <tr class="table-shrink" *ngFor="let item of reportData">
+                <th>{{ item.firstName }} {{ item.lastName }} </th>
+                <td
+                  *ngFor="let subitems of staticDays"
+                  [ngClass]="{
+                    saturdayClass: (subitems | date: 'EEEE') === 'Saturday',
+                    sundayClass: (subitems | date: 'EEEE') === 'Sunday'
+                  }"
+                >
+                  <div *ngFor="let itemss of item.reports">
+                    <span
+                      *ngIf="
+                        subitems === (itemss.createdDate | date: 'yyyy-MM-dd')
+                      "
+                      >〇</span
+                    >
+                  </div>
+                  <!-- <span *ngIf="(subitems | date:'EEEE') === 'Sunday'">休み</span> -->
+                </td>
+              </tr>
+
+
+
+
+
+  <!------ REDUNDANT DATA FOR TESTING. SHOULD DELETE-------------->
+
+
+
+
+
+
+              <tr *ngFor="let item of reportData">
+                <th>{{ item.firstName }} {{ item.lastName }} </th>
+                <td
+                  *ngFor="let subitems of staticDays"
+                  [ngClass]="{
+                    saturdayClass: (subitems | date: 'EEEE') === 'Saturday',
+                    sundayClass: (subitems | date: 'EEEE') === 'Sunday'
+                  }"
+                >
+                  <div *ngFor="let itemss of item.reports">
+                    <span
+                      *ngIf="
+                        subitems === (itemss.createdDate | date: 'yyyy-MM-dd')
+                      "
+                      >〇</span
+                    >
+                  </div>
+                  <!-- <span *ngIf="(subitems | date:'EEEE') === 'Sunday'">休み</span> -->
                 </td>
               </tr>
               <tr *ngFor="let item of reportData">
@@ -96,6 +147,112 @@
                   <!-- <span *ngIf="(subitems | date:'EEEE') === 'Sunday'">休み</span> -->
                 </td>
               </tr>
+              <tr *ngFor="let item of reportData">
+                <th>{{ item.firstName }} {{ item.lastName }} </th>
+                <td
+                  *ngFor="let subitems of staticDays"
+                  [ngClass]="{
+                    saturdayClass: (subitems | date: 'EEEE') === 'Saturday',
+                    sundayClass: (subitems | date: 'EEEE') === 'Sunday'
+                  }"
+                >
+                  <div *ngFor="let itemss of item.reports">
+                    <span
+                      *ngIf="
+                        subitems === (itemss.createdDate | date: 'yyyy-MM-dd')
+                      "
+                      >〇</span
+                    >
+                  </div>
+                  <!-- <span *ngIf="(subitems | date:'EEEE') === 'Sunday'">休み</span> -->
+                </td>
+              </tr>
+              <tr *ngFor="let item of reportData">
+                <th>{{ item.firstName }} {{ item.lastName }} </th>
+                <td
+                  *ngFor="let subitems of staticDays"
+                  [ngClass]="{
+                    saturdayClass: (subitems | date: 'EEEE') === 'Saturday',
+                    sundayClass: (subitems | date: 'EEEE') === 'Sunday'
+                  }"
+                >
+                  <div *ngFor="let itemss of item.reports">
+                    <span
+                      *ngIf="
+                        subitems === (itemss.createdDate | date: 'yyyy-MM-dd')
+                      "
+                      >〇</span
+                    >
+                  </div>
+                  <!-- <span *ngIf="(subitems | date:'EEEE') === 'Sunday'">休み</span> -->
+                </td>
+              </tr>
+              <tr *ngFor="let item of reportData">
+                <th>{{ item.firstName }} {{ item.lastName }} </th>
+                <td
+                  *ngFor="let subitems of staticDays"
+                  [ngClass]="{
+                    saturdayClass: (subitems | date: 'EEEE') === 'Saturday',
+                    sundayClass: (subitems | date: 'EEEE') === 'Sunday'
+                  }"
+                >
+                  <div *ngFor="let itemss of item.reports">
+                    <span
+                      *ngIf="
+                        subitems === (itemss.createdDate | date: 'yyyy-MM-dd')
+                      "
+                      >〇</span
+                    >
+                  </div>
+                  <!-- <span *ngIf="(subitems | date:'EEEE') === 'Sunday'">休み</span> -->
+                </td>
+              </tr>
+              <tr *ngFor="let item of reportData">
+                <th>{{ item.firstName }} {{ item.lastName }} </th>
+                <td
+                  *ngFor="let subitems of staticDays"
+                  [ngClass]="{
+                    saturdayClass: (subitems | date: 'EEEE') === 'Saturday',
+                    sundayClass: (subitems | date: 'EEEE') === 'Sunday'
+                  }"
+                >
+                  <div *ngFor="let itemss of item.reports">
+                    <span
+                      *ngIf="
+                        subitems === (itemss.createdDate | date: 'yyyy-MM-dd')
+                      "
+                      >〇</span
+                    >
+                  </div>
+                  <!-- <span *ngIf="(subitems | date:'EEEE') === 'Sunday'">休み</span> -->
+                </td>
+              </tr>
+              <tr *ngFor="let item of reportData">
+                <th>{{ item.firstName }} {{ item.lastName }} </th>
+                <td
+                  *ngFor="let subitems of staticDays"
+                  [ngClass]="{
+                    saturdayClass: (subitems | date: 'EEEE') === 'Saturday',
+                    sundayClass: (subitems | date: 'EEEE') === 'Sunday'
+                  }"
+                >
+                  <div *ngFor="let itemss of item.reports">
+                    <span
+                      *ngIf="
+                        subitems === (itemss.createdDate | date: 'yyyy-MM-dd')
+                      "
+                      >〇</span
+                    >
+                  </div>
+                  <!-- <span *ngIf="(subitems | date:'EEEE') === 'Sunday'">休み</span> -->
+                </td>
+              </tr>
+
+<!------ REDUNDANT DATA FOR TESTING. SHOULD DELETE-------------->
+
+
+
+
             </tbody>
           </table>
           <ngx-spinner
