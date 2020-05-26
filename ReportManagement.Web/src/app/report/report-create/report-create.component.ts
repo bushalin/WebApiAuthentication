@@ -11,6 +11,8 @@ import { jaLocale } from "ngx-bootstrap/locale";
 import { isNullOrUndefined, isNull } from 'util';
 defineLocale("ja", jaLocale);
 
+import * as ClassicEditor from '@ckeditor/ckeditor5-build-classic';
+
 @Component({
   selector: "app-report-create",
   templateUrl: "./report-create.component.html",
@@ -32,6 +34,8 @@ export class ReportCreateComponent implements OnInit {
   submitted = false;
 
   bsValue = new Date();
+
+  public Editor = ClassicEditor;
 
   // ngx-modal configuration and implementation
   modalRef: BsModalRef;
@@ -61,6 +65,24 @@ export class ReportCreateComponent implements OnInit {
         this.userData = data;
         this.userName = this.userData.fullName;
       });
+
+      ClassicEditor.defaultConfig = {
+        toolbar: {
+          items: [
+            'heading',
+            '|',
+            'bold',
+            'italic',
+            '|',
+            'bulletedList',
+            '|',
+            'undo',
+            'redo',
+            'fontColor',
+            'underline'
+          ]
+        },
+      };
   }
 
   ngOnInit() {
@@ -68,6 +90,8 @@ export class ReportCreateComponent implements OnInit {
       createdDate: [""],
       reportsdetails: this.formBuilder.array([this.createReports()])
     });
+
+    this.reportCreateForm.controls.createdDate.setValue(this.bsValue);
 
     this.reportDetailList = this.reportCreateForm.get(
       "reportsdetails"

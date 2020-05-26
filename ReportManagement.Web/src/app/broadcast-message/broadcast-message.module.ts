@@ -12,7 +12,7 @@ import { NgxPaginationModule } from 'ngx-pagination';
 import { NgaReadMoreModule } from "nga-read-more";
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { CKEditorModule } from '@ckeditor/ckeditor5-angular';
-import { SafeHtmlPipe } from '../safe-html.pipe';
+import { SharedModule } from '../shared/shared.module';
 
 
 
@@ -21,7 +21,6 @@ import { SafeHtmlPipe } from '../safe-html.pipe';
     BroadcastMessageCreateComponent, 
     BroadcastMessageShowComponent, 
     BroadcastMessageComponent,
-    SafeHtmlPipe
   ],
   imports: [
     CommonModule,
@@ -34,7 +33,8 @@ import { SafeHtmlPipe } from '../safe-html.pipe';
     FormsModule,
     ReactiveFormsModule,
     NgxSpinnerModule,
-    CKEditorModule
+    CKEditorModule,
+    SharedModule 
   ],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
   providers: [NgxSpinnerService],

@@ -78,12 +78,13 @@
                     <li
                       *ngFor="let subItem of item.reportDetail; let n = index"
                     >
-                      <div class="font-self-14">
+                      <!-- <div class="font-self-14">
                         <nga-read-more
                           [text]="subItem.details"
                           [textLength]="28"
                         ></nga-read-more>
-                      </div>
+                      </div> -->
+                      <div [innerHTML]="subItem.details | safeHtml"></div>
                     </li>
                   </ul>
                 </td>
@@ -92,7 +93,7 @@
                     <li
                       *ngFor="let subItem of item.reportDetail; let n = index"
                     >
-                      {{ subItem.progress }}%
+                      {{ subItem.progress }}<span *ngIf="subItem.progress">%</span>
                     </li>
                   </ul>
                 </td>
