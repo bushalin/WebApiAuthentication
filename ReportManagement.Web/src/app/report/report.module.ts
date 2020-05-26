@@ -22,6 +22,8 @@ import { TranslateModule } from '@ngx-translate/core';
 import { ReportComponent } from './report/report.component';
 import { ReportRoutingModule } from './report-routing.module';
 import { NgxSpinnerModule, NgxSpinnerService } from 'ngx-spinner';
+import { CKEditorModule } from '@ckeditor/ckeditor5-angular';
+import { SharedModule } from '../shared/shared.module';
 
 
 @NgModule({
@@ -51,6 +53,8 @@ import { NgxSpinnerModule, NgxSpinnerService } from 'ngx-spinner';
     NgaReadMoreModule,
     TypeaheadModule.forRoot(),
     ModalModule.forRoot(),
+    CKEditorModule,
+    SharedModule 
   ],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
   exports: [ReportCreateComponent, TopBarComponent, TranslateModule],

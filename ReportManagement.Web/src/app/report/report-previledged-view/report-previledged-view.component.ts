@@ -65,6 +65,7 @@ export class ReportPreviledgedViewComponent implements OnInit {
       employeeNameSelectedValue: [''],
       dateSelectedValue: ['']
     });
+    this.reportSearchForm.controls.dateSelectedValue.setValue(this.bsValue);
   }
 
   get f(){
