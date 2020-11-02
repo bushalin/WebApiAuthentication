@@ -3,6 +3,7 @@ import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { CommonService } from 'src/services/common.services';
 import { BsModalService, BsModalRef } from 'ngx-bootstrap';
 import { Router } from '@angular/router';
+import { RoleService } from 'src/services/role.service';
 
 @Component({
   selector: 'app-role-delete',
@@ -27,6 +28,7 @@ export class RoleDeleteComponent implements OnInit {
   constructor(
     private formBuilder: FormBuilder,
     private commonService: CommonService,
+    private roleService: RoleService,
     private modalService: BsModalService,
     private router: Router,
   ) {
@@ -44,7 +46,7 @@ export class RoleDeleteComponent implements OnInit {
   }
 
   getAllRoles() {
-    this.commonService.getAllRoles().subscribe(
+    this.roleService.getAllRoles().subscribe(
       data => {
         Object.entries(data).map(res => {
           this.roleList.push(res[1]);

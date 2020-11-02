@@ -1,10 +1,4 @@
-﻿using System;
-using System.Configuration;
-using System.Linq;
-using System.Net.Http.Formatting;
-using System.Threading.Tasks;
-using System.Web.Http;
-using Microsoft.Owin;
+﻿using Microsoft.Owin;
 using Microsoft.Owin.Security;
 using Microsoft.Owin.Security.DataHandler.Encoder;
 using Microsoft.Owin.Security.Jwt;
@@ -14,11 +8,11 @@ using Owin;
 using ReportManagement.Model;
 using ReportManagement.Model.User;
 using ReportManagement.Providers;
-using Microsoft.Owin.Cors;
-using System.IdentityModel.Tokens.Jwt;
-using System.Collections.Generic;
-using System.Security.Claims;
-using System.Web.Helpers;
+using System;
+using System.Configuration;
+using System.Linq;
+using System.Net.Http.Formatting;
+using System.Web.Http;
 
 [assembly: OwinStartup(typeof(ReportManagement.Startup))]
 
@@ -44,7 +38,6 @@ namespace ReportManagement
             app.CreatePerOwinContext<ApplicationUserManager>(ApplicationUserManager.Create);
             // Assigning the role manager class to Owin Context
             app.CreatePerOwinContext<ApplicationRoleManager>(ApplicationRoleManager.Create);
-
 
             // Plugin the OAuth bearer JSON Web Token tokens generation and Consumption will be here
 

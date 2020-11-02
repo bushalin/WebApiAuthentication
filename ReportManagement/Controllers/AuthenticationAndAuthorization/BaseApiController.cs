@@ -6,7 +6,6 @@ using System.Web.Http;
 
 namespace ReportManagement.Controllers
 {
-
     public class BaseApiController : ApiController
     {
         private ModelFactory _modelFactory;
@@ -25,7 +24,6 @@ namespace ReportManagement.Controllers
 
         public BaseApiController()
         {
-
         }
 
         protected ModelFactory TheModelFactory

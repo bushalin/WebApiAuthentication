@@ -1,10 +1,5 @@
 ﻿using ReportManagement.Model.BroadcastMessages;
 using ReportManagement.Services.BroadcastMessages;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Net;
-using System.Net.Http;
 using System.Web.Http;
 
 namespace ReportManagement.Controllers.BroadcastMessageControllers

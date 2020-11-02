@@ -2,12 +2,7 @@
 using ReportManagement.Model.User;
 using ReportManagement.Services.PhotoExtension;
 using System;
-using System.Collections.Generic;
-using System.IO;
 using System.Linq;
-using System.Net.Http;
-using System.Text;
-using System.Threading.Tasks;
 using System.Web.Mvc;
 
 namespace ReportManagement.Services.Users
@@ -68,7 +63,7 @@ namespace ReportManagement.Services.Users
         {
             var message = "";
 
-            if(user == null)
+            if (user == null)
             {
                 message = "Please provide valid user data";
                 return new JsonResult
@@ -81,7 +76,7 @@ namespace ReportManagement.Services.Users
             var userInfo = _context.Users.Find(user.UserId);
             var userDetail = _context.UserInfo.Find(user.UserId);
 
-            if(userInfo != null)
+            if (userInfo != null)
             {
                 userInfo.PhoneNumber = user.Phone;
 
@@ -90,12 +85,12 @@ namespace ReportManagement.Services.Users
                     _services.SaveChanges();
                     message = "Phone no updated successfully";
                 }
-                catch(Exception ex)
+                catch (Exception ex)
                 {
                     message = ex.Message;
                 }
             }
-            if(userDetail != null)
+            if (userDetail != null)
             {
                 userDetail.FirstName = user.FirstName;
                 userDetail.LastName = user.LastName;
@@ -109,7 +104,7 @@ namespace ReportManagement.Services.Users
                     _services.SaveChanges();
                     message = "User information updated successfully";
                 }
-                catch(Exception ex)
+                catch (Exception ex)
                 {
                     message = ex.Message;
                 }
@@ -131,7 +126,7 @@ namespace ReportManagement.Services.Users
             bytes = data.Files["file"].File;
 
             var userInfo = _context.UserInfo.Find(id);
-            if(bytes != null)
+            if (bytes != null)
             {
                 userInfo.Photo = bytes;
                 try
@@ -140,7 +135,7 @@ namespace ReportManagement.Services.Users
 
                     message = "Photo Uploaded Successfully";
                 }
-                catch(Exception ex)
+                catch (Exception ex)
                 {
                     message = ex.Message;
                 }
@@ -157,8 +152,11 @@ namespace ReportManagement.Services.Users
     public interface IUserServices
     {
         JsonResult GetAllUserInfo();
+
         JsonResult GetUserDetailById(string Id);
+
         JsonResult UpdateUserProfile(EditUserProfileBindingModel user);
+
         JsonResult UploadPicture(HttpPostedData data, string id);
     }
 }

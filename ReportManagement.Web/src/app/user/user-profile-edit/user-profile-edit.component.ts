@@ -1,9 +1,9 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, Validators, FormGroup } from '@angular/forms';
+import { FormBuilder, FormGroup } from '@angular/forms';
 import { UserProfileEdit, User } from 'src/models/user';
 import { AuthenticationService } from 'src/services/authentication.service';
-import { CommonService } from 'src/services/common.services';
 import { Router } from '@angular/router';
+import { UserService } from 'src/services/user.service';
 
 @Component({
   selector: 'app-user-profile-edit',
@@ -21,7 +21,7 @@ export class UserProfileEditComponent implements OnInit {
   constructor(
     private formBuilder: FormBuilder,
     private authService: AuthenticationService,
-    private commonService: CommonService,
+    private userService: UserService,
     private router: Router) {
       this.userDataSubscription = this.authService.userData.asObservable().subscribe(data => {
         this.userData = data;
@@ -43,7 +43,7 @@ export class UserProfileEditComponent implements OnInit {
   }
 
   setUserData() {
-    this.commonService.getUserInfoById(this.userData.userId).subscribe(
+    this.userService.getUserInfoById(this.userData.userId).subscribe(
       data => {
         this.profileUpdateForm.get("firstName").patchValue(data.firstName);
         this.profileUpdateForm.get("lastName").patchValue(data.lastName);
@@ -81,7 +81,7 @@ export class UserProfileEditComponent implements OnInit {
 
     console.log(this.profileUpdateForm.value);
     console.log(profileEditModel);
-    this.commonService.updateProfile(profileEditModel).subscribe(
+    this.userService.updateProfile(profileEditModel).subscribe(
       data => {
         console.log(data);
         //this.router.navigate(['/user']);

@@ -13,6 +13,7 @@ import { UserRole } from "src/models/roles";
 import { isDefined } from '@angular/compiler/src/util';
 import { isUndefined } from 'util';
 import { UserService } from 'src/services/user.service';
+import { CommonService } from 'src/services/common.services';
 
 @Injectable({
   providedIn: "root"
@@ -25,7 +26,7 @@ export class AuthGuard implements CanActivate {
   constructor(
     private router: Router,
     private authService: AuthenticationService,
-    private userService: UserService
+    private commonService: CommonService,
   ) {
     this.userDataSubscription = this.authService.userData
       .asObservable()
@@ -53,7 +54,7 @@ export class AuthGuard implements CanActivate {
     //   }
     // }
 
-    if(this.userService.roleMatch(['User', 'Admin'])) {
+    if(this.commonService.roleMatch(['User', 'Admin'])) {
       return true;
     }
 

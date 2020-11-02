@@ -1,11 +1,11 @@
 import { Component, OnInit } from "@angular/core";
 import { Router, NavigationEnd } from "@angular/router";
 import { ReportService } from "src/services/report.services";
-import { element } from "protractor";
 import { HttpClient } from "@angular/common/http";
 import { AuthenticationService } from 'src/services/authentication.service';
 import { UserService } from 'src/services/user.service';
 import { NgxSpinnerService } from "ngx-spinner";  
+import { CommonService } from 'src/services/common.services';
 
 @Component({
   selector: "app-report-user-view",
@@ -35,6 +35,7 @@ export class ReportUserViewComponent implements OnInit {
     private route: Router,
     private reportService: ReportService,
     private authService: AuthenticationService,
+    public commonService: CommonService,
     public userService: UserService,
     private http: HttpClient,
     //Spinner effect implemented. spinner will work while data is being loaded from server
@@ -63,7 +64,7 @@ export class ReportUserViewComponent implements OnInit {
   }
 
   ngOnInit() {
-    if(this.userService.roleMatch(['Shacho'])) {
+    if(this.commonService.roleMatch(['Shacho'])) {
       this.route.navigate(['/report/show']);
     }
 

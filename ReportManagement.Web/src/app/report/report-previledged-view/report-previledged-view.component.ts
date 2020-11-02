@@ -2,17 +2,15 @@ import { Component, OnInit } from "@angular/core";
 import { Router } from "@angular/router";
 import { ReportService } from "src/services/report.services";
 import { CommonService } from "src/services/common.services";
-import { element } from "protractor";
 import { HttpClient } from "@angular/common/http";
-import { TypeaheadMatch } from 'ngx-bootstrap/typeahead/typeahead-match.class';
 import { isUndefined } from 'util';
 import { FormGroup, FormBuilder } from '@angular/forms';
 import { DatePipe } from '@angular/common';
-import { datepickerAnimation } from 'ngx-bootstrap/datepicker/datepicker-animations';
 import { BsLocaleService } from 'ngx-bootstrap/datepicker';
 import { defineLocale } from "ngx-bootstrap/chronos";
 import { jaLocale } from "ngx-bootstrap/locale";
 import { NgxSpinnerService } from 'ngx-spinner';
+import { UserService } from 'src/services/user.service';
 defineLocale("ja", jaLocale);
 
 @Component({
@@ -36,7 +34,7 @@ export class ReportPreviledgedViewComponent implements OnInit {
   constructor(
     private route: Router,
     private reportService: ReportService,
-    private commonService: CommonService,
+    private userService: UserService,
     private http: HttpClient,
     private formBuilder: FormBuilder,
     private datePipe: DatePipe,
@@ -96,7 +94,7 @@ export class ReportPreviledgedViewComponent implements OnInit {
   }
 
   getAllUsers() {
-    this.commonService.getAllUsers().subscribe(
+    this.userService.getAllUsers().subscribe(
       data => {
         Object.entries(data).map(res => {
           this.userList.push(res[1]);

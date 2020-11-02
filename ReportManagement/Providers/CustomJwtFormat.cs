@@ -1,16 +1,12 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Configuration;
-using System.IdentityModel.Tokens.Jwt;
-using System.Linq;
-using System.Web;
-using Microsoft.IdentityModel.Tokens;
+﻿using Microsoft.IdentityModel.Tokens;
 using Microsoft.Owin.Security;
 using Microsoft.Owin.Security.DataHandler.Encoder;
+using System;
+using System.Configuration;
+using System.IdentityModel.Tokens.Jwt;
 
 namespace ReportManagement.Providers
 {
-
     public class CustomJwtFormat : ISecureDataFormat<AuthenticationTicket>
     {
         private readonly string _issuer = string.Empty;
@@ -38,7 +34,6 @@ namespace ReportManagement.Providers
 
             var issued = data.Properties.IssuedUtc;
             var expires = data.Properties.ExpiresUtc;
-            
 
             var handler = new JwtSecurityTokenHandler
             {

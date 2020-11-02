@@ -1,14 +1,15 @@
 import { Injectable } from "@angular/core";
 import { environment } from "src/environments/environment";
 import { map } from "rxjs/operators";
-import { HttpClient } from "@angular/common/http";
+import { HttpClient, HttpHeaders } from "@angular/common/http";
 import { AuthenticationService } from './authentication.service';
-import { User, ChangePassword } from 'src/models/user';
+import { User, UserProfileEdit } from 'src/models/user';
 
 @Injectable({
   providedIn: "root"
 })
 export class UserService {
+  header;
   userDataSubscription;
   userData = new User();
 
@@ -18,17 +19,10 @@ export class UserService {
       this.userData = data;
       //console.log(this.userData);
     });
-  }
 
-  roleMatch(allowedRoles: string[]): boolean {
-    var isMatch = false;
-    allowedRoles.forEach(element => {
-      if(this.userData.role.indexOf(element) > -1) {
-        isMatch = true;
-        return false;
-      }
-    });
-    return isMatch;
+    this.header = new HttpHeaders()
+    .set('Content-type', 'application/json');
+    this.header.set('Accept', 'application/json');
   }
 
   getUserAdditionalDetail(id) {
@@ -39,5 +33,42 @@ export class UserService {
           return res;
         })
       );
+  }
+
+  // Fetch all employee data
+  getAllUsers() {
+    return this.http.get<any>(environment.apiUrl + `user/getallUserInfo`).pipe(
+      map(res => {
+        return res;
+      })
+    );
+  }
+
+
+  getUserDetailsById(userId) {
+    return this.http.get<any>(environment.apiUrl + `accounts/user/` + userId , {headers: this.header})
+    .pipe(
+      map(res => {
+        return res;
+      })
+    );
+  }
+
+  getUserInfoById(id) {
+    return this.http.get<any>(environment.apiUrl + `user/GetUserDetailById/` + id)
+    .pipe(
+      map(res => {
+        return res;
+      })
+    );
+  }
+
+  updateProfile(userProfile) {
+    return this.http.put<UserProfileEdit>(environment.apiUrl + `user/UpdateUserProfile`, userProfile, {headers: this.header})
+    .pipe(
+      map(res => {
+        return res;
+      })
+    )
   }
 }

@@ -12,6 +12,7 @@ import { AuthenticationService } from "src/services/authentication.service";
 import { UserRole } from "src/models/roles";
 import { isUndefined } from "util";
 import { UserService } from "src/services/user.service";
+import { CommonService } from 'src/services/common.services';
 
 @Injectable({
   providedIn: "root"
@@ -23,7 +24,7 @@ export class AdminGuard implements CanActivate {
   constructor(
     private router: Router,
     private authService: AuthenticationService,
-    private userService: UserService
+    private commonService: CommonService,
   ) {
     this.userDataSubscription = this.authService.userData
       .asObservable()
@@ -48,7 +49,7 @@ export class AdminGuard implements CanActivate {
     //   if(this.guardFlag === true) { return true };
     // }
 
-    if(this.userService.roleMatch(['Admin'])) {
+    if(this.commonService.roleMatch(['Admin'])) {
       return true;
     }
 

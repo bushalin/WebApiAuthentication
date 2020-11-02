@@ -1,13 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.ComponentModel.DataAnnotations;
 
 namespace ReportManagement.Model.User
 {
-
     public class AccountCreateBindingModels
     {
         [Required]
@@ -36,10 +30,9 @@ namespace ReportManagement.Model.User
         [Display(Name = "Sex")]
         public string Sex { get; set; }
 
-
         [Display(Name = "Role Name")]
         public string RoleName { get; set; }
-        
+
         [Display(Name = "Is Employee Profile")]
         public bool IsEmployeeProfile { get; set; }
 
@@ -77,7 +70,6 @@ namespace ReportManagement.Model.User
         [Display(Name = "Confirm new password")]
         [Compare("NewPassword", ErrorMessage = "The new password and confirmation password do not match.")]
         public string ConfirmPassword { get; set; }
-
     }
 
     public class PasswordResetBindingModel
@@ -85,6 +77,7 @@ namespace ReportManagement.Model.User
         [Required]
         public string UserId { get; set; }
 
+        [Required]
         public string NewPassword { get; set; }
     }
 

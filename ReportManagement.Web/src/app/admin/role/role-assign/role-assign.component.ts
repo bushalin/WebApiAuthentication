@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import { CommonService } from 'src/services/common.services';
 import { FormGroup, FormBuilder, FormArray, FormControl, Validators } from '@angular/forms';
-import { AssignUserToRolesModel } from 'src/models/user';
+import { UserService } from 'src/services/user.service';
+import { RoleService } from 'src/services/role.service';
+import { AssignUserToRolesModel } from 'src/models/roles';
 
 @Component({
   selector: "app-role-assign",
@@ -18,7 +19,8 @@ export class RoleAssignComponent implements OnInit {
   public roleDataForm: FormArray;
 
   constructor(
-    private commonService: CommonService,
+    private userService: UserService,
+    private roleService: RoleService,
     private formBuilder: FormBuilder
   ) {
     this.getAllUsers();
@@ -49,7 +51,7 @@ export class RoleAssignComponent implements OnInit {
     this.employeeId = value;
     this.roleData = [];
 
-    this.commonService.getUserDetailsById(this.employeeId).subscribe(
+    this.userService.getUserDetailsById(this.employeeId).subscribe(
       data => {
         Object.entries(data.roles).map(res => {
           this.roleData.push(res[1]);
@@ -62,7 +64,7 @@ export class RoleAssignComponent implements OnInit {
   }
 
   getAllUsers() {
-    this.commonService.getAllUsers().subscribe(
+    this.userService.getAllUsers().subscribe(
       data => {
         Object.entries(data).map(res => {
           this.userList.push(res[1]);
@@ -73,7 +75,7 @@ export class RoleAssignComponent implements OnInit {
   }
 
   getAllRoles() {
-    this.commonService.getAllRoles().subscribe(
+    this.roleService.getAllRoles().subscribe(
       data => {
         Object.entries(data).map(res => {
           this.roleList.push(res[1]);
@@ -122,7 +124,7 @@ export class RoleAssignComponent implements OnInit {
       assignModel.RolesToAssign.push(element);
     })
 
-    this.commonService.assignRoletoUser(assignModel).subscribe(
+    this.roleService.assignRoletoUser(assignModel).subscribe(
       data => {
         console.log(data);
       },

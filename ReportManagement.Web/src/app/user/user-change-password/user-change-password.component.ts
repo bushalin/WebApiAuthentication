@@ -1,9 +1,11 @@
 import { Component, OnInit, HostListener } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { MustMatch } from '../../../helper/must-match.validator'
-import { ChangePassword } from 'src/models/user';
 import { CommonService } from 'src/services/common.services';
 import { Router } from '@angular/router';
+import { ChangePassword } from 'src/models/common';
+import { UserService } from 'src/services/user.service';
+import { AccountService } from 'src/services/account.service';
 
 @Component({
   selector: 'app-user-change-password',
@@ -19,7 +21,8 @@ export class UserChangePasswordComponent implements OnInit {
   alerts: any[] = [];
   constructor( private route: Router,
     private formBuilder: FormBuilder,
-    private commonService: CommonService
+    private commonService: CommonService,
+    private accountService: AccountService
   ) { }
 
   ngOnInit() {
@@ -63,7 +66,7 @@ export class UserChangePasswordComponent implements OnInit {
     changePasswordModel.NewPassword = this.changePasswordForm.controls['newPassword'].value;
     changePasswordModel.ConfirmPassword = this.changePasswordForm.controls['confirmPassword'].value;
 
-    this.commonService.changePassword(changePasswordModel).subscribe(
+    this.accountService.changePassword(changePasswordModel).subscribe(
       data => {
         console.log(data);
         // this.changePasswordForm.reset();

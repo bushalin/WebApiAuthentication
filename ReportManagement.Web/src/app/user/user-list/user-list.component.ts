@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { CommonService } from "src/services/common.services";
+import { UserService } from 'src/services/user.service';
 
 @Component({
   selector: 'app-user-list',
@@ -12,7 +13,8 @@ export class UserListComponent implements OnInit {
   userList:  any[] = [];
 
   constructor(
-    private commonService: CommonService
+    private commonService: CommonService,
+    private userService: UserService
   ) {
     this.getAllUsers();
    }
@@ -21,7 +23,7 @@ export class UserListComponent implements OnInit {
   }
 
   getAllUsers() {
-    this.commonService.getAllUsers().subscribe(
+    this.userService.getAllUsers().subscribe(
       data => {
         Object.entries(data).map(res => {
           this.userList.push(res[1]);

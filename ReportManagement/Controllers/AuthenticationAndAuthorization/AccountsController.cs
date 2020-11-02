@@ -1,4 +1,6 @@
 ﻿using Microsoft.AspNet.Identity;
+using Microsoft.AspNet.Identity.Owin;
+using Microsoft.Owin.Security.DataProtection;
 using ReportManagement.Model.User;
 using System;
 using System.Linq;
@@ -7,13 +9,12 @@ using System.Web.Http;
 
 namespace ReportManagement.Controllers
 {
-
     [RoutePrefix("v1/accounts")]
     public class AccountsController : BaseApiController
     {
         // TODO: have to redo these by service architecture
 
-        // URL: api/accounts/users
+        // URL: v1/accounts/users
         [Authorize(Roles = "Admin")]
         [Route("users")]
         public IHttpActionResult GetUsers()
@@ -21,12 +22,12 @@ namespace ReportManagement.Controllers
             return Ok(this.AppUserManager.Users.ToList().Select(u => this.TheModelFactory.Create(u)));
         }
 
-        // URL: api/accounts/
+        // URL: v1/accounts/
         [Authorize(Roles = "Admin")]
         [Route("user/{id:guid}", Name = "GetUserById")]
         public async Task<IHttpActionResult> GetUser(string Id)
         {
-            var user = await this.AppUserManager.FindByIdAsync(Id);
+            var user = await this.AppUserManager.FindByIdAsync(Id).ConfigureAwait(true);
 
             if (user != null)
             {
@@ -36,12 +37,12 @@ namespace ReportManagement.Controllers
             return NotFound();
         }
 
-        // URL: api/accounts/user/{username}
+        // URL: v1/accounts/user/{username}
         [Authorize(Roles = "Admin")]
         [Route("user/{userName}")]
         public async Task<IHttpActionResult> GetUserByName(string username)
         {
-            var user = await this.AppUserManager.FindByNameAsync(username);
+            var user = await this.AppUserManager.FindByNameAsync(username).ConfigureAwait(true);
             if (user != null)
             {
                 return Ok(this.TheModelFactory.Create(user));
@@ -50,7 +51,7 @@ namespace ReportManagement.Controllers
             return NotFound();
         }
 
-        // URL: api/accounts/create
+        // URL: v1/accounts/create
         [AllowAnonymous]
         [Route("create")]
         public async Task<IHttpActionResult> CreateUser(AccountCreateBindingModels accountCreateBindingModels)
@@ -78,7 +79,7 @@ namespace ReportManagement.Controllers
                 UserInfo = userInfo
             };
 
-            IdentityResult addUserResult = await this.AppUserManager.CreateAsync(user, accountCreateBindingModels.Password);
+            IdentityResult addUserResult = await this.AppUserManager.CreateAsync(user, accountCreateBindingModels.Password).ConfigureAwait(true);
 
             if (!addUserResult.Succeeded)
             {
@@ -89,7 +90,7 @@ namespace ReportManagement.Controllers
             var addedUser = this.AppUserManager.FindByName(user.UserName);
             IdentityResult assignRolesResult = await AppUserManager.AddToRoleAsync(addedUser.Id, "User").ConfigureAwait(true);
 
-            if(!assignRolesResult.Succeeded)
+            if (!assignRolesResult.Succeeded)
             {
                 return GetErrorResult(assignRolesResult);
             }
@@ -99,7 +100,7 @@ namespace ReportManagement.Controllers
             return Created(locationHeader, TheModelFactory.Create(user));
         }
 
-        // URL: api/accounts/ChangePassword
+        // URL: v1/accounts/ChangePassword
         [Authorize]
         [Route("ChangePassword")]
         public async Task<IHttpActionResult> ChangePassword(ChangePasswordBindingModel model)
@@ -109,7 +110,7 @@ namespace ReportManagement.Controllers
                 return BadRequest(ModelState);
             }
 
-            IdentityResult result = await this.AppUserManager.ChangePasswordAsync(User.Identity.GetUserId(), model.OldPassword, model.NewPassword);
+            IdentityResult result = await this.AppUserManager.ChangePasswordAsync(User.Identity.GetUserId(), model.OldPassword, model.NewPassword).ConfigureAwait(true);
 
             if (!result.Succeeded)
             {
@@ -121,34 +122,40 @@ namespace ReportManagement.Controllers
             return Ok(locationHeader);
         }
 
+        // URL : v1/accounts/ResetPassword
         [Authorize(Roles = "Admin")]
         [Route("ResetPassword")]
-        [HttpGet]
+        [HttpPost]
         public async Task<IHttpActionResult> ResetPassword(PasswordResetBindingModel model)
         {
-            string resetToken = await this.AppUserManager.GeneratePasswordResetTokenAsync(model.UserId);
-            IdentityResult result = await this.AppUserManager.ResetPasswordAsync(model.UserId, resetToken, model.NewPassword);
+            var provider = new DpapiDataProtectionProvider("ReportManagement");
 
-            if(!result.Succeeded)
+            this.AppUserManager.UserTokenProvider = new DataProtectorTokenProvider<ApplicationUser, string>(provider.Create("UserToken")) as IUserTokenProvider<ApplicationUser, string>;
+
+            string resetToken = await this.AppUserManager.GeneratePasswordResetTokenAsync(model.UserId).ConfigureAwait(true);
+            if (resetToken != null)
             {
-                return GetErrorResult(result);
+                IdentityResult result = await this.AppUserManager.ResetPasswordAsync(model.UserId, resetToken, model.NewPassword).ConfigureAwait(true);
+                if (!result.Succeeded)
+                {
+                    return GetErrorResult(result);
+                }
             }
-
-            return Ok();
+            return Ok("Password reset successfully");
         }
 
-        // URL: api/accounts/user/delete/{id}
+        // URL: v1/accounts/user/delete/{id}
         [Authorize(Roles = "Admin")]
         [Route("user/delete/{id:guid}")]
         public async Task<IHttpActionResult> DeleteUser(string id)
         {
             // only superadmin or admin can delete users
 
-            var appUser = await this.AppUserManager.FindByIdAsync(id);
+            var appUser = await this.AppUserManager.FindByIdAsync(id).ConfigureAwait(true);
 
             if (appUser != null)
             {
-                IdentityResult result = await this.AppUserManager.DeleteAsync(appUser);
+                IdentityResult result = await this.AppUserManager.DeleteAsync(appUser).ConfigureAwait(true);
 
                 if (!result.Succeeded)
                 {
@@ -161,32 +168,31 @@ namespace ReportManagement.Controllers
             return NotFound();
         }
 
-
-        // URL: api/accounts/user/{id}/roles
+        // URL: v1/accounts/user/{id}/roles
         [Authorize(Roles = "Admin")]
         [Route("user/{id:guid}/roles")]
         [HttpPut]
         public async Task<IHttpActionResult> AssignRolesToUser([FromUri] string Id, [FromBody] string[] rolesToAssign)
         {
-            var appUser = await this.AppUserManager.FindByIdAsync(Id);
+            var appUser = await this.AppUserManager.FindByIdAsync(Id).ConfigureAwait(true);
 
             if (appUser == null)
             {
                 return NotFound();
             }
 
-            var currentRoles = await this.AppUserManager.GetRolesAsync(appUser.Id);
+            var currentRoles = await this.AppUserManager.GetRolesAsync(appUser.Id).ConfigureAwait(true);
 
             var rolesNotExists = rolesToAssign.Except(this.AppRoleManager.Roles.Select(x => x.Name)).ToArray();
 
-            if (rolesNotExists.Count() > 0)
+            if (rolesNotExists.Any())
             {
                 ModelState.AddModelError("", String.Format("Roles '{0}' does not exist in the sytem", string.Join(",", rolesNotExists)));
                 return BadRequest(ModelState);
             }
 
             IdentityResult removeResult =
-                await this.AppUserManager.RemoveFromRolesAsync(appUser.Id, currentRoles.ToArray());
+                await this.AppUserManager.RemoveFromRolesAsync(appUser.Id, currentRoles.ToArray()).ConfigureAwait(true);
 
             if (!removeResult.Succeeded)
             {
@@ -194,7 +200,7 @@ namespace ReportManagement.Controllers
                 return BadRequest(ModelState);
             }
 
-            IdentityResult addResult = await this.AppUserManager.AddToRolesAsync(appUser.Id, rolesToAssign);
+            IdentityResult addResult = await this.AppUserManager.AddToRolesAsync(appUser.Id, rolesToAssign).ConfigureAwait(true);
 
             if (!addResult.Succeeded)
             {
@@ -210,25 +216,25 @@ namespace ReportManagement.Controllers
         [HttpPut]
         public async Task<IHttpActionResult> AssignRolesToUser(AssignRolesToUserBindingModel model)
         {
-            var appUser = await this.AppUserManager.FindByIdAsync(model.UserId);
+            var appUser = await this.AppUserManager.FindByIdAsync(model.UserId).ConfigureAwait(true);
 
             if (appUser == null)
             {
                 return NotFound();
             }
 
-            var currentRoles = await this.AppUserManager.GetRolesAsync(appUser.Id);
+            var currentRoles = await this.AppUserManager.GetRolesAsync(appUser.Id).ConfigureAwait(true); ;
 
             var rolesNotExists = model.RolesToAssign.Except(this.AppRoleManager.Roles.Select(x => x.Name)).ToArray();
 
-            if (rolesNotExists.Count() > 0)
+            if (rolesNotExists.Any())
             {
                 ModelState.AddModelError("", String.Format("Roles '{0}' does not exist in the sytem", string.Join(",", rolesNotExists)));
                 return BadRequest(ModelState);
             }
 
             IdentityResult removeResult =
-                await this.AppUserManager.RemoveFromRolesAsync(appUser.Id, currentRoles.ToArray());
+                await this.AppUserManager.RemoveFromRolesAsync(appUser.Id, currentRoles.ToArray()).ConfigureAwait(true); ;
 
             if (!removeResult.Succeeded)
             {
@@ -236,7 +242,7 @@ namespace ReportManagement.Controllers
                 return BadRequest(ModelState);
             }
 
-            IdentityResult addResult = await this.AppUserManager.AddToRolesAsync(appUser.Id, model.RolesToAssign);
+            IdentityResult addResult = await this.AppUserManager.AddToRolesAsync(appUser.Id, model.RolesToAssign).ConfigureAwait(true); ;
 
             if (!addResult.Succeeded)
             {
@@ -246,6 +252,5 @@ namespace ReportManagement.Controllers
 
             return Ok(addResult);
         }
-
     }
 }

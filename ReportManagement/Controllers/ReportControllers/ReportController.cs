@@ -40,7 +40,7 @@ namespace ReportManagement.Controllers.ReportControllers
         {
             System.DateTime parsedDate;
             bool convertSuccess = System.DateTime.TryParse(createdDate, out parsedDate);
-            if(parsedDate == System.DateTime.MinValue)
+            if (parsedDate == System.DateTime.MinValue)
             {
                 return Ok(_reportServices.SearchReportByEmployeeId(employeeId).Data);
             }
@@ -67,7 +67,7 @@ namespace ReportManagement.Controllers.ReportControllers
         [HttpGet]
         public IHttpActionResult GetAllReports()
         {
-            if(!ModelState.IsValid)
+            if (!ModelState.IsValid)
             {
                 return BadRequest();
             }
@@ -80,7 +80,7 @@ namespace ReportManagement.Controllers.ReportControllers
         [HttpGet]
         public IHttpActionResult GetRecentReports()
         {
-            if(!ModelState.IsValid)
+            if (!ModelState.IsValid)
             {
                 return BadRequest();
             }
@@ -91,7 +91,7 @@ namespace ReportManagement.Controllers.ReportControllers
         // URL: api/Report/SaveReport
         [Route("SaveReport")]
         [HttpPost]
-        public IHttpActionResult SaveReport([FromBody]JObject obj)
+        public IHttpActionResult SaveReport([FromBody] JObject obj)
         {
             if (!ModelState.IsValid)
             {
@@ -105,7 +105,7 @@ namespace ReportManagement.Controllers.ReportControllers
         [HttpPatch]
         public IHttpActionResult UpdateRemarks(Report reportObj)
         {
-            if(!ModelState.IsValid)
+            if (!ModelState.IsValid)
             {
                 return BadRequest();
             }

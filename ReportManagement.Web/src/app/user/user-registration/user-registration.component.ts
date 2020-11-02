@@ -6,6 +6,7 @@ import { Router } from "@angular/router";
 
 // import custom validator to validate that password and confirm password fields match
 import { MustMatch } from '../../../helper/must-match.validator'
+import { AccountService } from 'src/services/account.service';
 
 @Component({
   selector: 'app-user-registration',
@@ -22,7 +23,8 @@ export class UserRegistrationComponent implements OnInit {
     constructor(
       private formBuilder: FormBuilder,
       private router: Router,
-      private commonService: CommonService
+      private commonService: CommonService,
+      private accountService: AccountService
     ) { }
 
     ngOnInit() {
@@ -67,7 +69,7 @@ export class UserRegistrationComponent implements OnInit {
       console.log(userModel);
       
   
-      this.commonService.userRegistration(userModel).subscribe(data =>{
+      this.accountService.userRegistration(userModel).subscribe(data =>{
         console.log(data);
         this.router.navigate(['/user/list']);
       },

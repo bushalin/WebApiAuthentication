@@ -7,7 +7,6 @@ using System.Threading.Tasks;
 
 namespace ReportManagement.Providers
 {
-
     public class CustomOAuthProvider : OAuthAuthorizationServerProvider
     {
         public override Task ValidateClientAuthentication(OAuthValidateClientAuthenticationContext context)
@@ -20,7 +19,6 @@ namespace ReportManagement.Providers
         {
             //var allowedOrigin = "*";
             //context.OwinContext.Response.Headers.Add("Access-Control-Allow-Origin", new[] { allowedOrigin });
-
 
             var userManager = context.OwinContext.GetUserManager<ApplicationUserManager>();
             ApplicationUser user = await userManager.FindAsync(context.UserName, context.Password);

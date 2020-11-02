@@ -1,14 +1,6 @@
 ﻿using ReportManagement.Model.User;
-using ReportManagement.Services.PhotoExtension;
 using ReportManagement.Services.Users;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Net;
-using System.Net.Http;
-using System.Web;
 using System.Web.Http;
-using System.Web.Http.Cors;
 
 namespace ReportManagement.Controllers.UserControllers
 {
@@ -26,7 +18,7 @@ namespace ReportManagement.Controllers.UserControllers
         [HttpGet]
         public IHttpActionResult GetAllUserInfo()
         {
-            if(!ModelState.IsValid)
+            if (!ModelState.IsValid)
             {
                 return BadRequest();
             }
@@ -45,7 +37,7 @@ namespace ReportManagement.Controllers.UserControllers
         [HttpPut]
         public IHttpActionResult UpdateUserProfile(EditUserProfileBindingModel user)
         {
-            if(!ModelState.IsValid)
+            if (!ModelState.IsValid)
             {
                 return BadRequest();
             }

@@ -3,9 +3,8 @@ import { CanActivate, ActivatedRouteSnapshot, RouterStateSnapshot, UrlTree, Rout
 import { Observable } from 'rxjs';
 import { User } from 'src/models/user';
 import { AuthenticationService } from 'src/services/authentication.service';
-import { isUndefined } from 'util';
-import { UserRole } from 'src/models/roles';
 import { UserService } from 'src/services/user.service';
+import { CommonService } from 'src/services/common.services';
 
 @Injectable({
   providedIn: 'root'
@@ -18,6 +17,7 @@ export class ShachoGuard implements CanActivate {
 
   constructor(private router: Router,
     private authService: AuthenticationService,
+    private commonService: CommonService,
     private userService: UserService) {
       this.userDataSubscription = this.authService.userData
       .asObservable()
@@ -42,7 +42,7 @@ export class ShachoGuard implements CanActivate {
       //   }
       // }
 
-      if(this.userService.roleMatch(['Shacho', 'Admin'])) {
+      if(this.commonService.roleMatch(['Shacho', 'Admin'])) {
         return true;
       }
   

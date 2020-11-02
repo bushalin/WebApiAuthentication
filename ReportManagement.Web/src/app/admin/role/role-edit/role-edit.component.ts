@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
-import { CommonService } from 'src/services/common.services';
+import { RoleService } from 'src/services/role.service';
 
 @Component({
   selector: 'app-role-edit',
@@ -17,7 +17,7 @@ export class RoleEditComponent implements OnInit {
 
   constructor(
     private formBuilder: FormBuilder,
-    private commonService: CommonService,
+    private roleService: RoleService,
   ) {
     this.getAllRoles();
    }
@@ -34,7 +34,7 @@ export class RoleEditComponent implements OnInit {
   }
 
   getAllRoles() {
-    this.commonService.getAllRoles().subscribe(
+    this.roleService.getAllRoles().subscribe(
       data => {
         Object.entries(data).map(res => {
           this.roleList.push(res[1]);

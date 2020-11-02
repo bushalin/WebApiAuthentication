@@ -2,7 +2,7 @@ import { Injectable } from "@angular/core";
 import {
   HttpClient,
   HttpHeaders,
-  HttpClientModule
+  HttpClientModule,
 } from "@angular/common/http";
 import { environment } from "../environments/environment";
 import { Observable, throwError } from "rxjs";
@@ -19,7 +19,6 @@ export class ReportService {
     this.header = new HttpHeaders({
       "Content-Type": "application/json",
       Accept: "application/json",
-      Authorization: "Bearer " + localStorage.getItem('authToken')
     });
   }
 
@@ -29,10 +28,10 @@ export class ReportService {
     searchParams.set("createdDate", createdDate);
     return this.http
       .get<any>(environment.apiUrl + `Report/SearchReport`, {
-        params: { employeeId: employeeId, createdDate: createdDate }
+        params: { employeeId: employeeId, createdDate: createdDate },
       })
       .pipe(
-        map(res => {
+        map((res) => {
           return res;
         })
       );
@@ -41,9 +40,12 @@ export class ReportService {
   reportCheck(dateParam) {
     let searchParams: URLSearchParams = new URLSearchParams();
     searchParams.set("dateParam", dateParam);
-    return this.http.get<any>(environment.apiUrl + `Report/CheckReport`, { params: { dateParam: dateParam } })
+    return this.http
+      .get<any>(environment.apiUrl + `Report/CheckReport`, {
+        params: { dateParam: dateParam },
+      })
       .pipe(
-        map(res => {
+        map((res) => {
           return res;
         })
       );
@@ -57,7 +59,7 @@ export class ReportService {
         { headers: this.header }
       )
       .pipe(
-        map(res => {
+        map((res) => {
           return res;
         })
       );
@@ -72,7 +74,7 @@ export class ReportService {
         { headers: this.header }
       )
       .pipe(
-        map(res => {
+        map((res) => {
           return res;
         })
       );
@@ -82,7 +84,7 @@ export class ReportService {
     return this.http
       .get<any>(environment.apiUrl + `report/getReportById/` + id)
       .pipe(
-        map(res => {
+        map((res) => {
           return res;
         })
       );
@@ -93,7 +95,7 @@ export class ReportService {
     return this.http
       .get<any>(environment.apiUrl + `report/getreportbyuserid/` + id)
       .pipe(
-        map(res => {
+        map((res) => {
           return res;
         })
       );
@@ -103,7 +105,7 @@ export class ReportService {
     return this.http
       .get<any>(environment.apiUrl + `report/getreportbydate/` + date)
       .pipe(
-        map(res => {
+        map((res) => {
           return res;
         })
       );
@@ -111,7 +113,7 @@ export class ReportService {
 
   getAllReports() {
     return this.http.get<any>(environment.apiUrl + `report/getallreports`).pipe(
-      map(res => {
+      map((res) => {
         return res;
       })
     );
@@ -121,10 +123,9 @@ export class ReportService {
     return this.http
       .get<any>(environment.apiUrl + `Report/GetRecentReports`)
       .pipe(
-        map(res => {
+        map((res) => {
           return res;
         })
       );
   }
-
 }

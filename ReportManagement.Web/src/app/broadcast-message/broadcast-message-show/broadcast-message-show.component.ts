@@ -4,6 +4,7 @@ import { Router } from "@angular/router";
 import { TranslateService } from "@ngx-translate/core";
 import { NgxSpinnerService } from 'ngx-spinner';
 import { BroadcastMessageServiceService } from 'src/services/broadcast-message-service.service';
+import { CommonService } from 'src/services/common.services';
 
 @Component({
   selector: "app-broadcast-message-show",
@@ -16,7 +17,7 @@ export class BroadcastMessageShowComponent implements OnInit {
 
   pageNumber: number = 1;
   constructor(
-    public userService: UserService,
+    public commonService: CommonService,
     private broadcastService: BroadcastMessageServiceService,
     private translate: TranslateService,
     private route: Router,
@@ -24,9 +25,9 @@ export class BroadcastMessageShowComponent implements OnInit {
   ) {}
 
   ngOnInit() {
-    if (this.userService.roleMatch(["Shacho"]) && this.userService.userData.firstTimeLogIn === true) {
+    if (this.commonService.roleMatch(["Shacho"]) && this.commonService.userData.firstTimeLogIn === true) {
       // FIRST TIME LOG IN IS FOR THE FIRST TIME REDIRECTION
-      this.userService.userData.firstTimeLogIn = false;
+      this.commonService.userData.firstTimeLogIn = false;
       //for redirection in the user role "show message"
       this.route.navigate(["/report/show"]);
     }
